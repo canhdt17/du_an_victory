@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('showtimes', function (Blueprint $table) {
             $table->id();
+            $table->integer('movie_id');
+            $table->integer('room_id');
+            $table->date('showtime_date');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

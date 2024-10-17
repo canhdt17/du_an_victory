@@ -12,7 +12,8 @@ class ShowtimeController extends Controller
      */
     public function index()
     {
-        //
+        $showtimes = showtime::query()->latest('id')->paginate();
+        return view('admin/showtime/index', compact('showtimes'));
     }
 
     /**
@@ -20,7 +21,7 @@ class ShowtimeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.showtime.create');
     }
 
     /**
@@ -28,7 +29,16 @@ class ShowtimeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'movie_id' => 'required',
+            'room_id' => 'required',
+            'showtime_date' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+        ]);
+        // them vao database
+        showtime::query()->create($data);
+        return redirect()->route('showtime.index');
     }
 
     /**
@@ -44,7 +54,7 @@ class ShowtimeController extends Controller
      */
     public function edit(showtime $showtime)
     {
-        //
+        return view('admin.showtime.edit' ,compact('showtime'));
     }
 
     /**
@@ -52,7 +62,15 @@ class ShowtimeController extends Controller
      */
     public function update(Request $request, showtime $showtime)
     {
-        //
+        $data = $request->validate([
+            'movie_id' => 'required',
+            'room_id' => 'required',
+            'showtime_date' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+        ]);
+        $showtime->update($data);
+        return redirect()->route('showtime.index');
     }
 
     /**
@@ -60,6 +78,7 @@ class ShowtimeController extends Controller
      */
     public function destroy(showtime $showtime)
     {
-        //
-    }
+        $showtime->delete();
+        return redirect()->route('showtime.index') ;
+        }
 }

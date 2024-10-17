@@ -17,7 +17,11 @@ class ShowtimeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'movie_id' => rand(1, 100),
+            'room_id' => rand(1, 10),
+            'showtime_date' => '2024-10-17',
+            'start_time' => '09:13',
+            'end_time' => '10:45',
         ];
     }
 }
