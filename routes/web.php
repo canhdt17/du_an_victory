@@ -14,8 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('');
+// });
+
 
 Route::resource('showtimes', ShowtimeController::class);
+Route::prefix('admin')->group(function () {
+    Route::resource('showtime', ShowtimeController::class);
+    Route::get('/', function () {
+        return view('admin.layout.index');
+    });
+});
