@@ -1,0 +1,42 @@
+{
+  "room": [
+    {
+      "room_name": "Phòng 9",
+      "area_id": "Hồ Chí Minh",
+      "total_seat": 12,
+      "id": 1
+    },
+    {
+      "room_name": "Phòng 1",
+      "area_id": "Hồ Chí Minh",
+      "total_seat": 12,
+      "id": 2
+    }
+  ],
+  "area": [
+    {
+      "id": 1,
+      "area_name": "Hồ Chí Minh"
+    },
+    {
+      "id": 2,
+      "area_name": "Hà Nội"
+    },
+    {
+      "area_name": "Đà Nẵng",
+      "id": 3
+    },
+    {
+      "area_name": "Mông Cổ",
+      "id": 4
+    },
+    {
+      "area_name": "Lào Cai",
+      "id": 5
+    },
+    {
+      "area_name": "Việt Nam",
+      "id": 6
+    }
+  ]
+}
