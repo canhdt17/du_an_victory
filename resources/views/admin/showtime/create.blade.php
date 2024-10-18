@@ -23,7 +23,7 @@
                 </div>
             @endif
             <div class="card-body">
-                <form action="{{ route('showtimes.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('showtime.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="">movie_id</label>
