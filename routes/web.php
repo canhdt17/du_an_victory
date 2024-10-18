@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::resource('showtimes', ShowtimeController::class);
 Route::prefix('admin')->group(function () {
     Route::resource('showtime', ShowtimeController::class);
     Route::get('/', function () {
