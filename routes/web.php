@@ -20,8 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('admin')->group(function () {
-    Route::resource('showtime', ShowtimeController::class);
+    Route::resource('showtimes', ShowtimeController::class);
     Route::get('/', function () {
         return view('admin.layout.index');
     });
 });
+

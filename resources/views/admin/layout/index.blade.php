@@ -11,7 +11,7 @@
 
 <body>
     <nav>
-        <a href="{{ route('showtime.index') }}" class="btn btn-primary">Lịch xuất chiếu</a>
+        <a href="{{ route('showtimes.index') }}" class="btn btn-primary">Lịch xuất chiếu</a>
         <a href="showtime1/" class="btn btn-primary">Lịch xuất chiếu</a>
         <a href="showtime2/" class="btn btn-primary">Lịch xuất chiếu</a>
         <a href="showtime3/" class="btn btn-primary">Lịch xuất chiếu</a>
