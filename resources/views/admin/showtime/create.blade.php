@@ -23,7 +23,7 @@
                 </div>
             @endif
             <div class="card-body">
-                <form action="{{ route('showtime.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('showtimes.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="">movie_id</label>
@@ -50,7 +50,7 @@
                     </div>
                     <div>
                         <button class="btn btn-primary" type="submit">Add</button>
-                        <a href="{{ route('showtime.index') }}" class="btn btn-warning">Danh sách</a>
+                        <a href="{{ route('showtimes.index') }}" class="btn btn-warning">Danh sách</a>
                     </div>
                 </form>
             </div>
