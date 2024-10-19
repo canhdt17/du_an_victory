@@ -23,7 +23,7 @@
                 </div>
             @endif
             <div class="card-body">
-                <form action="{{ route('showtime.update' , $showtime) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('showtimes.update' , $showtime) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -51,7 +51,7 @@
                     </div>
                     <div>
                         <button class="btn btn-primary" type="submit">Update</button>
-                        <a href="{{ route('showtime.index') }}" class="btn btn-warning">Danh sách</a>
+                        <a href="{{ route('showtimes.index') }}" class="btn btn-warning">Danh sách</a>
                     </div>
                 </form>
             </div>
