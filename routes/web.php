@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SeatController;
+use App\Http\Controllers\SeatTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::prefix('admin')->group(function () {
+    Route::resource('seatType', SeatTypeController::class);
+    Route::resource('seat', SeatController::class);
+    Route::get('/', function () {
+        return view('admin.layout.index');
+    });
 });
