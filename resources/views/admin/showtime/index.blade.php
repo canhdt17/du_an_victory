@@ -44,7 +44,7 @@
                     <th>end_time</th>
                     <th>Thao tác</th>
                     <th>
-                        <a href="{{ route('showtime.create') }}" class="btn btn-primary">Create New</a>
+                        <a href="{{ route('showtimes.create') }}" class="btn btn-primary">Create New</a>
                     </th>
                 </tr>
             </thead>
@@ -60,8 +60,8 @@
                         <td>{{ $showtime->start_time }}</td>
                         <td>{{ $showtime->end_time }}</td>
                         <td class="button d-flex">
-                            <a href="{{ route('showtime.edit', $showtime) }}" class="btn btn-warning">Sửa</a>
-                            <form action="{{ route('showtime.destroy', $showtime) }}" method="post">
+                            <a href="{{ route('showtimes.edit', $showtime) }}" class="btn btn-warning">Sửa</a>
+                            <form action="{{ route('showtimes.destroy', $showtime) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"

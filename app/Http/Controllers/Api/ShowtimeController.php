@@ -1,27 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Api;
 use App\Models\showtime;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ShowtimeController extends Controller
 {
-    /**
+ /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $showtimes = showtime::query()->latest('id')->paginate();
-        return view('admin.showtime.index', compact('showtimes'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('admin.showtime.create');
+        return response()->json($showtimes);
     }
 
     /**
@@ -37,8 +29,8 @@ class ShowtimeController extends Controller
             'end_time' => 'required',
         ]);
         // them vao database
-        showtime::query()->create($data);
-        return redirect()->route('showtimes.index');
+        $showtime=showtime::query()->create($data);
+        return response()->json($showtime);
     }
 
     /**
@@ -46,7 +38,7 @@ class ShowtimeController extends Controller
      */
     public function show(showtime $showtime)
     {
-        //
+        response()->json($showtime);
     }
 
     /**
@@ -70,7 +62,7 @@ class ShowtimeController extends Controller
             'end_time' => 'required',
         ]);
         $showtime->update($data);
-        return redirect()->route('showtimes.index');
+        return response()->json($showtime);
     }
 
     /**
@@ -79,6 +71,6 @@ class ShowtimeController extends Controller
     public function destroy(showtime $showtime)
     {
         $showtime->delete();
-        return redirect()->route('showtimes.index') ;
+        return response()->json($showtime);
         }
-}
+    }
