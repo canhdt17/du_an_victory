@@ -31,7 +31,7 @@ class AreaController extends Controller
 
         Area::create($request->all());
 
-        return response()->json(['message' => 'Thêm mới khu vực thành công']);
+        return response()->json(['message' => 'Thêm mới khu vực thành công'],200);
     }
 
     /**

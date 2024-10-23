@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::prefix('admin')->group(function () {
+    Route::resource('areas', AreaController::class);
+    Route::resource('rooms', RoomController::class);
+    Route::get('/', function () {
+        return view('admin.layout.index');
+    });
 });
