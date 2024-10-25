@@ -25,14 +25,21 @@
             <div class="card-body">
                 <form action="{{ route('showtimes.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <label for="">movie_id</label>
-                        <input type="number" name="movie_id" class="form-control" id="movie_id">
+                    <div class="mb-3">
+                        <label for="movies" class="form-label">movies</label>
+                        <select class="form-select" id="movie_id" name="movie_id">
+                            @foreach ($movies as $movie)
+                            <option value="{{ $movie->id }}">{{ $movie->name_movie}}</option>
+                            @endforeach
+                        </select>
                     </div>
-
-                    <div class="form-group">
-                        <label for="">room_id</label>
-                        <input type="number" name="room_id" class="form-control" id="room_id">
+                    <div class="mb-3">
+                        <label for="rooms" class="form-label">room</label>
+                        <select class="form-select" id="room_id" name="room_id">
+                            @foreach ($rooms as $room)
+                            <option value="{{ $room->id }}">{{ $room->room_name}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">

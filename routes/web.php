@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ShowtimeController;
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
     Route::resource('showtimes', ShowtimeController::class);
+    Route::resource('movies', MovieController::class);
     Route::get('/', function () {
         return view('admin.layout.index');
     });
