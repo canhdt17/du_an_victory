@@ -5,18 +5,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>List Movies</title>
+
+    <title>List Movies</title>
+
+    <title>Demo</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
+
     <nav>
+
+
+    <nav>
+        <a href="{{ route('showtimes.index') }}" class="btn btn-primary">Lịch xuất chiếu</a>
+
+    {{-- <nav>
+
         <a href="" class="btn btn-primary">Lịch xuất chiếu</a>
         <a href="showtime1/" class="btn btn-primary">Lịch xuất chiếu</a>
         <a href="showtime2/" class="btn btn-primary">Lịch xuất chiếu</a>
         <a href="showtime3/" class="btn btn-primary">Lịch xuất chiếu</a>
 
+
     </nav>
+
+    </nav>
+
+    </nav> --}}
+
     <div>
 
         @yield('content')
@@ -25,5 +44,14 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 </body>
+
  
+</html>
+
+
+ 
+</html>
+
+
+
 </html>
