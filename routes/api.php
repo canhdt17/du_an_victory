@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\AreaController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::apiResource('movies',MovieComtroller::class);
 Route::apiResource('showtimes',ShowtimeController::class);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
