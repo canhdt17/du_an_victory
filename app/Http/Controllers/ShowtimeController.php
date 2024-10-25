@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\showtime;
 use Illuminate\Http\Request;
 
@@ -21,7 +21,9 @@ class ShowtimeController extends Controller
      */
     public function create()
     {
-        return view('admin.showtime.create');
+        $movies= DB::table('movies')->get();
+        $rooms= DB::table('rooms')->get();
+        return view('admin.showtime.create',compact('movies','rooms'));
     }
 
     /**
@@ -54,7 +56,9 @@ class ShowtimeController extends Controller
      */
     public function edit(showtime $showtime)
     {
-        return view('admin.showtime.edit' ,compact('showtime'));
+        $movies= DB::table('movies')->get();
+        $rooms= DB::table('rooms')->get();
+        return view('admin.showtime.edit' ,compact('showtime','movies','rooms'));
     }
 
     /**
