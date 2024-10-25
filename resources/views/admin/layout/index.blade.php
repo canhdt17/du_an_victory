@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>List Movies</title>
 
     <title>List Movies</title>
 
@@ -16,14 +17,20 @@
 <body>
 
     <nav>
+
+
+    <nav>
         <a href="{{ route('showtimes.index') }}" class="btn btn-primary">Lịch xuất chiếu</a>
 
     {{-- <nav>
+
         <a href="" class="btn btn-primary">Lịch xuất chiếu</a>
         <a href="showtime1/" class="btn btn-primary">Lịch xuất chiếu</a>
         <a href="showtime2/" class="btn btn-primary">Lịch xuất chiếu</a>
         <a href="showtime3/" class="btn btn-primary">Lịch xuất chiếu</a>
 
+
+    </nav>
 
     </nav>
 
@@ -42,6 +49,9 @@
 </html>
 
 
-
+ 
 </html>
 
+
+
+</html>
