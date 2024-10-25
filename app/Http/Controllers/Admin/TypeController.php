@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class TypeController extends Controller
 {
@@ -19,7 +20,7 @@ class TypeController extends Controller
                 'types' => $types
             ], 200);
         } catch (Exception $e) {
-            \Log::error($e->getMessage());
+            Log::error($e->getMessage());
             return response()->json([
                 'error' => 'Error fetching types.',
                 'message' => $e->getMessage()
@@ -52,7 +53,7 @@ class TypeController extends Controller
                 'type' => $type
             ], 201);
         } catch (Exception $e) {
-            \Log::error($e->getMessage());
+            Log::error($e->getMessage());
             return response()->json([
                 'error' => 'Error creating type.',
                 'message' => $e->getMessage()
@@ -70,7 +71,7 @@ class TypeController extends Controller
                 'type' => $type
             ], 200);
         } catch (Exception $e) {
-            \Log::error($e->getMessage());
+            Log::error($e->getMessage());
             return response()->json([
                 'error' => 'Type not found.',
                 'message' => $e->getMessage()
@@ -105,7 +106,7 @@ class TypeController extends Controller
                 'type' => $type
             ], 200);
         } catch (Exception $e) {
-            \Log::error($e->getMessage());
+            Log::error($e->getMessage());
             return response()->json([
                 'error' => 'Error updating type.',
                 'message' => $e->getMessage()
@@ -124,7 +125,7 @@ class TypeController extends Controller
                 'message' => 'Xóa thành công.'
             ], 200);
         } catch (Exception $e) {
-            \Log::error($e->getMessage());
+            Log::error($e->getMessage());
             return response()->json([
                 'error' => 'Error deleting type.',
                 'message' => $e->getMessage()

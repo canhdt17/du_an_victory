@@ -11,7 +11,7 @@ class Movie extends Model
     use HasFactory;
     use SoftDeletes; // Dung de xoa mem
     protected $fillable = [
-        'name',
+        'name_movie',
         'image',
         'type_id',
         'duration',

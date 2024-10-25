@@ -50,14 +50,14 @@
             <tbody>
                 @foreach ($rooms as $room)
                     <tr>
-                        <td>{{ $room->room_id  }}</td>
+                        <td>{{ $room->id  }}</td>
                         <td>{{ $room->room_name }}</td>
                         <td>{{ $room->total_seat }}</td>
                         <td>{{ $room->area ? $room->area->area_name : 'N/A' }}</td>
 
                         <td class="button d-flex">
-                            <a href="{{ route('rooms.edit', $room) }}" class="btn btn-warning">Sửa</a>
-                            <form action="{{route('rooms.destroy', $room)}}" method="post">
+                            <a href="{{ route('rooms.edit', $room->id) }}" class="btn btn-warning">Sửa</a>
+                            <form action="{{route('rooms.destroy', $room->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"

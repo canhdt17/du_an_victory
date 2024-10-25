@@ -11,15 +11,16 @@ class Type extends Model
     protected $table = 'types';
 
     // Specify which attributes are mass assignable
-    protected $fillable = ['name'];
+    protected $fillable = ['name_type'];
 
     // Define the relationship to Movie
     public function movies()
     {
         return $this->hasMany(Movie::class, 'type_id');
     }
-}
-
     use HasFactory;
 }
+
+   
+
 

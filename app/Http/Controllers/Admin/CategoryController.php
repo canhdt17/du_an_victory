@@ -90,7 +90,7 @@ class CategoryController extends Controller
     
         } catch (Exception $e) {
             // Log any other exceptions and return a generic error response
-            \Log::error($e->getMessage());
+            Log::error($e->getMessage());
     
             return response()->json([
                 'error' => 'Error updating category.',

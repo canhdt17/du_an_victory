@@ -30,7 +30,6 @@ Route::apiResource('movies',MovieComtroller::class);
 Route::apiResource('showtimes',ShowtimeController::class);
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('types', TypeController::class);
-Route::apiResource('showtimes',ShowtimeController::class);
 Route::apiResource('rooms', RoomController::class);
 Route::apiResource('areas', AreaController::class);
 

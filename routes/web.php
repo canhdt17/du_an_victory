@@ -1,21 +1,17 @@
 <?php
 
 
-use App\Http\Controllers\SeatController;
-use App\Http\Controllers\SeatTypeController;
-
-
-use App\Http\Controllers\ShowtimeController;
-
-use App\Http\Controllers\MovieController;
-
-use App\Http\Controllers\AreaController;
-use App\Http\Controllers\RoomController;
-
-
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\SeatController;
+use App\Http\Controllers\Admin\SeatTypeController;
+use App\Http\Controllers\Admin\ShowtimeController;
+use App\Http\Controllers\Admin\MovieController;
+use App\Http\Controllers\Admin\AreaController;
+use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\CategoryController;
+
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,30 +24,16 @@ use App\Http\Controllers\Admin\CategoryController;
 |
 */
 
+
 Route::prefix('admin')->group(function () {
     Route::resource('seatType', SeatTypeController::class);
     Route::resource('seat', SeatController::class);
-    Route::get('/', function () {
-        return view('admin.layout.index');
-    });
-});
-Route::prefix('admin')->group(function () {
-    Route::resource('showtimes', ShowtimeController::class);
-    Route::prefix('admin')->group(function () {
-        Route::resource('areas', AreaController::class);
-        Route::resource('rooms', RoomController::class);
-        Route::get('/', function () {
-            return view('admin.layout.index');
-        });
-
-    Route::resource('movies', MovieController::class);
-
-});
-Route::prefix('admin')->group(function () {
     Route::resource('areas', AreaController::class);
     Route::resource('rooms', RoomController::class);
-
-
+    Route::resource('showtimes', ShowtimeController::class);
+    Route::resource('movies', MovieController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('types', TypeController::class);
     Route::get('/', function () {
         return view('admin.layout.index');
 
