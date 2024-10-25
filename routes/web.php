@@ -42,14 +42,13 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::resource('showtimes', ShowtimeController::class);
+    Route::prefix('admin')->group(function () {
+        Route::resource('areas', AreaController::class);
+        Route::resource('rooms', RoomController::class);
 
-//     return view('welcome');
-// });
-Route::prefix('admin')->group(function () {
-    Route::resource('areas', AreaController::class);
-    Route::resource('rooms', RoomController::class);
-
-    Route::get('/', function () {
-        return view('admin.layout.index');
+        Route::get('/', function () {
+            return view('admin.layout.index');
+        });
     });
 });
+
