@@ -1,8 +1,10 @@
 <?php
 
 
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\TypeController;
+use App\Http\Controllers\Api\TinTucController;
+
 use App\Http\Controllers\Api\ShowtimeController ;
 use App\Http\Controllers\Api\MovieComtroller;
 
@@ -28,6 +30,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('types', TypeController::class);
+Route::apiResource('tin-tuc', TinTucController::class);
+
 Route::apiResource('showtimes',ShowtimeController::class);
 Route::apiResource('rooms', RoomController::class);
 Route::apiResource('areas', AreaController::class);
