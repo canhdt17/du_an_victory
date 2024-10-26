@@ -28,6 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::apiResource('movies',MovieComtroller::class);
+Route::apiResource('showtimes',ShowtimeController::class);
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('types', TypeController::class);
 Route::apiResource('tin-tuc', TinTucController::class);

@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Movie extends Model
+class movie extends Model
 {
     // Define the table name (if it's not the plural of the model name)
     protected $table = 'movies';

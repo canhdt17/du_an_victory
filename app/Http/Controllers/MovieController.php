@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
-use App\Models\movie;
+namespace App\Http\Controllers;
+
+use App\Models\Movie;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MovieComtroller extends Controller
+class MovieController extends Controller
 {
- /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -24,7 +24,17 @@ class MovieComtroller extends Controller
         ->latest('movies.id')
         ->paginate();
 
-        return response()->json($movies);
+        return view('admin.movie.index', compact('movies'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $types= DB::table('types')->get();
+        $categories= DB::table('categories')->get();
+        return view('admin.movie.create', compact('types','categories'));
     }
 
     /**
@@ -33,7 +43,7 @@ class MovieComtroller extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'=> 'required',
+            'name_movie'=> 'required',
             'image'=> 'required',
             'type_id'=> 'required',
             'duration'=> 'required',
@@ -50,8 +60,8 @@ class MovieComtroller extends Controller
         $data['image'] = $path_image;
 
         // them vao database
-        $movie=Movie::query()->create($data);
-        return response()->json($movie);
+        Movie::query()->create($data);
+        return redirect()->route('movies.index');
     }
 
     /**
@@ -59,7 +69,7 @@ class MovieComtroller extends Controller
      */
     public function show(Movie $movie)
     {
-        response()->json($movie);
+        //
     }
 
     /**
@@ -79,7 +89,7 @@ class MovieComtroller extends Controller
     public function update(Request $request, Movie $movie)
     {
         $data = $request->validate([
-            'name'=> 'required',
+            'name_movie'=> 'required',
             'type_id'=> 'required',
             'duration'=> 'required',
             'nation'=> 'required',
@@ -105,7 +115,7 @@ class MovieComtroller extends Controller
 
         // cap nhap vao database
         $movie->update($data);
-        return response()->json($movie);
+        return redirect()->route('movies.index');
     }
 
     /**
@@ -117,6 +127,6 @@ class MovieComtroller extends Controller
             unlink('storage/' . $movie->image);
         }
         $movie->delete();
-        return response()->json($movie);
+        return redirect()->route('movies.index') ;
     }
 }
