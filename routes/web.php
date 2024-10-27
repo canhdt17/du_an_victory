@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ShowtimeController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\AreaController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\BannerController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('rooms', RoomController::class);
     Route::resource('showtimes', ShowtimeController::class);
     Route::resource('movies', MovieController::class);
+    Route::resource('banners', BannerController::class);
     Route::get('/', function () {
         return view('admin.layout.index');
 

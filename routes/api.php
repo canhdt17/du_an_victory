@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ShowtimeController ;
 use App\Http\Controllers\Api\MovieComtroller;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\AreaController;
+use App\Http\Controllers\Api\BannerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,6 @@ Route::apiResource('categories', CategoryController::class);
 Route::apiResource('types', TypeController::class);
 Route::apiResource('rooms', RoomController::class);
 Route::apiResource('areas', AreaController::class);
+Route::apiResource('banners', BannerController::class);
+
 
