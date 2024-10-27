@@ -21,6 +21,13 @@
 
     <nav>
         <a href="{{ route('showtimes.index') }}" class="btn btn-primary">Lịch xuất chiếu</a>
+        <a href="{{ route('banners.index') }}" class="btn btn-primary">Banner</a>
+        <a href="{{ route('movies.index') }}" class="btn btn-primary">Phim</a>
+        <a href="{{ route('seatType.index') }}" class="btn btn-primary">Loại Ghế</a>
+        <a href="{{ route('seat.index') }}" class="btn btn-primary">Ghế</a>
+        <a href="{{ route('rooms.index') }}" class="btn btn-primary">Phòng</a>
+        <a href="{{ route('areas.index') }}" class="btn btn-primary">Khu Vực</a>
+        <a href="{{ route('areas.index') }}" class="btn btn-primary">Bình Luận</a>
 
     {{-- <nav>
 
