@@ -59,20 +59,9 @@ class MovieComtroller extends Controller
      */
     public function show(Movie $movie)
     {
-        response()->json($movie);
+        return response()->json($movie);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Movie $movie)
-    {        
-        $types= DB::table('types')->get();
-        $categories= DB::table('categories')->get();
-        return view('admin.movie.edit' ,compact('movie','types','categories'));
-
-    }
-
+    
     /**
      * Update the specified resource in storage.
      */
