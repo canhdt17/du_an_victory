@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\AreaController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\CommentController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('showtimes', ShowtimeController::class);
     Route::resource('movies', MovieController::class);
     Route::resource('banners', BannerController::class);
+    Route::resource('comments', CommentController::class);
     Route::get('/', function () {
         return view('admin.layout.index');
 
