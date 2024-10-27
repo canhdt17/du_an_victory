@@ -30,34 +30,28 @@
 @extends('admin.layout.index')
 @section('content')
     <div class="container mt-5">
-        <h1 class="text-center">Danh Sách Phòng </h1>
+        <h1 class="text-center">Danh Sách Bình Luân </h1>
 
 
         <table border="1" class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>#ID</th>
-                    <th>Tên</th>
-                    <th>Tổng số ghế</th>
-                    <th>Khu vực</th>
-
+                    <th>User id</th>
+                    <th>Movie id</th>
+                    <th>content</th>
                     <th>Thao tác</th>
-                    <th>
-                        <a href="{{ route('rooms.create')}}" class="btn btn-primary">Create New Room</a>
-                    </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($rooms as $room)
+                @foreach ($comments as $comment)
                     <tr>
-                        <td>{{ $room->id  }}</td>
-                        <td>{{ $room->room_name }}</td>
-                        <td>{{ $room->total_seat }}</td>
-                        <td>{{ $room->area ? $room->area->area_name : 'N/A' }}</td>
-
+                        <td>{{ $comment->id  }}</td>
+                        <td>{{ $comment->user_id }}</td>
+                        <td>{{ $comment->movie_id }}</td>
+                        <td>{{ $comment->content }}</td>
                         <td class="button d-flex">
-                            <a href="{{ route('rooms.edit', $room->id) }}" class="btn btn-warning">Sửa</a>
-                            <form action="{{route('rooms.destroy', $room->id)}}" method="post">
+                            <form action="{{route('comments.destroy', $comment)}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"
@@ -68,6 +62,6 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- {{$rooms->links()}} --}}
+        {{-- {{$comments->links()}} --}}
     </div>
 @endsection

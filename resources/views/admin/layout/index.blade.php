@@ -4,11 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>List Movies</title>
-
-    <title>List Movies</title>
-
-    <title>Demo</title>
+    <title>Admin</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -27,7 +23,9 @@
         <a href="{{ route('seat.index') }}" class="btn btn-primary">Ghế</a>
         <a href="{{ route('rooms.index') }}" class="btn btn-primary">Phòng</a>
         <a href="{{ route('areas.index') }}" class="btn btn-primary">Khu Vực</a>
-        <a href="{{ route('areas.index') }}" class="btn btn-primary">Bình Luận</a>
+        <a href="{{ route('comments.index') }}" class="btn btn-primary">Bình Luận</a>
+    
+
 
     {{-- <nav>
 
