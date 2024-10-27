@@ -1,15 +1,15 @@
 <?php
 
 
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\ShowtimeController ;
 use App\Http\Controllers\Api\MovieComtroller;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\AreaController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
