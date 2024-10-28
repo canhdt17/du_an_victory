@@ -27,7 +27,9 @@
         <a href="{{ route('seat.index') }}" class="btn btn-primary">Ghế</a>
         <a href="{{ route('rooms.index') }}" class="btn btn-primary">Phòng</a>
         <a href="{{ route('areas.index') }}" class="btn btn-primary">Khu Vực</a>
-        <a href="{{ route('areas.index') }}" class="btn btn-primary">Bình Luận</a>
+        {{-- <a href="{{ route('comments.index') }}" class="btn btn-primary">Bình Luận</a> --}}
+        <a href="{{ route('combofoods.index') }}" class="btn btn-primary">ComboFood</a>
+        <a href="{{ route('supports.index') }}" class="btn btn-primary">Support</a>
 
     {{-- <nav>
 
@@ -52,11 +54,11 @@
     </script>
 </body>
 
- 
+
 </html>
 
 
- 
+
 </html>
 
 
