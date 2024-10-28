@@ -30,7 +30,7 @@
 @extends('admin.layout.index')
 @section('content')
     <div class="container mt-5">
-        <h1 class="text-center">Danh sách loại ghế </h1>
+        <h1 class="text-center">Danh sách voucher </h1>
         
 
         <table border="1" class="table table-bordered table-hover">

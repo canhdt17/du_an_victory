@@ -27,7 +27,8 @@
         <a href="{{ route('combofoods.index') }}" class="btn btn-primary">ComboFood</a>
         <a href="{{ route('supports.index') }}" class="btn btn-primary">Support</a>
         <a href="{{ route('comments.index') }}" class="btn btn-primary">Bình Luận</a>
-    
+        <a href="{{ route('khuyenMai.index') }}" class="btn btn-primary">Khuyến Mãi</a>
+        <a href="{{ route('voucher.index') }}" class="btn btn-primary">Voucher</a>
 
 
 
