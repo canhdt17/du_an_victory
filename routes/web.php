@@ -10,6 +10,10 @@ use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ComboFoodController;
 use App\Http\Controllers\Admin\HoTroController;
+use App\Http\Controllers\Admin\CommentController;
+
+
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,6 +39,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('banners', BannerController::class);
     Route::resource('combofoods', ComboFoodController::class);
     Route::resource('supports', HoTroController::class);
+    Route::resource('comments', CommentController::class);
 
     Route::get('/', function () {
         return view('admin.layout.index');
