@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ho_tro', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('subject');
             $table->text('content');
             $table->boolean('status');
