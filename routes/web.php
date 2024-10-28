@@ -11,9 +11,8 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ComboFoodController;
 use App\Http\Controllers\Admin\HoTroController;
 use App\Http\Controllers\Admin\CommentController;
-
-
-
+use App\Http\Controllers\KhuyenMaiController;
+use App\Http\Controllers\VoucherController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -40,6 +39,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('combofoods', ComboFoodController::class);
     Route::resource('supports', HoTroController::class);
     Route::resource('comments', CommentController::class);
+    Route::resource('khuyenMai', KhuyenMaiController::class);
+    Route::resource('voucher', VoucherController::class);
 
     Route::get('/', function () {
         return view('admin.layout.index');
