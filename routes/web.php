@@ -11,8 +11,8 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ComboFoodController;
 use App\Http\Controllers\Admin\HoTroController;
 use App\Http\Controllers\Admin\CommentController;
-use App\Http\Controllers\KhuyenMaiController;
-use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\Admin\KhuyenMaiController;
+use App\Http\Controllers\Admin\VoucherController;
 use Illuminate\Support\Facades\Route;
 
 
