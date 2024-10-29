@@ -35,7 +35,7 @@
                 <tbody>
                     @foreach($categorys as $category)
                         <tr>
-                            <td>{{ $category->name }}</td>
+                            <td>{{ $category->name_category }}</td>
                             <td>
                                 <a href="{{ route('categorys.edit', $category->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <a href="{{ route('categorys.show', $category->id) }}" class="btn btn-info btn-sm">View</a>

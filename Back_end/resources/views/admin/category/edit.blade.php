@@ -28,8 +28,8 @@
             @method('PUT') {{-- This directive is necessary to send a PUT request for updating the resource --}}
 
             <div class="form-group">
-                <label for="name">category Name:</label>
-                <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $category->name) }}" required>
+                <label for="name_category">category Name:</label>
+                <input type="text" name="name_category" id="name_category" class="form-control" value="{{ old('name_category', $category->name_category) }}" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Update Category</button>

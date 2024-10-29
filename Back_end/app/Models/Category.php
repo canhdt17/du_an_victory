@@ -11,11 +11,6 @@ class Category extends Model{
     // Specify which attributes are mass assignable
     protected $fillable = ['name_category'];
 
-    // Define the relationship to Movie
-    public function movies()
-    {
-        return $this->hasMany(Movie::class, 'category_id');
-    }
 
 
 

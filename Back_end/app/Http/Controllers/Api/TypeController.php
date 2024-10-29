@@ -41,11 +41,11 @@ class TypeController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required|string|max:255',
+                'name_type' => 'required|string|max:255',
             ]);
 
             $type = Type::create([
-                'name' => $request->input('name'),
+                'name_type' => $request->input('name_type'),
             ]);
 
             return response()->json([
@@ -94,11 +94,11 @@ class TypeController extends Controller
             $type = Type::findOrFail($id);
 
             $request->validate([
-                'name' => 'required|string|max:255',
+                'name_type' => 'required|string|max:255',
             ]);
 
             $type->update([
-                'name' => $request->input('name'),
+                'name_type' => $request->input('name'),
             ]);
 
             return response()->json([
