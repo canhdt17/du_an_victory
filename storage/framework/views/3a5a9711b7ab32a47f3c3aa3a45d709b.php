@@ -30,7 +30,7 @@
 
 <?php $__env->startSection('content'); ?>
     <div class="container mt-5">
-        <h1 class="text-center">Danh Sách Khu Vực </h1>
+        <h1 class="text-center">Danh Sách Phòng </h1>
 
 
         <table border="1" class="table table-bordered table-hover">
