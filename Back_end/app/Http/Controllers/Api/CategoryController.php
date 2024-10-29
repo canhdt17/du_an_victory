@@ -28,11 +28,11 @@ class CategoryController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required|string|max:255',
+                'name_category' => 'required|string|max:255',
             ]);
 
             $category = Category::create([
-                'name' => $request->input('name'),
+                'name_category' => $request->input('name_category'),
             ]);
 
             return response()->json(['message' => 'thêm danh mục thành công.', 'category' => $category], 201);
@@ -62,7 +62,7 @@ class CategoryController extends Controller
     
             // Validate the input data
             $data = $request->validate([
-                'name' => 'required|unique:categories,name,' . $category->id . '|max:255',
+                'name_category' => 'required|unique:categories,name_category,' . $category->id . '|max:255',
                 
             ]);
     
