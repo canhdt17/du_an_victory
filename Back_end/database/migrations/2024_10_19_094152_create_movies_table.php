@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('nation');
             $table->string('director');
             $table->string('performer');
-            $table->string('show');
+            $table->date('show');
             $table->string('content');
             $table->string('link_trailler');
             $table->unsignedBigInteger('category_id');

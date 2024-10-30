@@ -60,7 +60,7 @@
 
                     <div class="form-group">
                         <label for="">show</label>
-                        <input type="text" name="show" class="form-control" id="show">
+                        <input type="date" name="show" class="form-control" id="show">
                     </div>
 
                     <div class="form-group">
