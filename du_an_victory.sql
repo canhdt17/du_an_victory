@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 30, 2024 at 09:16 AM
+-- Generation Time: Oct 30, 2024 at 09:25 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -430,6 +430,14 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `fullname`, `username`, `email`, `email_verified_at`, `password`, `phone`, `gender`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'abc', 'cuong', 'abc@gmail.com', NULL, '12345678', '0483208497', 'cajkshcjk', 'user', NULL, NULL, NULL),
+(2, 'admin', 'admin', 'admin@gmail.com', NULL, '12345678', '0937823648', 'xzcz', 'admin', NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -696,7 +704,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vouchers`
