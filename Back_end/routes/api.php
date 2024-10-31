@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\ComboFoodController;
 use App\Http\Controllers\Api\HoTroController;
+use App\Http\Controllers\Api\KhuyenMaiController;
+use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\Api\VoucherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +49,8 @@ Route::apiResource('banners', BannerController::class);
 Route::apiResource('combofoods', ComboFoodController::class);
 Route::apiResource('supports', HoTroController::class);
 Route::apiResource('seatTypes', SeatTypeController::class);
+Route::apiResource('seats', SeatController::class);
+Route::apiResource('khuyenmai', KhuyenMaiController::class);
 Route::apiResource('vouchers', VoucherController::class);
 
 

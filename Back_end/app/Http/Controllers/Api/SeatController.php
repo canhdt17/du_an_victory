@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\KhuyenMai;
+use App\Models\Seat;
 use Illuminate\Http\Request;
 
-class KhuyenMaiController extends Controller
+class SeatController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $khuyenmai = KhuyenMai::all();
-        return response()->json($khuyenmai);
+        $seats = Seat::all();
+        return response()->json($seats);
     }
 
     /**
@@ -22,21 +22,16 @@ class KhuyenMaiController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'image' => '',
-            'time_date' => 'required',
+        $request->validate([
+            'seat_type_id' => 'required|exists:seat_types,id', 
+            'seat_number' => 'required|string|max:10',         
+            'room_id' => 'required|exists:rooms,id',           
+            'seat_status' => 'required|boolean', 
         ]);
-        if($request->hasFile('image')){
-            $path_image = $request->file('image')->store('images');
-            $data['image'] = $path_image;
-        }
-        KhuyenMai::create($data);
+        Seat::create($request->all());
         return response()->json([
             'message' => 'Thêm mới thành công'
         ],200);
-        
     }
 
     /**
@@ -44,7 +39,7 @@ class KhuyenMaiController extends Controller
      */
     public function show(string $id)
     {
-        $data = KhuyenMai::query()->findOrFail($id);
+        $data = Seat::query()->findOrFail($id);
         return response()->json($data);
     }
 
@@ -53,9 +48,9 @@ class KhuyenMaiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $khuyenmai = KhuyenMai::query()->findOrFail($id);
-        $khuyenmai->update(request()->all());
-        return response()->json($khuyenmai);
+        $seats = Seat::query()->findOrFail($id);
+        $seats->update(request()->all());
+        return response()->json($seats);
     }
 
     /**
@@ -63,7 +58,7 @@ class KhuyenMaiController extends Controller
      */
     public function destroy(string $id)
     {
-        KhuyenMai::destroy($id);
+        Seat::destroy($id);
         return response()->json([
             'message'=> 'Xóa thành công'
         ]);
