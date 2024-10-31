@@ -4,6 +4,7 @@
 
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\API\SeatTypeController;
+use App\Http\Controllers\Api\TintucController;
 use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\ShowtimeController ;
 use App\Http\Controllers\Api\MovieComtroller;
@@ -34,8 +35,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('movies',MovieComtroller::class);
 Route::apiResource('showtimes',ShowtimeController::class);
+
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('types', TypeController::class);
+Route::apiResource('tin-tuc', TintucController::class);
+
+
 Route::apiResource('rooms', RoomController::class);
 Route::apiResource('areas', AreaController::class);
 Route::apiResource('banners', BannerController::class);
