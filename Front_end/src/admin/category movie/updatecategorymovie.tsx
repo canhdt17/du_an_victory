@@ -4,7 +4,7 @@ import MenuDashboard from "../menudashboard";
 import HeaderDashboard from "../headerdashboard";
 import Logo from "../logo";
 import { useForm } from "react-hook-form";
-import { IRoom } from "../../movie/room";
+import { IRoom } from "../../interface/room";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { IArea } from "../../movie/area";
@@ -15,33 +15,32 @@ import { CategoryMovieById } from "../../service/categorymovie";
 import { ICategoryMovie } from "../../movie/categorymovie";
 
 type Props = {
-    updateCategoryMovies:(id:number|string)=>void;
-}
+  updateCategoryMovies: (id: number | string) => void;
+};
 const createMovieScheama = Joi.object({
-    name:Joi.string().required(),
-})
+  name: Joi.string().required(),
+});
 const UpdateCategoryMovie = ({ updateCategoryMovies }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },reset
+    formState: { errors },
+    reset,
   } = useForm<IRoom>({
     resolver: joiResolver(createMovieScheama),
   });
- 
-  const param = useParams()
-  useEffect(()=>{
-    (async()=>{
-      const data = await CategoryMovieById(param?.id as number|string)
+
+  const param = useParams();
+  useEffect(() => {
+    (async () => {
+      const data = await CategoryMovieById(param?.id as number | string);
       reset({
-        name:data.name,
-        
-      })
-    })()
-  },[])
+        name: data.name,
+      });
+    })();
+  }, []);
   const onsubumit = (roomData: IRoom) => {
-   updateCategoryMovies(roomData,param?.id as number|string);
-   
+    updateCategoryMovies(roomData, param?.id as number | string);
   };
   return (
     <div className="dashboards">
@@ -78,9 +77,7 @@ const UpdateCategoryMovie = ({ updateCategoryMovies }: Props) => {
                   />
                   <div id="emailHelp" className="form-text">
                     {errors.name && (
-                      <div className="text-danger ">
-                        {errors.name.message}
-                      </div>
+                      <div className="text-danger ">{errors.name.message}</div>
                     )}
                   </div>
                 </div>

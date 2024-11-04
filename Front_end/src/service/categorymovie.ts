@@ -1,5 +1,6 @@
 import api from "../axios/config";
-import { ICategoryMovie } from "../movie/categorymovie";
+import { ICategoryMovie } from "../interface/categorymovie";
+
 
 
 export const CategoryMovie = async()=>{

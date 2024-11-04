@@ -4,12 +4,13 @@ import MenuDashboard from "../menudashboard";
 import HeaderDashboard from "../headerdashboard";
 import Logo from "../logo";
 import { useEffect, useState } from "react";
-import { ISeat } from "../../movie/seat";
+import { ISeat } from "../../interface/seat"; 
 import { useForm } from "react-hook-form";
-import { ISeatType } from "../../movie/seat_type";
-import { ListSeatTypes } from "../../service/seat_type";
-import { IRoom } from "../../movie/room";
+import { ISeatType } from "../../interface/seat_type"; 
+
+import { IRoom } from "../../interface/room"; 
 import { ListRoom } from "../../service/room";
+import { ListSeatTypes } from "../../service/seat_type";
 type Props ={
   addSeats:(seatData:ISeat) => void,
 }
@@ -22,7 +23,7 @@ const onsubmit = (seatData:ISeat)=>{
 const [seattyes,setSeatTypes] = useState<ISeatType[]>([])
 useEffect(()=>{
     (async()=>{
-        const data = await ListSeatTypes()
+        const data = await ListSeatTypes()  
         setSeatTypes(data);
     })()
 },[])
