@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { ICategoryMovie } from '../../movie/categorymovie'
+import { ICategoryMovie } from '../../interface/categorymovie' 
 import { CategoryMovie } from '../../service/categorymovie'
 
 type Props = {}

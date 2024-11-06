@@ -1,4 +1,5 @@
 export interface IRoom{
+    [x: string]: IRoom
     room_id:number|string
     room_name:string
     area_id:number|string

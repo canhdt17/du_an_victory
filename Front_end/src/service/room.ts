@@ -1,5 +1,5 @@
 import api from "../axios/config"
-import { IRoom, RoomData } from "../movie/room";
+import { RoomData } from "../movie/room";
 
 export const ListRoom = async()=>{
     try {

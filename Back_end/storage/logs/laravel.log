@@ -2812,3 +2812,84 @@ Trận mưa lớn từ 29/10 ở vùng Valencia, miền đông Tây Ban Nha, đ�
 #54 D:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('D:\\\\laragon\\\\www\\\\...')
 #55 {main}
 "} 
+[2024-11-04 02:59:53] local.ERROR: No arguments expected for "serve" command, got "list". {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): No arguments expected for \"serve\" command, got \"list\". at C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Input\\ArgvInput.php:196)
+[stacktrace]
+#0 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Input\\ArgvInput.php(89): Symfony\\Component\\Console\\Input\\ArgvInput->parseArgument('list')
+#1 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Input\\ArgvInput.php(74): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('list', true)
+#2 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Input\\Input.php(56): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Command\\Command.php(285): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#4 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(180): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#5 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Application.php(1096): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Foundation\\Console\\ServeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Application.php(175): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(201): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\laragon\\www\\du_an_victory\\Back_end\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 {main}
+"} 
+[2024-11-04 03:00:02] local.ERROR: Too many arguments to "list" command, expected arguments "namespace". {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): Too many arguments to \"list\" command, expected arguments \"namespace\". at C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Input\\ArgvInput.php:196)
+[stacktrace]
+#0 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Input\\ArgvInput.php(89): Symfony\\Component\\Console\\Input\\ArgvInput->parseArgument('router')
+#1 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Input\\ArgvInput.php(74): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('router', true)
+#2 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Input\\Input.php(56): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Command\\Command.php(285): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#4 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Application.php(1096): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Application.php(175): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(201): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\laragon\\www\\du_an_victory\\Back_end\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 {main}
+"} 
+[2024-11-04 03:00:51] local.ERROR: Command "router" is not defined.
+
+Did you mean one of these?
+    route:cache
+    route:clear
+    route:list {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"router\" is not defined.
+
+Did you mean one of these?
+    route:cache
+    route:clear
+    route:list at C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Application.php:737)
+[stacktrace]
+#0 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Application.php(266): Symfony\\Component\\Console\\Application->find('router')
+#1 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\symfony\\console\\Application.php(175): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(201): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\laragon\\www\\du_an_victory\\Back_end\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 {main}
+"} 
+[2024-11-04 04:47:53] local.ERROR: Route [login] not defined. {"exception":"[object] (Symfony\\Component\\Routing\\Exception\\RouteNotFoundException(code: 0): Route [login] not defined. at C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\UrlGenerator.php:477)
+[stacktrace]
+#0 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(811): Illuminate\\Routing\\UrlGenerator->route('login', Array, true)
+#1 C:\\laragon\\www\\du_an_victory\\Back_end\\app\\Http\\Middleware\\Authenticate.php(15): route('login')
+#2 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(96): App\\Http\\Middleware\\Authenticate->redirectTo(Object(Illuminate\\Http\\Request))
+#3 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(81): Illuminate\\Auth\\Middleware\\Authenticate->unauthenticated(Object(Illuminate\\Http\\Request), Array)
+#4 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(55): Illuminate\\Auth\\Middleware\\Authenticate->authenticate(Object(Illuminate\\Http\\Request), Array)
+#5 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure), 'sanctum')
+#6 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#7 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(805): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#8 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#9 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#10 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#11 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#12 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#13 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#15 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#18 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#29 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#30 C:\\laragon\\www\\du_an_victory\\Back_end\\public\\index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#31 C:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('C:\\\\laragon\\\\www\\\\...')
+#32 {main}
+"} 

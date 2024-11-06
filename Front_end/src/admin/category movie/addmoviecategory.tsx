@@ -3,7 +3,7 @@ import Logo from '../logo'
 import HeaderDashboard from '../headerdashboard'
 import MenuDashboard from '../menudashboard'
 import { useForm } from 'react-hook-form'
-import { ICategoryMovie } from '../../movie/categorymovie'
+import { ICategoryMovie } from '../../interface/categorymovie' 
 import { joiResolver } from '@hookform/resolvers/joi'
 import Joi from 'joi'
 
