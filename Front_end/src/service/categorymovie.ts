@@ -20,6 +20,15 @@ export const CategoryMovieById = async(id:number|string)=>{
         
     }
 }
+export const CategoryMovieDel = async(id:number|string)=>{
+    try {
+        const {data} = await api.delete(`categorymovie/${id}`)
+        return data
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 export const AddCategoryMovie = async(categorymovieData:ICategoryMovie)=>{
     try {
         const {data} = await api.post("categorymovie",categorymovieData)

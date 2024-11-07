@@ -6,12 +6,12 @@ import MovieDetail from "./moviedetail/moviedetail"
 import Room from "./admin/room/room"
 import { useEffect, useState } from "react"
 import { IRoom } from "./movie/room"
-import { AddRoom, ListRoom, RoomUpdate } from "./service/room"
+import { AddRoom, DeleteRoom, ListRoom, RoomUpdate } from "./service/room"
 import CreateRoom from "./admin/room/createroom"
 import UpdateRoom from "./admin/room/updateroom"
 import CreateArea from "./admin/area/createarea"
 import { IArea } from "./movie/area"
-import { AddArea } from "./service/area"
+import { AddArea, AreaDelete, AreaUpdate } from "./service/area"
 import Area from "./admin/area/area"
 import UpdateArea from "./admin/area/updatearea"
 import CreateSeat from "./admin/seat/createseat"
@@ -23,7 +23,7 @@ import UpdateSeatType from "./admin/seat_type/updateseattype"
 import Category from "./admin/category movie/category"
 import AddMovieCategory from "./admin/category movie/addmoviecategory"
 import { ICategoryMovie } from "./movie/categorymovie"
-import { AddCategoryMovie, UpdateCategoryMovies } from "./service/categorymovie"
+import { AddCategoryMovie, CategoryMovieDel, UpdateCategoryMovies } from "./service/categorymovie"
 import UpdateCategoryMovie from "./admin/category movie/updatecategorymovie"
 import Seat from "./admin/seat/seat"
 import ShowTime from "./admin/showtime/showtime"
@@ -92,13 +92,41 @@ const areAdd = async(areaData:IArea)=>{
     
   }
 }
+const delRoom = async(id:number|string)=>{
+  try {
+    const confirm = window.confirm("Bạn muốn xóa không?")
+    if(confirm){
+      const room = await DeleteRoom(id);
+      alert("Xóa Thành Công")
+      const newrooms = rooms.filter(room =>room.id !== id)
+      setRooms(newrooms)
+    }
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
 const updateArea = async(id:number|string,areaData:IArea)=>{
   try {
-    const areaDta = await RoomUpdate(areaData,id)
+    const areaDta = await AreaUpdate(areaData,id)
     alert("Cập nhật thành công.")
       const newareas = areas.map(area => (area.id == area)?areaDta:area)
-      setRooms(newareas)
+      setAreas(newareas)
       navigate('/admin/area')
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+const areaDel = async(id:number|string)=>{
+  try {
+    const confirm = window.confirm("Bạn muốn xóa không?")
+    if(confirm){
+      const area = await AreaDelete(id);
+      alert("Xóa Thành Công")
+      const newareas = areas.filter(area =>area.id !== id)
+      setAreas(newareas)
+    }
   } catch (error) {
     console.log(error);
     
@@ -156,6 +184,20 @@ const updateMoviesCategory = async(id:number|string,categoryMovie:ICategoryMovie
     
   }
 }
+const delCategoryMovie = async(id:number|string)=>{
+  try {
+    const confirm = window.confirm("Bạn muốn xóa không?")
+    if(confirm){
+      const category = await CategoryMovieDel(id);
+      alert("Xóa Thành Công")
+      const newcategorymovies = categorymovies.filter(category =>category.id !== id)
+      setCategoryMovies(newcategorymovies)
+    }
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
 const addShowTimes = async(showData:IShowTime)=>{
   try {
     const showTime = await ShowTimeAdd(showData)
@@ -192,13 +234,13 @@ const addSeats = async(seatData:ISeat)=>{
       <Route path="/" element={<HomePage></HomePage>}></Route>
       <Route path="/admin/dashboard" element={<Dashboard></Dashboard>}></Route>
       <Route path="/moviedetail" element={<MovieDetail></MovieDetail>}></Route>
-      <Route path="/room" element={<Room rooms={rooms}></Room>}></Route>
+      <Route path="/room" element={<Room rooms={rooms} onDel={delRoom}></Room>}></Route>
       <Route path="/admin/room/createroom" element={<CreateRoom onAdd={addRoom}></CreateRoom>}></Route>
       <Route path="/admin/area/createarea" element={<CreateArea addArea={areAdd}></CreateArea>}></Route>
       <Route path="/admin/room/edit/:id" element={<UpdateRoom onUpdate={updateRoom}></UpdateRoom>}></Route>
-      <Route path="/admin/area" element={<Area></Area>}></Route>
+      <Route path="/admin/area" element={<Area delArea={areaDel}></Area>}></Route>
       <Route path="/admin/area/edit/:id" element={<UpdateArea updateArea={updateArea}></UpdateArea>}></Route>
-      <Route path="/admin/category" element={<Category></Category>}></Route>
+      <Route path="/admin/category" element={<Category movieDel={delCategoryMovie}></Category>}></Route>
       <Route path="/admin/creatseat" element={<CreateSeat addSeats={addSeats}></CreateSeat>}></Route>
       <Route path="/admin/seat_type" element={<SeatType ></SeatType>}></Route>
       <Route path="/admin/create_type_seat" element={<CreateSeatType addSeatType={seatTypeAdd}></CreateSeatType>}></Route>

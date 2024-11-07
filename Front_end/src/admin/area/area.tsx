@@ -5,9 +5,11 @@ import HeaderDashboard from '../headerdashboard'
 import Logo from '../logo'
 import ListAreas from './listarea'
 
-type Props = {}
+type Props = {
+  delArea:(id:number|string) => void
+}
 
-const Area = (props: Props) => {
+const Area = ({delArea}: Props) => {
   return (
     <div>
         <div className="dashboards">
@@ -47,7 +49,7 @@ const Area = (props: Props) => {
            </button> */}
                 </div>
               </div>
-                   <ListAreas></ListAreas>
+                   <ListAreas delArea={delArea}></ListAreas>
               
             </main>
           </div>

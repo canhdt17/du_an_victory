@@ -849,6 +849,7 @@ ol {
 
 .anime-details {
 	padding-top: 60px;
+	background-color: #070720;
 }
 
 .anime__details__content {
@@ -1834,7 +1835,7 @@ ol {
 -----------------------*/
 
 .footer {
-	background: #070720;
+	background: #111827;
 	padding-top: 60px;
 	padding-bottom: 40px;
 	position: relative;

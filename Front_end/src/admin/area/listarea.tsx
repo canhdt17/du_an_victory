@@ -3,9 +3,11 @@ import { NavLink } from 'react-router-dom'
 import { IArea } from '../../movie/area'
 import { ListArea } from '../../service/area'
 
-type Props = {}
+type Props = {
+  delArea:(id:number|string) => void
+}
 
-const ListAreas = (props: Props) => {
+const ListAreas = ({delArea}: Props) => {
   const [areas,setAreas] = useState<IArea[]>([])
   useEffect(()=>{
     (async()=>{
@@ -31,11 +33,18 @@ const ListAreas = (props: Props) => {
                   <td>{area.area_name}</td>
                  
                   <td>
-                    
+                  
+                       <button
+                        type="button"
+                        className="btn btn-danger text-center " onClick={()=> delArea(area.id)}
+                      >
+                        Xóa
+                      </button>
+                     
                      <NavLink to={`/admin/area/edit/${area.id}`}>
                        <button
                         type="button"
-                        className="btn btn-warning text-center "
+                        className="btn btn-warning text-center ml-3"
                       >
                         Cập nhật
                       </button>

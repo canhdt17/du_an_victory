@@ -1,82 +1,13 @@
 {
   "room": [
     {
-      "room_name": "Phòng 9",
-      "area_id": "Đồng Tháp",
-      "total_seat": 12,
-      "id": 1
-    },
-    {
-      "room_name": "Phòng 1",
+      "room_name": "Phòng 100",
       "area_id": "Hồ Chí Minh",
       "total_seat": 12,
       "id": 2
     }
   ],
   "area": [
-    {
-      "id": 1,
-      "area_name": "Hồ Chí Minh"
-    },
-    {
-      "id": 2,
-      "area_name": "Hà Nội"
-    },
-    {
-      "area_name": "Đà Nẵng",
-      "id": 3
-    },
-    {
-      "area_name": "Mông Cổ",
-      "id": 4
-    },
-    {
-      "area_name": "Lào Cai",
-      "id": 5
-    },
-    {
-      "area_name": "Việt Nam",
-      "id": 6
-    },
-    {
-      "area_name": "Yên Bái",
-      "id": 7
-    },
-    {
-      "area_name": "Cao bằng",
-      "id": 8
-    },
-    {
-      "area_name": "Bình Dương",
-      "id": 9
-    },
-    {
-      "area_name": "Lai Châu",
-      "id": 10
-    },
-    {
-      "area_name": "Vũng Tàu",
-      "id": 11
-    },
-    {
-      "area_name": "Đồng Tháp",
-      "id": 12
-    },
-    {
-      "seat_type_name": "VIP",
-      "seat_price": 12,
-      "id": 13
-    },
-    {
-      "seat_type_name": "VIP",
-      "seat_price": 12,
-      "id": 14
-    },
-    {
-      "seat_type_name": "VIP",
-      "seat_price": 12,
-      "id": 15
-    },
     {
       "area_name": "Xin",
       "id": 16
@@ -86,12 +17,7 @@
       "id": 17
     }
   ],
-  "categorymovie": [
-    {
-      "name": "Phim Hài",
-      "id": 1
-    }
-  ],
+  "categorymovie": [],
   "seat_type": [
     {
       "seat_type_name": "VIP",

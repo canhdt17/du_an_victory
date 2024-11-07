@@ -21,7 +21,7 @@ export const GetRoomById = async(id:number|string)=>{
 }
 export const DeleteRoom = async(id:number|string)=>{
     try {
-        const {data} = await api.get(`room/${id}`)
+        const {data} = await api.delete(`room/${id}`)
         return data
     } catch (error) {
         console.log(error);

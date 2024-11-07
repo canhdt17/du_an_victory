@@ -9,9 +9,10 @@ import { NavLink } from "react-router-dom";
 
 type Props = {
   rooms: IRoom[];
+  onDel:(id:number|string) =>void
 };
 
-const Room = ({ rooms }: Props) => {
+const Room = ({ rooms,onDel }: Props) => {
   return (
     <div>
         <div className="dashboards">
@@ -59,7 +60,7 @@ const Room = ({ rooms }: Props) => {
                 </div>
               </div>
              
-              <ListRoom rooms={rooms}></ListRoom>
+              <ListRoom rooms={rooms} onDel={onDel}></ListRoom>
             </main>
           </div>
         </div>

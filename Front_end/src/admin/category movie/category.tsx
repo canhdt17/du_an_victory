@@ -5,9 +5,11 @@ import HeaderDashboard from '../headerdashboard'
 import Logo from '../logo'
 import ListCategoryMovie from './listcartegorymovie'
 
-type Props = {}
+type Props = {
+  movieDel:(id:number|string) => void
+}
 
-const Category = (props: Props) => {
+const Category = ({movieDel}: Props) => {
   return (
     <div>
     <div className="dashboards">
@@ -47,7 +49,7 @@ const Category = (props: Props) => {
        </button> */}
             </div>
           </div>
-                <ListCategoryMovie></ListCategoryMovie>
+                <ListCategoryMovie movieDel={movieDel}></ListCategoryMovie>
         </main>
       </div>
     </div>

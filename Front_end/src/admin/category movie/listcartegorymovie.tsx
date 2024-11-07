@@ -3,9 +3,11 @@ import { NavLink } from 'react-router-dom'
 import { ICategoryMovie } from '../../movie/categorymovie'
 import { CategoryMovie } from '../../service/categorymovie'
 
-type Props = {}
+type Props = {
+  movieDel:(id:number|string) => void
+}
 
-const ListCategoryMovie = ({props}: Props) => {
+const ListCategoryMovie = ({movieDel}: Props) => {
     const [categorymovies,setCategoryMovies] = useState<ICategoryMovie[]>([])
     useEffect(()=>{
         (async()=>{
@@ -32,11 +34,18 @@ const ListCategoryMovie = ({props}: Props) => {
                   <td>{categorymovie.name}</td>
                   <td>
                     
-                     
+                
+                      <button
+                        type="button"
+                        className="btn btn-danger text-center " onClick={() => movieDel(categorymovie.id)}
+                      >
+                       Xóa
+                      </button>
+                    
                      <NavLink to={`/admin/createmovie/edit/${categorymovie.id}`}>
                       <button
                         type="button"
-                        className="btn btn-warning text-center "
+                        className="btn btn-warning text-center ml-3"
                       >
                         Cập nhật
                       </button>

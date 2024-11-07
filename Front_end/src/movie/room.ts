@@ -4,4 +4,4 @@ export interface IRoom{
     area_id:number|string
     total_seat:number
 }
-export type RoomData = Pick<IRoom,'room_name'|'area_id'|'total_seat'>
+export type RoomData = Pick<IRoom,'room_id'|'room_name'|'area_id'|'total_seat'>

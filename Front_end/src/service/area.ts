@@ -19,6 +19,15 @@ export const AreaById = async(id:number|string)=>{
         
     }
 }
+export const AreaDelete = async(id:number|string)=>{
+    try {
+        const {data} = await api.delete(`area/${id}`)
+        return data
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 export const AddArea = async(areaData:IArea)=>{
     try {
         const {data} = await api.post("area",areaData)
