@@ -20,11 +20,6 @@
   "categorymovie": [],
   "seat_type": [
     {
-      "seat_type_name": "VIP",
-      "seat_price": 12,
-      "id": 1
-    },
-    {
       "seat_type_name": "Massage",
       "seat_price": 190,
       "id": 2

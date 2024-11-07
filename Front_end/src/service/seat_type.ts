@@ -19,6 +19,15 @@ export const SeatsTypeByID = async(id:number|string)=>{
         
     }
 }
+export const SeatsTypeDelete = async(id:number|string)=>{
+    try {
+        const {data} = await api.delete(`seat_type/${id}`)
+        return data
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 export const SeatsTypeAdd = async(seatTypeData:ISeatType)=>{
     try {
         const {data} = await api.post("seat_type",seatTypeData)

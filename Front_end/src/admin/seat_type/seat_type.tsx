@@ -5,9 +5,11 @@ import HeaderDashboard from '../headerdashboard'
 import Logo from '../logo'
 import ListSeatType from './list_seat_type'
 
-type Props = {}
+type Props = {
+  typeDel:(id:number|string) => void
+}
 
-const SeatType = (props: Props) => {
+const SeatType = ({typeDel}: Props) => {
   return (
     <div>
          <div>
@@ -48,7 +50,7 @@ const SeatType = (props: Props) => {
            </button> */}
                 </div>
               </div>
-             <ListSeatType></ListSeatType>
+             <ListSeatType typeDel={typeDel}></ListSeatType>
             </main>
           </div>
         </div>

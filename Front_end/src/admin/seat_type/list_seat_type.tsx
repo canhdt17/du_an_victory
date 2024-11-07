@@ -3,9 +3,11 @@ import { NavLink } from 'react-router-dom'
 import { ISeatType } from '../../movie/seat_type'
 import { ListSeatTypes } from '../../service/seat_type'
 
-type Props = {}
+type Props = {
+  typeDel:(id:number|string) => void
+}
 
-const ListSeatType = (props: Props) => {
+const ListSeatType = ({typeDel}: Props) => {
     const [seattyes,setSeatTypes] = useState<ISeatType[]>([])
     useEffect(()=>{
         (async()=>{
@@ -35,11 +37,19 @@ const ListSeatType = (props: Props) => {
                   
                   <td>
                     
+                 
+                           <button
+                        type="button"
+                        className="btn btn-danger text-center " onClick={()=> typeDel(seattype.id)}
+                      >
+                        Xóa
+                      </button> 
+                     
                      
                         <NavLink to={`/admin/seat_type/edit/${seattype.id}`}>
                            <button
                         type="button"
-                        className="btn btn-warning text-center "
+                        className="btn btn-warning text-center ml-3"
                       >
                         Cập nhật
                       </button> 

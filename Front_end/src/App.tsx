@@ -18,7 +18,7 @@ import CreateSeat from "./admin/seat/createseat"
 import SeatType from "./admin/seat_type/seat_type"
 import CreateSeatType from "./admin/seat_type/create_seat_type"
 import { ISeatType } from "./movie/seat_type"
-import { SeatsTypeAdd, SeatsTypeUpdate } from "./service/seat_type"
+import { SeatsTypeAdd, SeatsTypeDelete, SeatsTypeUpdate } from "./service/seat_type"
 import UpdateSeatType from "./admin/seat_type/updateseattype"
 import Category from "./admin/category movie/category"
 import AddMovieCategory from "./admin/category movie/addmoviecategory"
@@ -44,6 +44,7 @@ function App() {
   const [categorymovies,setCategoryMovies] = useState<ICategoryMovie[]>([])
   const [showtimes,setShowtimes] = useState<IShowTime[]>([])
   const [seats,setSeat] = useState<ISeat[]>([])
+  const [seattyes,setSeatTypes] = useState<ISeatType[]>([])
   const navigate= useNavigate()
 useEffect(()=>{
       (async()=>{
@@ -158,6 +159,20 @@ const seatTypeUpdate = async(seatTypeData:ISeatType,id:number|string)=>{
     
   }
 }
+const seatTypeDel = async(id:number|string)=>{
+  try {
+    const confirm = window.confirm("Bạn muốn xóa không?")
+    if(confirm){
+      const seattype = await SeatsTypeDelete(id);
+      alert("Xóa Thành Công")
+      const newseattype = areas.filter(seattype =>seattype.id !== id)
+      setSeatTypes(newseattype)
+    }
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
 const addCategoryMovie = async(categoryMovie:ICategoryMovie)=>{
   try {
     const movieType = await AddCategoryMovie(categoryMovie)
@@ -242,7 +257,7 @@ const addSeats = async(seatData:ISeat)=>{
       <Route path="/admin/area/edit/:id" element={<UpdateArea updateArea={updateArea}></UpdateArea>}></Route>
       <Route path="/admin/category" element={<Category movieDel={delCategoryMovie}></Category>}></Route>
       <Route path="/admin/creatseat" element={<CreateSeat addSeats={addSeats}></CreateSeat>}></Route>
-      <Route path="/admin/seat_type" element={<SeatType ></SeatType>}></Route>
+      <Route path="/admin/seat_type" element={<SeatType typeDel={seatTypeDel}></SeatType>}></Route>
       <Route path="/admin/create_type_seat" element={<CreateSeatType addSeatType={seatTypeAdd}></CreateSeatType>}></Route>
       <Route path="/admin/seat_type/edit/:id" element={<UpdateSeatType updateSeatType={seatTypeUpdate}></UpdateSeatType>}></Route>
       <Route path="/admin/createmovie" element={<AddMovieCategory addCreateMovie={addCategoryMovie}></AddMovieCategory>}></Route>
