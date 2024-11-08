@@ -3,9 +3,11 @@ import { NavLink } from 'react-router-dom'
 import { ISeat } from '../../movie/seat'
 import { SeatList } from '../../service/seat'
 
-type Props = {}
+type Props = {
+  seatDel:(id:number|string) => void
+}
 
-const ListSeat = (props: Props) => {
+const ListSeat = ({seatDel}: Props) => {
     const [seats,setSeat] = useState<ISeat[]>([])
     useEffect(()=>{
         (async()=>{
@@ -22,6 +24,7 @@ const ListSeat = (props: Props) => {
             <th scope="col">STT</th>
             <th scope="col">Số Ghế</th>
             <th scope="col">Kiểu Ghế</th>
+            <th scope="col">Số Phòng</th>
             <th scope="col">Trạng Thái</th>
             <th scope="col">Button</th>
           </tr>
@@ -32,14 +35,22 @@ const ListSeat = (props: Props) => {
                 <td>{i + 1}</td>
                 <td>{seat.seat_number}</td>
                 <td>{seat.seat_type_id}</td>
+                <td>{seat.room_id}</td>
                 <td>{seat.seat_status}</td>
                 <td>
-                  
-                   
-                   <NavLink to={`/admin/room/edit`}>
+                
                     <button
                       type="button"
-                      className="btn btn-warning text-center "
+                      className="btn btn-danger text-center " onClick={()=> seatDel(seat.id)}
+                    >
+                      Xóa
+                    </button>
+                  
+                   
+                   <NavLink to={`/admin/seat/edit/${seat.id}`}>
+                    <button
+                      type="button"
+                      className="btn btn-warning text-center ml-3"
                     >
                       Cập nhật
                     </button>

@@ -20,6 +20,15 @@ export const SeatByID = async(id:number|string)=>{
         
     }
 }
+export const SeatDelete = async(id:number|string)=>{
+    try {
+        const {data} = await api.delete(`seat/${id}`)
+        return data
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 export const SeatAdd = async(seatData:ISeat)=>{
     try {
         const {data} = await api.post("seat",seatData)
@@ -29,7 +38,7 @@ export const SeatAdd = async(seatData:ISeat)=>{
         
     }
 }
-export const SeatUpdate = async(seatData:ISeat,id:number|string)=>{
+export const SeatUpdate = async(id:number|string,seatData:ISeat)=>{
     try {
         const {data} = await api.put(`seat/${id}`,seatData)
         return data

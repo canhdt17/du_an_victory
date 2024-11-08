@@ -31,12 +31,18 @@
   ],
   "seat": [
     {
-      "function values() { [native code] }": "",
-      "id": 1
+      "seat_number": "11",
+      "seat_type_id": "Massage",
+      "room_id": "Phòng 100",
+      "seat_status": "Còn",
+      "id": 3
     },
     {
-      "function values() { [native code] }": "",
-      "id": 2
+      "seat_number": "00",
+      "seat_type_id": "Massage",
+      "room_id": "Phòng 100",
+      "seat_status": "11",
+      "id": 4
     }
   ],
   "showtime": [

@@ -10,15 +10,18 @@ import { ISeatType } from "../../movie/seat_type";
 import { ListSeatTypes } from "../../service/seat_type";
 import { IRoom } from "../../movie/room";
 import { ListRoom } from "../../service/room";
+import { SeatByID } from "../../service/seat";
+import { useParams } from "react-router-dom";
 type Props ={
-  addSeats:(seatData:ISeat) => void,
+    updateSeat:(id:number|string) => void,
 }
 
-const CreateSeat = ({addSeats}:Props) => {
-const {register,handleSubmit,formState:{errors}} = useForm<ISeat>()
+const UpdateSeat = ({updateSeat}:Props) => {
+const {register,handleSubmit,formState:{errors},reset} = useForm<ISeat>()
 const onsubmit = (seatData:ISeat)=>{
-  addSeats(seatData)
+  updateSeat(seatData,param?.id as number|string);
 }
+const param = useParams()
 const [seattyes,setSeatTypes] = useState<ISeatType[]>([])
 useEffect(()=>{
     (async()=>{
@@ -26,6 +29,17 @@ useEffect(()=>{
         setSeatTypes(data);
     })()
 },[])
+useEffect(()=>{
+    (async()=>{
+      const data = await SeatByID(param?.id as number|string)
+      reset({
+        seat_number:data.seat_number,
+        seat_type_id:data.seat_type_id,
+        room_id:data.room_id,
+        seat_status:data.seat_status,
+      })
+    })()
+  },[])
 const [rooms,setRooms] = useState<IRoom[]>([])
 useEffect(()=>{
       (async()=>{
@@ -53,7 +67,7 @@ useEffect(()=>{
             </div>
             <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 className="h2">Thêm Ghế</h1>
+                <h1 className="h2">Cập Nhật Ghế</h1>
                 <div className="btn-toolbar mb-2 mb-md-0"></div>
               </div>
               <form onSubmit={handleSubmit(onsubmit)}>
@@ -156,4 +170,4 @@ useEffect(()=>{
   );
 };
 
-export default CreateSeat;
+export default UpdateSeat;

@@ -9,10 +9,10 @@ import { Link, NavLink } from "react-router-dom";
 import ListSeat from "./listseat";
 
 type Props = {
- 
+  seatDel:(id:number|string) => void
 };
 
-const Seat = () => {
+const Seat = ({seatDel}:Props) => {
   return (
     <div>
         <div className="dashboards">
@@ -50,7 +50,7 @@ const Seat = () => {
                 </div>
                 
               </div>
-              <ListSeat></ListSeat>
+              <ListSeat seatDel={seatDel}></ListSeat>
             </main>
             
           </div>

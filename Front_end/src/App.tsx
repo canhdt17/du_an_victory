@@ -31,7 +31,8 @@ import CrateShowTime from "./admin/showtime/createshowtime"
 import { IShowTime } from "./movie/shotime"
 import { ShowTimeAdd } from "./service/showtime"
 import { ISeat } from "./movie/seat"
-import { SeatAdd } from "./service/seat"
+import { SeatAdd, SeatDelete, SeatUpdate } from "./service/seat"
+import UpdateSeat from "./admin/seat/updateseat"
 
 
 
@@ -241,6 +242,32 @@ const addSeats = async(seatData:ISeat)=>{
     
   }
 }
+const seatUpdate = async(id:number|string,seatData:ISeat)=>{
+  try {
+    const seatDta = await SeatUpdate(seatData,id)
+    alert("Cập nhật thành công.")
+      const newseats = seats.map(seat => (seat.id == seat)?seatDta:seat)
+      setSeat(newseats)
+      navigate('/admin/seat')
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+const delSeat = async(id:number|string)=>{
+  try {
+    const confirm = window.confirm("Bạn muốn xóa không?")
+    if(confirm){
+      const seat = await SeatDelete(id);
+      alert("Xóa Thành Công")
+      const newseat = seats.filter(seat =>seat.id !== id)
+      setSeatTypes(newseat)
+    }
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
   return (
    
     <>
@@ -257,12 +284,13 @@ const addSeats = async(seatData:ISeat)=>{
       <Route path="/admin/area/edit/:id" element={<UpdateArea updateArea={updateArea}></UpdateArea>}></Route>
       <Route path="/admin/category" element={<Category movieDel={delCategoryMovie}></Category>}></Route>
       <Route path="/admin/creatseat" element={<CreateSeat addSeats={addSeats}></CreateSeat>}></Route>
+      <Route path="/admin/seat/edit/:id" element={<UpdateSeat updateSeat={seatUpdate}></UpdateSeat>}> </Route>
       <Route path="/admin/seat_type" element={<SeatType typeDel={seatTypeDel}></SeatType>}></Route>
       <Route path="/admin/create_type_seat" element={<CreateSeatType addSeatType={seatTypeAdd}></CreateSeatType>}></Route>
       <Route path="/admin/seat_type/edit/:id" element={<UpdateSeatType updateSeatType={seatTypeUpdate}></UpdateSeatType>}></Route>
       <Route path="/admin/createmovie" element={<AddMovieCategory addCreateMovie={addCategoryMovie}></AddMovieCategory>}></Route>
       <Route path="/admin/createmovie/edit/:id" element={<UpdateCategoryMovie updateCategoryMovies={updateMoviesCategory}></UpdateCategoryMovie>}></Route>
-      <Route path="/admin/seat" element={<Seat></Seat>}></Route>
+      <Route path="/admin/seat" element={<Seat seatDel={delSeat}></Seat>}></Route>
       <Route path="/admin/showtime" element={<ShowTime></ShowTime>}></Route>
       <Route path="/admin/showtime/createshowtime" element={<CrateShowTime addShowTime={addShowTimes}></CrateShowTime>}></Route>
      </Routes>
