@@ -39,8 +39,8 @@ const UpdateCategoryMovie = ({ updateCategoryMovies }: Props) => {
       })
     })()
   },[])
-  const onsubumit = (roomData: IRoom) => {
-   updateCategoryMovies(roomData,param?.id as number|string);
+  const onsubumit = (categoryMovie: ICategoryMovie) => {
+   updateCategoryMovies(categoryMovie,param?.id as number|string);
    
   };
   return (

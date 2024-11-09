@@ -1,5 +1,5 @@
 import api from "../axios/config";
-import { IArea } from "../movie/area";
+import { AreaData, IArea } from "../movie/area";
 
 export const ListArea = async()=>{
     try {
@@ -37,7 +37,7 @@ export const AddArea = async(areaData:IArea)=>{
         
     }
 }
-export const AreaUpdate = async(areaData:IArea,id:number|string)=>{
+export const AreaUpdate = async(areaData:AreaData,id:number|string)=>{
     try {
         const {data} = await api.put(`area/${id}`,areaData)
         return data

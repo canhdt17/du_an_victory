@@ -1,40 +1,42 @@
 {
   "room": [
     {
-      "room_name": "Phòng 100",
-      "area_id": "Hồ Chí Minh",
+      "room_name": "Phòng 1",
+      "area_id": "Lào",
       "total_seat": 12,
-      "id": 2
+      "id": 1
     }
   ],
   "area": [
     {
-      "area_name": "Xin",
-      "id": 16
-    },
-    {
-      "area_name": "Yên Bái 111",
-      "id": 17
+      "area_name": "Lào",
+      "id": 1
     }
   ],
-  "categorymovie": [],
+  "categorymovie": [
+    {
+      "name": "A",
+      "id": 1
+    }
+  ],
   "seat_type": [
     {
-      "seat_type_name": "Massage",
-      "seat_price": 190,
-      "id": 2
+      "seat_type_name": "Ghế Đôi",
+      "seat_price": 190000,
+      "id": 1
     },
     {
-      "name": "Phim Kinh Dị",
-      "id": 3
+      "seat_type_name": "Ghế Mát Xa",
+      "seat_price": 299,
+      "id": 2
     }
   ],
   "seat": [
     {
       "seat_number": "11",
-      "seat_type_id": "Massage",
-      "room_id": "Phòng 100",
-      "seat_status": "Còn",
+      "seat_type_id": "Ghế Mát Xa",
+      "room_id": "Phòng 1",
+      "seat_status": "Còn 1",
       "id": 3
     },
     {

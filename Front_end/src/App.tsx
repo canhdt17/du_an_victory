@@ -80,20 +80,6 @@ const updateRoom = async(roomData:IRoom,id:number|string)=>{
     
   }
 }
-const areAdd = async(areaData:IArea)=>{
-  try {
-    const area = await AddArea(areaData)
-    alert("Thêm khu vực thành công.")
-    setAreas([...areas,area])
-    navigate("/admin/area")
-    
-    
-    
-  } catch (error) {
-    console.log(error);
-    
-  }
-}
 const delRoom = async(id:number|string)=>{
   try {
     const confirm = window.confirm("Bạn muốn xóa không?")
@@ -108,12 +94,23 @@ const delRoom = async(id:number|string)=>{
     
   }
 }
-const updateArea = async(id:number|string,areaData:IArea)=>{
+const areAdd = async(areaData:IArea)=>{
   try {
-    const areaDta = await AreaUpdate(areaData,id)
+    const area = await AddArea(areaData)
+    alert("Thêm khu vực thành công.")
+    setAreas([...areas,area])
+    navigate("/admin/area") 
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+const updateAreas = async(areaData:IArea,id:number|string)=>{
+  try {
+    const dataArea = await AreaUpdate(areaData,id)
     alert("Cập nhật thành công.")
-      const newareas = areas.map(area => (area.id == area)?areaDta:area)
-      setAreas(newareas)
+      const newarea = areas.map(area => (area.id == area)?dataArea:area)
+      setAreas(newarea)
       navigate('/admin/area')
   } catch (error) {
     console.log(error);
@@ -138,7 +135,7 @@ const seatTypeAdd = async(seatTypeData:ISeatType)=>{
   try {
     const seatType = await SeatsTypeAdd(seatTypeData)
     alert("Thêm kiểu ghế thành công.")
-    setSetTypes([...setTypes,seatType])
+    setSetTypes([...seattyes,seatType])
     
     navigate("/admin/seat_type")
 
@@ -148,9 +145,9 @@ const seatTypeAdd = async(seatTypeData:ISeatType)=>{
     
   }
 }
-const seatTypeUpdate = async(seatTypeData:ISeatType,id:number|string)=>{
+const seatTypeUpdate = async(seatType:ISeatType,id:number|string)=>{
   try {
-    const seatTypeData = await SeatsTypeUpdate(seatTypeData,id)
+    const seatTypeData = await SeatsTypeUpdate(seatType,id)
     alert("Cập nhật thành công.")
       const neweattype = settypes.map(settype => (settype.id == settype)?seatTypeData:settype)
       setSetTypes(neweattype)
@@ -166,7 +163,7 @@ const seatTypeDel = async(id:number|string)=>{
     if(confirm){
       const seattype = await SeatsTypeDelete(id);
       alert("Xóa Thành Công")
-      const newseattype = areas.filter(seattype =>seattype.id !== id)
+      const newseattype = seattyes.filter(seattype =>seattype.id !== id)
       setSeatTypes(newseattype)
     }
   } catch (error) {
@@ -190,10 +187,10 @@ const addCategoryMovie = async(categoryMovie:ICategoryMovie)=>{
 }
 const updateMoviesCategory = async(id:number|string,categoryMovie:ICategoryMovie)=>{
   try {
-    const movieDta = await UpdateCategoryMovies(categoryMovie,id)
+    const category = await UpdateCategoryMovies(categoryMovie,id)
     alert("Cập nhật thành công.")
-      const newamovies = categorymovies.map(categorymovie => (categorymovie.id == categorymovie)?categorymovie:movieDta)
-      setCategoryMovies(newamovies)
+      const newcategory = categorymovies.map(categorymovie => (categorymovie.id == categorymovie)?categorymovie:category)
+      setCategoryMovies(newcategory)
       navigate('/admin/category')
   } catch (error) {
     console.log(error);
@@ -281,7 +278,7 @@ const delSeat = async(id:number|string)=>{
       <Route path="/admin/area/createarea" element={<CreateArea addArea={areAdd}></CreateArea>}></Route>
       <Route path="/admin/room/edit/:id" element={<UpdateRoom onUpdate={updateRoom}></UpdateRoom>}></Route>
       <Route path="/admin/area" element={<Area delArea={areaDel}></Area>}></Route>
-      <Route path="/admin/area/edit/:id" element={<UpdateArea updateArea={updateArea}></UpdateArea>}></Route>
+      <Route path="/admin/area/edit/:id" element={<UpdateArea updateArea={updateAreas}></UpdateArea>}></Route>
       <Route path="/admin/category" element={<Category movieDel={delCategoryMovie}></Category>}></Route>
       <Route path="/admin/creatseat" element={<CreateSeat addSeats={addSeats}></CreateSeat>}></Route>
       <Route path="/admin/seat/edit/:id" element={<UpdateSeat updateSeat={seatUpdate}></UpdateSeat>}> </Route>

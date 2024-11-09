@@ -39,7 +39,7 @@ export const SeatsTypeAdd = async(seatTypeData:ISeatType)=>{
 }
 export const SeatsTypeUpdate = async(seatTypeData:ISeatType,id:number|string)=>{
     try {
-        const {data} = await api.put(`area/${id}`,seatTypeData)
+        const {data} = await api.put(`seat_type/${id}`,seatTypeData)
         return data
     } catch (error) {
         console.log(error);

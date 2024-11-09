@@ -28,8 +28,9 @@ const ListAreas = ({delArea}: Props) => {
           </thead>
           <tbody className="text-center">
             {areas.map((area:IArea,i:number)=>(
-               <tr key={i+1}>
-                  <td>{area.area_id}</td>
+               <tr key={area.area_id}>
+
+                  <td>{i+1}</td>
                   <td>{area.area_name}</td>
                  
                   <td>
