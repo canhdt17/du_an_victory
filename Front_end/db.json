@@ -21,11 +21,6 @@
   ],
   "seat_type": [
     {
-      "seat_type_name": "Ghế Đôi",
-      "seat_price": 190000,
-      "id": 1
-    },
-    {
       "seat_type_name": "Ghế Mát Xa",
       "seat_price": 299,
       "id": 2
