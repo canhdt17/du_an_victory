@@ -25,12 +25,12 @@ const Header = (props: Props) => {
     </nav>
     <div className="space-x-4">
     {/* Đăng ký Button */}
-    <button className="px-6 py-2 border-2 border-white text-white rounded-full hover:bg-white hover:text-gray-900 transition-all">
-      Đăng ký
+    <button className="px-6 py-2 border-2 border-white  text-black rounded-full hover:bg-white hover:text-gray-900 transition-all w-[131px] ">
+     <NavLink to={`/client/dangki`}> Đăng ký</NavLink>
     </button>
     {/* Đăng nhập Button */}
     <button className="px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all">
-      Đăng nhập
+     <NavLink to={`/client/dangnhap`}> Đăng nhập</NavLink>
     </button>
   </div>
   </div>

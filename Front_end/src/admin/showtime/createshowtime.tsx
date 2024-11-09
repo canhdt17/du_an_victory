@@ -10,7 +10,7 @@ import { IRoom } from '../../movie/room'
 import { ListRoom } from '../../service/room'
 
 type Props = {
-    addShowTime: (showData: IShowTime) => void;
+  addShowTime: IShowTime[]
 }
 const showScheama = Joi.object({
   movie_id:Joi.string().required(),
@@ -60,7 +60,7 @@ const CrateShowTime = ({addShowTime}: Props) => {
               <form onSubmit={handleSubmit(onsubumit)}>
                 <div className="mb-3">
                   <label htmlFor="exampleInputEmail1" className="form-label">
-                    Movie ID:
+                    Movie:
                   </label>
                   <input
                     type="text"

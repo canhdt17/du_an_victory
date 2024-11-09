@@ -33,6 +33,8 @@ import { ShowTimeAdd, ShowTimeDelete } from "./service/showtime"
 import { ISeat } from "./movie/seat"
 import { SeatAdd, SeatDelete, SeatUpdate } from "./service/seat"
 import UpdateSeat from "./admin/seat/updateseat"
+import Signup from "./client/siggnup"
+import Signin from "./client/signin"
 
 
 
@@ -213,9 +215,9 @@ const delCategoryMovie = async(id:number|string)=>{
 }
 const addShowTimes = async(showData:IShowTime)=>{
   try {
-    const showTime = await ShowTimeAdd(showData)
+    const showtime = await ShowTimeAdd(showData)
     alert("Thêm xuất chiếu phim thành công.")
-    setShowtimes([...showtimes,showTime])
+    setShowtimes([...showtimes,showtime])
     
     navigate("/admin/showtime")
     
@@ -305,6 +307,8 @@ const delSeat = async(id:number|string)=>{
       <Route path="/admin/seat" element={<Seat seatDel={delSeat}></Seat>}></Route>
       <Route path="/admin/showtime" element={<ShowTime showDel={delShowTime}></ShowTime>}></Route>
       <Route path="/admin/showtime/createshowtime" element={<CrateShowTime addShowTime={addShowTimes}></CrateShowTime>}></Route>
+      <Route path="/client/dangki" element={<Signup></Signup>}></Route>
+      <Route path="/client/dangnhap" element={<Signin></Signin>}></Route>
      </Routes>
      
     </>

@@ -1,5 +1,5 @@
 import api from "../axios/config";
-import { IArea } from "../movie/area";
+
 import { IShowTime } from "../movie/shotime";
 
 export const ShowTimeList = async()=>{

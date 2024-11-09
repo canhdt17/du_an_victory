@@ -1,7 +1,7 @@
 {
   "room": [
     {
-      "room_name": "Phòng 1",
+      "room_name": "Phòng 01",
       "area_id": "Lào",
       "total_seat": 12,
       "id": 1
@@ -82,6 +82,13 @@
       "room_id": "Phòng 100",
       "seat_status": "11",
       "id": 4
+    },
+    {
+      "seat_number": "03",
+      "seat_type_id": "Ghế Điều Hòa",
+      "room_id": "Phòng 03",
+      "seat_status": "Còn",
+      "id": 5
     }
   ],
   "showtime": []
