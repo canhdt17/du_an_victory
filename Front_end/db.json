@@ -5,33 +5,75 @@
       "area_id": "Lào",
       "total_seat": 12,
       "id": 1
+    },
+    {
+      "room_name": "Phòng 02",
+      "area_id": "Lào",
+      "total_seat": 100,
+      "id": 2
+    },
+    {
+      "room_name": "Phòng 03",
+      "area_id": "Campuchia",
+      "total_seat": 99,
+      "id": 3
     }
   ],
   "area": [
     {
       "area_name": "Lào",
       "id": 1
+    },
+    {
+      "area_name": "Campuchia",
+      "id": 2
+    },
+    {
+      "area_name": "Mianma",
+      "id": 3
+    },
+    {
+      "area_name": "Philipin",
+      "id": 4
     }
   ],
   "categorymovie": [
     {
       "name": "A",
       "id": 1
+    },
+    {
+      "name": "Phim Kinh Dị",
+      "id": 2
+    },
+    {
+      "name": "Phim Trinh Thám",
+      "id": 3
     }
   ],
   "seat_type": [
     {
       "seat_type_name": "Ghế Mát Xa",
-      "seat_price": 299,
+      "seat_price": 299999,
       "id": 2
+    },
+    {
+      "seat_type_name": "Ghế Đôi",
+      "seat_price": 299999,
+      "id": 3
+    },
+    {
+      "seat_type_name": "Ghế Điều Hòa",
+      "seat_price": 399999,
+      "id": 4
     }
   ],
   "seat": [
     {
-      "seat_number": "11",
-      "seat_type_id": "Ghế Mát Xa",
-      "room_id": "Phòng 1",
-      "seat_status": "Còn 1",
+      "seat_number": "01",
+      "seat_type_id": "Ghế Điều Hòa",
+      "room_id": "Phòng 02",
+      "seat_status": "hết",
       "id": 3
     },
     {
@@ -42,37 +84,5 @@
       "id": 4
     }
   ],
-  "showtime": [
-    {
-      "movie_id": "",
-      "room_id": "",
-      "showtime_date": "",
-      "start_time": "",
-      "end_time": "",
-      "id": 1
-    },
-    {
-      "movie_id": "12",
-      "room_id": "Phòng số 9",
-      "showtime_date": "2024-10-25",
-      "start_time": "19:00",
-      "end_time": "21:00",
-      "id": 2
-    },
-    {
-      "movie_id": "",
-      "room_id": "",
-      "showtime_date": "",
-      "start_time": "",
-      "end_time": "",
-      "id": 3
-    },
-    {
-      "movie_id": "",
-      "showtime_date": "",
-      "start_time": "",
-      "end_time": "",
-      "id": 4
-    }
-  ]
+  "showtime": []
 }

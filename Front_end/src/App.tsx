@@ -29,7 +29,7 @@ import Seat from "./admin/seat/seat"
 import ShowTime from "./admin/showtime/showtime"
 import CrateShowTime from "./admin/showtime/createshowtime"
 import { IShowTime } from "./movie/shotime"
-import { ShowTimeAdd } from "./service/showtime"
+import { ShowTimeAdd, ShowTimeDelete } from "./service/showtime"
 import { ISeat } from "./movie/seat"
 import { SeatAdd, SeatDelete, SeatUpdate } from "./service/seat"
 import UpdateSeat from "./admin/seat/updateseat"
@@ -218,8 +218,23 @@ const addShowTimes = async(showData:IShowTime)=>{
     setShowtimes([...showtimes,showTime])
     
     navigate("/admin/showtime")
+    
 
     
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+const delShowTime = async(id:number|string)=>{
+  try {
+    const confirm = window.confirm("Bạn muốn xóa không?")
+    if(confirm){
+      const timeShow = await ShowTimeDelete(id);
+      alert("Xóa Thành Công")
+      const newtime = seats.filter(timeShow =>timeShow.id !== id)
+      setShowtimes(newtime)
+    }
   } catch (error) {
     console.log(error);
     
@@ -288,7 +303,7 @@ const delSeat = async(id:number|string)=>{
       <Route path="/admin/createmovie" element={<AddMovieCategory addCreateMovie={addCategoryMovie}></AddMovieCategory>}></Route>
       <Route path="/admin/createmovie/edit/:id" element={<UpdateCategoryMovie updateCategoryMovies={updateMoviesCategory}></UpdateCategoryMovie>}></Route>
       <Route path="/admin/seat" element={<Seat seatDel={delSeat}></Seat>}></Route>
-      <Route path="/admin/showtime" element={<ShowTime></ShowTime>}></Route>
+      <Route path="/admin/showtime" element={<ShowTime showDel={delShowTime}></ShowTime>}></Route>
       <Route path="/admin/showtime/createshowtime" element={<CrateShowTime addShowTime={addShowTimes}></CrateShowTime>}></Route>
      </Routes>
      

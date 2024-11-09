@@ -4,9 +4,11 @@ import { IShowTime } from '../../movie/shotime'
 import { ShowTimeList } from '../../service/showtime'
 
 
-type Props = {}
+type Props = {
+  showDel:(id:number|string)=> void
+}
 
-const ListShowtime = (props: Props) => {
+const ListShowtime = ({showDel}: Props) => {
     const [showtimes,setShowtimes] = useState<IShowTime[]>([])
     useEffect(()=>{
         (async()=>{
@@ -39,12 +41,19 @@ const ListShowtime = (props: Props) => {
                 <td>{showtime.start_time}</td>
                 <td>{showtime.end_time}</td>
                 <td>
+               
+                    <button
+                      type="button"
+                      className="btn btn-danger text-center " onClick={()=> showDel(showtime.id)}
+                    >
+                      Xóa
+                    </button>
                   
                    
                    <NavLink to={`/admin/showtime/edit/${showtime.id}`}>
                     <button
                       type="button"
-                      className="btn btn-warning text-center "
+                      className="btn btn-warning text-center ml-3"
                     >
                       Cập nhật
                     </button>

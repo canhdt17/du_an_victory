@@ -20,6 +20,15 @@ export const ShowTimeById = async(id:number|string)=>{
         
     }
 }
+export const ShowTimeDelete= async(id:number|string)=>{
+    try {
+        const {data} = await api.delete(`showtime/${id}`)
+        return data
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 export const ShowTimeAdd = async(showData:IShowTime)=>{
     try {
         const {data} = await api.post("showtime",showData)

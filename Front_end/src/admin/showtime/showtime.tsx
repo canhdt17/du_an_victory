@@ -5,9 +5,11 @@ import MenuDashboard from '../menudashboard'
 import { NavLink } from 'react-router-dom'
 import ListShowtime from './listshowtime'
 
-type Props = {}
+type Props = {
+  showDel:(id:number|string) => void
+}
 
-const ShowTime = (props: Props) => {
+const ShowTime = ({showDel}: Props) => {
   return (
     <div>
         <div className="dashboards">
@@ -44,7 +46,7 @@ const ShowTime = (props: Props) => {
                   
                 </div>
               </div>
-              <ListShowtime></ListShowtime>
+              <ListShowtime showDel={showDel}></ListShowtime>
             </main>
           </div>
         </div>
