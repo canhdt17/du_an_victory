@@ -17,4 +17,10 @@ class showtime extends Model
         'start_time',
         'end_time',
     ];
+
+    public function movie()
+{
+    return $this->belongsTo(Movie::class);
+}
+
 }

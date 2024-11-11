@@ -7,7 +7,7 @@ use App\Http\Controllers\API\SeatTypeController;
 use App\Http\Controllers\Api\TintucController;
 use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\ShowtimeController ;
-use App\Http\Controllers\Api\MovieComtroller;
+use App\Http\Controllers\Api\MovieController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\BannerController;
@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('movies',MovieComtroller::class);
+Route::apiResource('movies',MovieController::class);
 Route::apiResource('showtimes',ShowtimeController::class);
 
 Route::apiResource('categories', CategoryController::class);
@@ -48,6 +48,9 @@ Route::apiResource('combofoods', ComboFoodController::class);
 Route::apiResource('supports', HoTroController::class);
 Route::apiResource('seatTypes', SeatTypeController::class);
 Route::apiResource('vouchers', VoucherController::class);
+Route::get('/categories/{id}/movies', [MovieController::class, 'listFilmByCategory']);
+Route::get('/movies/dang-chieu', [MovieController::class, 'phimDangChieu']);
+Route::get('/movies/sap-chieu', [MovieController::class, 'phimSapChieu']);
 
 
 
