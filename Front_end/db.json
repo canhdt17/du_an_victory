@@ -91,5 +91,31 @@
       "id": 5
     }
   ],
-  "showtime": []
+  "showtime": [],
+  "users": [
+    {
+      "email": "bdtrong2004@gmail.com",
+      "password": "$2a$10$/HgZ.ftrZqdi4suDLVCOVOFBbGpYJxXmVQ7DSnHJdBkbSDlJqpWoe",
+      "name": "Duy Trọng",
+      "id": 1
+    },
+    {
+      "email": "bdtrong2004@gmail.comm",
+      "password": "$2a$10$PPNoBoebVn6K7WUFNvRFReu4oL4J7qzdtI6QGkMYFWO/9mfY1q6gO",
+      "name": "1111",
+      "id": 2
+    },
+    {
+      "email": "bdtrong2004@gmailcom",
+      "password": "$2a$10$jyIBe2X.cb5y0AtdLAsEl.2YGxJF.Hw7Tn2oqX6XPJYeXca963Cpu",
+      "name": "1222",
+      "id": 3
+    },
+    {
+      "email": "bdtrong20044@gmail.com",
+      "password": "$2a$10$29SbbrDLIHE6AxiVmQOa7.Rs1x3aKG31hUFY6so.pWENa0ple4TXq",
+      "name": "Trọng",
+      "id": 4
+    }
+  ]
 }
