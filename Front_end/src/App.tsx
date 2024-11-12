@@ -35,6 +35,12 @@ import { SeatAdd, SeatDelete, SeatUpdate } from "./service/seat"
 import UpdateSeat from "./admin/seat/updateseat"
 import Signup from "./client/siggnup"
 import Signin from "./client/signin"
+import News from "./admin/news/news"
+import CreateNews from "./admin/news/createnews"
+import { INews } from "./movie/news"
+import { AddNews, DeleteNews, UpdateNews } from "./service/news"
+import UpdateNew from "./admin/news/updatenews"
+import TinTuc from "./compoents/news"
 
 
 
@@ -48,6 +54,7 @@ function App() {
   const [showtimes,setShowtimes] = useState<IShowTime[]>([])
   const [seats,setSeat] = useState<ISeat[]>([])
   const [seattyes,setSeatTypes] = useState<ISeatType[]>([])
+  const [news,setNews] = useState<INews[]>([])
   const navigate= useNavigate()
 useEffect(()=>{
       (async()=>{
@@ -282,13 +289,53 @@ const delSeat = async(id:number|string)=>{
     
   }
 }
+const addNews = async(newsData:INews)=>{
+  try {
+    const newData = await AddNews(newsData)
+    alert("Thêm tin tức thành công.")
+    setNews([...news,newData])
+    
+    navigate("/admin/tintuc")
+
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+const newsDel = async(id:number|string)=>{
+  try {
+    const confirm = window.confirm("Bạn muốn xóa không?")
+    if(confirm){
+      const tintuc = await DeleteNews(id);
+      alert("Xóa Thành Công")
+      const newtintuc = news.filter(tintuc =>tintuc.id !== id)
+      setNews(newtintuc)
+    }
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+const updateNews = async(id:number|string,newsData:INews)=>{
+  try {
+    const tinTuc = await UpdateNews(newsData,id)
+    alert("Cập nhật thành công.")
+      const newtintuc = news.map(tintuc => (tintuc.id == tintuc)?tinTuc:tintuc)
+      setNews(newtintuc)
+      navigate('/admin/tintuc')
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
   return (
    
     <>
 
     <Routes>
       <Route path="/" element={<HomePage></HomePage>}></Route>
-      <Route path="/admin/dashboard" element={<Dashboard></Dashboard>}></Route>
+      <Route path="/admin/tintuc" element={<News delNews={newsDel}></News>}></Route>
       <Route path="/moviedetail" element={<MovieDetail></MovieDetail>}></Route>
       <Route path="/room" element={<Room rooms={rooms} onDel={delRoom}></Room>}></Route>
       <Route path="/admin/room/createroom" element={<CreateRoom onAdd={addRoom}></CreateRoom>}></Route>
@@ -309,6 +356,10 @@ const delSeat = async(id:number|string)=>{
       <Route path="/admin/showtime/createshowtime" element={<CrateShowTime addShowTime={addShowTimes}></CrateShowTime>}></Route>
       <Route path="/client/dangki" element={<Signup></Signup>}></Route>
       <Route path="/client/dangnhap" element={<Signin></Signin>}></Route>
+      <Route path="/admin/news/createnews" element={<CreateNews newsAdd={addNews}></CreateNews>}></Route>
+      <Route path="/admin/news/updatenews/:id" element={<UpdateNew newsUpdate={updateNews}></UpdateNew>}></Route>
+      <Route path="/tintuc" element={<TinTuc></TinTuc>}></Route>
+
      </Routes>
      
     </>

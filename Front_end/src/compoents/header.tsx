@@ -6,22 +6,22 @@ type Props = {}
 const Header = (props: Props) => {
   return (
     <div>
-      <div className='headermenu bg-gray-900 '>
-                  <header className="flex items-center justify-between px-6 py-4 bg-gray-900 text-white">
+      <div className=' bg-gray-900 '>
+                  <header className=" flex items-center justify-between px-6 py-4 bg-gray-900 text-white">
   {/* Left Side: Logo */}
   <div className="flex items-center space-x-8">
     {/* Logo */}
     <img src="logo.png" alt="Logo" className="h-10" />
     {/* Navigation Links */}
     <nav className="flex space-x-6">
-      <a href="#" className="hover:text-red-500">Trang chủ</a>
+      <NavLink to={`/`}><a href="#" className="hover:text-red-500">Trang chủ</a></NavLink>
       <a href="#" className="hover:text-gray-300">Lịch chiếu</a>
-      <a href="#" className="hover:text-gray-300">Tin tức</a>
+      <NavLink to={`/tintuc`}><a href="#" className="hover:text-gray-300">Tin tức</a></NavLink>
       <a href="#" className="hover:text-gray-300">Khuyến mãi</a>
       <a href="#" className="hover:text-gray-300">Giá vé</a>
       <a href="#" className="hover:text-gray-300">Liên hoan phim</a>
       <a href="#" className="hover:text-gray-300">Giới thiệu</a>
-      <NavLink to={`/admin/dashboard`}><a  className="hover:text-gray-300">Admin</a></NavLink>
+      <NavLink to={`/admin/tintuc`}><a  className="hover:text-gray-300">Admin</a></NavLink>
     </nav>
     <div className="space-x-4">
     {/* Đăng ký Button */}

@@ -31,7 +31,7 @@
 /* Template default CSS
 /*----------------------------------------*/
 .headermenu{
-	text-align: center;
+	justify-content: center;
 }
 html,
 body {
@@ -558,6 +558,7 @@ ol {
 }
 .product__item__pic img{
 	height: 320px;
+	border-radius: 15px;
 }
 .product__item__pic .ep {
 	font-size: 13px;
@@ -2326,4 +2327,25 @@ button:hover {
 }
 .rowrow{
 	margin-left: 300px;
+}
+.card {
+	background-color: #1b1d23;
+	color: white;
+	border: none;
+	border-radius: 8px;
+}
+.card img {
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+.card-body {
+	background-color: #2a2d34;
+}
+.card-date {
+	font-size: 14px;
+	color: #a0a4a8;
+}
+.card-title {
+	font-size: 18px;
+	font-weight: bold;
 }

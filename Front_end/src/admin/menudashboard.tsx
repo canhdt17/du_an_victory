@@ -17,7 +17,7 @@ const MenuDashboard = (props: Props) => {
               <svg className="bi">
                 <use xlinkHref="#house-fill" />
               </svg>
-              Dashboard
+             <NavLink to={`/admin/tintuc`}>Tin Tức</NavLink> 
             </a>
           </li>
           <li className="nav-item">

@@ -12,12 +12,12 @@ const Product = (props: Props) => {
   return (
     <div>
         <section className="product spad">
-    <div className="container">
+    <div className="container ">
       <div className="row">
         <div className="col-lg-8">
-          <div className="trending__product">
+          <div className="trending__product ">
             <div className="row">
-              <div className="col-lg-8 col-md-8 col-sm-8">
+              <div className="col-lg-4 col-md-8 col-sm-8 ">
                 <div className="section-title">
                   <h4>Đang Khởi Chiếu</h4>
                 </div>
@@ -32,7 +32,7 @@ const Product = (props: Props) => {
           </div>
           <div className="popular__product">
             <div className="row">
-              <div className="col-lg-8 col-md-8 col-sm-8">
+              <div className="col-lg-3 col-md-8 col-sm-8">
                 <div className="section-title">
                   <h4>Sắp Ra Mắt</h4>
                 </div>
@@ -47,7 +47,7 @@ const Product = (props: Props) => {
           </div>
           <div className="recent__product">
             <div className="row">
-              <div className="col-lg-8 col-md-8 col-sm-8">
+              <div className="col-lg-5 col-md-8 col-sm-8">
                 <div className="section-title">
                   <h4>Recently Added Shows</h4>
                 </div>
@@ -62,7 +62,7 @@ const Product = (props: Props) => {
           </div>
           <div className="live__product">
             <div className="row">
-              <div className="col-lg-8 col-md-8 col-sm-8">
+              <div className="col-lg-3 col-md-8 col-sm-8">
                 <div className="section-title">
                   <h4>Live Action</h4>
                 </div>

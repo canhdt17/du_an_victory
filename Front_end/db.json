@@ -1,12 +1,6 @@
 {
   "room": [
     {
-      "room_name": "Phòng 01",
-      "area_id": "Lào",
-      "total_seat": 12,
-      "id": 1
-    },
-    {
       "room_name": "Phòng 02",
       "area_id": "Lào",
       "total_seat": 100,
@@ -21,11 +15,7 @@
   ],
   "area": [
     {
-      "area_name": "Lào",
-      "id": 1
-    },
-    {
-      "area_name": "Campuchia",
+      "area_name": "Campuchia 1",
       "id": 2
     },
     {
@@ -49,6 +39,50 @@
     {
       "name": "Phim Trinh Thám",
       "id": 3
+    },
+    {
+      "name": "A",
+      "id": 4
+    },
+    {
+      "name": "b",
+      "id": 5
+    },
+    {
+      "name": "14 ProMax Titab",
+      "id": 6
+    },
+    {
+      "name": "A Update",
+      "id": 7
+    },
+    {
+      "name": "A",
+      "id": 8
+    },
+    {
+      "name": "A",
+      "id": 9
+    },
+    {
+      "name": "A",
+      "id": 10
+    },
+    {
+      "name": "A Update",
+      "id": 11
+    },
+    {
+      "name": "A",
+      "id": 12
+    },
+    {
+      "name": "A",
+      "id": 13
+    },
+    {
+      "name": "A",
+      "id": 14
     }
   ],
   "seat_type": [
@@ -116,6 +150,43 @@
       "password": "$2a$10$29SbbrDLIHE6AxiVmQOa7.Rs1x3aKG31hUFY6so.pWENa0ple4TXq",
       "name": "Trọng",
       "id": 4
+    }
+  ],
+  "news": [
+    {
+      "name_TinTuc": "Chương trình phim kỉ niệm nhân dịp 70 năm Giải phòng Thủ đô",
+      "sub_title": "Nhân dịp 70 năm ngày Giải phóng Thủ đô (10/10/1954 – 10/10/2024), Trung tâm Chiếu phim Quốc gia tổ chức chương trình phim kỉ niệm tại Trung tâm.  Bộ phim được chọn để trình chiếu miễn phí trong chương trình phim lần này là: “ Đào, phở và Piano”. Tác phẩm tái hiện khung cảnh Hà Nội những ngày cuối cùng trong Trận Hà Nội 1946 và vừa được chọn làm đại diện cho Điện ảnh Việt Nam dự vòng sơ loại Oscar 2025.   1-\tThời gian chiếu phim: Từ 6/10- 10/10/2024   2-\tĐịa điểm: Phòng chiếu số 12   3-\tSuất chiếu: 10h00 và 20h15   4- Hình thức nhận vé: Khách hàng nhận vé 0 đồng trực tiếp tại quầy vé từ 8h00 đến 23h00 hàng ngày, bắt đầu từ ngày 4/10/2024 đến khi hết vé (khán giả có thể nhận vé trước ngày xem phim và mỗi khách nhận tối đa 02 vé/người).",
+      "content": "Giảm giá 20%",
+      "imager": "https://picsum.photos/536/354",
+      "id": 1
+    },
+    {
+      "name_TinTuc": "Chương trình phim kỉ niệm nhân dịp 70 năm Giải phòng Thủ đô",
+      "sub_title": "Nhân dịp 70 năm ngày Giải phóng Thủ đô (10/10/1954 – 10/10/2024), Trung tâm Chiếu phim Quốc gia tổ chức chương trình phim kỉ niệm tại Trung tâm.  Bộ phim được chọn để trình chiếu miễn phí trong chương trình phim lần này là: “ Đào, phở và Piano”. Tác phẩm tái hiện khung cảnh Hà Nội những ngày cuối cùng trong Trận Hà Nội 1946 và vừa được chọn làm đại diện cho Điện ảnh Việt Nam dự vòng sơ loại Oscar 2025.   1-\tThời gian chiếu phim: Từ 6/10- 10/10/2024   2-\tĐịa điểm: Phòng chiếu số 12   3-\tSuất chiếu: 10h00 và 20h15   4- Hình thức nhận vé: Khách hàng nhận vé 0 đồng trực tiếp tại quầy vé từ 8h00 đến 23h00 hàng ngày, bắt đầu từ ngày 4/10/2024 đến khi hết vé (khán giả có thể nhận vé trước ngày xem phim và mỗi khách nhận tối đa 02 vé/người).",
+      "content": "Giảm giá 20%",
+      "imager": "https://picsum.photos/536/354",
+      "id": 2
+    },
+    {
+      "name_TinTuc": "Chương trình phim kỉ niệm nhân dịp 70 năm Giải phòng Thủ đô",
+      "sub_title": "Nhân dịp 70 năm ngày Giải phóng Thủ đô (10/10/1954 – 10/10/2024), Trung tâm Chiếu phim Quốc gia tổ chức chương trình phim kỉ niệm tại Trung tâm.  Bộ phim được chọn để trình chiếu miễn phí trong chương trình phim lần này là: “ Đào, phở và Piano”. Tác phẩm tái hiện khung cảnh Hà Nội những ngày cuối cùng trong Trận Hà Nội 1946 và vừa được chọn làm đại diện cho Điện ảnh Việt Nam dự vòng sơ loại Oscar 2025.   1-\tThời gian chiếu phim: Từ 6/10- 10/10/2024   2-\tĐịa điểm: Phòng chiếu số 12   3-\tSuất chiếu: 10h00 và 20h15   4- Hình thức nhận vé: Khách hàng nhận vé 0 đồng trực tiếp tại quầy vé từ 8h00 đến 23h00 hàng ngày, bắt đầu từ ngày 4/10/2024 đến khi hết vé (khán giả có thể nhận vé trước ngày xem phim và mỗi khách nhận tối đa 02 vé/người).",
+      "content": "Giảm giá 20%",
+      "imager": "https://picsum.photos/536/354",
+      "id": 3
+    },
+    {
+      "name_TinTuc": "Chương trình phim kỉ niệm nhân dịp 70 năm Giải phòng Thủ đô",
+      "sub_title": "Nhân dịp 70 năm ngày Giải phóng Thủ đô (10/10/1954 – 10/10/2024), Trung tâm Chiếu phim Quốc gia tổ chức chương trình phim kỉ niệm tại Trung tâm.  Bộ phim được chọn để trình chiếu miễn phí trong chương trình phim lần này là: “ Đào, phở và Piano”. Tác phẩm tái hiện khung cảnh Hà Nội những ngày cuối cùng trong Trận Hà Nội 1946 và vừa được chọn làm đại diện cho Điện ảnh Việt Nam dự vòng sơ loại Oscar 2025.   1-\tThời gian chiếu phim: Từ 6/10- 10/10/2024   2-\tĐịa điểm: Phòng chiếu số 12   3-\tSuất chiếu: 10h00 và 20h15   4- Hình thức nhận vé: Khách hàng nhận vé 0 đồng trực tiếp tại quầy vé từ 8h00 đến 23h00 hàng ngày, bắt đầu từ ngày 4/10/2024 đến khi hết vé (khán giả có thể nhận vé trước ngày xem phim và mỗi khách nhận tối đa 02 vé/người).",
+      "content": "Giảm giá 20%",
+      "imager": "https://picsum.photos/536/354",
+      "id": 4
+    },
+    {
+      "name_TinTuc": "Chương trình phim kỉ niệm nhân dịp 70 năm Giải phòng Thủ đô",
+      "sub_title": "Nhân dịp 70 năm ngày Giải phóng Thủ đô (10/10/1954 – 10/10/2024), Trung tâm Chiếu phim Quốc gia tổ chức chương trình phim kỉ niệm tại Trung tâm.  Bộ phim được chọn để trình chiếu miễn phí trong chương trình phim lần này là: “ Đào, phở và Piano”. Tác phẩm tái hiện khung cảnh Hà Nội những ngày cuối cùng trong Trận Hà Nội 1946 và vừa được chọn làm đại diện cho Điện ảnh Việt Nam dự vòng sơ loại Oscar 2025.   1-\tThời gian chiếu phim: Từ 6/10- 10/10/2024   2-\tĐịa điểm: Phòng chiếu số 12   3-\tSuất chiếu: 10h00 và 20h15   4- Hình thức nhận vé: Khách hàng nhận vé 0 đồng trực tiếp tại quầy vé từ 8h00 đến 23h00 hàng ngày, bắt đầu từ ngày 4/10/2024 đến khi hết vé (khán giả có thể nhận vé trước ngày xem phim và mỗi khách nhận tối đa 02 vé/người).",
+      "content": "Giảm giá 20%",
+      "imager": "https://picsum.photos/536/354",
+      "id": 5
     }
   ]
 }

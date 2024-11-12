@@ -16,7 +16,8 @@ const TopView = (props: Props) => {
                 <li data-filter=".years">Years</li>
               </ul> */}
               <div className="filter__gallery">
-                <div className="product__sidebar__view__item set-bg mix day years" data-setbg="img/sidebar/tv-1.jpg">
+                <div className="product__sidebar__view__item set-bg mix day years" >
+                {/* <img src="/src/img/anime/details-pic.jpg"></img> */}
                   <div className="ep">18 / ?</div>
                   <div className="view"><i className="fa fa-eye" /> 9141</div>
                   <h5><a href="#">Boruto: Naruto next generations</a></h5>

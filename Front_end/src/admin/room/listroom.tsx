@@ -11,7 +11,7 @@ const ListRoom = ({ rooms,onDel }: Props) => {
   return (
     <div>
       <div className="table-responsive small">
-        <table className="table table-striped table-sm">
+      <table className="table table-striped table-sm">
           <thead>
             <tr className="text-center">
               <th scope="col">STT</th>
