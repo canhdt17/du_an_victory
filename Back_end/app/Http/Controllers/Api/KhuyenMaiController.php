@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\KhuyenMai;
 use Illuminate\Http\Request;
 
 class KhuyenMaiController extends Controller
@@ -12,7 +13,8 @@ class KhuyenMaiController extends Controller
      */
     public function index()
     {
-        //
+        $khuyenmai = KhuyenMai::all();
+        return response()->json($khuyenmai);
     }
 
     /**
@@ -20,7 +22,21 @@ class KhuyenMaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'image' => '',
+            'time_date' => 'required',
+        ]);
+        if($request->hasFile('image')){
+            $path_image = $request->file('image')->store('images');
+            $data['image'] = $path_image;
+        }
+        KhuyenMai::create($data);
+        return response()->json([
+            'message' => 'Thêm mới thành công'
+        ],200);
+        
     }
 
     /**
@@ -28,7 +44,8 @@ class KhuyenMaiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = KhuyenMai::query()->findOrFail($id);
+        return response()->json($data);
     }
 
     /**
@@ -36,7 +53,9 @@ class KhuyenMaiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $khuyenmai = KhuyenMai::query()->findOrFail($id);
+        $khuyenmai->update(request()->all());
+        return response()->json($khuyenmai);
     }
 
     /**
@@ -44,6 +63,9 @@ class KhuyenMaiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        KhuyenMai::destroy($id);
+        return response()->json([
+            'message'=> 'Xóa thành công'
+        ]);
     }
 }

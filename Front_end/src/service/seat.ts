@@ -1,5 +1,5 @@
 import api from "../axios/config";
-import { ISeat } from "../movie/seat";
+import { ISeat } from "../interface/seat";
 
 
 export const SeatList = async()=>{

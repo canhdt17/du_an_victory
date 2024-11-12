@@ -1,6 +1,7 @@
 import React from "react";
-import { IRoom } from "../../movie/room";
+
 import { NavLink } from "react-router-dom";
+import { IRoom } from "../../interface/room";
 
 type Props = {
   rooms: IRoom[];

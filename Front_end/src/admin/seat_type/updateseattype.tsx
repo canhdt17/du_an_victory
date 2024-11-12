@@ -3,11 +3,11 @@ import Logo from '../logo'
 import HeaderDashboard from '../headerdashboard'
 import MenuDashboard from '../menudashboard'
 import { useForm } from 'react-hook-form'
-import { ISeatType } from '../../movie/seat_type'
+import { ISeatType } from '../../interface/seat_type' 
 import Joi from 'joi'
 import { joiResolver } from '@hookform/resolvers/joi'
 import { useParams } from 'react-router-dom'
-import { SeatsTypeByID } from '../../service/seat_type'
+import { SeatsTypeByID } from '../../service/seat_type' 
 
 type Props = {
     updateSeatType:(id:number|string) => void;
