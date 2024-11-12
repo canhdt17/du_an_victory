@@ -1,5 +1,5 @@
 import api from "../axios/config";
-import { IArea } from "../movie/area";
+import { IArea } from "../interface/area";
 
 export const ListArea = async()=>{
     try {

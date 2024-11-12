@@ -1,11 +1,12 @@
 import React from "react";
 import HeaderDashboard from "../headerdashboard";
-import MovieList from "../movielist";
+
 import MenuDashboard from "../menudashboard";
 import Logo from "../logo";
 import ListRoom from "./listroom";
-import { IRoom } from "../../movie/room";
+
 import { NavLink } from "react-router-dom";
+import { IRoom } from "../../interface/room";
 
 type Props = {
   rooms: IRoom[];

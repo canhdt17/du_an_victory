@@ -1,9 +1,10 @@
 import api from "../axios/config"
-import { RoomData } from "../movie/room";
+import { RoomData } from "../interface/room";
+
 
 export const ListRoom = async()=>{
     try {
-        const {data} = await api.get("room")
+        const {data} = await api.get("/rooms")
         return data
     } catch (error) {
         console.log(error);
@@ -12,7 +13,7 @@ export const ListRoom = async()=>{
 }
 export const GetRoomById = async(id:number|string)=>{
     try {
-        const {data} = await api.get(`room/${id}`)
+        const {data} = await api.get(`/rooms/${id}`)
         return data
     } catch (error) {
         console.log(error);
@@ -21,7 +22,7 @@ export const GetRoomById = async(id:number|string)=>{
 }
 export const DeleteRoom = async(id:number|string)=>{
     try {
-        const {data} = await api.get(`room/${id}`)
+        const {data} = await api.get(`/rooms/${id}`)
         return data
     } catch (error) {
         console.log(error);
@@ -30,7 +31,7 @@ export const DeleteRoom = async(id:number|string)=>{
 }
 export const AddRoom = async(roomData:RoomData)=>{
     try {
-        const {data} = await api.post('room',roomData)
+        const {data} = await api.post('/rooms',roomData)
         return data
     } catch (error) {
         console.log(error);
@@ -39,7 +40,7 @@ export const AddRoom = async(roomData:RoomData)=>{
 }
 export const RoomUpdate = async(roomData:RoomData,id:number|string)=>{
     try {
-        const {data} = await api.put(`room/${id}`,roomData)
+        const {data} = await api.put(`/rooms/${id}`,roomData)
         return data
     } catch (error) {
         console.log(error);
