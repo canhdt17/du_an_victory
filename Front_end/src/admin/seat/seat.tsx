@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import HeaderDashboard from "../headerdashboard";
 import Logo from "../logo";
 import MenuDashboard from "../menudashboard";
-import ListSeat from "./listseat";
+import ListSeat from "./ListSeat";
 
 type Props = {};
 
