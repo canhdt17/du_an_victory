@@ -30,38 +30,37 @@
 
 <?php $__env->startSection('content'); ?>
     <div class="container mt-5">
-        <h1 class="text-center">Danh sách Khuyến Mãi </h1>
+        <h1 class="text-center">Danh sách voucher </h1>
         
 
         <table border="1" class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>#ID</th>
-                    <th>Title</th>
-                    <th>Content</th>
-                    <th>Image</th>
-                    <th>Time Date</th>
+                    <th>Code</th>
+                    <th>Discount Amount</th>
+                    <th>Expiry Date</th>
+                    <th>Active</th>
                     <th>Thao tác</th>
                     <th>
-                        <a href="<?php echo e(route('khuyenMai.create')); ?>" class="btn btn-primary">Create New</a>
+                        <a href="<?php echo e(route('voucher.create')); ?>" class="btn btn-primary">Create New</a>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <?php $__currentLoopData = $khuyenMais; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $khuyenMai): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php $__currentLoopData = $vouchers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $voucher): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td><?php echo e($khuyenMai->id); ?></td>
-                        <td><?php echo e($khuyenMai->title); ?></td>
+                        <td><?php echo e($voucher->id); ?></td>
+                        <td><?php echo e($voucher->code); ?></td>
                         <td>
-                            <?php echo e($khuyenMai->content); ?>
+                            <?php echo e($voucher->discount_amount); ?>
 
                         </td>
-                        
-                        <td><img src="<?php echo e(asset('/storage/'.$khuyenMai->image)); ?>" alt="<?php echo e($khuyenMai->image); ?>" width="50px" height="50px"></td>
-                        <td><?php echo e($khuyenMai->time_date); ?></td>
+                        <td><?php echo e($voucher->expiry_date); ?></td>
+                        <td><?php echo e($voucher->is_active); ?></td>
                         <td class="button d-flex">
-                            <a href="<?php echo e(route('khuyenMai.edit', $khuyenMai)); ?>" class="btn btn-warning">Sửa</a>
-                            <form action="<?php echo e(route('khuyenMai.destroy', $khuyenMai)); ?>" method="post">
+                            <a href="<?php echo e(route('voucher.edit', $voucher)); ?>" class="btn btn-warning">Sửa</a>
+                            <form action="<?php echo e(route('voucher.destroy', $voucher)); ?>" method="post">
                                 <?php echo csrf_field(); ?>
                                 <?php echo method_field('DELETE'); ?>
                                 <button type="submit" class="btn btn-danger"
@@ -76,4 +75,4 @@
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('admin.layout.index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\du_an_victory\Back_end\resources\views/admin/khuyenMai/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.layout.index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\du_an_victory\Back_end\resources\views/admin/voucher/index.blade.php ENDPATH**/ ?>

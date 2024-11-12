@@ -38,9 +38,11 @@ class KhuyenMaiController extends Controller
             'image' => 'required',
             'time_date' => 'required',
         ]);
-        if($request->hasFile('image')){
-            $data['image'] = Storage::put('khuyenmai',$request->file('image'));
-        }
+        // if($request->hasFile('image')){
+        //     $data['image'] = Storage::put('khuyenmai',$request->file('image'));
+        // }
+        $path_image = $request->file('image')->store('images');
+        $data['image'] = $path_image;
         KhuyenMai::query()->create($data);
         return redirect()->route('khuyenMai.index');
     }
@@ -74,7 +76,13 @@ class KhuyenMaiController extends Controller
             'time_date' => '',
         ]);
         if($request->hasFile('image')){
-            $data['image'] = Storage::put('khuyenmai',$request->file('image'));
+            if (file_exists('storage/' . $khuyenMai->image)) {
+                unlink('storage/' . $khuyenMai->image);
+            }
+            $path_image = $request->file('image')->store('images');
+            $data['image'] = $path_image;
+        }else{
+            $data['image'] = $khuyenMai->image;
         }
         $khuyenMai->update($data);
         return redirect()->route('khuyenMai.index');

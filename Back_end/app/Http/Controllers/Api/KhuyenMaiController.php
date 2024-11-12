@@ -28,10 +28,8 @@ class KhuyenMaiController extends Controller
             'image' => '',
             'time_date' => 'required',
         ]);
-        if($request->hasFile('image')){
-            $path_image = $request->file('image')->store('images');
-            $data['image'] = $path_image;
-        }
+        $path_image = $request->file('image')->store('images');
+        $data['image'] = $path_image;
         KhuyenMai::create($data);
         return response()->json([
             'message' => 'Thêm mới thành công'

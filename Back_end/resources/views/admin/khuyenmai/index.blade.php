@@ -55,12 +55,12 @@
                         <td>
                             {{ $khuyenMai->content }}
                         </td>
-                        <td>
+                        {{-- <td>
                             @if($khuyenMai->image && \Storage::exists($khuyenMai->image))
                             <img src="{{ \Storage::url($khuyenMai->image)}}" width="100px" alt="">
                             @endif
-                        </td>
-                        {{-- <td>{{ $khuyenMai->image }}</td> --}}
+                        </td> --}}
+                        <td><img src="{{ asset('/storage/'.$khuyenMai->image) }}" alt="{{$khuyenMai->image}}" width="50px" height="50px"></td>
                         <td>{{ $khuyenMai->time_date }}</td>
                         <td class="button d-flex">
                             <a href="{{route('khuyenMai.edit', $khuyenMai)}}" class="btn btn-warning">Sửa</a>
