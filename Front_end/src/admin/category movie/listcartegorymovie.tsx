@@ -6,11 +6,19 @@ type Props = {
   categories: ICategoryMovie[];
   loading: boolean;
   error: string | null;
-  updateCategoryMovies: (id: number | string, updatedCategory: ICategoryMovie) => void;
+  updateCategoryMovies: (
+    id: number | string,
+    updatedCategory: ICategoryMovie
+  ) => void;
   deleteCategoryMovie: (id: number | string) => void;
 };
 
-const ListCategoryMovie: React.FC<Props> = ({ categories, loading, error, deleteCategoryMovie }) => {
+const ListCategoryMovie: React.FC<Props> = ({
+  categories,
+  loading,
+  error,
+  deleteCategoryMovie,
+}) => {
   const safeCategories = Array.isArray(categories) ? categories : [];
 
   return (

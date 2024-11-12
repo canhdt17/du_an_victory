@@ -3,11 +3,9 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./compoents/page";
 import Dashboard from "./admin/dashboard";
 import MovieDetail from "./moviedetail/moviedetail";
-import Room from "./admin/room/room";
-import CreateRoom from "./admin/room/createroom";
-import UpdateRoom from "./admin/room/updateroom";
+
 import Area from "./admin/area/area";
-import CreateArea from "./admin/area/createarea";
+import CreateArea from "./admin/area/addarea";
 import UpdateArea from "./admin/area/updatearea";
 import Category from "./admin/category movie/category";
 import AddMovieCategory from "./admin/category movie/addmoviecategory";
@@ -15,8 +13,8 @@ import UpdateCategoryMovie from "./admin/category movie/updatecategorymovie";
 import SeatType from "./admin/seat_type/seat_type";
 import CreateSeatType from "./admin/seat_type/create_seat_type";
 import UpdateSeatType from "./admin/seat_type/updateseattype";
-import Seat from "./admin/seat/seat";
-import CreateSeat from "./admin/seat/createseat";
+import Seat from "./admin/seat/Seat";
+import CreateSeat from "./admin/seat/CreatSeat";
 import ShowTime from "./admin/showtime/showtime";
 import CrateShowTime from "./admin/showtime/createshowtime";
 import UserList from "./admin/user/UserList";
@@ -26,19 +24,23 @@ import Register from "./client/auth/register";
 import Login from "./client/auth/login";
 import Profile from "./client/profile/profile";
 import { IRoom } from "./interface/room";
-import { AddRoom, ListRoom, RoomUpdate } from "./service/room";
+import { AddRoom, ListRoom } from "./service/room";
 import { IArea } from "./interface/area";
 import { ISeatType } from "./interface/seat_type";
 import { ICategoryMovie } from "./interface/categorymovie";
 import { IShowTime } from "./interface/shotime";
 import { ISeat } from "./interface/seat";
-import { AddArea } from "./service/area";
+import { AddArea, AreaUpdate } from "./service/area";
 import { SeatsTypeAdd, SeatsTypeUpdate } from "./service/seat_type";
 import {
   AddCategoryMovie,
   UpdateCategoryMovies,
 } from "./service/categorymovie";
 import { ShowTimeAdd } from "./service/showtime";
+import Room from "./admin/room/Room";
+import CreateRoom from "./admin/room/AddRoom";
+import UpdateRoom from "./admin/room/UpdateRoom";
+
 
 function App() {
   const [rooms, setRooms] = useState<IRoom[]>([]);
@@ -57,9 +59,7 @@ function App() {
     fetchData();
   }, []);
 
-
-
-  //ROOM 
+  //ROOM
   const addRoom = async (roomData: IRoom) => {
     try {
       const room = await AddRoom(roomData);
@@ -83,7 +83,6 @@ function App() {
     }
   };
 
-
   //AREA
   const addArea = async (areaData: IArea) => {
     try {
@@ -96,19 +95,17 @@ function App() {
     }
   };
 
-  const updateArea = async (id: number | string, areaData: IArea) => {
+  const updateArea = async (area_id: number | string,areaData: IArea) => {
     try {
-      const areaDta = await RoomUpdate(areaData, id);
+      const areaDta = await AreaUpdate(area_id,areaData );
       alert("Cập nhật thành công.");
-      const newAreas = areas.map((area) => (area.id === id ? areaDta : area));
+      const newAreas = areas.map((area) => (area.area_id === area_id ? areaDta : area));
       setAreas(newAreas);
       navigate("/admin/area");
     } catch (error) {
       console.log(error);
     }
   };
-
-
 
   //SEAT TYPE
   const addSeatType = async (seatTypeData: ISeatType) => {
@@ -139,9 +136,7 @@ function App() {
     }
   };
 
-
-
-  // category 
+  // category
   const addCategoryMovie = async (categoryMovie: ICategoryMovie) => {
     try {
       const movieType = await AddCategoryMovie(categoryMovie);
@@ -172,9 +167,6 @@ function App() {
       console.log(error);
     }
   };
-
-
-
 
   const addShowTime = async (showTimeData: IShowTime) => {
     try {
@@ -208,13 +200,11 @@ function App() {
           element={<Dashboard></Dashboard>}
         ></Route>
 
-
         {/* chi tiet phim */}
         <Route
           path="/moviedetail"
           element={<MovieDetail></MovieDetail>}
         ></Route>
-
 
         {/* phong */}
         <Route path="/room" element={<Room rooms={rooms}></Room>}></Route>
@@ -227,9 +217,8 @@ function App() {
           element={<UpdateRoom onUpdate={updateRoom}></UpdateRoom>}
         ></Route>
 
-
         {/* Khu vuc */}
-        <Route path="/admin/area" element={<Area></Area>}></Route>
+        <Route path="/admin/area" element={<Area areas = {areas}></Area>}></Route>
         <Route
           path="/admin/area/createarea"
           element={<CreateArea addArea={addArea}></CreateArea>}
@@ -238,7 +227,6 @@ function App() {
           path="/admin/area/edit/:id"
           element={<UpdateArea updateArea={updateArea}></UpdateArea>}
         ></Route>
-
 
         {/* the loai - danh muc phim */}
         <Route path="/admin/category" element={<Category></Category>}></Route>
@@ -259,7 +247,6 @@ function App() {
           }
         ></Route>
 
-
         {/* Kieu ghe */}
         <Route path="/admin/seat_type" element={<SeatType></SeatType>}></Route>
         <Route
@@ -273,14 +260,12 @@ function App() {
           }
         ></Route>
 
-
         {/* ghe */}
         <Route path="/admin/seat" element={<Seat></Seat>}></Route>
         <Route
           path="/admin/creatseat"
           element={<CreateSeat addSeats={addSeat}></CreateSeat>}
         ></Route>
-
 
         {/* gio chieu */}
         <Route path="/admin/showtime" element={<ShowTime></ShowTime>}></Route>
@@ -289,12 +274,10 @@ function App() {
           element={<CrateShowTime addShowTime={addShowTime}></CrateShowTime>}
         ></Route>
 
-
         {/* admin / quan li nguoi dung */}
         <Route path="/admin/user" element={<UserList />} />
         <Route path="/admin/createuser" element={<CreateUser />} />
         <Route path="/admin/edituser/:id" element={<EditUser />} />
-
 
         {/* client */}
         <Route path="/login" element={<Login />} />

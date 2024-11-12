@@ -1,19 +1,16 @@
 import { useEffect, useState } from "react";
-
 import MenuDashboard from "../menudashboard";
 import HeaderDashboard from "../headerdashboard";
 import Logo from "../logo";
 import { useForm } from "react-hook-form";
-
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-
 import { ListArea } from "../../service/area";
 import { IRoom } from "../../interface/room";
 import { IArea } from "../../interface/area";
 
 type Props = {
-  onAdd: (roomData: IRoom) => void;
+  onAdd: (roomsData: IRoom) => void;
 };
 const roomScheama = Joi.object({
   room_name: Joi.string().required(),
@@ -32,11 +29,11 @@ const CreateRoom = ({ onAdd }: Props) => {
   useEffect(() => {
     (async () => {
       const data = await ListArea();
-      setAreas(data);
+      setAreas(data || []);
     })();
   }, []);
-  const onsubumit = (roomData: IRoom) => {
-    onAdd(roomData);
+  const onsubumit = (roomsData: IRoom) => {
+    onAdd(roomsData);
   };
   return (
     <div>

@@ -1,24 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
-import Joi, { any } from 'joi';
-import { joiResolver } from '@hookform/resolvers/joi';
-import { ICategoryMovie } from '../../interface/categorymovie';
-import { CategoryMovieById } from '../../service/categorymovie';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import Joi from "joi";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { ICategoryMovie } from "../../interface/categorymovie";
+import { CategoryMovieById } from "../../service/categorymovie";
 
 type Props = {
   updateCategoryMovies: (id: number | string, data: ICategoryMovie) => void;
 };
 
 const updateMovieSchema = Joi.object({
-  name_category: Joi.string().required().label('Category Name'),
+  name_category: Joi.string().required().label("Category Name"),
 });
 
 const UpdateCategoryMovie: React.FC<Props> = ({ updateCategoryMovies }) => {
-  const { id } = useParams<{ id: string  }>();
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<ICategoryMovie>({
+  const { id } = useParams<{ id: string }>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ICategoryMovie>({
     resolver: joiResolver(updateMovieSchema),
   });
 
@@ -29,8 +34,8 @@ const UpdateCategoryMovie: React.FC<Props> = ({ updateCategoryMovies }) => {
     const fetchCategory = async () => {
       try {
         const data = await CategoryMovieById(id!);
-        reset(dataz) ; 
-    } catch (error : any){
+        reset(dataz);
+      } catch (error: any) {
         // fetchError("Failed to fetch category data.");
       } finally {
         setLoading(false);
