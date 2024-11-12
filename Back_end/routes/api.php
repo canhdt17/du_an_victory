@@ -49,8 +49,8 @@ Route::apiResource('supports', HoTroController::class);
 Route::apiResource('seatTypes', SeatTypeController::class);
 Route::apiResource('vouchers', VoucherController::class);
 Route::get('/categories/{id}/movies', [MovieController::class, 'listFilmByCategory']);
-Route::get('/movies/dang-chieu', [MovieController::class, 'phimDangChieu']);
-Route::get('/movies/sap-chieu', [MovieController::class, 'phimSapChieu']);
+Route::get('/phim-dang-chieu', [MovieController::class, 'phimDangChieu']);
+Route::get('/phim-sap-chieu', [MovieController::class, 'phimSapChieu']);
 
 
 

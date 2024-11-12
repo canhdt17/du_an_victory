@@ -5,7 +5,7 @@ use App\Models\Movie;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\showtime;
+use App\Models\Showtime;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -71,19 +71,18 @@ class MovieController extends Controller
      * Display the specified resource.
      */
     public function show(Movie $movie)
-    {
-        $movie = Movie::with(['category', 'showtimes', 'comments.user'])
-        ->find($movie);
+{
 
-if (!$movie) {
-return response()->json(['message' => 'Khong tim thay phim'], 404);
-}
+    $movie->load(['category', 'showtimes', 'comments.user']);
 
-return response()->json([
-'movie' => $movie
-]);
-
+    if (!$movie) {
+        return response()->json(['message' => 'Không tìm thấy phim'], 404);
     }
+
+    return response()->json([
+        'movie' => $movie
+    ]);
+}
 
     /**
      * Update the specified resource in storage.
@@ -134,26 +133,32 @@ return response()->json([
     // phim dang chieu
     public function phimDangChieu()
     {
-        $today = Carbon::today();
+        $now = Carbon::now();
+        $dateToday = $now->toDateString();
+        // $timeNow = $now->toTimeString();
 
-        $movies = Movie::whereHas('showtimes', function($query) use ($today) {
-            $query->where('showtime_date', '<=', $today);
-                //   ->where('end_time', '>=', $today);
-        })->get();
+        $phimDangChieu = Movie::where('show', '=', $dateToday)
+            // ->whereHas('showtimes', function ($query) use ($dateToday, $timeNow) {
+            //     $query->whereDate('showtime_date', $dateToday)
+            //           ->where('start_time', '<=', $timeNow)
+            //           ->where('end_time', '>=', $timeNow);
+            // })
+            ->with('showtimes')->get();
 
-        return response()->json($movies);
+        return response()->json($phimDangChieu);
     }
 
     // phim sap chieu
     public function phimSapChieu()
     {
-        $today = Carbon::today();
+        $now = Carbon::now();
+        $dateToday = $now->toDateString();
 
-        $movies = Movie::whereHas('showtimes', function($query) use ($today) {
-            $query->where('showtime_date', '>', $today);
-        })->get();
+        $phimSapChieu = Movie::where('show', '>', $dateToday)
+            ->with('showtimes')
+            ->get();
 
-        return response()->json($movies);
+        return response()->json($phimSapChieu);
     }
 
 }
