@@ -1,8 +1,7 @@
-export interface IRoom{
-    [x: string]: IRoom
-    room_id:number|string
-    room_name:string
-    area_id:number|string
-    total_seat:number
+export interface IRoom {
+  id?: number | string;
+  room_name: string;
+  area_id: number | string;
+  total_seat: number;
 }
-export type RoomData = Pick<IRoom,'room_name'|'area_id'|'total_seat'>
+export type RoomData = Pick<IRoom, "room_name" | "area_id" | "total_seat">;

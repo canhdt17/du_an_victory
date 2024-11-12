@@ -1,52 +1,29 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
 import Logo from "../logo";
 import HeaderDashboard from "../headerdashboard";
 import MenuDashboard from "../menudashboard";
 import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { AreaById } from "../../service/area";
-import { useParams } from "react-router-dom";
 import { IArea } from "../../interface/area";
 
 type Props = {
-  updateArea: (area_id: number | string, data: IArea) => void;
+  addArea: (area: IArea) => void;
 };
-const updateAreaScheama = Joi.object({
-  area_name: Joi.string().required().label('Area Name'),
+const areaScheama = Joi.object({
+  area_name: Joi.string().required().label("Area Name"),
 });
-const UpdateArea: React.FC<Props> = ({ updateArea }) => {
-  const { id } = useParams<string>();
-  const {register,handleSubmit,formState: { errors },reset,} = useForm<IArea>({
-    resolver: joiResolver(updateAreaScheama),
+const AddArea: React.FC<Props> = ({ addArea }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IArea>({
+    resolver: joiResolver(areaScheama),
   });
 
-  const [loading, setLoading] = useState(true);
-  const [fetchError] = useState<string | null>(null);
-  
-  useEffect(() => {
-    const fetchArea = async () => {
-      try {
-        const data = await AreaById(id!);
-        reset(data);
-      } catch (error : any) {
-        // fetchError("Failed to fetch category data.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchArea();
-  }, [id, reset]);
-
-  const onSubmit = (data: IArea) => {
-    console.log(id);
-    
-    updateArea(id!, data);
+  const onsubumit = (areaData: IArea) => {
+    addArea(areaData);
   };
-
   return (
     <div>
       <div className="dashboards">
@@ -67,14 +44,11 @@ const UpdateArea: React.FC<Props> = ({ updateArea }) => {
               </div>
               <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 className="h2">Cập nhật Khu Vực</h1>
+                  <h1 className="h2">Thêm Khu Vực</h1>
                   <div className="btn-toolbar mb-2 mb-md-0"></div>
                 </div>
 
-
-                <form onSubmit={handleSubmit(onSubmit)}>
-                {loading && <p>Loading...</p>}
-                {fetchError && <p>{fetchError}</p>}
+                <form onSubmit={handleSubmit(onsubumit)}>
                   <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">
                       Tên Khu Vực:
@@ -85,14 +59,14 @@ const UpdateArea: React.FC<Props> = ({ updateArea }) => {
                       id="exampleInputEmail1"
                       {...register("area_name")}
                     />
-                    <div id="emailHelp" className="form-text">
-                      {errors.area_name && (
-                        <div className="text-danger ">
-                          {errors.area_name.message}
-                        </div>
-                      )}
-                    </div>
+
+                    {errors.area_name && (
+                      <div className="text-danger ">
+                        {errors.area_name.message}
+                      </div>
+                    )}
                   </div>
+
                   <button type="submit" className="btn btn-primary">
                     Submit
                   </button>
@@ -106,4 +80,4 @@ const UpdateArea: React.FC<Props> = ({ updateArea }) => {
   );
 };
 
-export default UpdateArea;
+export default AddArea;

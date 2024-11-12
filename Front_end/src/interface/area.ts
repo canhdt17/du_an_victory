@@ -1,5 +1,4 @@
 export interface IArea {
-    [x: string]: IArea
     area_id:number|string
     area_name:string
 }
