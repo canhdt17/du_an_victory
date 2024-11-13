@@ -32,6 +32,11 @@
 /*----------------------------------------*/
 .headermenu{
 	justify-content: center;
+	position: fixed;
+	top:0;
+	left:0;
+	width: 100%;
+	padding: 10px 0;
 }
 html,
 body {
@@ -341,7 +346,7 @@ ol {
 .hero {
 	padding-top: 50px;
 
-	background-color:  #070720;;
+	background-color:  #070720;
 }
 
 .hero__items {
@@ -549,6 +554,7 @@ ol {
 
 .product__item {
 	margin-bottom: 30px;
+
 }
 
 .product__item__pic {
@@ -2339,7 +2345,7 @@ button:hover {
 	border-top-right-radius: 8px;
 }
 .card-body {
-	background-color: #2a2d34;
+	background-color: #070720;
 }
 .card-date {
 	font-size: 14px;

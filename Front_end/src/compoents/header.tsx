@@ -6,8 +6,8 @@ type Props = {}
 const Header = (props: Props) => {
   return (
     <div>
-      <div className=' bg-gray-900 '>
-                  <header className=" flex items-center justify-between px-6 py-4 bg-gray-900 text-white">
+      <div className='menuhead bg-gray-900 '>
+                  <header className="headermenu flex items-center justify-between px-6 py-4 bg-gray-900 text-white">
   {/* Left Side: Logo */}
   <div className="flex items-center space-x-8">
     {/* Logo */}

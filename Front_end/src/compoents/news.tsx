@@ -15,7 +15,7 @@ const TinTuc = (props: Props) => {
       })()
   },[])
   return (
-    <div className='bg-[#070720] '>
+    <div className='bg-[#070720]'>
         <Header></Header>
         <div className="container mt-5 ">
   <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
@@ -24,7 +24,7 @@ const TinTuc = (props: Props) => {
     <div className="col " key={tintuc.id}>
       <div className="card h-100">
         <img src={tintuc.imager} className="card-img-top" alt="Image" />
-        <div className="card-body rounded-b-xl">
+        <div className="card-body ">
           
           <h5 className="card-title">{tintuc.name_TinTuc}</h5>
         </div>
