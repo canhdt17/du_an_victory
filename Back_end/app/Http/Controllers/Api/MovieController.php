@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\Models\movie;
+use App\Models\Movie;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Showtime;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class MovieComtroller extends Controller
+class MovieController extends Controller
 {
  /**
      * Display a listing of the resource.
@@ -18,13 +21,23 @@ class MovieComtroller extends Controller
         ->join('types','types.id','=','movies.type_id')
         ->whereNull('movies.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng movies
         ->select('movies.*','name_type','name_category')
-        ->orderByDesc('movies.id')           
-        ->orderByDesc('movies.type_id')      
+        ->orderByDesc('movies.id')
+        ->orderByDesc('movies.type_id')
         ->orderByDesc('movies.category_id')
         ->latest('movies.id')
         ->paginate();
 
         return response()->json($movies);
+    }
+    public function listFilmByCategory($id)
+    {
+        $category = Category::with('movies')->find($id);
+
+        if (!$category) {
+            return response()->json(['error' => 'Khong co phim nao trong danh muc nay'], 404);
+        }
+
+        return response()->json($category->movies);
     }
 
     /**
@@ -58,10 +71,19 @@ class MovieComtroller extends Controller
      * Display the specified resource.
      */
     public function show(Movie $movie)
-    {
-        return response()->json($movie);
+{
+
+    $movie->load(['category', 'showtimes', 'comments.user']);
+
+    if (!$movie) {
+        return response()->json(['message' => 'Không tìm thấy phim'], 404);
     }
-    
+
+    return response()->json([
+        'movie' => $movie
+    ]);
+}
+
     /**
      * Update the specified resource in storage.
      */
@@ -79,8 +101,8 @@ class MovieComtroller extends Controller
             'link_trailler'=> 'required',
             'category_id'=> 'required',
         ]);
-       
-        //neu cap nhap anh 
+
+        //neu cap nhap anh
         if($request->hasFile('image')){
             if (file_exists('storage/' . $movie->image)) {
                 unlink('storage/' . $movie->image);
@@ -108,4 +130,35 @@ class MovieComtroller extends Controller
         $movie->delete();
         return response()->json($movie);
     }
+    // phim dang chieu
+    public function phimDangChieu()
+    {
+        $now = Carbon::now();
+        $dateToday = $now->toDateString();
+        // $timeNow = $now->toTimeString();
+
+        $phimDangChieu = Movie::where('show', '=', $dateToday)
+            // ->whereHas('showtimes', function ($query) use ($dateToday, $timeNow) {
+            //     $query->whereDate('showtime_date', $dateToday)
+            //           ->where('start_time', '<=', $timeNow)
+            //           ->where('end_time', '>=', $timeNow);
+            // })
+            ->with('showtimes')->get();
+
+        return response()->json($phimDangChieu);
+    }
+
+    // phim sap chieu
+    public function phimSapChieu()
+    {
+        $now = Carbon::now();
+        $dateToday = $now->toDateString();
+
+        $phimSapChieu = Movie::where('show', '>', $dateToday)
+            ->with('showtimes')
+            ->get();
+
+        return response()->json($phimSapChieu);
+    }
+
 }
