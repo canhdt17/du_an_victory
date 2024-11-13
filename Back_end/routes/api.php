@@ -41,6 +41,8 @@ Route::apiResource('showtimes',ShowtimeController::class);
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('types', TypeController::class);
 Route::apiResource('tin-tuc', TintucController::class);
+Route::get('tin-tucs', [TinTucController::class, 'index']); // Route để lấy danh sách tin tức
+Route::get('tin-tucs/{id}', [TinTucController::class, 'show']); // Route để hiển thị chi tiết tin tức
 
 
 Route::apiResource('rooms', RoomController::class);

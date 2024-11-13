@@ -2812,3 +2812,4 @@ Trận mưa lớn từ 29/10 ở vùng Valencia, miền đông Tây Ban Nha, đ�
 #54 D:\\laragon\\www\\du_an_victory\\Back_end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('D:\\\\laragon\\\\www\\\\...')
 #55 {main}
 "} 
+[2024-11-02 05:33:34] local.ERROR: The name type field is required.  
