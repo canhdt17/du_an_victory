@@ -1,1 +1,0 @@
-<?php /**PATH C:\laragon\www\du_an_victory\Back_end\resources\views/admin/rooms/create.blade.php ENDPATH**/ ?>
