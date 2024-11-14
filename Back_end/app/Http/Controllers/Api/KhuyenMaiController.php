@@ -28,10 +28,8 @@ class KhuyenMaiController extends Controller
             'image' => '',
             'time_date' => 'required',
         ]);
-        if($request->hasFile('image')){
-            $path_image = $request->file('image')->store('images');
-            $data['image'] = $path_image;
-        }
+        $path_image = $request->file('image')->store('images');
+        $data['image'] = $path_image;
         KhuyenMai::create($data);
         return response()->json([
             'message' => 'Thêm mới thành công'
@@ -51,21 +49,38 @@ class KhuyenMaiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,KhuyenMai $km)
     {
-        $khuyenmai = KhuyenMai::query()->findOrFail($id);
-        $khuyenmai->update(request()->all());
-        return response()->json($khuyenmai);
+
+        $data = $request->validate([
+            'title'=> 'required',
+            'content'=> 'required',
+            'time_date'=> 'required',
+        ]);
+        if($request->hasFile('image')){
+            if (file_exists('storage/' . $km->images)) {
+                unlink('storage/' . $km->images);
+            }
+            $path_image = $request->file('image')->store('images');
+            $data['images'] = $path_image;
+        }else{
+            $data['images'] = $km->images;
+        }
+
+        // $khuyenmai = KhuyenMai::query()->findOrFail($id);
+        $km->update($data);
+        return response()->json($km);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(KhuyenMai $khuyenmai)
     {
-        KhuyenMai::destroy($id);
-        return response()->json([
-            'message'=> 'Xóa thành công'
-        ]);
+        if (file_exists('storage/' . $khuyenmai->image)) {
+            unlink('storage/' . $khuyenmai->image);
+        }
+        $khuyenmai->delete();
+        return response()->json($khuyenmai);
     }
 }
