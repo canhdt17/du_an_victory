@@ -62,6 +62,7 @@ Route::apiResource('vouchers', VoucherController::class);
 Route::get('/categories/{id}/movies', [MovieController::class, 'listFilmByCategory']);
 Route::get('/phim-dang-chieu', [MovieController::class, 'phimDangChieu']);
 Route::get('/phim-sap-chieu', [MovieController::class, 'phimSapChieu']);
-
+Route::get('/lastest-tin-tuc', [TintucController::class, 'LastestTinTuc']);
+Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
 
 

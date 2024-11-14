@@ -87,4 +87,8 @@ class TintucController extends Controller
        $tinTuc->delete();
        return response()->json(['message' => 'Xóa thành công'], 200);
    }
+   public function LastestTinTuc(){
+    $LastTinTucs = TinTuc::orderByDesc('id')->take(4)->get();
+    return response()->json($LastTinTucs);
+   }
 }

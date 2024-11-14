@@ -13,7 +13,6 @@ import UpdateCategoryMovie from "./admin/category movie/updatecategorymovie";
 import SeatType from "./admin/seat_type/seat_type";
 import CreateSeatType from "./admin/seat_type/create_seat_type";
 import UpdateSeatType from "./admin/seat_type/updateseattype";
-import Seat from "./admin/seat/Seat";
 import CreateSeat from "./admin/seat/CreatSeat";
 import ShowTime from "./admin/showtime/showtime";
 import CrateShowTime from "./admin/showtime/createshowtime";
@@ -37,9 +36,11 @@ import {
   UpdateCategoryMovies,
 } from "./service/categorymovie";
 import { ShowTimeAdd } from "./service/showtime";
-import Room from "./admin/room/Room";
+import Room from "./admin/room/room";
 import CreateRoom from "./admin/room/AddRoom";
-import UpdateRoom from "./admin/room/UpdateRoom";
+import UpdateRoom from "./admin/room/updateroom";
+import Seat from "./admin/seat/seat";
+
 
 
 function App() {
@@ -179,9 +180,11 @@ function App() {
     }
   };
 
+
+  //SEAT
   const addSeat = async (seatData: ISeat) => {
     try {
-      const seat = await SeatAdd(seatData);
+      const seat = await addSeat(seatData);
       alert("Thêm ghế phim thành công.");
       setSeats([...seats, seat]);
       navigate("/admin/seat");
