@@ -27,7 +27,7 @@ const Details = (props: Props) => {
       <div>
         <Header></Header>
 
-        <section className="anime-details spad mt-10">
+        <section className="anime-details spad mt-10" id="wrapper">
           <div className="container">
            
             <div className="anime__details__content">
@@ -71,9 +71,7 @@ const Details = (props: Props) => {
                     <button className="bg-transparent border border-yellow-500 text-yellow-500 px-4 py-2 rounded hover:bg-yellow-500 hover:text-gray-900 transition duration-200">
                       Chi tiết nội dung
                     </button>
-                    <button className="bg-yellow-500 text-gray-900 px-4 py-2 rounded hover:bg-yellow-600 transition duration-200">
-                      Xem trailer
-                    </button>
+                   
                   </div>
                 </div>
                  

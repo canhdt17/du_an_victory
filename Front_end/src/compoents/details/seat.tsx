@@ -1,64 +1,44 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const Seat = (props: Props) => {
   return (
     <div>
-        <div className='bodyy'>
-<div className="seatt-container">
-  <div className="roww">
-    <div className="seatt">A14</div>
-    <div className="seatt">A13</div>
-    <div className="seatt">A12</div>
-    <div className="seatt">A11</div>
-    <div className="seatt">A10</div>
-    <div className="seatt">A9</div>
-    <div className="seatt">A8</div>
-    <div className="seatt">A7</div>
-    <div className="seatt">A6</div>
-    <div className="seatt">A5</div>
-    <div className="seatt">A4</div>
-    <div className="seatt">A3</div>
-    <div className="seatt">A2</div>
-    <div className="seatt">A1</div>
-  </div>
-  <div className="roww">
-    <div className="seatt">B14</div>
-    <div className="seatt">B13</div>
-    <div className="seatt">B12</div>
-    <div className="seatt">B11</div>
-    <div className="seatt">B10</div>
-    <div className="seatt">B9</div>
-    <div className="seatt">B8</div>
-    <div className="seatt">B7</div>
-    <div className="seatt">B6</div>
-    <div className="seatt">B5</div>
-    <div className="seatt">B4</div>
-    <div className="seatt">B3</div>
-    <div className="seatt">B2</div>
-    <div className="seatt">B1</div>
-  </div>
-  <div className="roww">
-    <div className="seatt">C14</div>
-    <div className="seatt">C13</div>
-    <div className="seatt">C12</div>
-    <div className="seatt">C11</div>
-    <div className="seatt">C10</div>
-    <div className="seatt">C9</div>
-    <div className="seatt">C8</div>
-    <div className="seatt">C7</div>
-    <div className="seatt">C6</div>
-    <div className="seatt">C5</div>
-    <div className="seatt">C4</div>
-    <div className="seatt">C3</div>
-    <div className="seatt">C2</div>
-    <div className="seatt">C1</div>
-  </div>
-</div>
+      {/* <div className="bodyy" id="modal-container">
+        <div className="seatt-container " id="modal">
+          <div className="modal-header ">
+            <h3 className="text-white">Vui lòng chọn ghế !</h3>
+            <button  id="btn-close"><i className="fa-solid fa-xmark"></i></button>
+          </div>
+          <div className="roww modal-body">
+            <div className="seatt">A14</div>
+            <div className="seatt">A13</div>
+            <div className="seatt">A12</div>
+            <div className="seatt">A11</div>
+            <div className="seatt">A10</div>
+            <div className="seatt">A9</div>
+            <div className="seatt">A8</div>
+            <div className="seatt">A7</div>
+            <div className="seatt">A6</div>
+            <div className="seatt">A5</div>
+            <div className="seatt">A4</div>
+            <div className="seatt">A3</div>
+            <div className="seatt">A2</div>
+            <div className="seatt">A1</div>
+          </div>
+          <button className="bg-yellow-500 text-gray-900 px-4 py-2 rounded hover:bg-yellow-600 transition duration-200">
+            Đặt Vé
+          </button>
         </div>
+      </div> */}
+      <div id="wrapper">
+        <h1>Tạo model với html</h1>
+        <p>Lorem ipsum</p>
+        <button id="btn-open"></button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Seat
+export default Seat;
