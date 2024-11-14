@@ -25,6 +25,18 @@ class HoTroController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->validate([
+            'subject' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+
+        $data['user_id'] = $request->user()->id;
+
+
+        HoTro::create($data);
+
+        return response()->json(['message' => 'Thêm hỗ trợ thành công'], 201);
 
     }
 

@@ -36,7 +36,7 @@ class KhuyenMaiController extends Controller
         return response()->json([
             'message' => 'Thêm mới thành công'
         ],200);
-        
+
     }
 
     /**
@@ -68,4 +68,8 @@ class KhuyenMaiController extends Controller
             'message'=> 'Xóa thành công'
         ]);
     }
+    public function LastestKM(){
+        $LastKMs = KhuyenMai::orderByDesc('id')->take(4)->get();
+        return response()->json($LastKMs);
+       }
 }
