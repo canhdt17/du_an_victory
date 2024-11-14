@@ -40,7 +40,7 @@ class TintucController extends Controller
            'name_TinTuc' => $request->name_TinTuc,
            'sub_title' => $request->sub_title,
            'content' => $request->content,
-           'imager' => $request->imager,
+           'imager' => $request->file('image'),
            'slug' => Str::slug($request->name_TinTuc),
        ]);
 
