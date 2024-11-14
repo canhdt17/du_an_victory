@@ -22,11 +22,17 @@ class SeatController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->validate([
+        //     'seat_type_id' => 'required|exists:seat_types,id', 
+        //     'seat_number' => 'required|string|max:10',         
+        //     'room_id' => 'required|exists:rooms,id',           
+        //     'seat_status' => 'required|boolean', 
+        // ]);
         $request->validate([
-            'seat_type_id' => 'required|exists:seat_types,id', 
-            'seat_number' => 'required|string|max:10',         
-            'room_id' => 'required|exists:rooms,id',           
-            'seat_status' => 'required|boolean', 
+            'seat_type_id' => 'required', 
+            'seat_number' => 'required',         
+            'room_id' => 'required',           
+            'seat_status' => 'required', 
         ]);
         Seat::create($request->all());
         return response()->json([
@@ -48,8 +54,14 @@ class SeatController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $data= $request->validate([
+            'seat_type_id' => 'required', 
+            'seat_number' => 'required',         
+            'room_id' => 'required',           
+            'seat_status' => 'required', 
+        ]);
         $seats = Seat::query()->findOrFail($id);
-        $seats->update(request()->all());
+        $seats->update($data);
         return response()->json($seats);
     }
 
