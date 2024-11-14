@@ -17,7 +17,7 @@ const Header = (props: Props) => {
       <NavLink to={`/`}><a href="#" className="hover:text-red-500">Trang chủ</a></NavLink>
       <a href="#" className="hover:text-gray-300">Lịch chiếu</a>
       <NavLink to={`/tintuc`}><a href="#" className="hover:text-gray-300">Tin tức</a></NavLink>
-      <a href="#" className="hover:text-gray-300">Khuyến mãi</a>
+      <NavLink to={`/client/khuyenmai`}className="hover:text-gray-300">Khuyến Mãi</NavLink>
       <a href="#" className="hover:text-gray-300">Giá vé</a>
       <a href="#" className="hover:text-gray-300">Liên hoan phim</a>
       <a href="#" className="hover:text-gray-300">Giới thiệu</a>

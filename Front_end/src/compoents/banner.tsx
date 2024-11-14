@@ -5,7 +5,7 @@ type Props = {}
 const Banner = (props: Props) => {
   return (
     <div>
-         <section className="hero">
+         {/* <section className="hero">
     <div className="container">
       <div className="hero__slider owl-carousel">
         <div className="hero__items set-bg" >
@@ -48,7 +48,9 @@ const Banner = (props: Props) => {
         </div>
       </div>
     </div>
-  </section>
+  </section> */}
+
+ 
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import { Route, Routes, useNavigate } from "react-router-dom"
 
 import HomePage from "./compoents/page"
-import Dashboard from "./admin/dashboard"
-import MovieDetail from "./moviedetail/moviedetail"
+
+
 import Room from "./admin/room/room"
 import { useEffect, useState } from "react"
 import { IRoom } from "./movie/room"
@@ -41,6 +41,8 @@ import { INews } from "./movie/news"
 import { AddNews, DeleteNews, UpdateNews } from "./service/news"
 import UpdateNew from "./admin/news/updatenews"
 import TinTuc from "./compoents/news"
+import Promotion from "./compoents/khuyenmai"
+import Details from "./compoents/details/details"
 
 
 
@@ -336,7 +338,6 @@ const updateNews = async(id:number|string,newsData:INews)=>{
     <Routes>
       <Route path="/" element={<HomePage></HomePage>}></Route>
       <Route path="/admin/tintuc" element={<News delNews={newsDel}></News>}></Route>
-      <Route path="/moviedetail" element={<MovieDetail></MovieDetail>}></Route>
       <Route path="/room" element={<Room rooms={rooms} onDel={delRoom}></Room>}></Route>
       <Route path="/admin/room/createroom" element={<CreateRoom onAdd={addRoom}></CreateRoom>}></Route>
       <Route path="/admin/area/createarea" element={<CreateArea addArea={areAdd}></CreateArea>}></Route>
@@ -359,7 +360,8 @@ const updateNews = async(id:number|string,newsData:INews)=>{
       <Route path="/admin/news/createnews" element={<CreateNews newsAdd={addNews}></CreateNews>}></Route>
       <Route path="/admin/news/updatenews/:id" element={<UpdateNew newsUpdate={updateNews}></UpdateNew>}></Route>
       <Route path="/tintuc" element={<TinTuc></TinTuc>}></Route>
-
+      <Route path="/client/khuyenmai" element={<Promotion></Promotion>}></Route>
+      <Route path="/client/details/:id" element={<Details></Details>}></Route>
      </Routes>
      
     </>

@@ -11,8 +11,7 @@ const Trending = (props: Props) => {
   useEffect(()=>{
     (async()=>{
       const {data} = await axios.get('http://127.0.0.1:8000/api/movies')
-        //cai nay dung roi    
-        console.log(data.data);
+
           
       setTrenDings(data.data)
     })()
@@ -29,7 +28,7 @@ const Trending = (props: Props) => {
      
       <img src={trending.image} alt="Movie Poster" className="w-full h-60 object-cover" />
       <div className="p-4">
-        <p className="text-sm text-gray-400">{trending.name_movie}</p>
+        <NavLink to={`/client/details/${trending.id}`}><p className="text-sm text-gray-400">{trending.name_movie}</p></NavLink>
         <p className="text-xs text-gray-400 mb-2">{trending.show}</p>
     
       </div>

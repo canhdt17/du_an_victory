@@ -1,6 +1,6 @@
 export interface ITrenDings{
     id:number|string,
-    name:string,
+    name_movie:string,
     image:string,
     type_id:number|string,
     duration:string,
