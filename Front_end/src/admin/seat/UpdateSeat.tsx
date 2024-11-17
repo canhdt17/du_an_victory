@@ -1,80 +1,143 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import Joi from "joi";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { ISeat } from "../../interface/seat";
+import { SeatByID } from "../../service/seat";
+import { fetchSeatTypes, fetchRooms } from "../../service/seat"; 
 
-const EditSeat: React.FC = () => {
+type Props = {
+  updateSeats: (id: number | string, data: ISeat) => void;
+  seat_types: { id: number; name: string }[]; 
+  rooms: { id: number; name: string }[]; 
+}
+
+const updateSeatSchema = Joi.object({
+  seat_number: Joi.string().required().label("Seat Number"),
+  seat_type_id: Joi.number().required().label("Seat Type"),
+  room_id: Joi.number().required().label("Room"),
+});
+
+const UpdateSeat: React.FC<Props> = ({ updateSeats }) => {
   const { id } = useParams<{ id: string }>();
-  const [seatNumber, setSeatNumber] = useState("");
-  const [seatType, setSeatType] = useState("VIP");
-  const [room, setRoom] = useState("");
-  const [status, setStatus] = useState("Trống");
-  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ISeat>({
+    resolver: joiResolver(updateSeatSchema),
+  });
 
+  const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+  const [seatTypes, setSeatTypes] = useState<{ id: number; name: string }[]>([]);
+  const [rooms, setRooms] = useState<{ id: number; name: string }[]>([]);
+
+  const fetchData = async () => {
+    try {
+      const [seatTypesData, roomsData] = await Promise.all([
+        fetchSeatTypes(),
+        fetchRooms(),
+      ]);
+      setSeatTypes(seatTypesData.seat_types || []);
+      setRooms(roomsData.rooms || []);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+  };
+
+  // Fetch dữ liệu ghế dựa trên ID
   useEffect(() => {
-    // Giả lập lấy thông tin ghế từ API
-    // Ở đây bạn sẽ gọi API để lấy chi tiết ghế dựa vào `id`
-    setSeatNumber("A1");
-    setSeatType("VIP");
-    setRoom("Phòng 1");
-    setStatus("Trống");
-  }, [id]);
+    const fetchSeat = async () => {
+      try {
+        await fetchData();
+        const data = await SeatByID(id!);
+        reset(data);
+      } catch (error: any) {
+        setFetchError("Failed to fetch seat data.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleUpdate = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({ id, seatNumber, seatType, room, status });
-    // Xử lý cập nhật ghế vào database
-    navigate("/admin/seat"); // Quay lại trang danh sách ghế sau khi cập nhật thành công
+    fetchSeat();
+  }, [id, reset]);
+
+  const onSubmit = (data: ISeat) => {
+    updateSeats(id!, data);
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Chỉnh Sửa Ghế</h2>
-      <form onSubmit={handleUpdate}>
-        <div className="mb-3">
-          <label className="form-label">Số Ghế:</label>
-          <input
-            type="text"
-            className="form-control"
-            value={seatNumber}
-            onChange={(e) => setSeatNumber(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Kiểu Ghế:</label>
-          <select
-            className="form-select"
-            value={seatType}
-            onChange={(e) => setSeatType(e.target.value)}
-          >
-            <option value="VIP">VIP</option>
-            <option value="Thường">Thường</option>
-          </select>
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Phòng:</label>
-          <input
-            type="text"
-            className="form-control"
-            value={room}
-            onChange={(e) => setRoom(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Trạng Thái:</label>
-          <input
-            type="text"
-            className="form-control"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          />
-        </div>
-        <button type="submit" className="btn btn-success">
-          Cập Nhật Ghế
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {loading && <p>Loading...</p>}
+      {fetchError && <p>{fetchError}</p>}
+
+      <div className="mb-3">
+        <label htmlFor="seatName" className="form-label">
+          Tên Ghế:
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          id="seatName"
+          {...register("seat_number")}
+        />
+        {errors.seat_number && (
+          <div className="text-danger">{errors.seat_number.message}</div>
+        )}
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="seatType" className="form-label">
+          Loại Ghế:
+        </label>
+        <select
+          id="seatType"
+          className="form-select"
+          {...register("seat_type_id")}
+        >
+          <option value="">Chọn loại ghế</option>
+          {seatTypes.map((type) => (
+            <option key={type.id} value={type.id}>
+              {type.name}
+            </option>
+          ))}
+        </select>
+        {errors.seat_type_id && (
+          <div className="text-danger">{errors.seat_type_id.message}</div>
+        )}
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="room" className="form-label">
+          Phòng:
+        </label>
+        <select
+          id="room"
+          className="form-select"
+          {...register("room_id")}
+        >
+          <option value="">Chọn phòng</option>
+          {rooms.map((room) => (
+            <option key={room.id} value={room.id}>
+              {room.name}
+            </option>
+          ))}
+        </select>
+        {errors.room_id && (
+          <div className="text-danger">{errors.room_id.message}</div>
+        )}
+      </div>
+
+      <button type="submit" className="btn btn-primary">
+        Cập Nhật Ghế
+      </button>
+    </form>
   );
 };
 
-export default EditSeat;
+export default UpdateSeat;

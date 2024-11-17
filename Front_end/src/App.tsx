@@ -10,10 +10,9 @@ import UpdateArea from "./admin/area/updatearea";
 import Category from "./admin/category movie/category";
 import AddMovieCategory from "./admin/category movie/addmoviecategory";
 import UpdateCategoryMovie from "./admin/category movie/updatecategorymovie";
-import SeatType from "./admin/seat_type/seat_type";
-import CreateSeatType from "./admin/seat_type/create_seat_type";
-import UpdateSeatType from "./admin/seat_type/updateseattype";
-import CreateSeat from "./admin/seat/CreatSeat";
+import SeatType from "./admin/seat_type/SeatTypes";
+import CreateSeatType from "./admin/seat_type/AddSeatTypes";
+import UpdateSeatType from "./admin/seat_type/UpdateSeatTypes";
 import ShowTime from "./admin/showtime/showtime";
 import CrateShowTime from "./admin/showtime/createshowtime";
 import UserList from "./admin/user/UserList";
@@ -39,9 +38,10 @@ import { ShowTimeAdd } from "./service/showtime";
 import Room from "./admin/room/room";
 import CreateRoom from "./admin/room/AddRoom";
 import UpdateRoom from "./admin/room/updateroom";
-import Seat from "./admin/seat/seat";
-
-
+import { SeatAdd, SeatUpdate } from "./service/seat";
+import AddSeat from "./admin/seat/AddSeat";
+import UpdateSeat from "./admin/seat/UpdateSeat";
+import Seat from "./admin/seat/Seat";
 
 function App() {
   const [rooms, setRooms] = useState<IRoom[]>([]);
@@ -72,11 +72,13 @@ function App() {
     }
   };
 
-  const updateRoom = async (roomData: IRoom, id: number | string) => {
+  const updateRoom = async ( id: number | string,roomData: IRoom) => {
     try {
-      const roomDta = await updateRoom(roomData, id);
+      const roomDta = await UpdateRoom( id,roomData);
       alert("Cập nhật thành công.");
-      const newRooms = rooms.map((room) => (room.id === id ? roomDta : room));
+      const newRooms = rooms.map((room) =>
+        room.id === id ? roomDta : room
+      );
       setRooms(newRooms);
       navigate("/room");
     } catch (error) {
@@ -84,7 +86,7 @@ function App() {
     }
   };
 
-  //AREA
+  //AREA - KHU VỰC ( DONE )
   const addArea = async (areaData: IArea) => {
     try {
       const area = await AddArea(areaData);
@@ -96,11 +98,13 @@ function App() {
     }
   };
 
-  const updateArea = async (area_id: number | string,areaData: IArea) => {
+  const updateArea = async (area_id: number | string, areaData: IArea) => {
     try {
-      const areaDta = await AreaUpdate(area_id,areaData );
+      const areaDta = await AreaUpdate(area_id, areaData);
       alert("Cập nhật thành công.");
-      const newAreas = areas.map((area) => (area.area_id === area_id ? areaDta : area));
+      const newAreas = areas.map((area) =>
+        area.area_id === area_id ? areaDta : area
+      );
       setAreas(newAreas);
       navigate("/admin/area");
     } catch (error) {
@@ -108,7 +112,7 @@ function App() {
     }
   };
 
-  //SEAT TYPE
+  //SEAT TYPE - KIỂU GHẾ ()
   const addSeatType = async (seatTypeData: ISeatType) => {
     try {
       const seatType = await SeatsTypeAdd(seatTypeData);
@@ -137,7 +141,7 @@ function App() {
     }
   };
 
-  // category
+  // CATEGORY - DANH MỤC ( DONE )
   const addCategoryMovie = async (categoryMovie: ICategoryMovie) => {
     try {
       const movieType = await AddCategoryMovie(categoryMovie);
@@ -160,7 +164,7 @@ function App() {
       );
       alert("Cập nhật thành công.");
       const newCategoryMovies = categoryMovies.map((categoryMovie) =>
-        categoryMovie.id === id ? updatedCategoryMovie : categoryMovie
+        categoryMovie.cate_id === id ? updatedCategoryMovie : categoryMovie
       );
       setCategoryMovies(newCategoryMovies);
       navigate("/admin/category");
@@ -169,6 +173,7 @@ function App() {
     }
   };
 
+  // SHOWTIME
   const addShowTime = async (showTimeData: IShowTime) => {
     try {
       const showTime = await ShowTimeAdd(showTimeData);
@@ -180,13 +185,25 @@ function App() {
     }
   };
 
-
-  //SEAT
+  //SEAT - GHẾ ( )
   const addSeat = async (seatData: ISeat) => {
     try {
-      const seat = await addSeat(seatData);
+      const seat = await SeatAdd(seatData);
       alert("Thêm ghế phim thành công.");
       setSeats([...seats, seat]);
+      navigate("/admin/seat");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const updateSeat = async (seatData: ISeat, id: number | string) => {
+    try {
+      const updatedSeat = await SeatUpdate(seatData, id);
+      alert("Cập nhật ghế thành công.");
+      const newSeats = seats.map((seat) =>
+        seat.id === id ? updatedSeat : seat
+      );
+      setSeats(newSeats);
       navigate("/admin/seat");
     } catch (error) {
       console.log(error);
@@ -221,7 +238,7 @@ function App() {
         ></Route>
 
         {/* Khu vuc */}
-        <Route path="/admin/area" element={<Area areas = {areas}></Area>}></Route>
+        <Route path="/admin/area" element={<Area areas={areas}></Area>}></Route>
         <Route
           path="/admin/area/createarea"
           element={<CreateArea addArea={addArea}></CreateArea>}
@@ -267,7 +284,23 @@ function App() {
         <Route path="/admin/seat" element={<Seat></Seat>}></Route>
         <Route
           path="/admin/creatseat"
-          element={<CreateSeat addSeats={addSeat}></CreateSeat>}
+          element={
+            <AddSeat
+              addCreateSeat={addSeat}
+              seat_types={[]}
+              rooms={[]}
+            ></AddSeat>
+          }
+        ></Route>
+        <Route
+          path="/admin/seat/edit/:id"
+          element={
+            <UpdateSeat
+              updateSeat={updateSeat}
+              seat_types={[]}
+              rooms={[]}
+            ></UpdateSeat>
+          }
         ></Route>
 
         {/* gio chieu */}

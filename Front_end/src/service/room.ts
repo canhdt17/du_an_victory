@@ -1,10 +1,10 @@
 import api from "../axios/config";
-import { RoomData } from "../interface/room";
+import { IRoom } from './../interface/room';
 
 //List
 export const ListRoom = async () => {
   try {
-    const { data } = await api.get<{rooms : RoomData[]}>("rooms");
+    const { data } = await api.get<IRoom[]>("rooms");
     return data;
   } catch (error) {
     console.log(error);
@@ -14,17 +14,17 @@ export const ListRoom = async () => {
 //ID
 export const GetRoomById = async (id: number | string) => {
   try {
-    const { data } = await api.get<{rooms : RoomData[]}>(`rooms/${id}`);
-    return data;
+    const { data } = await api.get<{rooms : IRoom[]}>(`rooms/${id}`);
+    return data.rooms;
   } catch (error) {
     console.log(error);
   }
 };
 
 //ADD
-export const AddRoom = async (roomData: RoomData) => {
+export const AddRoom = async (roomData: IRoom) => {
   try {
-    const { data } = await api.post<{rooms : RoomData[]}>("rooms", roomData);
+    const { data } = await api.post<{rooms : IRoom[]}>("rooms", roomData);
     return data;
   } catch (error) {
     console.log(error);
@@ -42,10 +42,10 @@ export const DeleteRoom = async (id: number | string) => {
 };
 
 //UPDATE
-export const RoomUpdate = async (roomData: RoomData, id: number | string) => {
+export const UpdateRoom = async ( id: number | string,roomData: IRoom) => {
   try {
-    const { data } = await api.put<{rooms : RoomData[]}>(`rooms/${id}`, roomData);
-    return data;
+    const { data } = await api.put<{rooms : IRoom[]}>(`rooms/${id}`, roomData);
+    return data.rooms;
   } catch (error) {
     console.log(error);
   }

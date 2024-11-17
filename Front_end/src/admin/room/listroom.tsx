@@ -2,22 +2,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { IRoom } from "../../interface/room";
-import { DeleteRoom } from "../../service/room";
 
 type Props = {
   rooms: IRoom[];
   loading: boolean;
   error: string | null;
-  onDelete: (id: number | string) => void;
+  updateRooms: (id: number | string, updateRoom: IRoom) => void;
+  deleteRooms: (id: number | string) => void;
 };
 
-const ListRooms: React.FC<Props> = ({ rooms, loading, error, onDelete }) => {
-  const handleDelete = async (id: number | string) => {
-    if (confirm("Bạn có chắc muốn xóa phòng này không?")) {
-      await DeleteRoom(id);
-      onDelete(id);
-    }
-  };
+const ListRooms: React.FC<Props> = ({ rooms, loading, error, deleteRooms }) => {
 
   return (
     <div>
@@ -33,9 +27,20 @@ const ListRooms: React.FC<Props> = ({ rooms, loading, error, onDelete }) => {
             </tr>
           </thead>
           <tbody className="text-center">
-            {rooms.map((room: IRoom, i: number) => (
+          {loading && (
+              <tr>
+                <td colSpan={3}>Đang tải...</td>
+              </tr>
+            )}
+            {error && (
+              <tr>
+                <td colSpan={3}>Lỗi: {error}</td>
+              </tr>
+            )}
+            {rooms.length > 0 ? (
+            rooms.map((room,index) => (
               <tr key={room.id}>
-                <td>{i + 1}</td>
+                <td>{index + 1}</td>
                 <td>{room.room_name}</td>
                 <td>{room.area_id}</td>
                 <td>{room.total_seat}</td>
@@ -48,13 +53,18 @@ const ListRooms: React.FC<Props> = ({ rooms, loading, error, onDelete }) => {
                   <button
                     type="button"
                     className="btn btn-danger ms-2"
-                    onClick={() => handleDelete(room.id!)}
+                    onClick={() => deleteRooms(room.id!)}
                   >
                     Delete
                   </button>
                 </td>
               </tr>
-            ))}
+            ))
+          ): (
+              <tr>
+                <td colSpan={3}>Không có dữ liệu</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
