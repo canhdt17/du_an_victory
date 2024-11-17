@@ -30,17 +30,18 @@ class TintucController extends Controller
    public function store(Request $request)
    {
        $request->validate([
-           'name_TinTuc' => 'required|string|max:255',
-           'sub_title' => 'nullable|string|max:255',
-           'content' => 'nullable|string',
-           'imager' => 'nullable|string|max:255'
+           'name_TinTuc' => 'required',
+           'sub_title' => 'required',
+           'content' => 'required',
+           'imager' => 'required'
        ]);
-
+       $file = $request->file('imager');
+       $path_image = $file->getClientOriginalName();
        $tinTuc = TinTuc::create([
            'name_TinTuc' => $request->name_TinTuc,
            'sub_title' => $request->sub_title,
            'content' => $request->content,
-           'imager' => $request->file('image'),
+           'imager' => $path_image,
            'slug' => Str::slug($request->name_TinTuc),
        ]);
 
@@ -51,10 +52,10 @@ class TintucController extends Controller
    public function update(Request $request, $id)
    {
        $request->validate([
-           'name_TinTuc' => 'required|string|max:255',
-           'sub_title' => 'nullable|string|max:255',
-           'content' => 'nullable|string',
-           'imager' => 'nullable|string|max:255'
+           'name_TinTuc' => 'required',
+           'sub_title' => 'required',
+           'content' => 'required',
+           'imager' => 'required'
        ]);
 
        $tinTuc = TinTuc::find($id);
@@ -62,10 +63,17 @@ class TintucController extends Controller
            return response()->json(['message' => 'Tin tức không tồn tại'], 404);
        }
 
+        //neu cap nhap anh 
+        if($request->hasFile('imager')){
+            $file = $request->file('imager');
+            $path_image = $file->getClientOriginalName();
+            $tinTuc->imager=$path_image;
+        }else{
+            $tinTuc->imager= $tinTuc->imager;
+        }
        $tinTuc->name_TinTuc = $request->name_TinTuc;
        $tinTuc->sub_title = $request->sub_title;
        $tinTuc->content = $request->content;
-       $tinTuc->imager = $request->imager;
 
        if ($tinTuc->isDirty('name_TinTuc')) {
            $tinTuc->slug = Str::slug($request->name_TinTuc);
