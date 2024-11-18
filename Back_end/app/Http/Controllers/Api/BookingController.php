@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\BookingDetail;
+use App\Models\ComboFood;
 use App\Models\Seat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,41 +42,45 @@ class BookingController extends Controller
         DB::beginTransaction();
 
         try {
-
             $booking = Booking::create([
                 'user_id' => Auth::id(),
                 'showtime_id' => $validated['showtime_id'],
                 'booking_time' => now(),
             ]);
 
-            $unavailableSeats = []; // Danh sách ghế k chon dc
-
+            $unavailableSeats = [];
+            $totalPrice = 0;
             foreach ($validated['seats'] as $seat_id) {
                 $seat = Seat::find($seat_id);
-
-                // Kiểm tra trạng thái ghế
-                if ($seat->seat_status == 2) { // Đã đặt
+                if ($seat->seat_status == 2 || $seat->seat_status == 3) {
                     $unavailableSeats[] = $seat_id;
                     continue;
                 }
-
-                if ($seat->seat_status == 3) { // Có người khác đang chọn
-                    $unavailableSeats[] = $seat_id;
-                    continue;
-                }
-
-                // Đánh dấu ghế đang được đặt (trạng thái 3)
-                $seat->seat_status = 3;
+                $seat->seat_status = 2;
                 $seat->save();
-
-
-                BookingDetail::create([
+                $bookingDetail = BookingDetail::create([
                     'booking_id' => $booking->id,
                     'seat_id' => $seat_id,
+                    'price' => $seat->price,
                 ]);
+                $totalPrice += $bookingDetail->price;
             }
 
-            // Nếu có ghế không khả dụng
+            if (!empty($validated['combofoods'])) {
+                foreach ($validated['combofoods'] as $combofood_id) {
+                    $combofood = ComboFood::find($combofood_id);
+                    BookingDetail::create([
+                        'booking_id' => $booking->id,
+                        'combofood_id' => $combofood_id,
+                        'price' => $combofood->price,
+                    ]);
+                    $totalPrice += $combofood->price;
+                }
+            }
+
+            $booking->total_price = $totalPrice;
+            $booking->save();
+
             if (!empty($unavailableSeats)) {
                 DB::rollBack();
                 return response()->json([
@@ -84,30 +89,61 @@ class BookingController extends Controller
                 ], 400);
             }
 
-
-            foreach ($validated['seats'] as $seat_id) {
-                $seat = Seat::find($seat_id);
-                $seat->seat_status = 2; // Đã đặt
-                $seat->save();
-            }
-
-
-            if (!empty($validated['combofoods'])) {
-                foreach ($validated['combofoods'] as $combofood_id) {
-                    BookingDetail::create([
-                        'booking_id' => $booking->id,
-                        'combofood_id' => $combofood_id,
-                    ]);
-                }
-            }
-
             DB::commit();
-            return response()->json(['message' => 'Đặt vé thành công', 'booking' => $booking], 201);
+            return response()->json([
+                'message' => 'Đặt vé thành công',
+                'booking' => $booking,
+                'booking_details' => $booking->bookingDetails,
+            ], 201);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
 
+    public function show($id)
+    {
+        $booking = Booking::with('bookingDetails', 'bookingDetails.seat', 'bookingDetails.combofood')->find($id);
+        if ($booking) {
+            return response()->json($booking);
+        } else {
+            return response()->json(['error' => 'Không tìm thấy đơn đặt vé'], 404);
+        }
+    }
+
+    public function cancel($id)
+    {
+        $booking = Booking::find($id);
+        if ($booking) {
+            if ($booking->user_id == Auth::id()) {
+                DB::beginTransaction();
+                try {
+                    foreach ($booking->bookingDetails as $bookingDetail) {
+                        $seat = Seat::find($bookingDetail->seat_id);
+                        $seat->seat_status = 1; // Trạng thái ghế: Có sẵn
+                        $seat->save();
+                    }
+                    $booking->delete();
+                    DB::commit();
+                    return response()->json(['message' => 'Hủy đơn đặt vé thành công']);
+                } catch (\Exception $e) {
+                    DB::rollBack();
+                    return response()->json(['error' => $e->getMessage()], 400);
+                }
+            } else {
+                return response()->json(['error' => 'Bạn không có quyền hủy đơn đặt vé này'], 403);
+            }
+        } else {
+            return response()->json(['error' => 'Không tìm thấy đơn đặt vé'], 404);
+        }
+    }
+
+    public function history()
+    {
+        $bookings = Booking::where('user_id', Auth::id())
+            ->with('bookingDetails', 'bookingDetails.seat', 'bookingDetails.combofood')
+            ->get();
+        return response()->json($bookings);
+    }
 //
 }
