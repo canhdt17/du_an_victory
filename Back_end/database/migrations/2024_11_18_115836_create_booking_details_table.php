@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('booking_id');
             $table->unsignedBigInteger('seat_id');
             $table->unsignedBigInteger('combofood_id');
+            $table->decimal('total_price', 10, 2);
             $table->timestamps();
 
             $table->foreign('booking_id')->references('booking_id')->on('bookings')->onDelete('cascade');
