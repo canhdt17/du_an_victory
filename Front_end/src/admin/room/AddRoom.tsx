@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuDashboard from "../menudashboard";
 import HeaderDashboard from "../headerdashboard";
 import Logo from "../logo";
@@ -13,11 +13,11 @@ type Props = {
   onAdd: (roomsData: IRoom) => void;
 };
 const roomScheama = Joi.object({
-  room_name: Joi.string().required(),
-  area_id: Joi.string().required(),
-  total_seat: Joi.number().required(),
+  room_name: Joi.string().required().label("Room Name "),
+  area_id: Joi.string().required().label("ID Area"),
+  total_seat: Joi.number().required().label(" Total Seat"),
 });
-const CreateRoom = ({ onAdd }: Props) => {
+const CreateRoom: React.FC<Props> = ({ onAdd }) => {
   const {
     register,
     handleSubmit,

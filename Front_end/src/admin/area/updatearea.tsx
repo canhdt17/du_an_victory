@@ -15,23 +15,28 @@ type Props = {
   updateArea: (area_id: number | string, data: IArea) => void;
 };
 const updateAreaScheama = Joi.object({
-  area_name: Joi.string().required().label('Area Name'),
+  area_name: Joi.string().required().label("Area Name"),
 });
 const UpdateArea: React.FC<Props> = ({ updateArea }) => {
   const { id } = useParams<string>();
-  const {register,handleSubmit,formState: { errors },reset,} = useForm<IArea>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IArea>({
     resolver: joiResolver(updateAreaScheama),
   });
 
   const [loading, setLoading] = useState(true);
   const [fetchError] = useState<string | null>(null);
-  
+
   useEffect(() => {
     const fetchArea = async () => {
       try {
         const data = await AreaById(id!);
         reset(data);
-      } catch (error : any) {
+      } catch (error: any) {
         // fetchError("Failed to fetch category data.");
       } finally {
         setLoading(false);
@@ -43,7 +48,7 @@ const UpdateArea: React.FC<Props> = ({ updateArea }) => {
 
   const onSubmit = (data: IArea) => {
     console.log(id);
-    
+
     updateArea(id!, data);
   };
 
@@ -71,10 +76,9 @@ const UpdateArea: React.FC<Props> = ({ updateArea }) => {
                   <div className="btn-toolbar mb-2 mb-md-0"></div>
                 </div>
 
-
                 <form onSubmit={handleSubmit(onSubmit)}>
-                {loading && <p>Loading...</p>}
-                {fetchError && <p>{fetchError}</p>}
+                  {loading && <p>Loading...</p>}
+                  {fetchError && <p>{fetchError}</p>}
                   <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">
                       Tên Khu Vực:
