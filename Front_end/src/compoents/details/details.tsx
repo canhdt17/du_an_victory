@@ -24,7 +24,10 @@ const Details = () => {
   (async()=>{
     try {
       const data = await DetailsById(param?.id as number|string)
-      setTrendings([data])
+      
+      setTrendings([data]);
+     
+      
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +48,7 @@ const Details = () => {
             
                 <div className="w-1/3">
                   <img
-                    src={trendings.image}
+                    src="https://noithatbinhminh.com.vn/wp-content/uploads/2022/08/anh-dep-44.jpg.webp"
                     alt="Movie Poster"
                     className="rounded-lg shadow-md"
                   />
@@ -61,7 +64,7 @@ const Details = () => {
                     </span>
                   </div>
                   <p className="text-sm text-gray-400">
-                    <strong>Nation</strong> &nbsp; • &nbsp;{trendings. duration} &nbsp; •
+                    <strong>Nation</strong> &nbsp; • &nbsp;{trendings.duration} &nbsp; •
                     &nbsp; Đạo diễn:{trendings.director}
                   </p>
                   <p className="text-sm text-gray-400 mb-4">
