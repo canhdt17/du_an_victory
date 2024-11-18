@@ -27,9 +27,9 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'room_name' => 'required|string|max:255',
-            'total_seat' => 'required|integer',
-            'area_id' => 'required|exists:areas,id',
+            'room_name' => 'required',
+            'total_seat' => 'required',
+            'area_id' => 'required',
         ]);
 
         // $data = Room::create([
@@ -58,9 +58,9 @@ class RoomController extends Controller
     {
         //
         $request->validate([
-            'room_name' => 'required|string|max:255',
-            'area_id' => 'required|exists:areas,area_id',
-            'total_seat' => 'required|integer',
+            'room_name' => 'required',
+            'area_id' => 'required',
+            'total_seat' => 'required',
         ]);
 
 

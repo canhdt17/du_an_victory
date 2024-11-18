@@ -16,9 +16,10 @@ const Seat: React.FC = () => {
 
   // fetch
   const fetchSeats = async () => {
+    setLoading(true);
     try {
       const data = await SeatList();
-      setSeats(data?.seats || []);
+      setSeats(data || []);
     } catch (error: any) {
       setError(error.response ? error.response.data.message : error.message);
     } finally {

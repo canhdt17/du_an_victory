@@ -46,7 +46,7 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'=> 'required',
+            'name_movie'=> 'required',
             'image'=> 'required',
             'type_id'=> 'required',
             'duration'=> 'required',
@@ -59,9 +59,11 @@ class MovieController extends Controller
             'category_id'=> 'required',
         ]);
 
-        $path_image = $request->file('image')->store('images');
+        // $path_image = $request->file('image')->store('images');
+        // $data['image'] = $path_image;
+        $file = $request->file('image');
+        $path_image = $file->getClientOriginalName();
         $data['image'] = $path_image;
-
         // them vao database
         $movie=Movie::query()->create($data);
         return response()->json($movie);
@@ -90,7 +92,7 @@ class MovieController extends Controller
     public function update(Request $request, Movie $movie)
     {
         $data = $request->validate([
-            'name'=> 'required',
+            'name_movie'=> 'required',
             'type_id'=> 'required',
             'duration'=> 'required',
             'nation'=> 'required',
@@ -103,16 +105,23 @@ class MovieController extends Controller
         ]);
 
         //neu cap nhap anh
+        // if($request->hasFile('image')){
+        //     if (file_exists('storage/' . $movie->image)) {
+        //         unlink('storage/' . $movie->image);
+        //     }
+        //     $path_image = $request->file('image')->store('images');
+        //     $data['image'] = $path_image;
+        // }else{
+        //     $data['image'] = $movie->image;
+        // }
         if($request->hasFile('image')){
-            if (file_exists('storage/' . $movie->image)) {
-                unlink('storage/' . $movie->image);
-            }
-            $path_image = $request->file('image')->store('images');
+   
+            $file = $request->file('image');
+            $path_image = $file->getClientOriginalName();
             $data['image'] = $path_image;
         }else{
             $data['image'] = $movie->image;
         }
-
 
         // cap nhap vao database
         $movie->update($data);

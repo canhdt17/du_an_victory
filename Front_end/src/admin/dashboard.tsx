@@ -1,97 +1,68 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState, useEffect, useCallback } from "react";
 import Logo from "./logo";
 import HeaderDashboard from "./headerdashboard";
 import MenuDashboard from "./menudashboard";
+import { IMovie } from "../interface/movie";
+import { NavLink } from "react-router-dom";
+import { ListMovies, MovieDelete, MovieUpdate } from "../service/movie";
 import MovieList from "./movielist";
-import { Movie } from "../interface/movie";
-import AddMovie from "./Addmovie";
-import EditMovie from "./EditMovie";
 
-type Props = {};
+const Dashboard: React.FC = () => {
+  const [movies, setMovies] = useState<IMovie[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-const Dashboard: React.FC<Props> = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [isEditing, setIsEditing] = useState(false);
-  const [movieToEditId, setMovieToEditId] = useState<number | null>(null);
-  const [isAdding, setIsAdding] = useState(false);
-  const [notification, setNotification] = useState("");
+  // ham fetch data
+  const fetchMovies = async () => {
+    setLoading(true);
+    try {
+      const data = await ListMovies();
+      setMovies(data || []);
+    } catch (error: any) {
+      setError(error.response ? error.response.data.message : error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const apiEndpoint = "http://127.0.0.1:8000/api/movies";
+  const editMovie = useCallback(
+    async (id: number | string, editMovie: IMovie) => {
+      setLoading(true);
+      try {
+        await MovieUpdate(id, editMovie);
+        fetchMovies();
+        alert("Cập nhật phim thành công!");
+      } catch (error: any) {
+        alert("Cập nhật phim thất bại!");
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    []
+  );
+
+  const deleteMovie = useCallback(async (id: number | string) => {
+    setLoading(true);
+    try {
+      const confirmDelete = window.confirm("Bạn có chắc muốn xóa phim này?");
+      if (!confirmDelete) return;
+
+      await MovieDelete(id);
+      fetchMovies();
+      alert("Xóa phim thành công!");
+    } catch (error: any) {
+      console.error("Xóa phim thất bại", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await fetch(apiEndpoint);
-        const data = await response.json();
-        setMovies(Array.isArray(data) ? data : []);
-      } catch (error) {
-        console.error("Failed to fetch movies:", error);
-        setMovies([]);
-      }
-    };
-  
     fetchMovies();
   }, []);
-  
-
-  const addMovie = async (movie: Omit<Movie, "id">) => {
-    try {
-      const response = await fetch(apiEndpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(movie),
-      });
-      const newMovie = await response.json();
-      setMovies((prevMovies) => [...prevMovies, newMovie]);
-      setNotification("Movie added successfully!");
-    } catch (error) {
-      console.error("Failed to add movie:", error);
-    }
-  };
-
-  const editMovie = async (editedMovie: Movie) => {
-    try {
-      await fetch(`${apiEndpoint}/${editedMovie.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editedMovie),
-      });
-      setMovies((prevMovies) =>
-        prevMovies.map((movie) => (movie.id === editedMovie.id ? editedMovie : movie))
-      );
-      setNotification("Movie updated successfully!");
-    } catch (error) {
-      console.error("Failed to update movie:", error);
-    }
-  };
-
-  const deleteMovie = async (id: number) => {
-    try {
-      await fetch(`${apiEndpoint}/${id}`, {
-        method: "DELETE",
-      });
-      setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== id));
-      setNotification("Movie deleted successfully!");
-    } catch (error) {
-      console.error("Failed to delete movie:", error);
-    }
-  };
-
-  const handleEditClick = (id: number) => {
-    setIsEditing(true);
-    setMovieToEditId(id);
-  };
-
-  const handleCancelEdit = () => {
-    setIsEditing(false);
-    setMovieToEditId(null);
-    setIsAdding(false); 
-  };
-
-  const handleCancelAdd = () => {
-    setIsAdding(false);
-    setIsEditing(false);
-  };
 
   return (
     <>
@@ -113,27 +84,30 @@ const Dashboard: React.FC<Props> = () => {
               </div>
               <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h2>Danh Sách Phim</h2>
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => setIsAdding(true)} 
-                  >
-                    Add Movie
-                  </button>
+                  <h1 className="h2">Danh Sách Phim </h1>
+                  <div className="btn-toolbar mb-2 mb-md-0">
+                    <div className="btn-group me-2">
+                      <NavLink to={`/admin/dashboard/addmovie`}>
+                        <button type="button" className="btn btn-primary">
+                          Add Movie
+                        </button>
+                      </NavLink>
+                    </div>
+                  </div>
                 </div>
-                {notification && <div className="alert alert-success">{notification}</div>}
-                {isAdding ? (
-                  <AddMovie onAddMovie={addMovie} onCancel={handleCancelAdd} />
-                ) : isEditing ? (
-                  <EditMovie
-                    movieId={movieToEditId!}
-                    onEditMovie={editMovie}
-                    onCancel={handleCancelEdit}
+                {!loading && !error && movies.length === 0 && (
+                  <p>Không có phim nào!</p>
+                )}
+                {loading && <p>Đang tải dữ liệu...</p>}
+                {error && <p>Lỗi: {error}</p>}
+                {!loading && !error && movies.length > 0 && (
+                  <MovieList
                     movies={movies}
+                    loading={loading}
+                    error={error}
+                    editMovies={editMovie}
+                    deleteMovies={deleteMovie}
                   />
-                ) : (
-                  <MovieList movies={movies} onEdit={handleEditClick} onDelete={deleteMovie} />
                 )}
               </main>
             </div>

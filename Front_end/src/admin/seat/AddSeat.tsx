@@ -3,12 +3,9 @@ import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import { ISeat } from "../../interface/seat";
-import { fetchSeatTypes, fetchRooms } from "../../service/seat";
 
 type Props = {
   addCreateSeat: (seat: ISeat) => void;
-  seat_types: { id: number; name: string }[];
-  rooms: { id: number; name: string }[]; 
 };
 
 const createSeatSchema = Joi.object({
@@ -22,21 +19,36 @@ const AddSeat: React.FC<Props> = ({ addCreateSeat }) => {
     resolver: joiResolver(createSeatSchema),
   });
 
-  const [seatTypes, setSeatTypes] = useState<{ id: number; name: string }[]>([]);
-  const [rooms, setRooms] = useState<{ id: number; name: string }[]>([]);
+  const [seatTypes, setSeatTypes] = useState<{ id: number; seat_type_name: string }[]>([]);
+  const [rooms, setRooms] = useState<{ id: number; room_name: string }[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Fetch seat_types và rooms từ API
+  // Fetch seat types and rooms from the APIs
   const fetchData = async () => {
+    setLoading(true);
     try {
-      const [seatTypesData, roomsData] = await Promise.all([
-        fetchSeatTypes(),
-        fetchRooms(),
-      ]);
-      setSeatTypes(seatTypesData?.seattypes);
-      setRooms(roomsData?.rooms);
+      // Fetch seat types
+      const seatTypesResponse = await fetch("http://127.0.0.1:8000/api/seatTypes");
+      if (!seatTypesResponse.ok) {
+        throw new Error(`Failed to fetch seat types: ${seatTypesResponse.statusText}`);
+      }
+      const seatTypesData = await seatTypesResponse.json();
+      console.log("Seat Types Data:", seatTypesData); // Debugging log
+      setSeatTypes(seatTypesData || []);
+
+      // Fetch rooms
+      const roomsResponse = await fetch("http://127.0.0.1:8000/api/rooms");
+      if (!roomsResponse.ok) {
+        throw new Error(`Failed to fetch rooms: ${roomsResponse.statusText}`);
+      }
+      const roomsData = await roomsResponse.json();
+      console.log("Rooms Data:", roomsData); // Debugging log
+      setRooms(roomsData || []);
+      
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      console.error("Error fetching data:", error);  // More detailed logging
+      setError(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -56,9 +68,12 @@ const AddSeat: React.FC<Props> = ({ addCreateSeat }) => {
         <p>Loading...</p>
       ) : (
         <>
+          {/* Error message for failed data fetch */}
+          {error && <div className="text-danger mb-3">{error}</div>}
+
           <div className="mb-3">
             <label htmlFor="seatNumber" className="form-label">
-              Tên Ghế:
+              Số Ghế:
             </label>
             <input
               type="text"
@@ -81,11 +96,15 @@ const AddSeat: React.FC<Props> = ({ addCreateSeat }) => {
               {...register("seat_type_id")}
             >
               <option value="">Chọn loại ghế</option>
-              {seatTypes.map((type) => (
-                <option key={type.id} value={type.id}>
-                  {type.name}
-                </option>
-              ))}
+              {seatTypes.length > 0 ? (
+                seatTypes.map((type) => (
+                  <option key={type.id} value={type.id}>
+                    {type.seat_type_name}
+                  </option>
+                ))
+              ) : (
+                <option disabled>Không có loại ghế</option>
+              )}
             </select>
             {errors.seat_type_id && (
               <div className="text-danger">{errors.seat_type_id.message}</div>
@@ -102,11 +121,15 @@ const AddSeat: React.FC<Props> = ({ addCreateSeat }) => {
               {...register("room_id")}
             >
               <option value="">Chọn phòng</option>
-              {rooms.map((room) => (
-                <option key={room.id} value={room.id}>
-                  {room.name}
-                </option>
-              ))}
+              {rooms.length > 0 ? (
+                rooms.map((room) => (
+                  <option key={room.id} value={room.id}>
+                    {room.room_name}
+                  </option>
+                ))
+              ) : (
+                <option disabled>Không có phòng</option>
+              )}
             </select>
             {errors.room_id && (
               <div className="text-danger">{errors.room_id.message}</div>

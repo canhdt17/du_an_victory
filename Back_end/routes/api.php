@@ -16,8 +16,11 @@ use App\Http\Controllers\Api\HoTroController;
 use App\Http\Controllers\Api\KhuyenMaiController;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\Api\VoucherController;
+use App\Http\Controllers\Api\UserController;
+// use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -31,9 +34,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group( function (){
+    Route::get('/user',[UserController::class,'user']);
+    Route::get('/logout',[UserController::class,'logout']);
 });
+Route::post('/login',[UserController::class,'login']);
+Route::post('/register',[UserController::class,'register']);
+
 
 Route::apiResource('movies',MovieController::class);
 Route::apiResource('showtimes',ShowtimeController::class);
@@ -55,6 +62,7 @@ Route::apiResource('vouchers', VoucherController::class);
 Route::get('/categories/{id}/movies', [MovieController::class, 'listFilmByCategory']);
 Route::get('/phim-dang-chieu', [MovieController::class, 'phimDangChieu']);
 Route::get('/phim-sap-chieu', [MovieController::class, 'phimSapChieu']);
-
+Route::get('/lastest-tin-tuc', [TintucController::class, 'LastestTinTuc']);
+Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
 
 

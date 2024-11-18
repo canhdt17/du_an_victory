@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IRoom } from "../../interface/room";
-import { GetRoomById } from "../../service/room";
+// import { GetRoomById } from "../../service/room";
+import { GetRoomById, UpdateRoom as updateRoomService } from "../../service/room";
+
 import Logo from "../logo";
 import HeaderDashboard from "../headerdashboard";
 import MenuDashboard from "../menudashboard";
@@ -33,6 +35,7 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
 
   const [loading, setLoading] = useState(true);
   const [fetchError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -49,11 +52,22 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
     fetchRooms();
   }, [id, reset]);
 
-  const onSubmit = (data: IRoom) => {
-    console.log(id);
-    updateRoom(id!, data);
+  const onSubmit = async (data: IRoom) => {
+    try {
+      if (!id) return;
+      console.log(id);
+      const updatedRoom = await updateRoomService(id, data);
+      if (updatedRoom) {
+        console.log("Room updated successfully:", updatedRoom);
+        alert("Cập nhật phòng thành công!");
+        navigate("/room");
+      }
+    } catch (error) {
+      console.error("Failed to update room:", error);
+      alert("Cập nhật phòng thất bại!");
+    }
   };
-
+  
   return (
     <div>
       <div className="dashboards">

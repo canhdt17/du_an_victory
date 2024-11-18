@@ -42,11 +42,12 @@ export const DeleteRoom = async (id: number | string) => {
 };
 
 //UPDATE
-export const UpdateRoom = async ( id: number | string,roomData: IRoom) => {
+export const UpdateRoom = async (id: string | number, data: IRoom) => {
   try {
-    const { data } = await api.put<{rooms : IRoom[]}>(`rooms/${id}`, roomData);
-    return data.rooms;
+    const response = await api.put(`/rooms/${id}`, data);
+    return response.data;
   } catch (error) {
-    console.log(error);
+    console.error("Error updating room:", error);
+    throw error;
   }
 };
