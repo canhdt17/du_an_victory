@@ -10,30 +10,42 @@ const Promotion = (props: Props) => {
     const [promotions,setPromotions] =useState<IPromotion[]>([])
     useEffect(()=>{
         (async()=>{
-            const {data} = await axios.get('')
+         try {
+          const {data} = await axios.get(`http://127.0.0.1:8000/api/lastest-khuyen-mai`)
+          setPromotions(data)
+         } catch (error) {
+          console.log(error);
+          
+         }
         })()
     },[])
   return (
-    <div className='bg-[#070720]'>
+    <div>
     <Header></Header>
-    <div className="container mt-5 ">
-<div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-
- <div className="col">
-  <div className="card h-100">
-    <img src="https://via.placeholder.com/300x180" className="card-img-top" alt="Image" />
-    <div className="card-body">
-      <p className="card-date">13/09/2024</p>
-      <h5 className="card-title">VUI TẾT TRUNG THU - RINH QUÀ VI VU</h5>
+    
+     <div className="bg-[#070720] text-white p-8">
+      
+      <div className="grid grid-cols-4 gap-6 mt-[90px]">
+        {promotions.map((promotion,i:number)=>(
+  
+  <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden" key={i+1}>
+    <img src="https://manhcuongbds.com/wp-content/uploads/2023/06/tin-tuc-3.jpg"  className="w-full h-64 object-cover" />
+          
+    <div className="p-4">
+      <h3 className="text-lg font-bold mt-2">{promotion.time_date}</h3>
+      <p className="text-sm text-gray-400"> {promotion.content}</p>
+      
     </div>
   </div>
-</div>
+ ))}
+</div>    
+      
+  
 
 
-</div>
-</div>
-<Footer></Footer>
-</div>
+    </div>
+    <Footer></Footer>
+   </div>
   )
 }
 

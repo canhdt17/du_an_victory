@@ -27,8 +27,8 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="">name</label>
-                        <input type="text" name="name" class="form-control" id="name" value="{{$movie->name}}" >
+                        <label for="">name_movie</label>
+                        <input type="text" name="name_movie" class="form-control" id="name_movie" value="{{$movie->name_movie}}" >
                     </div>
                     <div class="form-group">
                         <label for="">image</label>

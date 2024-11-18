@@ -1,6 +1,7 @@
 {
   "room": [
     {
+
       "room_name": "Phòng 02",
       "area_id": "Lào",
       "total_seat": 100,
@@ -13,11 +14,16 @@
       "id": 3
     },
     {
-      "id": 4
+      "room_name": "Phòng 1",
+      "area_id": "Hồ Chí Minh",
+      "total_seat": 12,
+      "id": "2"
+
     }
   ],
   "area": [
     {
+
       "area_name": "Campuchia 1",
       "id": 2
     },
@@ -26,12 +32,77 @@
       "id": 3
     },
     {
-      "area_name": "Philipin",
-      "id": 4
+      "id": "2",
+      "area_name": "Hà Nội"
+    },
+    {
+      "area_name": "Đà Nẵng",
+      "id": "3"
+    },
+    {
+      "area_name": "Mông Cổ",
+      "id": "4"
+    },
+    {
+      "area_name": "Lào Cai",
+      "id": "5"
+    },
+    {
+      "area_name": "Việt Nam",
+      "id": "6"
+    },
+    {
+      "area_name": "Yên Bái",
+      "id": "7"
+    },
+    {
+      "area_name": "Cao bằng",
+      "id": "8"
+    },
+    {
+      "area_name": "Bình Dương",
+      "id": "9"
+    },
+    {
+      "area_name": "Lai Châu",
+      "id": "10"
+    },
+    {
+      "area_name": "Vũng Tàu",
+      "id": "11"
+    },
+    {
+      "area_name": "Đồng Tháp",
+      "id": "12"
+    },
+    {
+      "seat_type_name": "VIP",
+      "seat_price": 12,
+      "id": "13"
+    },
+    {
+      "seat_type_name": "VIP",
+      "seat_price": 12,
+      "id": "14"
+    },
+    {
+      "seat_type_name": "VIP",
+      "seat_price": 12,
+      "id": "15"
+    },
+    {
+      "area_name": "Xin",
+      "id": "16"
+    },
+    {
+      "area_name": "Yên Bái 111",
+      "id": "17"
+
     }
   ],
-  "categorymovie": [
+  "categories": [
     {
+
       "name": "A",
       "id": 1
     },
@@ -84,12 +155,14 @@
       "id": 13
     },
     {
-      "name": "A",
-      "id": 14
+      "id": "42aa",
+      "name": "Hài hước"
+
     }
   ],
   "seat_type": [
     {
+
       "seat_type_name": "Ghế Mát Xa",
       "seat_price": 299999,
       "id": 2
@@ -100,13 +173,19 @@
       "id": 3
     },
     {
-      "seat_type_name": "Ghế Điều Hòa",
-      "seat_price": 399999,
-      "id": 4
+      "seat_type_name": "Massage",
+      "seat_price": 190,
+      "id": "2"
+    },
+    {
+      "name": "Phim Kinh Dị",
+      "id": "3"
+
     }
   ],
   "seat": [
     {
+
       "seat_number": "01",
       "seat_type_id": "Ghế Điều Hòa",
       "room_id": "Phòng 02",
@@ -128,7 +207,7 @@
       "id": 5
     }
   ],
-  "showtime": [],
+  
   "users": [
     {
       "email": "bdtrong2004@gmail.com",
@@ -185,11 +264,42 @@
       "id": 4
     },
     {
-      "name_TinTuc": "Chương trình phim kỉ niệm nhân dịp 70 năm Giải phòng Thủ đô",
-      "sub_title": "Nhân dịp 70 năm ngày Giải phóng Thủ đô (10/10/1954 – 10/10/2024), Trung tâm Chiếu phim Quốc gia tổ chức chương trình phim kỉ niệm tại Trung tâm.  Bộ phim được chọn để trình chiếu miễn phí trong chương trình phim lần này là: “ Đào, phở và Piano”. Tác phẩm tái hiện khung cảnh Hà Nội những ngày cuối cùng trong Trận Hà Nội 1946 và vừa được chọn làm đại diện cho Điện ảnh Việt Nam dự vòng sơ loại Oscar 2025.   1-\tThời gian chiếu phim: Từ 6/10- 10/10/2024   2-\tĐịa điểm: Phòng chiếu số 12   3-\tSuất chiếu: 10h00 và 20h15   4- Hình thức nhận vé: Khách hàng nhận vé 0 đồng trực tiếp tại quầy vé từ 8h00 đến 23h00 hàng ngày, bắt đầu từ ngày 4/10/2024 đến khi hết vé (khán giả có thể nhận vé trước ngày xem phim và mỗi khách nhận tối đa 02 vé/người).",
-      "content": "Giảm giá 20%",
-      "imager": "https://picsum.photos/536/354",
-      "id": 5
+      "function values() { [native code] }": "",
+      "id": "2"
+    }
+  ],
+  "showtime": [
+    {
+      "movie_id": "",
+      "room_id": "",
+      "showtime_date": "",
+      "start_time": "",
+      "end_time": "",
+      "id": "1"
+    },
+    {
+      "movie_id": "12",
+      "room_id": "Phòng số 9",
+      "showtime_date": "2024-10-25",
+      "start_time": "19:00",
+      "end_time": "21:00",
+      "id": "2"
+    },
+    {
+      "movie_id": "",
+      "room_id": "",
+      "showtime_date": "",
+      "start_time": "",
+      "end_time": "",
+      "id": "3"
+    },
+    {
+      "movie_id": "",
+      "showtime_date": "",
+      "start_time": "",
+      "end_time": "",
+      "id": "4"
+
     }
   ]
 }

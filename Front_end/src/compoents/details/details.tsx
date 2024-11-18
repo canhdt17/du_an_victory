@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from "react";
 
-import { ITrenDings } from "../../movie/trendings";
+
 
 import Seat from "./seat";
 import Header from "../header";
 import Footer from "../footer";
-import { useParams } from "react-router-dom";
-import { DetailsById } from "../../service/details";
+
 import Time from "./time";
-import Button from "./button";
+import { ITrenDings } from "../../movie/trendings";
+import { DetailsById } from "../../service/details";
+import { useParams } from "react-router-dom";
 
-type Props = {};
 
-const Details = (props: Props) => {
-  const [trendings, setTrenDings] = useState<ITrenDings[]>([]);
-  const param = useParams();
-  useEffect(() => {
-    (async () => {
-      const data = await DetailsById(param?.id as number | string);
 
-      setTrenDings(data);
-    })();
-  }, []);
+
+
+
+
+const Details = () => {
+ const [trendings,setTrendings] = useState<ITrenDings[]>([])
+ const param = useParams()
+ useEffect(()=>{
+  (async()=>{
+    try {
+      const data = await DetailsById(param?.id as number|string)
+      setTrendings([data])
+    } catch (error) {
+      console.log(error);
+    }
+  })()
+ },[])
   return (
     <div>
       <div>
@@ -45,25 +53,25 @@ const Details = (props: Props) => {
              
                 <div className="w-2/3 ml-6">
                   <h2 className="text-3xl font-bold mb-2 text-white">
-                    {trendings.name_movie}
+                  {trendings.name_movie}
                   </h2>
                   <div className="flex items-center mb-4">
                     <span className="text-sm bg-gray-600 text-white px-2 py-1 rounded">
-                      {trendings.type_id}
+                    {trendings. type_id}
                     </span>
                   </div>
                   <p className="text-sm text-gray-400">
-                    <strong>{trendings.nation}</strong> &nbsp; • &nbsp; {trendings.duration} &nbsp; •
-                    &nbsp; Đạo diễn: {trendings.director}
+                    <strong>Nation</strong> &nbsp; • &nbsp;{trendings. duration} &nbsp; •
+                    &nbsp; Đạo diễn:{trendings.director}
                   </p>
                   <p className="text-sm text-gray-400 mb-4">
-                    {trendings.performer}
+                  {trendings.performer}
                   </p>
                   <p className="text-sm text-gray-400 mb-4">
-                    Khởi chiếu:     
+                    Khởi chiếu:  {trendings.show}   
                   </p>
                   <p className="text-sm text-gray-300 mb-4">
-                    {trendings.content}
+                  {trendings.content}
                   </p>
                   <p className="text-red-500 mb-4">Kiểm duyệt: .</p>
                
@@ -100,6 +108,7 @@ const Details = (props: Props) => {
         </section>
         <Footer></Footer>
       </div>
+      
     </div>
   );
 };

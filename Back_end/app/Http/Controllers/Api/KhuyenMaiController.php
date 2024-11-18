@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\KhuyenMai;
 use Illuminate\Http\Request;
 
 class KhuyenMaiController extends Controller
@@ -12,7 +13,8 @@ class KhuyenMaiController extends Controller
      */
     public function index()
     {
-        //
+        $khuyenmai = KhuyenMai::all();
+        return response()->json($khuyenmai);
     }
 
     /**
@@ -20,7 +22,19 @@ class KhuyenMaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'image' => '',
+            'time_date' => 'required',
+        ]);
+        $path_image = $request->file('image')->store('images');
+        $data['image'] = $path_image;
+        KhuyenMai::create($data);
+        return response()->json([
+            'message' => 'Thêm mới thành công'
+        ],200);
+
     }
 
     /**
@@ -28,22 +42,49 @@ class KhuyenMaiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = KhuyenMai::query()->findOrFail($id);
+        return response()->json($data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,KhuyenMai $km)
     {
-        //
+
+        $data = $request->validate([
+            'title'=> 'required',
+            'content'=> 'required',
+            'time_date'=> 'required',
+        ]);
+        if($request->hasFile('image')){
+            if (file_exists('storage/' . $km->images)) {
+                unlink('storage/' . $km->images);
+            }
+            $path_image = $request->file('image')->store('images');
+            $data['images'] = $path_image;
+        }else{
+            $data['images'] = $km->images;
+        }
+
+        // $khuyenmai = KhuyenMai::query()->findOrFail($id);
+        $km->update($data);
+        return response()->json($km);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(KhuyenMai $khuyenmai)
     {
-        //
+        if (file_exists('storage/' . $khuyenmai->image)) {
+            unlink('storage/' . $khuyenmai->image);
+        }
+        $khuyenmai->delete();
+        return response()->json($khuyenmai);
     }
+    public function LastestKM(){
+        $LastKMs = KhuyenMai::orderByDesc('id')->take(4)->get();
+        return response()->json($LastKMs);
+       }
 }

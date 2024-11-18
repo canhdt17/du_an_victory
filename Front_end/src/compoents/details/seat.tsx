@@ -5,7 +5,7 @@ type Props = {};
 const Seat = (props: Props) => {
   return (
     <div>
-      {/* <div className="bodyy" id="modal-container">
+      <div className="bodyy" id="modal-container">
         <div className="seatt-container " id="modal">
           <div className="modal-header ">
             <h3 className="text-white">Vui lòng chọn ghế !</h3>
@@ -31,12 +31,8 @@ const Seat = (props: Props) => {
             Đặt Vé
           </button>
         </div>
-      </div> */}
-      <div id="wrapper">
-        <h1>Tạo model với html</h1>
-        <p>Lorem ipsum</p>
-        <button id="btn-open"></button>
       </div>
+      
     </div>
   );
 };

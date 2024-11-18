@@ -1,5 +1,6 @@
-import api from "../axios/config"
-import { IRoom, RoomData } from "../movie/room";
+import api from "../axios/config";
+import { RoomData } from "../interface/room";
+
 
 export const ListRoom = async()=>{
     try {
@@ -46,3 +47,4 @@ export const RoomUpdate = async(roomData:RoomData,id:number|string)=>{
         
     }
 }
+

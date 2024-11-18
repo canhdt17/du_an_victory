@@ -1,5 +1,7 @@
 export interface ISeatType{
-    setat_type_id:number|string,
+    [x: string]: string | number | readonly string[] | undefined;
+    id: ISeatType;
+    seat_type_id:number|string,
     seat_type_name:string,
     seat_price:number,
 }

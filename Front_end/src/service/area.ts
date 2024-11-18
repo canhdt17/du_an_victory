@@ -1,6 +1,8 @@
 import api from "../axios/config";
 import { AreaData, IArea } from "../movie/area";
 
+
+
 export const ListArea = async()=>{
     try {
         const {data} = await api.get("area")
@@ -46,3 +48,5 @@ export const AreaUpdate = async(areaData:AreaData,id:number|string)=>{
         
     }
 }
+
+

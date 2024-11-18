@@ -1,6 +1,11 @@
 import api from "../axios/config";
 import { ISeatType } from "../movie/seat_type";
 
+
+
+
+
+
 export const ListSeatTypes = async()=>{
     try {
         const {data} = await api.get("seat_type")
@@ -10,6 +15,7 @@ export const ListSeatTypes = async()=>{
         
     }
 }
+
 export const SeatsTypeByID = async(id:number|string)=>{
     try {
         const {data} = await api.get(`seat_type/${id}`)
@@ -46,3 +52,6 @@ export const SeatsTypeUpdate = async(seatTypeData:ISeatType,id:number|string)=>{
         
     }
 }
+
+
+

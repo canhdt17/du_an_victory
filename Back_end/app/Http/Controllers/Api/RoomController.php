@@ -26,19 +26,19 @@ class RoomController extends Controller
     //--- thêm mới ----
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'room_name' => 'required|string|max:255',
             'total_seat' => 'required|integer',
             'area_id' => 'required|exists:areas,id',
         ]);
 
-        $room = Room::create([
-            'room_name' => $request->room_name,
-            'total_seat' => $request->total_seat,
-            'area_id' => $request->area_id,
-        ]);
-
-        return response()->json($room, 201);
+        // $data = Room::create([
+        //     'room_name' => $request->room_name,
+        //     'total_seat' => $request->total_seat,
+        //     'area_id' => $request->area_id,
+        // ]);
+        $room=Room::query()->create($data);
+        return response()->json($room);
     }
 
 
@@ -59,8 +59,8 @@ class RoomController extends Controller
         //
         $request->validate([
             'room_name' => 'required|string|max:255',
-            'total_seat' => 'required|integer',
             'area_id' => 'required|exists:areas,area_id',
+            'total_seat' => 'required|integer',
         ]);
 
 

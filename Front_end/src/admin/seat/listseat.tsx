@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { ISeat } from '../../movie/seat'
 import { SeatList } from '../../service/seat'
+import { ISeat } from '../../interface/seat'
 
 type Props = {
   seatDel:(id:number|string) => void
