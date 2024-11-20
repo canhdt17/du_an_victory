@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
 {
@@ -15,9 +16,16 @@ class RoomController extends Controller
     ///--- hiển thị ----//
     public function index()
     {
-        //
-        $rooms = Room::all();
-        return response()->json($rooms, 200);
+        $rooms= DB::table('rooms')
+        ->join('areas','areas.area_id','=','rooms.area_id')
+        ->whereNull('rooms.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng areas
+        ->select('rooms.*','area_name')
+        ->orderByDesc('rooms.id')
+        ->orderByDesc('rooms.area_id')
+        ->latest('rooms.id')
+        ->paginate();
+        return response()->json($rooms);
+
     }
 
     /**
