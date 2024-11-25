@@ -26,7 +26,7 @@ const Area: React.FC = () => {
     setLoading(true);
     try {
       const data = await ListArea();
-      setAreas(data || []); // Đảm bảo dữ liệu được set đúng
+      setAreas(data || []);
     } catch (error: any) {
       setError(error.response ? error.response.data.message : error.message);
     } finally {
@@ -38,7 +38,7 @@ const Area: React.FC = () => {
   const updateAreas = async (area_id: number | string, updateArea: IArea) => {
     try {
       await AreaUpdate(area_id, updateArea);
-      await fetchAreas(); // Fetch lại dữ liệu sau khi cập nhật
+      await fetchAreas(); 
       alert("Cập nhật khu vực thành công!");
     } catch (error: any) {
       alert("Cập nhật khu vực thất bại!");

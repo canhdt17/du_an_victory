@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SeatList } from '../../service/seat'
@@ -15,27 +16,62 @@ const ListSeat = ({seatDel}: Props) => {
             setSeat(data)
         })()
     },[])
+=======
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { ISeat } from "../../interface/seat";
+
+type Props = {
+  seats: ISeat[];
+  loading: boolean;
+  error: string | null;
+  updateSeat: (id: number | string, updatedSeat: ISeat) => void;
+  deleteSeat: (id: number | string) => void;
+};
+
+const ListSeat: React.FC<Props> = ({ seats, loading, error, deleteSeat }) => {
+  const safeSeats = Array.isArray(seats) ? seats : [];
+
+>>>>>>> e163f975229a920b2de0146b3830c0ffc7c1ed48
   return (
-    <div>
     <div className="table-responsive small">
       <table className="table table-striped table-sm">
         <thead>
           <tr className="text-center">
             <th scope="col">STT</th>
+<<<<<<< HEAD
             <th scope="col">Số Ghế</th>
             <th scope="col">Kiểu Ghế</th>
             <th scope="col">Số Phòng</th>
             <th scope="col">Trạng Thái</th>
             <th scope="col">Button</th>
+=======
+            <th scope="col">Tên Ghế</th>
+            <th scope="col">Loai Ghế</th>
+            <th scope="col">Phòng </th>
+            <th scope="col">Hành Động</th>
+>>>>>>> e163f975229a920b2de0146b3830c0ffc7c1ed48
           </tr>
         </thead>
         <tbody className="text-center">
-           {seats.map((seat:ISeat,i:number)=>(
-            <tr key={seat.seat_id}>
-                <td>{i + 1}</td>
+          {loading && (
+            <tr>
+              <td colSpan={3}>Đang tải...</td>
+            </tr>
+          )}
+          {error && (
+            <tr>
+              <td colSpan={3}>Error: {error}</td>
+            </tr>
+          )}
+          {safeSeats.length > 0 ? (
+            safeSeats.map((seat, index) => (
+              <tr key={seat.id}>
+                <td>{index + 1}</td>
                 <td>{seat.seat_number}</td>
                 <td>{seat.seat_type_id}</td>
                 <td>{seat.room_id}</td>
+<<<<<<< HEAD
                 <td>{seat.seat_status}</td>
                 <td>
                 
@@ -52,22 +88,34 @@ const ListSeat = ({seatDel}: Props) => {
                       type="button"
                       className="btn btn-warning text-center ml-3"
                     >
+=======
+
+                <td>
+                  <NavLink to={`/admin/createmovie/edit/${seat.id}`}>
+                    <button type="button" className="btn btn-warning me-2">
+>>>>>>> e163f975229a920b2de0146b3830c0ffc7c1ed48
                       Cập nhật
                     </button>
-                   </NavLink>
-                    
-                    
-                  
+                  </NavLink>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => deleteSeat(seat.id)}
+                  >
+                    Xóa
+                  </button>
                 </td>
               </tr>
-           ))}
-              
-           
+            ))
+          ) : (
+            <tr>
+              <td colSpan={3}>Không có dữ liệu</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default ListSeat
+export default ListSeat;

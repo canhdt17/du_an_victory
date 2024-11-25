@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+
 
 class showtime extends Model
 {
@@ -17,10 +20,17 @@ class showtime extends Model
         'start_time',
         'end_time',
     ];
-
-    public function movie()
-{
-    return $this->belongsTo(Movie::class);
-}
+    public function movie():BelongsTo
+    {
+        return $this->belongsTo(Movie::class, 'movie_id');
+    }
+    public function room():BelongsTo
+    {
+        return $this->belongsTo(Room::class, 'room_id');
+    }
+    // public function movie()
+    // {
+    //     return $this->belongsTo(Movie::class);
+    // }
 
 }

@@ -93,7 +93,7 @@ const ListAreas: React.FC<Props> = ({ areas, loading, error, deleteArea }) => {
               <tr>
                 <td colSpan={3}>Không có dữ liệu</td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
       </div>
