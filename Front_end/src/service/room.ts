@@ -51,3 +51,18 @@ export const RoomUpdate = async(roomData:RoomData,id:number|string)=>{
 }
 
 
+<<<<<<< HEAD
+//UPDATE
+export const UpdateRoom = async (id: string | number, data: IRoom) => {
+  try {
+    const response = await api.put(`/rooms/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating room:", error);
+    throw error;
+  }
+};
+
+
+=======
+>>>>>>> origin/main

@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { NavLink } from "react-router-dom";
+
+import ListAreas from "./listarea";
+import { IArea } from "../../interface/area";
+import { useEffect, useState } from "react";
+import { AreaDelete, AreaUpdate, ListArea } from "../../service/area";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
+=======
 // /* eslint-disable @typescript-eslint/no-unused-vars */
 // /* eslint-disable @typescript-eslint/no-explicit-any */
 // import { NavLink } from "react-router-dom";
@@ -8,13 +21,47 @@
 // import { IArea } from "../../movie/area";
 // import { useEffect, useState } from "react";
 // import { AreaDelete, AreaUpdate, ListArea } from "../../service/area";
+>>>>>>> origin/main
 
 
+<<<<<<< HEAD
+  // Hàm fetch dữ liệu
+  const fetchAreas = async () => {
+    try {
+      const data = await ListArea();
+
+      setAreas(data || []);
+    } catch (error: any) {
+      setError(error.response ? error.response.data.message : error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Hàm cập nhật khu vực
+  const updateAreas = async (
+    area_id: number | string,
+    updateArea: IArea
+  ): Promise<void> => {
+    try {
+      const data = await AreaUpdate(area_id, updateArea);
+      if (data?.areas) {
+        setAreas(data.areas);
+      }
+      await fetchAreas();
+      alert("Cập nhật danh mục phim thành công");
+    } catch (error: any) {
+      alert("Cập nhật danh mục phim thất bại!");
+      console.error("Update Category Error:", error?.message || error);
+    }
+  };
+=======
 // type Props = {
 //   delArea:(id:number|string) => void
 // }
 
 // const Area = ({delArea}: Props) => {
+>>>>>>> origin/main
 
 // const Area: React.FC = () => {
 //   const [areas, setAreas] = useState<IArea[]>([]);

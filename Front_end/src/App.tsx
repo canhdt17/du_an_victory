@@ -49,8 +49,12 @@ import Details from "./compoents/details/details"
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./compoents/page";
+<<<<<<< HEAD
+import MovieDetail from "./moviedetail/moviedetail";
+=======
 // import Dashboard from "./admin/dashboard";
 // import MovieDetail from "./moviedetail/moviedetail";
+>>>>>>> origin/main
 
 
 // import Area from "./admin/area/area";
@@ -83,6 +87,23 @@ import {
   AddCategoryMovie,
   UpdateCategoryMovies,
 } from "./service/categorymovie";
+<<<<<<< HEAD
+import { ShowTimeAdd, ShowTimeUpdate } from "./service/showtime";
+import Room from "./admin/room/room";
+import CreateRoom from "./admin/room/AddRoom";
+import UpdateRoom from "./admin/room/updateroom";
+import { SeatAdd, SeatUpdate } from "./service/seat";
+import AddSeat from "./admin/seat/AddSeat";
+import UpdateSeat from "./admin/seat/UpdateSeat";
+import Seat from "./admin/seat/seat";
+import { IMovie } from "./interface/movie";
+import { MovieAdd, MovieUpdate } from "./service/movie";
+
+import UpdateShowtime from "./admin/showtime/updateshowtime";
+import Dashboard from "./admin/movie/dashboard";
+import AddMovie from "./admin/movie/Addmovie";
+import EditMovie from "./admin/movie/EditMovie";
+=======
 
 import { ISeat } from "./movie/seat"
 import { ISeatType } from "./movie/seat_type"
@@ -91,6 +112,7 @@ import DetailNews from "./compoents/detail-news.tsx/detail-news"
 import ShowTime from "./compoents/showtime/showtime"
 // s
 
+>>>>>>> origin/main
 
 function App() {
 
@@ -534,7 +556,19 @@ useEffect(()=>{
         <Route
           path="/admin/dashboard"
           element={<Dashboard></Dashboard>}
+<<<<<<< HEAD
+        ></Route>
+        <Route
+          path="/admin/dashboard/addmovie"
+          element={<AddMovie onAddMovie={addMovie}></AddMovie>}
+        ></Route>
+        <Route
+          path="/admin/dashboard/edit/:id"
+          element={<EditMovie onEditMovie={editMovie}></EditMovie>}
+        ></Route>
+=======
         ></Route> */}
+>>>>>>> origin/main
 
 
     <Routes>
@@ -572,7 +606,11 @@ useEffect(()=>{
         <Route path="/showtimes" element={<ShowTime></ShowTime>}></Route>
         <Route path="/promotions" element={<Promotion></Promotion>}></Route>
         {/* phong */}
+<<<<<<< HEAD
+        <Route path="/room" element={<Room></Room>}></Route>
+=======
         {/* <Route path="/room" element={<Room rooms={rooms}></Room>}></Route>
+>>>>>>> origin/main
         <Route
           path="/admin/room/createroom"
           element={<CreateRoom onAdd={addRoom}></CreateRoom>}
@@ -583,7 +621,11 @@ useEffect(()=>{
         ></Route> */}
 
         {/* Khu vuc */}
+<<<<<<< HEAD
+        <Route path="/admin/area" element={<Area></Area>}></Route>
+=======
         {/* <Route path="/admin/area" element={<Area areas = {areas}></Area>}></Route>
+>>>>>>> origin/main
         <Route
           path="/admin/area/createarea"
           element={<CreateArea addArea={addArea}></CreateArea>}
@@ -616,7 +658,7 @@ useEffect(()=>{
         {/* <Route path="/admin/seat_type" element={<SeatType></SeatType>}></Route>
         <Route
           path="/admin/create_type_seat"
-          element={<CreateSeatType addSeatType={addSeatType}></CreateSeatType>}
+          element={<CreateSeatType addSeatTypes={addSeatType}></CreateSeatType>}
         ></Route>
         <Route
           path="/admin/seat_type/edit/:id"

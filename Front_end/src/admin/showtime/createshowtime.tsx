@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from "react";
+
+import { useForm } from "react-hook-form";
+import { IShowTime } from "../../interface/shotime";
+import Joi from "joi";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { IRoom } from "../../interface/room";
+import { ListRoom } from "../../service/room";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
+=======
+>>>>>>> origin/main
 
 // import React, { useEffect, useState } from "react";
 // import Logo from "../logo";

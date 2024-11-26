@@ -1,5 +1,5 @@
 export interface IArea {
-    area_id:number|string
-    area_name:string
+  area_id: number | string;
+  area_name: string;
 }
-export type AreaData = Pick<IArea,'area_name'>
+export type AreaData = Pick<IArea, "area_name">;

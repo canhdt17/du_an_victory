@@ -2,6 +2,24 @@ import api from "../axios/config";
 
 import { ISeatType } from "../movie/seat_type";
 
+<<<<<<< HEAD
+// by id
+export const SeatsTypeByID = async (id: number | string) => {
+  try {
+    const { data } = await api.get<{
+      seat_price: number | undefined;
+      seat_type_name: string | undefined; seattypes: ISeatType[] 
+}>(
+      `seatTypes/${id}`
+    );
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch seat type by ID:", error);
+    throw error;
+  }
+};
+=======
+>>>>>>> origin/main
 
 
 

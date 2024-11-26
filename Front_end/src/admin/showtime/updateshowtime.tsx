@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import Joi from "joi";
+import { IShowTime } from "../../interface/shotime";
+import { useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { useEffect, useState } from "react";
+import { ShowTimeById } from "../../service/showtime";
+
+import { IRoom } from "../../interface/room";
+import { ListRoom } from "../../service/room";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
+=======
 // /* eslint-disable @typescript-eslint/no-unused-vars */
 // import Joi from "joi";
 // import { IShowTime } from "../../interface/shotime";
@@ -11,6 +27,7 @@
 // import MenuDashboard from "../menudashboard";
 // import { IRoom } from "../../interface/room";
 // import { ListRoom } from "../../service/room";
+>>>>>>> origin/main
 
 // type Props = {
 //   updateShowtimes: (id: number | string, data: IShowTime) => void;

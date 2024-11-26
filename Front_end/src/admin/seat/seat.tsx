@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import { ISeat } from "../../interface/seat";
+import { SeatDelete, SeatList, SeatUpdate } from "../../service/seat";
+import ListSeat from "./listseat";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
+=======
+>>>>>>> origin/main
 
 // import React, { useEffect, useState } from "react";
 // import { NavLink } from "react-router-dom";

@@ -8,6 +8,62 @@
 //   movieDel:(id:number|string) => void
 // }
 
+<<<<<<< HEAD
+  return (
+    <div className="table-responsive small">
+      <table className="table table-striped table-sm">
+        <thead>
+          <tr className="text-center">
+            <th scope="col">STT</th>
+            <th scope="col">Tên Danh Mục</th>
+            <th scope="col">Hành Động</th>
+          </tr>
+        </thead>
+        <tbody className="text-center">
+          {loading && (
+            <tr>
+              <td colSpan={3}>Đang tải...</td>
+            </tr>
+          )}
+          {error && (
+            <tr>
+              <td colSpan={3}>Error: {error}</td>
+            </tr>
+          )}
+          {safeCategories.length > 0 ? (
+            safeCategories.map((category, index) => (
+              <tr key={category.id}>
+                <td>{index + 1}</td>
+                <td>{category.name_category}</td>
+                <td>
+                <div className="action-buttons">
+                  <NavLink to={`/admin/createmovie/edit/${category.id}`}>
+                    <button type="button" className="btn btn-warning me-2">
+                      Cập nhật
+                    </button>
+                  </NavLink>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => deleteCategoryMovie(category.id)}
+                  >
+                    Xóa
+                  </button>
+                  </div>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={3}>Không có dữ liệu</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+=======
 // const ListCategoryMovie = ({movieDel}: Props) => {
 //     const [categorymovies,setCategoryMovies] = useState<ICategoryMovie[]>([])
 //     useEffect(()=>{
@@ -16,6 +72,7 @@
 //             setCategoryMovies(data)
 //         })()
 //     },[])
+>>>>>>> origin/main
 
 
 // };

@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+
+import { useForm } from "react-hook-form";
+import Joi from "joi";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { IArea } from "../../interface/area";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
+=======
 // import Logo from "../logo";
 // import HeaderDashboard from "../headerdashboard";
 // import MenuDashboard from "../menudashboard";
@@ -5,6 +15,7 @@
 // import Joi from "joi";
 // import { joiResolver } from "@hookform/resolvers/joi";
 // import { IArea } from "../../movie/area";
+>>>>>>> origin/main
 
 // type Props = {
 //   addArea: (area: IArea) => void;

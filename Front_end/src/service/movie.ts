@@ -54,3 +54,6 @@ export const MovieDelete = async (id: number | string) => {
     console.log(error);
   }
 };
+
+
+

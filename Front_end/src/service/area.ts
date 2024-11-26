@@ -1,6 +1,19 @@
 import api from "../axios/config";
 import { AreaData, IArea } from "../movie/area";
 
+<<<<<<< HEAD
+//All
+export const ListArea = async () => {
+  try {
+    const { data } = await api.get<{areas:IArea[]}>("areas");
+    return data;
+  } catch (error) {
+    console.log(error);
+    // return { areas: [] }; 
+  }
+};
+=======
+>>>>>>> origin/main
 
 
 export const ListArea = async()=>{
@@ -49,4 +62,19 @@ export const AreaUpdate = async(areaData:AreaData,id:number|string)=>{
     }
 }
 
+<<<<<<< HEAD
+//Update
+export const AreaUpdate = async (areaData: IArea,area_id: number | string ) => {
+  try {
+    const { data } = await api.put<{ areas: IArea }>(
+      `areas/${area_id}`,
+      areaData
+    );
+    return data; 
+  } catch (error) {
+    console.log(error);
+  }
+};
+=======
+>>>>>>> origin/main
 

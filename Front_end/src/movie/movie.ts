@@ -7,7 +7,7 @@ export interface IMovie {
   nation: string;
   director: string;
   performer: string;
-  show: Date | null ;
+  show:string;
   content: string | null;
   link_trailler: string;
   category_id: string | number;

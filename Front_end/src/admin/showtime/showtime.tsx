@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { IShowTime } from "../../interface/shotime";
+import {
+  ShowTimeDelete,
+  ShowTimeList,
+  ShowTimeUpdate,
+} from "../../service/showtime";
+import ListShowtime from "./listshowtime";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
+=======
+>>>>>>> origin/main
 
 // import Logo from "../logo";
 // import HeaderDashboard from "../headerdashboard";
