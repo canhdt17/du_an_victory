@@ -1,114 +1,50 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { ITrenDings } from '../movie/trendings'
+import axios from 'axios'
+
 
 type Props = {}
 
 const Recently = (props: Props) => {
+  const [recentlys,setRecentlys] = useState<ITrenDings[]>([])
+  useEffect(()=>{
+    (async()=>{
+      try {
+        const {data} = await axios.get('http://127.0.0.1:8000/api/phim-sap-chieu')
+
+          
+      setRecentlys(data)
+      } catch (error) {
+        console.log(error);
+        
+      }
+    })()
+  },[])
+  
   return (
-    <div>
-         <div className="row">
-              <div className="col-lg-4 col-md-6 col-sm-6">
-                <div className="product__item">
-                  <div className="product__item__pic set-bg" >
-                  <img src="/src/img/recent/1.jpg"></img>
-                    <div className="ep">18 / 18</div>
-                    <div className="comment"><i className="fa fa-comments" /> 11</div>
-                    <div className="view"><i className="fa fa-eye" /> 9141</div>
-                  </div>
-                  <div className="product__item__text">
-                    <ul>
-                      <li>Active</li>
-                      <li>Movie</li>
-                    </ul>
-                    <h5><a href="#">Great Teacher Onizuka</a></h5>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 col-md-6 col-sm-6">
-                <div className="product__item">
-                  <div className="product__item__pic set-bg" >
-                  <img src="/src/img/recent/2.jpg"></img>
-                    <div className="ep">18 / 18</div>
-                    <div className="comment"><i className="fa fa-comments" /> 11</div>
-                    <div className="view"><i className="fa fa-eye" /> 9141</div>
-                  </div>
-                  <div className="product__item__text">
-                    <ul>
-                      <li>Active</li>
-                      <li>Movie</li>
-                    </ul>
-                    <h5><a href="#">Fate/stay night Movie: Heaven's Feel - II. Lost</a></h5>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 col-md-6 col-sm-6">
-                <div className="product__item">
-                  <div className="product__item__pic set-bg" >
-                  <img src="/src/img/recent/3.jpg"></img>
-                    <div className="ep">18 / 18</div>
-                    <div className="comment"><i className="fa fa-comments" /> 11</div>
-                    <div className="view"><i className="fa fa-eye" /> 9141</div>
-                  </div>
-                  <div className="product__item__text">
-                    <ul>
-                      <li>Active</li>
-                      <li>Movie</li>
-                    </ul>
-                    <h5><a href="#">Mushishi Zoku Shou: Suzu no Shizuku</a></h5>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 col-md-6 col-sm-6">
-                <div className="product__item">
-                  <div className="product__item__pic set-bg" >
-                  <img src="/src/img/recent/4.jpg"></img>
-                    <div className="ep">18 / 18</div>
-                    <div className="comment"><i className="fa fa-comments" /> 11</div>
-                    <div className="view"><i className="fa fa-eye" /> 9141</div>
-                  </div>
-                  <div className="product__item__text">
-                    <ul>
-                      <li>Active</li>
-                      <li>Movie</li>
-                    </ul>
-                    <h5><a href="#">Fate/Zero 2nd Season</a></h5>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 col-md-6 col-sm-6">
-                <div className="product__item">
-                  <div className="product__item__pic set-bg" >
-                  <img src="/src/img/recent/5.jpg"></img>
-                    <div className="ep">18 / 18</div>
-                    <div className="comment"><i className="fa fa-comments" /> 11</div>
-                    <div className="view"><i className="fa fa-eye" /> 9141</div>
-                  </div>
-                  <div className="product__item__text">
-                    <ul>
-                      <li>Active</li>
-                      <li>Movie</li>
-                    </ul>
-                    <h5><a href="#">Kizumonogatari II: Nekket su-hen</a></h5>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 col-md-6 col-sm-6">
-                <div className="product__item">
-                  <div className="product__item__pic set-bg" >
-                  <img src="/src/img/recent/6.webp"></img>
-                    <div className="ep">18 / 18</div>
-                    <div className="comment"><i className="fa fa-comments" /> 11</div>
-                    <div className="view"><i className="fa fa-eye" /> 9141</div>
-                  </div>
-                  <div className="product__item__text">
-                    <ul>
-                      <li>Active</li>
-                      <li>Movie</li>
-                    </ul>
-                    <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div >
+      
+            <div className="container mx-auto py-8">
+              
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+   {recentlys?.map((recently:ITrenDings)=>(
+    <div className="rounded-lg overflow-hidden shadow-lg" key={recently.id}>
+     
+      <img src={recently.image} alt="Movie Poster" className="w-full h-60 object-cover" />
+      <div className="p-4">
+        <NavLink to={`/client/details/${recently.id}`}><p className="text-sm text-gray-400">{recently.name_movie}</p></NavLink>
+        <p className="text-xs text-gray-400 mb-2">{recently.show}</p>
+    
+      </div>
+      
+    </div>
+   ))}
+  </div>
+</div>
+    
+
+
     </div>
   )
 }

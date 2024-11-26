@@ -1,17 +1,30 @@
 import api from "../axios/config";
 import { ICategoryMovie } from "../interface/categorymovie";
 
-//ALL
-export const CategoryMovie = async () => {
-  try {
-    const { data } = await api.get<{ categories: ICategoryMovie[] }>(
-      "categories"
-    );
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+
+
+
+export const CategoryMovie = async()=>{
+    try {
+        const {data} = await api.get("categorymovie")
+        return data
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+export const CategoryMovieDel = async(id:number|string)=>{
+    try {
+        const {data} = await api.delete(`categorymovie/${id}`)
+        return data
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
 
 // ID
 export const CategoryMovieById = async (id: number | string) => {
@@ -54,12 +67,4 @@ export const UpdateCategoryMovies = async (
   }
 };
 
-// DELETE
-export const DeleteCategoryMovie = async (id: number | string) => {
-  try {
-    const { data } = await api.delete<{ message: string }>(`categories/${id}`);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+
