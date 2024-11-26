@@ -54,6 +54,7 @@ const ListShowtime: React.FC<Props> = ({
                   <td>{showtime.start_time}</td>
                   <td>{showtime.end_time}</td>
                   <td>
+                  <div className="action-buttons">
                     <NavLink to={`/admin/showtime/edit/${showtime.id}`}>
                       <button
                         type="button"
@@ -69,6 +70,7 @@ const ListShowtime: React.FC<Props> = ({
                     >
                       Xóa
                     </button>
+                    </div>
                   </td>
                 </tr>
               ))

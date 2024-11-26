@@ -14,7 +14,10 @@ export const ListSeatTypes = async () => {
 // by id
 export const SeatsTypeByID = async (id: number | string) => {
   try {
-    const { data } = await api.get<{ seattypes: ISeatType[] }>(
+    const { data } = await api.get<{
+      seat_price: number | undefined;
+      seat_type_name: string | undefined; seattypes: ISeatType[] 
+}>(
       `seatTypes/${id}`
     );
     return data;

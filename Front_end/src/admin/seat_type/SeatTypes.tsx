@@ -2,9 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import MenuDashboard from "../menudashboard";
-import HeaderDashboard from "../headerdashboard";
-import Logo from "../logo";
 import { ISeatType } from "../../interface/seat_type";
 import {
   ListSeatTypes,
@@ -12,6 +9,9 @@ import {
   SeatsTypeUpdate,
 } from "../../service/seat_type";
 import ListSeatType from "./ListSeatTypes";
+import MenuDashboard from './../movie/menudashboard';
+import HeaderDashboard from './../movie/headerdashboard';
+import Logo from './../movie/logo';
 
 const SeatType: React.FC = () => {
   const [seattypes, setSeatTypes] = useState<ISeatType[]>([]);
@@ -19,11 +19,11 @@ const SeatType: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Hàm fetch dữ liệu
-  const fetchAreas = async () => {
+  const fecthSeatTypes = async () => {
     setLoading(true);
     try {
       const data = await ListSeatTypes();
-      setSeatTypes(data || []); // Đảm bảo dữ liệu được set đúng
+      setSeatTypes(data || []); 
     } catch (error: any) {
       setError(error.response ? error.response.data.message : error.message);
     } finally {
@@ -31,7 +31,7 @@ const SeatType: React.FC = () => {
     }
   };
 
-  // Hàm cập nhật khu vực
+  // Hàm cập nhật kiểu ghế
   async function updateSeatType({
     id,
     updateSeatTypes,
@@ -41,32 +41,32 @@ const SeatType: React.FC = () => {
   }) {
     try {
       await SeatsTypeUpdate(id, updateSeatTypes);
-      await fetchAreas(); // Fetch lại dữ liệu sau khi cập nhật
-      alert("Cập nhật khu vực thành công!");
+      await fecthSeatTypes();
+      alert("Cập nhật kiểu ghế thành công!");
     } catch (error: any) {
-      alert("Cập nhật khu vực thất bại!");
+      alert("Cập nhật kiểu ghế thất bại!");
       console.error(error);
     }
   }
 
-  // Hàm xóa khu vực
+  // Hàm xóa kiểu ghế
   const deleteSeatType = async (id: number | string) => {
     try {
       const confirmDelete = window.confirm(
-        "Bạn có chắc chắn muốn xóa khu vực này?"
+        "Bạn có chắc chắn muốn xóa kiểu ghế này?"
       );
       if (!confirmDelete) return;
 
       await SeatsTypeDelete(id);
-      alert("Xóa khu vực thành công!");
+      alert("Xóa kiểu ghế thành công!");
       setSeatTypes(seattypes.filter((seattype) => seattype.id !== id));
     } catch (error) {
-      console.error("Xóa khu vực thất bại!");
+      console.error("Xóa kiểu ghế thất bại!");
     }
   };
 
   useEffect(() => {
-    fetchAreas();
+    fecthSeatTypes();
   }, []);
 
   return (

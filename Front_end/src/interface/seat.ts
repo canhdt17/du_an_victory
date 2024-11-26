@@ -6,5 +6,5 @@ export interface ISeat {
   seat_status: string,
   deleted_at: null,
   created_at: null,
-  updated_at: null,
+  updated_at: null,x
 }

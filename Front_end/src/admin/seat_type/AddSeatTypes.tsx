@@ -1,20 +1,21 @@
 import React from "react";
-import Logo from "../logo";
-import HeaderDashboard from "../headerdashboard";
-import MenuDashboard from "../menudashboard";
+
 import { useForm } from "react-hook-form";
 import { ISeatType } from "../../interface/seat_type";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
 
 type Props = {
-  addSeatType: ISeatType[];
+  addSeatTypes: ISeatType[];
 };
 const seatTypeScheama = Joi.object({
   seat_type_name: Joi.string().required(),
   seat_price: Joi.number().required(),
 });
-const CreateSeatType = ({ addSeatType }: Props) => {
+const CreateSeatType = ({ addSeatTypes }: Props) => {
   const {
     register,
     handleSubmit,
@@ -23,7 +24,7 @@ const CreateSeatType = ({ addSeatType }: Props) => {
     resolver: joiResolver(seatTypeScheama),
   });
   const onsubmit = (seatypeData: ISeatType) => {
-    addSeatType(seatypeData);
+    addSeatTypes(seatypeData);
   };
   return (
     <div>
@@ -51,7 +52,7 @@ const CreateSeatType = ({ addSeatType }: Props) => {
                 <form onSubmit={handleSubmit(onsubmit)}>
                   <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">
-                      Kiểu Ghế:
+                      Kiểu Ghế
                     </label>
                     <input
                       type="text"
@@ -70,7 +71,7 @@ const CreateSeatType = ({ addSeatType }: Props) => {
 
                   <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">
-                      Giá Ghế:
+                      Giá Ghế
                     </label>
                     <input
                       type="number"
@@ -86,7 +87,7 @@ const CreateSeatType = ({ addSeatType }: Props) => {
                     </div>
                   </div>
                   <button type="submit" className="btn btn-primary">
-                    Submit
+                    Duyệt
                   </button>
                 </form>
               </main>

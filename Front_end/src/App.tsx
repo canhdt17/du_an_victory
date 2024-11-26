@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./compoents/page";
-import Dashboard from "./admin/dashboard";
 import MovieDetail from "./moviedetail/moviedetail";
 
 import Area from "./admin/area/area";
@@ -45,9 +44,11 @@ import UpdateSeat from "./admin/seat/UpdateSeat";
 import Seat from "./admin/seat/seat";
 import { IMovie } from "./interface/movie";
 import { MovieAdd, MovieUpdate } from "./service/movie";
-import EditMovie from "./admin/EditMovie";
-import AddMovie from "./admin/Addmovie";
+
 import UpdateShowtime from "./admin/showtime/updateshowtime";
+import Dashboard from "./admin/movie/dashboard";
+import AddMovie from "./admin/movie/Addmovie";
+import EditMovie from "./admin/movie/EditMovie";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -276,7 +277,7 @@ function App() {
           element={<AddMovie onAddMovie={addMovie}></AddMovie>}
         ></Route>
         <Route
-          path="/admin/dashboard/editmovie/:id"
+          path="/admin/dashboard/edit/:id"
           element={<EditMovie onEditMovie={editMovie}></EditMovie>}
         ></Route>
 
@@ -287,7 +288,7 @@ function App() {
         ></Route>
 
         {/* phong */}
-        <Route path="/room" element={<Room rooms={rooms}></Room>}></Route>
+        <Route path="/room" element={<Room></Room>}></Route>
         <Route
           path="/admin/room/createroom"
           element={<CreateRoom onAdd={addRoom}></CreateRoom>}
@@ -298,7 +299,7 @@ function App() {
         ></Route>
 
         {/* Khu vuc */}
-        <Route path="/admin/area" element={<Area areas={areas}></Area>}></Route>
+        <Route path="/admin/area" element={<Area></Area>}></Route>
         <Route
           path="/admin/area/createarea"
           element={<CreateArea addArea={addArea}></CreateArea>}
@@ -331,7 +332,7 @@ function App() {
         <Route path="/admin/seat_type" element={<SeatType></SeatType>}></Route>
         <Route
           path="/admin/create_type_seat"
-          element={<CreateSeatType addSeatType={addSeatType}></CreateSeatType>}
+          element={<CreateSeatType addSeatTypes={addSeatType}></CreateSeatType>}
         ></Route>
         <Route
           path="/admin/seat_type/edit/:id"

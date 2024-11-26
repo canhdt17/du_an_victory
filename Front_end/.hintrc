@@ -11,6 +11,10 @@
           "-webkit-text-size-adjust"
         ]
       }
-    ]
+    ],
+    "no-inline-styles": "off",
+    "axe/text-alternatives": "off",
+    "button-type": "off",
+    "axe/name-role-value": "off"
   }
 }

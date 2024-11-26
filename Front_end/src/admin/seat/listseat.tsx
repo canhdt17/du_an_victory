@@ -19,7 +19,7 @@ const ListSeat: React.FC<Props> = ({ seats, loading, error, deleteSeat }) => {
         <thead>
           <tr className="text-center">
             <th scope="col">STT</th>
-            <th scope="col">Tên Ghế</th>
+            <th scope="col">Só Ghế</th>
             <th scope="col">Loai Ghế</th>
             <th scope="col">Phòng </th>
             <th scope="col">Hành Động</th>
@@ -45,7 +45,8 @@ const ListSeat: React.FC<Props> = ({ seats, loading, error, deleteSeat }) => {
                 <td>{seat.room_id}</td>
 
                 <td>
-                  <NavLink to={`/admin/createmovie/edit/${seat.id}`}>
+                <div className="action-buttons">
+                  <NavLink to={`/admin/seat/edit/${seat.id}`}>
                     <button type="button" className="btn btn-warning me-2">
                       Cập nhật
                     </button>
@@ -57,6 +58,7 @@ const ListSeat: React.FC<Props> = ({ seats, loading, error, deleteSeat }) => {
                   >
                     Xóa
                   </button>
+                  </div>
                 </td>
               </tr>
             ))

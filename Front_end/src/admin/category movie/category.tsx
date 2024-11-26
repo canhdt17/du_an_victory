@@ -2,20 +2,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import MenuDashboard from "../menudashboard";
-import HeaderDashboard from "../headerdashboard";
-import Logo from "../logo";
-import { ICategoryMovie } from "../../interface/categorymovie";
-import { CategoryMovie, DeleteCategoryMovie, UpdateCategoryMovies} from "../../service/categorymovie";
-import ListCategoryMovie from "./listcartegorymovie";
 
+import { ICategoryMovie } from "../../interface/categorymovie";
+import {
+  CategoryMovie,
+  DeleteCategoryMovie,
+  UpdateCategoryMovies,
+} from "../../service/categorymovie";
+import ListCategoryMovie from "./listcartegorymovie";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
 
 const Category: React.FC = () => {
   const [categories, setCategories] = useState<ICategoryMovie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-
 
   // fetch
   const fetchCategories = async () => {
@@ -29,32 +31,40 @@ const Category: React.FC = () => {
     }
   };
 
-//update
-  const updateCategoryMovies = async (id: number | string, updatedCategory: ICategoryMovie) => {
+  //update
+  const updateCategoryMovies = async (
+    id: number | string,
+    updatedCategory: ICategoryMovie
+  ): Promise<void> => {
     try {
-      const data =  await UpdateCategoryMovies(id, updatedCategory);
-      setCategories(data?.categories || []);
+      const data = await UpdateCategoryMovies(id, updatedCategory);
+      if (data?.categories) {
+        setCategories(data.categories);
+      }
       await fetchCategories();
       alert("Cập nhật danh mục phim thành công!");
     } catch (error: any) {
       alert("Cập nhật danh mục phim thất bại!");
-      console.error(error);
+      console.error("Update Category Error:", error?.message || error);
     }
   };
-  // Hàm xóa
-const deleteCategoryMovie = async (id: number | string) => {
-  try {
-    const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa danh mục này?");
-    if (!confirmDelete) return;
 
-    await DeleteCategoryMovie(id);
-    alert("Xóa danh mục phim thành công!");
-    setCategories(categories.filter((category) => category.id !== id));
-  } catch (error) {
-    console.error("Xóa danh mục phim thất bại!");
-  }
-};
-  
+  // Hàm xóa
+  const deleteCategoryMovie = async (id: number | string) => {
+    try {
+      const confirmDelete = window.confirm(
+        "Bạn có chắc chắn muốn xóa danh mục này?"
+      );
+      if (!confirmDelete) return;
+
+      await DeleteCategoryMovie(id);
+      alert("Xóa danh mục phim thành công!");
+      setCategories(categories.filter((category) => category.id !== id));
+    } catch (error) {
+      console.error("Xóa danh mục phim thất bại!");
+    }
+  };
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -89,13 +99,12 @@ const deleteCategoryMovie = async (id: number | string) => {
               {error && <p>Error fetching categories: {error}</p>}
               {!loading && !error && (
                 <ListCategoryMovie
-                categories={categories}
-                loading={false}
-                error={null}
-                updateCategoryMovies={updateCategoryMovies}
-                deleteCategoryMovie={deleteCategoryMovie}
-              />
-              
+                  categories={categories}
+                  loading={false}
+                  error={null}
+                  updateCategoryMovies={updateCategoryMovies}
+                  deleteCategoryMovie={deleteCategoryMovie}
+                />
               )}
             </main>
           </div>

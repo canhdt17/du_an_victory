@@ -4,18 +4,22 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { IRoom } from "../../interface/room";
 // import { GetRoomById } from "../../service/room";
-import { GetRoomById, UpdateRoom as updateRoomService } from "../../service/room";
+import { GetRoomById } from "../../service/room";
 
-import Logo from "../logo";
-import HeaderDashboard from "../headerdashboard";
-import MenuDashboard from "../menudashboard";
+
+import { IArea } from "../../interface/area";
+import { ListArea } from "../../service/area";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
 
 type Props = {
   updateRoom: (id: string | number, data: IRoom) => void;
 };
+
 const roomSchema = Joi.object({
   room_name: Joi.string().required().label("Room Name"),
   area_id: Joi.string().required().label("ID Area"),
@@ -34,46 +38,48 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
   });
 
   const [loading, setLoading] = useState(true);
-  const [fetchError] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const [fetchError, setFetchError] = useState<string | null>(null);
+  const [areas, setAreas] = useState<IArea[]>([]);
 
+  // Fetch areas
   useEffect(() => {
-    const fetchRooms = async () => {
+    (async () => {
+      try {
+        const data = await ListArea();
+        setAreas(data || []);
+      } catch (error) {
+        setFetchError("Failed to fetch areas.");
+      }
+    })();
+  }, []);
+
+  // Fetch room data
+  useEffect(() => {
+    const fetchRoom = async () => {
       try {
         const data = await GetRoomById(id!);
         reset(data);
       } catch (error: any) {
-        // setFetchError("Failed to fetch room data.");
+        setFetchError("Failed to fetch room data.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchRooms();
+    fetchRoom();
   }, [id, reset]);
 
-  const onSubmit = async (data: IRoom) => {
-    try {
-      if (!id) return;
-      console.log(id);
-      const updatedRoom = await updateRoomService(id, data);
-      if (updatedRoom) {
-        console.log("Room updated successfully:", updatedRoom);
-        alert("Cập nhật phòng thành công!");
-        navigate("/room");
-      }
-    } catch (error) {
-      console.error("Failed to update room:", error);
-      alert("Cập nhật phòng thất bại!");
-    }
+  // Handle form submission
+  const onSubmit = (data: IRoom) => {
+    updateRoom(id!, data);
   };
-  
+
   return (
     <div>
       <div className="dashboards">
         <div>
-          <Logo></Logo>
-          <HeaderDashboard></HeaderDashboard>
+          <Logo />
+          <HeaderDashboard />
           <div className="container-fluid">
             <div className="row">
               <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
@@ -83,12 +89,12 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
                   id="sidebarMenu"
                   aria-labelledby="sidebarMenuLabel"
                 >
-                  <MenuDashboard></MenuDashboard>
+                  <MenuDashboard />
                 </div>
               </div>
               <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 className="h2">Cập nhật Phòng </h1>
+                  <h1 className="h2">Cập nhật Phòng</h1>
                   <div className="btn-toolbar mb-2 mb-md-0"></div>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -114,14 +120,20 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
 
                   <div className="mb-3">
                     <label htmlFor="area_id" className="form-label">
-                      ID Khu vực:
+                      Khu Vực:
                     </label>
-                    <input
-                      type="text"
+                    <select
                       className="form-control"
-                      id="area_id"
+                      aria-label="Large select example"
                       {...register("area_id")}
-                    />
+                    >
+                      <option value="">Chọn Khu Vực</option>
+                      {areas.map((area: IArea, i : number) => (
+                        <option key={area.area_id} value={area.area_id}>
+                          {area.area_name}
+                        </option>
+                      ))}
+                    </select>
                     {errors.area_id && (
                       <div className="text-danger">
                         {errors.area_id.message}

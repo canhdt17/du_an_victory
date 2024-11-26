@@ -2,12 +2,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import MenuDashboard from "../menudashboard";
-import HeaderDashboard from "../headerdashboard";
-import Logo from "../logo";
+
 import { ISeat } from "../../interface/seat";
 import { SeatDelete, SeatList, SeatUpdate } from "../../service/seat";
 import ListSeat from "./listseat";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
 
 const Seat: React.FC = () => {
   const [seats, setSeats] = useState<ISeat[]>([]);
