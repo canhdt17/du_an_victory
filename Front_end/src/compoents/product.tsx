@@ -47,10 +47,10 @@ const Product = (props: Props) => {
             <Recently></Recently>
           </div>
         </div>
-        <div className="col-lg-3 col-md-6 col-sm-8">
+        <div className="col-lg-2 col-md-6 col-sm-8">
           <div className="product__sidebar">
             <TopView></TopView>
-            <NewComment></NewComment>
+            {/* <NewComment></NewComment> */}
           </div>
         </div>
       </div>

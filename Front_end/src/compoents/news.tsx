@@ -14,7 +14,7 @@ const TinTuc = (props: Props) => {
     (async () => {
      try {
       const { data } = await axios.get(
-        `http://127.0.0.1:8000/api/lastest-tin-tuc`
+        `http://127.0.0.1:8000/api/tin-tuc`
       );
       setNews(data);
      } catch (error) {

@@ -1,111 +1,22 @@
-<<<<<<< HEAD
-// /* eslint-disable @typescript-eslint/no-unused-vars */
+
 // import React from "react";
 // import { NavLink } from "react-router-dom";
 // import { IRoom } from "../../interface/room";
-// import { DeleteRoom } from "../../service/room";
 
 // type Props = {
 //   rooms: IRoom[];
-// <<<<<<< HEAD
-//   onDel:(id:number|string) =>void
-// };
-
-// const ListRoom = ({ rooms,onDel }: Props) => {
-// =======
 //   loading: boolean;
 //   error: string | null;
-//   onDelete: (id: number | string) => void;
+//   updateRooms: (id: number | string, updateRoom: IRoom) => void;
+//   deleteRooms: (id: number | string) => void;
 // };
 
-// const ListRooms: React.FC<Props> = ({ rooms, loading, error, onDelete }) => {
-//   const handleDelete = async (id: number | string) => {
-//     if (confirm("Bạn có chắc muốn xóa phòng này không?")) {
-//       await DeleteRoom(id);
-//       onDelete(id);
-//     }
-//   };
-=======
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { IRoom } from "../../interface/room";
+// const ListRooms: React.FC<Props> = ({ rooms, loading, error, deleteRooms }) => {
 
-type Props = {
-  rooms: IRoom[];
-  loading: boolean;
-  error: string | null;
-  updateRooms: (id: number | string, updateRoom: IRoom) => void;
-  deleteRooms: (id: number | string) => void;
-};
-
-const ListRooms: React.FC<Props> = ({ rooms, loading, error, deleteRooms }) => {
-
-  return (
-    <div>
-      <div className="table-responsive small">
-        <table className="table table-striped table-sm">
-          <thead>
-            <tr className="text-center">
-              <th scope="col">STT</th>
-              <th scope="col">Room Name</th>
-              <th scope="col">Area</th>
-              <th scope="col">Total Seat</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="text-center">
-          {loading && (
-              <tr>
-                <td colSpan={3}>Đang tải...</td>
-              </tr>
-            )}
-            {error && (
-              <tr>
-                <td colSpan={3}>Lỗi: {error}</td>
-              </tr>
-            )}
-            {rooms.length > 0 ? (
-            rooms.map((room,index) => (
-              <tr key={room.id}>
-                <td>{index + 1}</td>
-                <td>{room.room_name}</td>
-                <td>{room.area_id}</td>
-                <td>{room.total_seat}</td>
-                <td>
-                  <NavLink to={`/admin/room/edit/${room.id}`}>
-                    <button type="button" className="btn btn-warning">
-                      Edit
-                    </button>
-                  </NavLink>
-                  <button
-                    type="button"
-                    className="btn btn-danger ms-2"
-                    onClick={() => deleteRooms(room.id!)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))
-          ): (
-              <tr>
-                <td colSpan={3}>Không có dữ liệu</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-};
->>>>>>> e163f975229a920b2de0146b3830c0ffc7c1ed48
-
-// >>>>>>> 53d9ae682cb6f773ce4a6a20b2b0d440a3952b64
 //   return (
 //     <div>
 //       <div className="table-responsive small">
-//       <table className="table table-striped table-sm">
+//         <table className="table table-striped table-sm">
 //           <thead>
 //             <tr className="text-center">
 //               <th scope="col">STT</th>
@@ -116,43 +27,20 @@ const ListRooms: React.FC<Props> = ({ rooms, loading, error, deleteRooms }) => {
 //             </tr>
 //           </thead>
 //           <tbody className="text-center">
-// <<<<<<< HEAD
-//              { Array.isArray(rooms) && rooms.map((room: IRoom, i: number) => (
-//                 <tr key={room.room_id}>
-//                   <td>{i + 1}</td>
-//                   <td>{room.room_name}</td>
-//                   <td>{room.area_id}</td>
-//                   <td>{room.total_seat}</td>
-//                   <td className="text-cen">
-                    
-                        
-                 
-//                       <button
-//                         type="button"
-//                         className="btn btn-danger text-center " onClick={()=>onDel(room.id)}
-//                       >
-//                         Xóa
-//                       </button>
-                
-                      
-//                      <NavLink to={`/admin/room/edit/${room.id}`}>
-//                       <button
-//                         type="button"
-//                         className="btn btn-warning text-center ml-3"
-//                       >
-//                         Cập nhật
-//                       </button>
-//                      </NavLink>
-                      
-                      
-                    
-//                   </td>
-//                 </tr>
-//               ))}
-// =======
-//             {rooms.map((room: IRoom, i: number) => (
+//           {loading && (
+//               <tr>
+//                 <td colSpan={3}>Đang tải...</td>
+//               </tr>
+//             )}
+//             {error && (
+//               <tr>
+//                 <td colSpan={3}>Lỗi: {error}</td>
+//               </tr>
+//             )}
+//             {rooms.length > 0 ? (
+//             rooms.map((room,index) => (
 //               <tr key={room.id}>
-//                 <td>{i + 1}</td>
+//                 <td>{index + 1}</td>
 //                 <td>{room.room_name}</td>
 //                 <td>{room.area_id}</td>
 //                 <td>{room.total_seat}</td>
@@ -165,19 +53,21 @@ const ListRooms: React.FC<Props> = ({ rooms, loading, error, deleteRooms }) => {
 //                   <button
 //                     type="button"
 //                     className="btn btn-danger ms-2"
-//                     onClick={() => handleDelete(room.id!)}
+//                     onClick={() => deleteRooms(room.id!)}
 //                   >
 //                     Delete
 //                   </button>
 //                 </td>
 //               </tr>
-//             ))}
-// >>>>>>> 53d9ae682cb6f773ce4a6a20b2b0d440a3952b64
+//             ))
+//           ): (
+//               <tr>
+//                 <td colSpan={3}>Không có dữ liệu</td>
+//               </tr>
+//             )}
 //           </tbody>
 //         </table>
 //       </div>
 //     </div>
 //   );
 // };
-
-// export default ListRooms;

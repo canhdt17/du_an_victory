@@ -11,7 +11,7 @@ const Promotion = (props: Props) => {
     useEffect(()=>{
         (async()=>{
          try {
-          const {data} = await axios.get(`http://127.0.0.1:8000/api/lastest-khuyen-mai`)
+          const {data} = await axios.get(`http://127.0.0.1:8000/api/khuyenmai`)
           setPromotions(data)
          } catch (error) {
           console.log(error);
