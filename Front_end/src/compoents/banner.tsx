@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const Banner = (props: Props) => {
   return (
     <div>
-         <section className="hero">
+      <div className="bannerimage">
+      {/* <section className="hero">
     <div className="container">
       <div className="hero__slider owl-carousel">
         <div className="hero__items set-bg" >
@@ -48,9 +49,34 @@ const Banner = (props: Props) => {
         </div>
       </div>
     </div>
-  </section>
+  </section> */}
+      <div className="slider">
+        <div className="list">
+          <div className="item">
+            <img src="https://gcs.tripi.vn/public-tripi/tripi-feed/img/474113AgA/hinh-anh-cuc-quang-dep-nhat_014856850.jpg"></img>
+          </div>
+          <div className="item">
+            <img src="https://images2.thanhnien.vn/528068263637045248/2024/1/25/c991278688992373366c97ea4881536e-65a11ac5cff6b880-1706156502395619358819.jpg"></img>
+          </div>
+          <div className="item">
+            <img src="/src/img/hero/review-phim-train-to-busan-chuyen-tau-sinh-tu-2016-nghet-tho-tung-phut-mot-202206061124535108.jpg"></img>
+          </div>
+        </div>
+        <div className="buttons">
+          <button id="prev"><i className="fa-solid fa-arrow-left"></i></button>
+          <button id="next"><i className="fa-solid fa-arrow-right"></i></button>
+        </div>
+        <ul className="dots">
+          <li className="active"></li>
+          <li></li>
+          <li></li>
+        </ul>
     </div>
-  )
-}
+      </div>
+      
+    </div>
+    
+  );
+};
 
-export default Banner
+export default Banner;

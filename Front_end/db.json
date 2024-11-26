@@ -1,22 +1,35 @@
 {
   "room": [
     {
-      "room_name": "Phòng 9",
-      "area_id": "Đồng Tháp",
-      "total_seat": 12,
-      "id": "1"
+
+      "room_name": "Phòng 02",
+      "area_id": "Lào",
+      "total_seat": 100,
+      "id": 2
+    },
+    {
+      "room_name": "Phòng 03",
+      "area_id": "Campuchia",
+      "total_seat": 99,
+      "id": 3
     },
     {
       "room_name": "Phòng 1",
       "area_id": "Hồ Chí Minh",
       "total_seat": 12,
       "id": "2"
+
     }
   ],
   "area": [
     {
-      "id": "1",
-      "area_name": "Hồ Chí Minh"
+
+      "area_name": "Campuchia 1",
+      "id": 2
+    },
+    {
+      "area_name": "Mianma",
+      "id": 3
     },
     {
       "id": "2",
@@ -84,23 +97,80 @@
     {
       "area_name": "Yên Bái 111",
       "id": "17"
+
     }
   ],
   "categories": [
     {
-      "name": "Phim Hài",
-      "id": "1"
+
+      "name": "A",
+      "id": 1
+    },
+    {
+      "name": "Phim Kinh Dị",
+      "id": 2
+    },
+    {
+      "name": "Phim Trinh Thám",
+      "id": 3
+    },
+    {
+      "name": "A",
+      "id": 4
+    },
+    {
+      "name": "b",
+      "id": 5
+    },
+    {
+      "name": "14 ProMax Titab",
+      "id": 6
+    },
+    {
+      "name": "A Update",
+      "id": 7
+    },
+    {
+      "name": "A",
+      "id": 8
+    },
+    {
+      "name": "A",
+      "id": 9
+    },
+    {
+      "name": "A",
+      "id": 10
+    },
+    {
+      "name": "A Update",
+      "id": 11
+    },
+    {
+      "name": "A",
+      "id": 12
+    },
+    {
+      "name": "A",
+      "id": 13
     },
     {
       "id": "42aa",
       "name": "Hài hước"
+
     }
   ],
   "seat_type": [
     {
-      "seat_type_name": "VIP",
-      "seat_price": 12,
-      "id": "1"
+
+      "seat_type_name": "Ghế Mát Xa",
+      "seat_price": 299999,
+      "id": 2
+    },
+    {
+      "seat_type_name": "Ghế Đôi",
+      "seat_price": 299999,
+      "id": 3
     },
     {
       "seat_type_name": "Massage",
@@ -110,12 +180,88 @@
     {
       "name": "Phim Kinh Dị",
       "id": "3"
+
     }
   ],
   "seat": [
     {
-      "function values() { [native code] }": "",
-      "id": "1"
+
+      "seat_number": "01",
+      "seat_type_id": "Ghế Điều Hòa",
+      "room_id": "Phòng 02",
+      "seat_status": "hết",
+      "id": 3
+    },
+    {
+      "seat_number": "00",
+      "seat_type_id": "Massage",
+      "room_id": "Phòng 100",
+      "seat_status": "11",
+      "id": 4
+    },
+    {
+      "seat_number": "03",
+      "seat_type_id": "Ghế Điều Hòa",
+      "room_id": "Phòng 03",
+      "seat_status": "Còn",
+      "id": 5
+    }
+  ],
+  
+  "users": [
+    {
+      "email": "bdtrong2004@gmail.com",
+      "password": "$2a$10$/HgZ.ftrZqdi4suDLVCOVOFBbGpYJxXmVQ7DSnHJdBkbSDlJqpWoe",
+      "name": "Duy Trọng",
+      "id": 1
+    },
+    {
+      "email": "bdtrong2004@gmail.comm",
+      "password": "$2a$10$PPNoBoebVn6K7WUFNvRFReu4oL4J7qzdtI6QGkMYFWO/9mfY1q6gO",
+      "name": "1111",
+      "id": 2
+    },
+    {
+      "email": "bdtrong2004@gmailcom",
+      "password": "$2a$10$jyIBe2X.cb5y0AtdLAsEl.2YGxJF.Hw7Tn2oqX6XPJYeXca963Cpu",
+      "name": "1222",
+      "id": 3
+    },
+    {
+      "email": "bdtrong20044@gmail.com",
+      "password": "$2a$10$29SbbrDLIHE6AxiVmQOa7.Rs1x3aKG31hUFY6so.pWENa0ple4TXq",
+      "name": "Trọng",
+      "id": 4
+    }
+  ],
+  "news": [
+    {
+      "name_TinTuc": "Chương trình phim kỉ niệm nhân dịp 70 năm Giải phòng Thủ đô",
+      "sub_title": "Nhân dịp 70 năm ngày Giải phóng Thủ đô (10/10/1954 – 10/10/2024), Trung tâm Chiếu phim Quốc gia tổ chức chương trình phim kỉ niệm tại Trung tâm.  Bộ phim được chọn để trình chiếu miễn phí trong chương trình phim lần này là: “ Đào, phở và Piano”. Tác phẩm tái hiện khung cảnh Hà Nội những ngày cuối cùng trong Trận Hà Nội 1946 và vừa được chọn làm đại diện cho Điện ảnh Việt Nam dự vòng sơ loại Oscar 2025.   1-\tThời gian chiếu phim: Từ 6/10- 10/10/2024   2-\tĐịa điểm: Phòng chiếu số 12   3-\tSuất chiếu: 10h00 và 20h15   4- Hình thức nhận vé: Khách hàng nhận vé 0 đồng trực tiếp tại quầy vé từ 8h00 đến 23h00 hàng ngày, bắt đầu từ ngày 4/10/2024 đến khi hết vé (khán giả có thể nhận vé trước ngày xem phim và mỗi khách nhận tối đa 02 vé/người).",
+      "content": "Giảm giá 20%",
+      "imager": "https://picsum.photos/536/354",
+      "id": 1
+    },
+    {
+      "name_TinTuc": "Chương trình phim kỉ niệm nhân dịp 70 năm Giải phòng Thủ đô",
+      "sub_title": "Nhân dịp 70 năm ngày Giải phóng Thủ đô (10/10/1954 – 10/10/2024), Trung tâm Chiếu phim Quốc gia tổ chức chương trình phim kỉ niệm tại Trung tâm.  Bộ phim được chọn để trình chiếu miễn phí trong chương trình phim lần này là: “ Đào, phở và Piano”. Tác phẩm tái hiện khung cảnh Hà Nội những ngày cuối cùng trong Trận Hà Nội 1946 và vừa được chọn làm đại diện cho Điện ảnh Việt Nam dự vòng sơ loại Oscar 2025.   1-\tThời gian chiếu phim: Từ 6/10- 10/10/2024   2-\tĐịa điểm: Phòng chiếu số 12   3-\tSuất chiếu: 10h00 và 20h15   4- Hình thức nhận vé: Khách hàng nhận vé 0 đồng trực tiếp tại quầy vé từ 8h00 đến 23h00 hàng ngày, bắt đầu từ ngày 4/10/2024 đến khi hết vé (khán giả có thể nhận vé trước ngày xem phim và mỗi khách nhận tối đa 02 vé/người).",
+      "content": "Giảm giá 20%",
+      "imager": "https://picsum.photos/536/354",
+      "id": 2
+    },
+    {
+      "name_TinTuc": "Chương trình phim kỉ niệm nhân dịp 70 năm Giải phòng Thủ đô",
+      "sub_title": "Nhân dịp 70 năm ngày Giải phóng Thủ đô (10/10/1954 – 10/10/2024), Trung tâm Chiếu phim Quốc gia tổ chức chương trình phim kỉ niệm tại Trung tâm.  Bộ phim được chọn để trình chiếu miễn phí trong chương trình phim lần này là: “ Đào, phở và Piano”. Tác phẩm tái hiện khung cảnh Hà Nội những ngày cuối cùng trong Trận Hà Nội 1946 và vừa được chọn làm đại diện cho Điện ảnh Việt Nam dự vòng sơ loại Oscar 2025.   1-\tThời gian chiếu phim: Từ 6/10- 10/10/2024   2-\tĐịa điểm: Phòng chiếu số 12   3-\tSuất chiếu: 10h00 và 20h15   4- Hình thức nhận vé: Khách hàng nhận vé 0 đồng trực tiếp tại quầy vé từ 8h00 đến 23h00 hàng ngày, bắt đầu từ ngày 4/10/2024 đến khi hết vé (khán giả có thể nhận vé trước ngày xem phim và mỗi khách nhận tối đa 02 vé/người).",
+      "content": "Giảm giá 20%",
+      "imager": "https://picsum.photos/536/354",
+      "id": 3
+    },
+    {
+      "name_TinTuc": "Chương trình phim kỉ niệm nhân dịp 70 năm Giải phòng Thủ đô",
+      "sub_title": "Nhân dịp 70 năm ngày Giải phóng Thủ đô (10/10/1954 – 10/10/2024), Trung tâm Chiếu phim Quốc gia tổ chức chương trình phim kỉ niệm tại Trung tâm.  Bộ phim được chọn để trình chiếu miễn phí trong chương trình phim lần này là: “ Đào, phở và Piano”. Tác phẩm tái hiện khung cảnh Hà Nội những ngày cuối cùng trong Trận Hà Nội 1946 và vừa được chọn làm đại diện cho Điện ảnh Việt Nam dự vòng sơ loại Oscar 2025.   1-\tThời gian chiếu phim: Từ 6/10- 10/10/2024   2-\tĐịa điểm: Phòng chiếu số 12   3-\tSuất chiếu: 10h00 và 20h15   4- Hình thức nhận vé: Khách hàng nhận vé 0 đồng trực tiếp tại quầy vé từ 8h00 đến 23h00 hàng ngày, bắt đầu từ ngày 4/10/2024 đến khi hết vé (khán giả có thể nhận vé trước ngày xem phim và mỗi khách nhận tối đa 02 vé/người).",
+      "content": "Giảm giá 20%",
+      "imager": "https://picsum.photos/536/354",
+      "id": 4
     },
     {
       "function values() { [native code] }": "",
@@ -153,6 +299,7 @@
       "start_time": "",
       "end_time": "",
       "id": "4"
+
     }
   ]
 }
