@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
@@ -10,107 +9,97 @@ import { DeleteRoom, ListRoom, UpdateRoom } from "../../service/room";
 import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
-=======
->>>>>>> origin/main
 
+const Room: React.FC = () => {
+  const [rooms, setRooms] = useState<IRoom[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-// import React, { useEffect, useState } from "react";
-// import HeaderDashboard from "../headerdashboard";
-// import MenuDashboard from "../menudashboard";
-// import Logo from "../logo";
-// import { IRoom } from "../../interface/room";
-// import { NavLink } from "react-router-dom";
-// import ListRooms from "./listroom";
-// import { DeleteRoom, ListRoom, UpdateRoom } from "../../service/room";
+  // Hàm fetch dữ liệu
+  const fetchRooms = async () => {
+    setLoading(true);
+    try {
+      const data = await ListRoom();
+      setRooms(data || []); // Đảm bảo dữ liệu được set đúng
+    } catch (error: any) {
+      setError(error.response ? error.response.data.message : error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-// const Room: React.FC = () => {
-//   const [rooms, setRooms] = useState<IRoom[]>([]);
-//   const [loading, setLoading] = useState<boolean>(true);
-//   const [error, setError] = useState<string | null>(null);
+  // Hàm cập nhật khu vực
+  const updateRooms = async (id: number | string, updateRoom: IRoom) => {
+    try {
+      await UpdateRoom(id, updateRoom);
+      await fetchRooms(); // Fetch lại dữ liệu sau khi cập nhật
+      alert("Cập nhật khu vực thành công!");
+    } catch (error: any) {
+      alert("Cập nhật khu vực thất bại!");
+      console.error(error);
+    }
+  };
 
-//   // Hàm fetch dữ liệu
-//   const fetchRooms = async () => {
-//     setLoading(true);
-//     try {
-//       const data = await ListRoom();
-//       setRooms(data || []); // Đảm bảo dữ liệu được set đúng
-//     } catch (error: any) {
-//       setError(error.response ? error.response.data.message : error.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+  // Hàm xóa khu vực
+  const deleteRooms = async (id: number | string) => {
+    try {
+      const confirmDelete = window.confirm(
+        "Bạn có chắc chắn muốn xóa phòng này?"
+      );
+      if (!confirmDelete) return;
 
-//   // Hàm cập nhật khu vực
-//   const updateRooms = async (id: number | string, updateRoom: IRoom) => {
-//     try {
-//       await UpdateRoom(id, updateRoom);
-//       await fetchRooms(); // Fetch lại dữ liệu sau khi cập nhật
-//       alert("Cập nhật khu vực thành công!");
-//     } catch (error: any) {
-//       alert("Cập nhật khu vực thất bại!");
-//       console.error(error);
-//     }
-//   };
+      await DeleteRoom(id);
+      alert("Xóa khu vực thành công!");
+      setRooms(rooms.filter((room) => room.id !== id));
+    } catch (error) {
+      console.error("Xóa khu vực thất bại!");
+    }
+  };
 
-//   // Hàm xóa khu vực
-//   const deleteRooms = async (id: number | string) => {
-//     try {
-//       const confirmDelete = window.confirm(
-//         "Bạn có chắc chắn muốn xóa phòng này?"
-//       );
-//       if (!confirmDelete) return;
+  useEffect(() => {
+    fetchRooms();
+  }, []);
+  return (
+    <div className="dashboards">
+      <Logo />
+      <HeaderDashboard />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <div
+              className="offcanvas-md offcanvas-end bg-body-tertiary"
+              tabIndex={-1}
+              id="sidebarMenu"
+              aria-labelledby="sidebarMenuLabel"
+            >
+              <MenuDashboard />
+            </div>
+          </div>
+          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div className="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 className="h2">Danh Sách Phòng</h1>
+              <NavLink to="/admin/room/createroom">
+                <button className="btn btn-sm btn-outline-secondary">
+                  Thêm Phòng
+                </button>
+              </NavLink>
+            </div>
+            {loading && <p>Đang tải dữ liệu...</p>}
+            {error && <p>Lỗi: {error}</p>}
+            {!loading && !error && (
+              <ListRooms
+                rooms={rooms}
+                loading={loading}
+                error={error}
+                updateRooms={updateRooms}
+                deleteRooms={deleteRooms}
+              />
+            )}
+          </main>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-//       await DeleteRoom(id);
-//       alert("Xóa khu vực thành công!");
-//       setRooms(rooms.filter((room) => room.id !== id));
-//     } catch (error) {
-//       console.error("Xóa khu vực thất bại!");
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchRooms();
-//   }, []);
-//   return (
-//     <div className="dashboards">
-//       <Logo />
-//       <HeaderDashboard />
-//       <div className="container-fluid">
-//         <div className="row">
-//           <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-//             <div
-//               className="offcanvas-md offcanvas-end bg-body-tertiary"
-//               tabIndex={-1}
-//               id="sidebarMenu"
-//               aria-labelledby="sidebarMenuLabel"
-//             >
-//               <MenuDashboard />
-//             </div>
-//           </div>
-//           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-//             <div className="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
-//               <h1 className="h2">Danh Sách Phòng</h1>
-//               <NavLink to="/admin/room/createroom">
-//                 <button className="btn btn-sm btn-outline-secondary">
-//                   Thêm Phòng
-//                 </button>
-//               </NavLink>
-//             </div>
-//             {loading && <p>Đang tải dữ liệu...</p>}
-//             {error && <p>Lỗi: {error}</p>}
-//             {!loading && !error && (
-//               <ListRooms
-//                 rooms={rooms}
-//                 loading={loading}
-//                 error={error}
-//                 updateRooms={updateRooms}
-//                 deleteRooms={deleteRooms}
-//               />
-//             )}
-//           </main>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+export default Room;

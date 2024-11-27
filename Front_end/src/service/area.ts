@@ -1,7 +1,6 @@
 import api from "../axios/config";
-import { AreaData, IArea } from "../movie/area";
+import { IArea } from "../interface/area";
 
-<<<<<<< HEAD
 //All
 export const ListArea = async () => {
   try {
@@ -12,57 +11,27 @@ export const ListArea = async () => {
     // return { areas: [] }; 
   }
 };
-=======
->>>>>>> origin/main
 
+//ID
+export const AreaById = async (area_id: number | string) => {
+  try {
+    const { data } = await api.get<{ area: IArea }>(`areas/${area_id}`);
+    return data.area;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export const ListArea = async()=>{
-    try {
-        const {data} = await api.get("area")
-        return data
-    } catch (error) {
-        console.log(error);
-        
-    }
-}
-export const AreaById = async(id:number|string)=>{
-    try {
-        const {data} = await api.get(`area/${id}`)
-        return data
-    } catch (error) {
-        console.log(error);
-        
-    }
-}
-export const AreaDelete = async(id:number|string)=>{
-    try {
-        const {data} = await api.delete(`area/${id}`)
-        return data
-    } catch (error) {
-        console.log(error);
-        
-    }
-}
-export const AddArea = async(areaData:IArea)=>{
-    try {
-        const {data} = await api.post("area",areaData)
-        return data
-    } catch (error) {
-        console.log(error);
-        
-    }
-}
-export const AreaUpdate = async(areaData:AreaData,id:number|string)=>{
-    try {
-        const {data} = await api.put(`area/${id}`,areaData)
-        return data
-    } catch (error) {
-        console.log(error);
-        
-    }
-}
+//Add
+export const AddArea = async (areaData: IArea) => {
+  try {
+    const { data } = await api.post<{ areas: IArea }>("areas", areaData);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-<<<<<<< HEAD
 //Update
 export const AreaUpdate = async (areaData: IArea,area_id: number | string ) => {
   try {
@@ -75,6 +44,13 @@ export const AreaUpdate = async (areaData: IArea,area_id: number | string ) => {
     console.log(error);
   }
 };
-=======
->>>>>>> origin/main
 
+// Delete
+export const AreaDelete = async (area_id: number | string) => {
+  try {
+    const { data } = await api.delete<{ message: string }>(`areas/${area_id}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
