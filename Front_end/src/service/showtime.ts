@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import api from "../axios/config";
-
-
-import { IShowTime } from "../movie/shotime";
-
-
-
+import { IShowTime } from "../interface/shotime";
 
 // List all showtimes
 export const ShowTimeList = async () => {
@@ -34,44 +29,6 @@ export const ShowTimeAdd = async (showData: IShowTime) => {
     if (showData.showtime_date.includes("T")) {
       showData.showtime_date = showData.showtime_date.split("T")[0];
     }
-
-export const ShowTimeById = async(id:number|string)=>{
-    try {
-        const {data} = await api.get(`showtime/${id}`)
-        return data
-    } catch (error) {
-        console.log(error);
-        
-    }
-}
-export const ShowTimeDelete= async(id:number|string)=>{
-    try {
-        const {data} = await api.delete(`showtime/${id}`)
-        return data
-    } catch (error) {
-        console.log(error);
-        
-    }
-}
-export const ShowTimeAdd = async(showData:IShowTime)=>{
-    try {
-        const {data} = await api.post("showtime",showData)
-        return data
-    } catch (error) {
-        console.log(error);
-        
-    }
-}
-export const ShowTimeUpdate = async(showData:IShowTime,id:number|string)=>{
-    try {
-        const {data} = await api.put(`showtime/${id}`,showData)
-        return data
-    } catch (error) {
-        console.log(error);
-        
-    }
-}
-
 
     const response = await api.post<{ showtime: IShowTime }>(
       "/showtimes",
@@ -121,4 +78,3 @@ export const ShowTimeDelete = async (id: number | string) => {
     console.error(`Error deleting showtime with ID ${id}:`, error);
   }
 };
-

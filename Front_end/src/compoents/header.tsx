@@ -8,41 +8,8 @@ const Header = (props: Props) => {
 
   return (
     <div>
-
-      <div className='menuhead bg-gray-900 '>
-                  <header className="headermenu flex items-center justify-between px-6 py-4 bg-gray-900 text-white">
-  {/* Left Side: Logo */}
-  <div className="flex items-center space-x-8">
-    {/* Logo */}
-    <img src="logo.png" alt="Logo" className="h-10" />
-    {/* Navigation Links */}
-    <nav className="flex space-x-6">
-      <NavLink to={`/`}><a href="#" className="hover:text-red-500">Trang chủ</a></NavLink>
-      <a href="#" className="hover:text-gray-300">Lịch chiếu</a>
-      <NavLink to={`/tintuc`}><a href="#" className="hover:text-gray-300">Tin tức</a></NavLink>
-      <NavLink to={`/client/khuyenmai`}className="hover:text-gray-300">Khuyến Mãi</NavLink>
-      <a href="#" className="hover:text-gray-300">Giá vé</a>
-      <a href="#" className="hover:text-gray-300">Liên hoan phim</a>
-      <a href="#" className="hover:text-gray-300">Giới thiệu</a>
-      <NavLink to={`/admin/tintuc`}><a  className="hover:text-gray-300">Admin</a></NavLink>
-    </nav>
-    <div className="space-x-4">
-    {/* Đăng ký Button */}
-    <button className="px-6 py-2 border-2 border-white  text-black rounded-full hover:bg-white hover:text-gray-900 transition-all w-[131px] ">
-     <NavLink to={`/client/dangki`}> Đăng ký</NavLink>
-    </button>
-    {/* Đăng nhập Button */}
-    <button className="px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all">
-     <NavLink to={`/client/dangnhap`}> Đăng nhập</NavLink>
-    </button>
-  </div>
-  </div>
-  {/* Right Side: Buttons */}
- 
-</header>
-
-      <div className=" bg-gray-900 ">
-        <header className="headermenu flex items-center justify-between px-6 py-4 bg-gray-900 text-white">
+      <div className="headermenu bg-gray-900 ">
+        <header className="flex items-center justify-between px-6 py-4 bg-gray-900 text-white">
           {/* Left Side: Logo */}
           <div className="flex items-center space-x-8">
             {/* Logo */}
@@ -65,8 +32,7 @@ const Header = (props: Props) => {
                 Giá vé
               </NavLink>
               <NavLink to="/film-festival" className="hover:text-gray-300">
-            Thể Loại Phim
-
+                Liên hoan phim
               </NavLink>
               <NavLink to="/about" className="hover:text-gray-300">
                 Giới thiệu
@@ -93,9 +59,7 @@ const Header = (props: Props) => {
           </div>
           {/* Right Side: Buttons */}
         </header>
-
       </div>
-    </div>
     </div>
   );
 };
