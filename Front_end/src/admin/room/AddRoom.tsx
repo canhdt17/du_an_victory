@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import MenuDashboard from "../menudashboard";
-import HeaderDashboard from "../headerdashboard";
-import Logo from "../logo";
+
 import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { ListArea } from "../../service/area";
 import { IRoom } from "../../interface/room";
 import { IArea } from "../../interface/area";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
 
 type Props = {
   onAdd: (roomsData: IRoom) => void;

@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import HeaderDashboard from "../headerdashboard";
-import MenuDashboard from "../menudashboard";
-import Logo from "../logo";
+
 import { IRoom } from "../../interface/room";
 import { NavLink } from "react-router-dom";
 import ListRooms from "./listroom";
 import { DeleteRoom, ListRoom, UpdateRoom } from "../../service/room";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
 
 const Room: React.FC = () => {
   const [rooms, setRooms] = useState<IRoom[]>([]);

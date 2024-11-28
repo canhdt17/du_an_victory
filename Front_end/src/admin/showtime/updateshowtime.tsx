@@ -6,11 +6,12 @@ import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useEffect, useState } from "react";
 import { ShowTimeById } from "../../service/showtime";
-import Logo from "../logo";
-import HeaderDashboard from "../headerdashboard";
-import MenuDashboard from "../menudashboard";
+
 import { IRoom } from "../../interface/room";
 import { ListRoom } from "../../service/room";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
 
 type Props = {
   updateShowtimes: (id: number | string, data: IShowTime) => void;

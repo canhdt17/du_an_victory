@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import Logo from "../logo";
-import HeaderDashboard from "../headerdashboard";
-import MenuDashboard from "../menudashboard";
+
 import { useForm } from "react-hook-form";
 import { IShowTime } from "../../interface/shotime";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { IRoom } from "../../interface/room";
 import { ListRoom } from "../../service/room";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
 
 type Props = {
   addShowTime: (showData: IShowTime) => void;

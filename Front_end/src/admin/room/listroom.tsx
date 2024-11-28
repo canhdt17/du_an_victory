@@ -45,6 +45,7 @@ const ListRooms: React.FC<Props> = ({ rooms, loading, error, deleteRooms }) => {
                 <td>{room.area_id}</td>
                 <td>{room.total_seat}</td>
                 <td>
+                <div className="action-buttons">
                   <NavLink to={`/admin/room/edit/${room.id}`}>
                     <button type="button" className="btn btn-warning">
                       Edit
@@ -57,6 +58,7 @@ const ListRooms: React.FC<Props> = ({ rooms, loading, error, deleteRooms }) => {
                   >
                     Delete
                   </button>
+                  </div>
                 </td>
               </tr>
             ))

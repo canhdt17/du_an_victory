@@ -48,6 +48,7 @@ const ListCategoryMovie: React.FC<Props> = ({
                 <td>{index + 1}</td>
                 <td>{category.name_category}</td>
                 <td>
+                <div className="action-buttons">
                   <NavLink to={`/admin/createmovie/edit/${category.id}`}>
                     <button type="button" className="btn btn-warning me-2">
                       Cập nhật
@@ -60,6 +61,7 @@ const ListCategoryMovie: React.FC<Props> = ({
                   >
                     Xóa
                   </button>
+                  </div>
                 </td>
               </tr>
             ))
