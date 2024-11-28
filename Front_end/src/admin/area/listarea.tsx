@@ -10,6 +10,8 @@ type Props = {
 };
 
 const ListAreas: React.FC<Props> = ({ areas, loading, error, deleteArea }) => {
+  const safeAreas = Array.isArray(areas) ? areas : [];
+
   return (
     <div>
       <div className="table-responsive small">
@@ -32,27 +34,26 @@ const ListAreas: React.FC<Props> = ({ areas, loading, error, deleteArea }) => {
                 <td colSpan={3}>Lỗi: {error}</td>
               </tr>
             )}
-            {areas.length > 0 ? (
-              areas.map((area, index) => (
+            {safeAreas.length > 0 ? (
+              safeAreas.map((area, index) => (
                 <tr key={area.area_id}>
                   <td>{index + 1}</td>
                   <td>{area.area_name}</td>
                   <td>
-                    <NavLink to={`/admin/area/edit/${area.area_id}`}>
+                    <div className="action-buttons">
+                      <NavLink to={`/admin/area/edit/${area.area_id}`}>
+                        <button type="button" className="btn btn-warning">
+                          Cập nhật
+                        </button>
+                      </NavLink>
                       <button
                         type="button"
-                        className="btn btn-warning text-center"
+                        className="btn btn-danger"
+                        onClick={() => deleteArea(area.area_id)}
                       >
-                        Cập nhật
+                        Xóa
                       </button>
-                    </NavLink>
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() => deleteArea(area.area_id)}
-                    >
-                      Xóa
-                    </button>
+                    </div>
                   </td>
                 </tr>
               ))

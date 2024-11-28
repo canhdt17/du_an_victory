@@ -56,16 +56,32 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+.action-buttons .btn-danger {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 0.75rem; 
+  width: 80px; 
+  height: auto; 
+}
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.action-buttons .btn-danger:hover {
+  background-color: #c82333;
+}
+.table-container {
+  height: calc(100% - 100px); 
+  overflow-y: auto; 
+  position: relative;
+}
+
+.table th {
+  background-color: #3c3c3c; 
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  position: sticky;
+  top: 0; 
+  z-index: 2; 
 }

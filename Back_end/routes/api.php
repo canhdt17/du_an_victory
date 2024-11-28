@@ -9,14 +9,19 @@ use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\ShowtimeController ;
 use App\Http\Controllers\Api\MovieController;
 use App\Http\Controllers\Api\RoomController;
-use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\BaseController;
+use App\Http\Controllers\Api\BookingController;
+use App\Http\Controllers\Api\BookingDetailController;
 use App\Http\Controllers\Api\ComboFoodController;
 use App\Http\Controllers\Api\HoTroController;
 use App\Http\Controllers\Api\KhuyenMaiController;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\Api\UserController;
+
+use App\Http\Controllers\Api;
+use App\Http\Controllers\Api\CinemaController;
 // use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -51,7 +56,8 @@ Route::apiResource('tin-tuc', TintucController::class);
 
 
 Route::apiResource('rooms', RoomController::class);
-Route::apiResource('areas', AreaController::class);
+Route::apiResource('bases', BaseController::class);
+Route::apiResource('cinemas', CinemaController::class);
 Route::apiResource('banners', BannerController::class);
 Route::apiResource('combofoods', ComboFoodController::class);
 Route::apiResource('supports', HoTroController::class);
@@ -64,5 +70,8 @@ Route::get('/phim-dang-chieu', [MovieController::class, 'phimDangChieu']);
 Route::get('/phim-sap-chieu', [MovieController::class, 'phimSapChieu']);
 Route::get('/lastest-tin-tuc', [TintucController::class, 'LastestTinTuc']);
 Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
-
+// dat ve
+Route::post('/bookings', [BookingController::class, 'store'])->middleware('auth:sanctum');
+Route::get('/bookings/{id}', [BookingDetailController::class, 'show']);
+Route::get('/bookings-by-user/{id}', [BookingDetailController::class, 'showByUser']);
 

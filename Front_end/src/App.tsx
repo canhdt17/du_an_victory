@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./compoents/page";
-import Dashboard from "./admin/dashboard";
 import MovieDetail from "./moviedetail/moviedetail";
 
 import Area from "./admin/area/area";
@@ -10,10 +10,9 @@ import UpdateArea from "./admin/area/updatearea";
 import Category from "./admin/category movie/category";
 import AddMovieCategory from "./admin/category movie/addmoviecategory";
 import UpdateCategoryMovie from "./admin/category movie/updatecategorymovie";
-import SeatType from "./admin/seat_type/seat_type";
-import CreateSeatType from "./admin/seat_type/create_seat_type";
-import UpdateSeatType from "./admin/seat_type/updateseattype";
-import CreateSeat from "./admin/seat/CreatSeat";
+import SeatType from "./admin/seat_type/SeatTypes";
+import CreateSeatType from "./admin/seat_type/AddSeatTypes";
+import UpdateSeatType from "./admin/seat_type/UpdateSeatTypes";
 import ShowTime from "./admin/showtime/showtime";
 import CrateShowTime from "./admin/showtime/createshowtime";
 import UserList from "./admin/user/UserList";
@@ -35,15 +34,24 @@ import {
   AddCategoryMovie,
   UpdateCategoryMovies,
 } from "./service/categorymovie";
-import { ShowTimeAdd } from "./service/showtime";
+import { ShowTimeAdd, ShowTimeUpdate } from "./service/showtime";
 import Room from "./admin/room/room";
 import CreateRoom from "./admin/room/AddRoom";
 import UpdateRoom from "./admin/room/updateroom";
+import { SeatAdd, SeatUpdate } from "./service/seat";
+import AddSeat from "./admin/seat/AddSeat";
+import UpdateSeat from "./admin/seat/UpdateSeat";
 import Seat from "./admin/seat/seat";
+import { IMovie } from "./interface/movie";
+import { MovieAdd, MovieUpdate } from "./service/movie";
 
-
+import UpdateShowtime from "./admin/showtime/updateshowtime";
+import Dashboard from "./admin/movie/dashboard";
+import AddMovie from "./admin/movie/Addmovie";
+import EditMovie from "./admin/movie/EditMovie";
 
 function App() {
+  const [movies, setMovies] = useState<IMovie[]>([]);
   const [rooms, setRooms] = useState<IRoom[]>([]);
   const [areas, setAreas] = useState<IArea[]>([]);
   const [seatTypes, setSeatTypes] = useState<ISeatType[]>([]);
@@ -52,6 +60,35 @@ function App() {
   const [seats, setSeats] = useState<ISeat[]>([]);
   const navigate = useNavigate();
 
+  //Danh muc phim
+  const addMovie = async (movieData: IMovie) => {
+    try {
+      const movie = await MovieAdd(movieData);
+      alert("Thêm phim thành công.");
+      setMovies([...movies, movie]);
+      navigate("/admin/dashboard");
+    } catch (error) {
+      console.log(error);
+      alert("Lỗi khi thêm phim.");
+    }
+  };
+
+  const editMovie = async (id: number | string, movieData: IMovie) => {
+    try {
+      const movieDta = await MovieUpdate(id, movieData);
+      alert("Cập nhật thành công.");
+      const newMovies = movies.map((movie) =>
+        movie.id == id ? movieDta : movie
+      );
+      setMovies(newMovies);
+      navigate("/admin/dashboard");
+    } catch (error) {
+      console.log(error);
+      alert("Lỗi khi cập nhật phim.");
+    }
+  };
+
+  //ROOM
   useEffect(() => {
     const fetchData = async () => {
       const roomsData = await ListRoom();
@@ -60,7 +97,6 @@ function App() {
     fetchData();
   }, []);
 
-  //ROOM
   const addRoom = async (roomData: IRoom) => {
     try {
       const room = await AddRoom(roomData);
@@ -72,9 +108,9 @@ function App() {
     }
   };
 
-  const updateRoom = async (roomData: IRoom, id: number | string) => {
+  const updateRoom = async (id: number | string, roomData: IRoom) => {
     try {
-      const roomDta = await updateRoom(roomData, id);
+      const roomDta = await UpdateRoom(id, roomData);
       alert("Cập nhật thành công.");
       const newRooms = rooms.map((room) => (room.id === id ? roomDta : room));
       setRooms(newRooms);
@@ -84,7 +120,7 @@ function App() {
     }
   };
 
-  //AREA
+  //AREA - KHU VỰC ( DONE )
   const addArea = async (areaData: IArea) => {
     try {
       const area = await AddArea(areaData);
@@ -96,11 +132,13 @@ function App() {
     }
   };
 
-  const updateArea = async (area_id: number | string,areaData: IArea) => {
+  const updateArea = async (area_id: number | string, areaData: IArea) => {
     try {
-      const areaDta = await AreaUpdate(area_id,areaData );
+      const areaDta = await AreaUpdate(area_id, areaData);
       alert("Cập nhật thành công.");
-      const newAreas = areas.map((area) => (area.area_id === area_id ? areaDta : area));
+      const newAreas = areas.map((area) =>
+        area.area_id === area_id ? areaDta : area
+      );
       setAreas(newAreas);
       navigate("/admin/area");
     } catch (error) {
@@ -108,7 +146,7 @@ function App() {
     }
   };
 
-  //SEAT TYPE
+  //SEAT TYPE - KIỂU GHẾ ()
   const addSeatType = async (seatTypeData: ISeatType) => {
     try {
       const seatType = await SeatsTypeAdd(seatTypeData);
@@ -137,7 +175,7 @@ function App() {
     }
   };
 
-  // category
+  // CATEGORY - DANH MỤC ( DONE )
   const addCategoryMovie = async (categoryMovie: ICategoryMovie) => {
     try {
       const movieType = await AddCategoryMovie(categoryMovie);
@@ -160,7 +198,7 @@ function App() {
       );
       alert("Cập nhật thành công.");
       const newCategoryMovies = categoryMovies.map((categoryMovie) =>
-        categoryMovie.id === id ? updatedCategoryMovie : categoryMovie
+        categoryMovie.cate_id === id ? updatedCategoryMovie : categoryMovie
       );
       setCategoryMovies(newCategoryMovies);
       navigate("/admin/category");
@@ -169,24 +207,56 @@ function App() {
     }
   };
 
+  // SHOWTIME
   const addShowTime = async (showTimeData: IShowTime) => {
     try {
       const showTime = await ShowTimeAdd(showTimeData);
       alert("Thêm xuất chiếu phim thành công.");
       setShowTimes([...showTimes, showTime]);
       navigate("/admin/showtime");
+    } catch (error: any) {
+      console.error(error);
+      alert(`Lỗi khi thêm xuất chiếu phim: ${error.message}`);
+    }
+  };
+
+  const updateShowtime = async (
+    showtimeDta: IShowTime,
+    id: number | string
+  ) => {
+    try {
+      const updatedShowtime = await ShowTimeUpdate(showtimeDta, id);
+      alert("Cập nhật xuất chiếu phim thành công.");
+      const newShowtimes = showTimes.map((showtime) =>
+        showtime.id === id ? updatedShowtime : showtime
+      );
+      setShowTimes(newShowtimes);
+      navigate("/admin/showtime");
+    } catch (error: any) {
+      console.error(error);
+      alert(`Lỗi khi cập nhật xuất chiếu phim: ${error.message}`);
+    }
+  };
+
+  //SEAT - GHẾ ( )
+  const addSeat = async (seatData: ISeat) => {
+    try {
+      const seat = await SeatAdd(seatData);
+      alert("Thêm ghế phim thành công.");
+      setSeats([...seats, seat]);
+      navigate("/admin/seat");
     } catch (error) {
       console.log(error);
     }
   };
-
-
-  //SEAT
-  const addSeat = async (seatData: ISeat) => {
+  const updateSeat = async (seatData: ISeat, id: number | string) => {
     try {
-      const seat = await addSeat(seatData);
-      alert("Thêm ghế phim thành công.");
-      setSeats([...seats, seat]);
+      const updatedSeat = await SeatUpdate(seatData, id);
+      alert("Cập nhật ghế thành công.");
+      const newSeats = seats.map((seat) =>
+        seat.id === id ? updatedSeat : seat
+      );
+      setSeats(newSeats);
       navigate("/admin/seat");
     } catch (error) {
       console.log(error);
@@ -196,11 +266,19 @@ function App() {
   return (
     <>
       <Routes>
-        {/* trang chu admin - trang giao dien phim */}
+        {/* trang chu admin - trang giao dien phim - phim  */}
         <Route path="/" element={<HomePage></HomePage>}></Route>
         <Route
           path="/admin/dashboard"
           element={<Dashboard></Dashboard>}
+        ></Route>
+        <Route
+          path="/admin/dashboard/addmovie"
+          element={<AddMovie onAddMovie={addMovie}></AddMovie>}
+        ></Route>
+        <Route
+          path="/admin/dashboard/edit/:id"
+          element={<EditMovie onEditMovie={editMovie}></EditMovie>}
         ></Route>
 
         {/* chi tiet phim */}
@@ -210,18 +288,18 @@ function App() {
         ></Route>
 
         {/* phong */}
-        <Route path="/room" element={<Room rooms={rooms}></Room>}></Route>
+        <Route path="/room" element={<Room></Room>}></Route>
         <Route
           path="/admin/room/createroom"
           element={<CreateRoom onAdd={addRoom}></CreateRoom>}
         ></Route>
         <Route
           path="/admin/room/edit/:id"
-          element={<UpdateRoom onUpdate={updateRoom}></UpdateRoom>}
+          element={<UpdateRoom updateRoom={updateRoom}></UpdateRoom>}
         ></Route>
 
         {/* Khu vuc */}
-        <Route path="/admin/area" element={<Area areas = {areas}></Area>}></Route>
+        <Route path="/admin/area" element={<Area></Area>}></Route>
         <Route
           path="/admin/area/createarea"
           element={<CreateArea addArea={addArea}></CreateArea>}
@@ -254,7 +332,7 @@ function App() {
         <Route path="/admin/seat_type" element={<SeatType></SeatType>}></Route>
         <Route
           path="/admin/create_type_seat"
-          element={<CreateSeatType addSeatType={addSeatType}></CreateSeatType>}
+          element={<CreateSeatType addSeatTypes={addSeatType}></CreateSeatType>}
         ></Route>
         <Route
           path="/admin/seat_type/edit/:id"
@@ -267,15 +345,35 @@ function App() {
         <Route path="/admin/seat" element={<Seat></Seat>}></Route>
         <Route
           path="/admin/creatseat"
-          element={<CreateSeat addSeats={addSeat}></CreateSeat>}
+          element={
+            <AddSeat
+              addCreateSeat={addSeat}
+              seat_types={[]}
+              rooms={[]}
+            ></AddSeat>
+          }
+        ></Route>
+        <Route
+          path="/admin/seat/edit/:id"
+          element={
+            <UpdateSeat
+              updateSeats={updateSeat}
+              seat_types={[]}
+              rooms={[]}
+            ></UpdateSeat>
+          }
         ></Route>
 
         {/* gio chieu */}
         <Route path="/admin/showtime" element={<ShowTime></ShowTime>}></Route>
         <Route
           path="/admin/showtime/createshowtime"
-          element={<CrateShowTime addShowTime={addShowTime}></CrateShowTime>}
-        ></Route>
+          element={<CrateShowTime addShowTime={addShowTime} />}
+        />
+        <Route
+          path="/admin/showtime/edit/:id"
+          element={<UpdateShowtime updateShowtimes={updateShowtime} />}
+        />
 
         {/* admin / quan li nguoi dung */}
         <Route path="/admin/user" element={<UserList />} />

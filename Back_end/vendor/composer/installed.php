@@ -3,7 +3,11 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
         'reference' => 'c00ffca3f5454ec2a00357e2aa09b84a45d8d9e7',
+=======
+        'reference' => '5cda08bb0a2c4996b17dae14f095727b48bb0630',
+>>>>>>> a7b73876e7b2527cfa2a82205fe8d95d8bb58d5e
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -382,7 +386,11 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
             'reference' => 'c00ffca3f5454ec2a00357e2aa09b84a45d8d9e7',
+=======
+            'reference' => '5cda08bb0a2c4996b17dae14f095727b48bb0630',
+>>>>>>> a7b73876e7b2527cfa2a82205fe8d95d8bb58d5e
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -518,7 +526,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../myclabs/deep-copy',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'nesbot/carbon' => array(
             'pretty_version' => '2.72.5',
@@ -1203,9 +1211,15 @@
             'dev_requirement' => false,
         ),
         'symfony/string' => array(
+<<<<<<< HEAD
             'pretty_version' => 'v6.4.15',
             'version' => '6.4.15.0',
             'reference' => '73a5e66ea2e1677c98d4449177c5a9cf9d8b4c6f',
+=======
+            'pretty_version' => 'v7.1.8',
+            'version' => '7.1.8.0',
+            'reference' => '591ebd41565f356fcd8b090fe64dbb5878f50281',
+>>>>>>> a7b73876e7b2527cfa2a82205fe8d95d8bb58d5e
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/string',
             'aliases' => array(),

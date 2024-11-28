@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Seat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class SeatController extends Controller
 {
@@ -13,7 +15,14 @@ class SeatController extends Controller
      */
     public function index()
     {
-        $seats = Seat::all();
+        $seats= DB::table('seats')
+        ->join('seat_types','seat_types.id','=','seats.seat_type_id')
+        ->whereNull('seats.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng seat_types
+        ->select('seats.*','seat_type_name')
+        ->orderByDesc('seats.id')
+        ->orderByDesc('seats.seat_type_id')
+        ->latest('seats.id')
+        ->paginate();
         return response()->json($seats);
     }
 

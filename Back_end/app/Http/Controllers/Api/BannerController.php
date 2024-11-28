@@ -34,7 +34,10 @@ class BannerController extends Controller
             'link'=> 'required',   
         ]);
 
-        $path_image = $request->file('image')->store('images');
+        // $path_image = $request->file('image')->store('images');
+        // $data['image'] = $path_image;
+        $file = $request->file('image');
+        $path_image = $file->getClientOriginalName();
         $data['image'] = $path_image;
 
         // them vao database
@@ -62,10 +65,8 @@ class BannerController extends Controller
        
         //neu cap nhap anh 
         if($request->hasFile('image')){
-            if (file_exists('storage/' . $banner->image)) {
-                unlink('storage/' . $banner->image);
-            }
-            $path_image = $request->file('image')->store('images');
+            $file = $request->file('image');
+            $path_image = $file->getClientOriginalName();
             $data['image'] = $path_image;
         }else{
             $data['image'] = $banner->image;

@@ -16,14 +16,14 @@ export const CategoryMovie = async () => {
 // ID
 export const CategoryMovieById = async (id: number | string) => {
   try {
-    const { data } = await api.get<{ categories: ICategoryMovie[] }>(
-      `categories/${id}`
-    );
-    return data;
+    const { data } = await api.get<{ category: ICategoryMovie }>(`categories/${id}`);
+    return data.category; 
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching category:", error);
+    return null; 
   }
 };
+
 
 //ADD
 export const AddCategoryMovie = async (categorymovieData: ICategoryMovie) => {
