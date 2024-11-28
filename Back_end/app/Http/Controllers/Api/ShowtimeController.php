@@ -16,13 +16,13 @@ class ShowtimeController extends Controller
         $showtimes= DB::table('showtimes')
         ->join('movies','movies.id','=','showtimes.movie_id')
         ->join('rooms','rooms.id','=','showtimes.room_id')
-        ->join('cinemas','cinemas.id','=','showtimes.cinemas_id')
+        ->join('base','base.id','=','showtimes.base_id')
         ->whereNull('showtimes.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng movies
-        ->select('showtimes.*','name_movie','room_name','cinemas_name')
+        ->select('showtimes.*','name_movie','room_name','base_name')
         ->orderByDesc('showtimes.id')
         ->orderByDesc('showtimes.movie_id')
         ->orderByDesc('showtimes.room_id')
-        ->orderByDesc('showtimes.cinemas_id')
+        ->orderByDesc('showtimes.base_id')
         ->latest('showtimes.id')
         ->paginate();
         return response()->json($showtimes);
@@ -39,7 +39,7 @@ class ShowtimeController extends Controller
             'showtime_date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
-            'cinemas_id' => 'required',
+            'base_id' => 'required',
         ]);
         // them vao database
         $showtime=showtime::query()->create($data);
@@ -51,7 +51,7 @@ class ShowtimeController extends Controller
      */
     public function show(showtime $showtime)
     {
-        $showtime->load(['movie','room','cinema']);
+        $showtime->load(['movie','room','base']);
         return response()->json(['showtime' => $showtime]);
     }
 
@@ -74,7 +74,7 @@ class ShowtimeController extends Controller
             'showtime_date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
-            'cinemas_id' => 'required',
+            'base_id' => 'required',
         ]);
         $showtime->update($data);
         return response()->json($showtime);
@@ -88,4 +88,36 @@ class ShowtimeController extends Controller
         $showtime->delete();
         return response()->json($showtime);
         }
+    public function getSeatShowtime(Request $request)
+    {
+        $listSeat=DB::table('showtimes')
+        ->join('rooms','rooms.id','=','showtimes.room_id')
+        ->join('rooms','rooms.id','=','seats.room_id')
+        ->whereNull('showtimes.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng movies
+        ->select('showtimes.*','seats.*')
+        ->where('movie_id','=',['movie_id' => $request->movie_id])
+        ->where('start_time','=',['start_time' => $request->start_time])
+        ->where('base_id','=',['base_id' => $request->base_id])
+        ->orderByDesc('showtimes.room_id')
+        ->get();
+        return response()->json($listSeat);
+
+        
+    }
+
+
+
+    public function getItems(Request $request)
+    {
+        // Lấy các ID từ query parameter
+        $idArray = explode(',', $request->query('ids'));
+
+        // // Xử lý các ID
+        // $items = Item::whereIn('id', $idArray)->get();
+
+        // Trả về dữ liệu
+        return response()->json($idArray);
+    }
+
+
     }
