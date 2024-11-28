@@ -74,5 +74,5 @@ Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
 // Route::post('/bookings', [BookingController::class, 'store'])->middleware('auth:sanctum');
 // Route::get('/bookings/{id}', [BookingDetailController::class, 'show']);
 // Route::get('/bookings-by-user/{id}', [BookingDetailController::class, 'showByUser']);
-Route::get('/getSeatShowtime', [ShowtimeController::class, 'getSeatShowtime']);
+Route::post('/getSeatShowtime', [ShowtimeController::class, 'getSeatShowtime']);
 
