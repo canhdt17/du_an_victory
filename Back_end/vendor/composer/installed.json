@@ -5914,7 +5914,7 @@
             },
             "time": "2024-09-25T14:20:29+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\CssSelector\\": ""
@@ -6149,7 +6149,7 @@
             },
             "time": "2024-09-25T14:20:29+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\EventDispatcher\\": ""
@@ -7638,7 +7638,7 @@
             },
             "time": "2024-11-13T13:31:21+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "Resources/functions.php"
@@ -8067,7 +8067,7 @@
                 "Resources/bin/yaml-lint"
             ],
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Yaml\\": ""
@@ -8454,7 +8454,6 @@
         "laravel/pint",
         "laravel/sail",
         "mockery/mockery",
-        "myclabs/deep-copy",
         "nunomaduro/collision",
         "phar-io/manifest",
         "phar-io/version",

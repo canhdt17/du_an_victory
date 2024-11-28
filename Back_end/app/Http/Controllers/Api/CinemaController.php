@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Cinema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -63,5 +64,4 @@ class CinemaController extends Controller
         $cinema->delete();
         return response()->json(['message' => 'Xóa thành công']);
     }
-
 }

@@ -19,7 +19,9 @@ use App\Http\Controllers\Api\KhuyenMaiController;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\CinemaController;
+
+use App\Http\Controllers\Api;
+use App\Http\Controllers\Api\CinemaController;
 // use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
