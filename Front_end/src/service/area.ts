@@ -4,7 +4,7 @@ import { IArea } from "../interface/area";
 //All
 export const ListArea = async () => {
   try {
-    const { data } = await api.get<IArea[]>("areas");
+    const { data } = await api.get<{areas:IArea[]}>("areas");
     return data;
   } catch (error) {
     console.log(error);
@@ -33,13 +33,13 @@ export const AddArea = async (areaData: IArea) => {
 };
 
 //Update
-export const AreaUpdate = async (area_id: number | string, areaData: IArea) => {
+export const AreaUpdate = async (areaData: IArea,area_id: number | string ) => {
   try {
-    const { data } = await api.put<{ area: IArea }>(
+    const { data } = await api.put<{ areas: IArea }>(
       `areas/${area_id}`,
       areaData
     );
-    return data.area; 
+    return data; 
   } catch (error) {
     console.log(error);
   }

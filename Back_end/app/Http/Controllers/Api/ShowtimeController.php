@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\showtime;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ShowtimeController extends Controller
 {
@@ -12,7 +13,16 @@ class ShowtimeController extends Controller
      */
     public function index()
     {
-        $showtimes = showtime::query()->latest('id')->paginate();
+        $showtimes= DB::table('showtimes')
+        ->join('movies','movies.id','=','showtimes.movie_id')
+        ->join('rooms','rooms.id','=','showtimes.room_id')
+        ->whereNull('showtimes.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng movies
+        ->select('showtimes.*','name_movie','room_name')
+        ->orderByDesc('showtimes.id')
+        ->orderByDesc('showtimes.movie_id')
+        ->orderByDesc('showtimes.room_id')
+        ->latest('showtimes.id')
+        ->paginate();
         return response()->json($showtimes);
     }
 
@@ -38,16 +48,17 @@ class ShowtimeController extends Controller
      */
     public function show(showtime $showtime)
     {
-        response()->json($showtime);
+        $showtime->load(['movie','room']);
+        return response()->json(['showtime' => $showtime]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(showtime $showtime)
-    {
-        return view('admin.showtime.edit' ,compact('showtime'));
-    }
+    // public function edit(showtime $showtime)
+    // {
+    //     return view('admin.showtime.edit' ,compact('showtime'));
+    // }
 
     /**
      * Update the specified resource in storage.

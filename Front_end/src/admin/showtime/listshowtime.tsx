@@ -1,20 +1,23 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ShowTimeList } from "../../service/showtime";
 import { IShowTime } from "../../interface/shotime";
+import React from "react";
 
-type Props = {};
+type Props = {
+  showtimes: IShowTime[];
+  loading: boolean;
+  error: string | null;
+  updateShowtimes: (id: number | string, updateShowtime: IShowTime) => void;
+  deleteShowtimes: (id: number | string) => void;
+};
 
-const ListShowtime = (props: Props) => {
-  const [showtimes, setShowtimes] = useState<IShowTime[]>([]);
-  useEffect(() => {
-    (async () => {
-      const data = await ShowTimeList();
-      setShowtimes(data);
-    })();
-  }, []);
+const ListShowtime: React.FC<Props> = ({
+  showtimes,
+  loading,
+  error,
+  deleteShowtimes,
+}) => {
   return (
     <div>
       <div className="table-responsive small">
@@ -31,8 +34,18 @@ const ListShowtime = (props: Props) => {
             </tr>
           </thead>
           <tbody className="text-center">
-            {Array.isArray(showtimes) &&
-              showtimes.map((showtime: IShowTime, i: number) => (
+            {loading && (
+              <tr>
+                <td colSpan={3}>Đang tải...</td>
+              </tr>
+            )}
+            {error && (
+              <tr>
+                <td colSpan={3}>Lỗi: {error}</td>
+              </tr>
+            )}
+            {showtimes.length > 0 ? (
+              showtimes.map((showtime, i: number) => (
                 <tr key={showtime.id}>
                   <td>{i + 1}</td>
                   <td>{showtime.movie_id}</td>
@@ -41,6 +54,7 @@ const ListShowtime = (props: Props) => {
                   <td>{showtime.start_time}</td>
                   <td>{showtime.end_time}</td>
                   <td>
+                  <div className="action-buttons">
                     <NavLink to={`/admin/showtime/edit/${showtime.id}`}>
                       <button
                         type="button"
@@ -49,9 +63,22 @@ const ListShowtime = (props: Props) => {
                         Cập nhật
                       </button>
                     </NavLink>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() => deleteShowtimes(showtime.id)}
+                    >
+                      Xóa
+                    </button>
+                    </div>
                   </td>
                 </tr>
-              ))}
+              ))
+            ) : (
+              <tr>
+                <td colSpan={3}>Không có dữ liệu</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

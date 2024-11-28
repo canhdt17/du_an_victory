@@ -1,23 +1,24 @@
-import { useEffect, useState } from "react";
-import MenuDashboard from "../menudashboard";
-import HeaderDashboard from "../headerdashboard";
-import Logo from "../logo";
+import React, { useEffect, useState } from "react";
+
 import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { ListArea } from "../../service/area";
 import { IRoom } from "../../interface/room";
 import { IArea } from "../../interface/area";
+import Logo from "../movie/logo";
+import HeaderDashboard from "../movie/headerdashboard";
+import MenuDashboard from "../movie/menudashboard";
 
 type Props = {
   onAdd: (roomsData: IRoom) => void;
 };
 const roomScheama = Joi.object({
-  room_name: Joi.string().required(),
-  area_id: Joi.string().required(),
-  total_seat: Joi.number().required(),
+  room_name: Joi.string().required().label("Room Name "),
+  area_id: Joi.string().required().label("ID Area"),
+  total_seat: Joi.number().required().label(" Total Seat"),
 });
-const CreateRoom = ({ onAdd }: Props) => {
+const CreateRoom: React.FC<Props> = ({ onAdd }) => {
   const {
     register,
     handleSubmit,

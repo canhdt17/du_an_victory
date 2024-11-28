@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
-use App\Http\Controllers\Controller;
 use App\Models\KhuyenMai;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class KhuyenMaiController extends Controller
 {
@@ -25,18 +26,18 @@ class KhuyenMaiController extends Controller
         $data = $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => '',
+            'image' => 'required',
             'time_date' => 'required',
         ]);
-        if($request->hasFile('image')){
-            $path_image = $request->file('image')->store('images');
-            $data['image'] = $path_image;
-        }
+
+        $file = $request->file('image');
+        $path_image = $file->getClientOriginalName();
+        $data['image'] = $path_image;
         KhuyenMai::create($data);
         return response()->json([
             'message' => 'Thêm mới thành công'
         ],200);
-        
+
     }
 
     /**
@@ -54,7 +55,21 @@ class KhuyenMaiController extends Controller
     public function update(Request $request, string $id)
     {
         $khuyenmai = KhuyenMai::query()->findOrFail($id);
-        $khuyenmai->update(request()->all());
+        $data = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'time_date' => 'required',
+        ]);
+        if($request->hasFile('image')){
+   
+            $file = $request->file('image');
+            $path_image = $file->getClientOriginalName();
+            $data['image'] = $path_image;
+        }else{
+            $data['image'] = $khuyenmai->image;
+        }
+
+        $khuyenmai->update($data);
         return response()->json($khuyenmai);
     }
 
@@ -68,4 +83,8 @@ class KhuyenMaiController extends Controller
             'message'=> 'Xóa thành công'
         ]);
     }
+    public function LastestKM(){
+        $LastKMs = KhuyenMai::orderByDesc('id')->take(4)->get();
+        return response()->json($LastKMs);
+       }
 }
