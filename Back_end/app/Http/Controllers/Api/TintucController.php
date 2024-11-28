@@ -12,18 +12,34 @@ class TintucController extends Controller
    // Lấy danh sách tất cả tin tức
    public function index()
    {
-       $tinTuc = TinTuc::all();
-       return response()->json($tinTuc, 200);
+    try {
+        $tinTucs = TinTuc::all(); // Lấy tất cả các tin tức
+        return response()->json($tinTucs, 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Đã xảy ra lỗi khi lấy danh sách tin tức',
+            'error' => $e->getMessage()
+        ], 500);
+    }
    }
 
    // Lấy thông tin của một tin tức
    public function show($id)
    {
-       $tinTuc = TinTuc::find($id);
-       if (!$tinTuc) {
-           return response()->json(['message' => 'Tin tức không tồn tại'], 404);
-       }
-       return response()->json($tinTuc, 200);
+    try {
+        $tinTuc = TinTuc::find($id); // Tìm tin tức theo ID
+        if (!$tinTuc) {
+            return response()->json(['message' => 'Tin tức không tồn tại'], 404);
+        }
+
+        return response()->json($tinTuc, 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Đã xảy ra lỗi khi lấy tin tức',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+
    }
 
    // Tạo mới tin tức

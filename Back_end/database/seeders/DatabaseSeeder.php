@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\showtime;
 use Illuminate\Database\Seeder;
+use Database\Seeders\TinTucSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +21,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        showtime::factory(5)->create();
+        // showtime::factory(5)->create();
+        $this->call([
+            TinTucSeeder::class
+        ]);
     }
 }
