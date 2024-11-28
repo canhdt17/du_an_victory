@@ -61,9 +61,9 @@ class MovieController extends Controller
 
         // $path_image = $request->file('image')->store('images');
         // $data['image'] = $path_image;
-        $file = $request->file('image');
-        $path_image = $file->getClientOriginalName();
-        $data['image'] = $path_image;
+        // $file = $request->file('image');
+        // $path_image = $file->getClientOriginalName();
+        // $data['image'] = $path_image;
         // them vao database
         $movie=Movie::query()->create($data);
         return response()->json($movie);
@@ -116,9 +116,9 @@ class MovieController extends Controller
         // }
         if($request->hasFile('image')){
    
-            $file = $request->file('image');
-            $path_image = $file->getClientOriginalName();
-            $data['image'] = $path_image;
+            // $file = $request->file('image');
+            // $path_image = $file->getClientOriginalName();
+            $data['image'] = $request->image;
         }else{
             $data['image'] = $movie->image;
         }

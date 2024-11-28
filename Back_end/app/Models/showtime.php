@@ -19,7 +19,6 @@ class showtime extends Model
         'showtime_date',
         'start_time',
         'end_time',
-        'base_id'
     ];
     public function movie():BelongsTo
     {
@@ -29,10 +28,10 @@ class showtime extends Model
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
-    public function cinemas():BelongsTo
-    {
-        return $this->belongsTo(Cinema::class,'base_id');
-    }
+    // public function cinemas():BelongsTo
+    // {
+    //     return $this->belongsTo(Cinema::class,'base_id');
+    // }
     // public function movie()
     // {
     //     return $this->belongsTo(Movie::class);
