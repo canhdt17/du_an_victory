@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
+class ComposerStaticInit27ddd7ce61e57896ae3e274856e0014c
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -544,11 +544,12 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Controllers\\Admin\\SeatTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SeatTypeController.php',
         'App\\Http\\Controllers\\Admin\\ShowtimeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ShowtimeController.php',
         'App\\Http\\Controllers\\Admin\\VoucherController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/VoucherController.php',
-        'App\\Http\\Controllers\\Api\\AreaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AreaController.php',
         'App\\Http\\Controllers\\Api\\BannerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/BannerController.php',
+        'App\\Http\\Controllers\\Api\\BaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/BaseController.php',
         'App\\Http\\Controllers\\Api\\BookingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/BookingController.php',
         'App\\Http\\Controllers\\Api\\BookingDetailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/BookingDetailController.php',
         'App\\Http\\Controllers\\Api\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/CategoryController.php',
+        'App\\Http\\Controllers\\Api\\CinemaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/CinemaController.php',
         'App\\Http\\Controllers\\Api\\ComboFoodController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ComboFoodController.php',
         'App\\Http\\Controllers\\Api\\HoTroController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/HoTroController.php',
         'App\\Http\\Controllers\\Api\\KhuyenMaiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/KhuyenMaiController.php',
@@ -580,24 +581,26 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Requests\\UpdateSeatRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateSeatRequest.php',
         'App\\Http\\Requests\\UpdateSeatTypeRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateSeatTypeRequest.php',
         'App\\Http\\Requests\\UpdateVoucherRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateVoucherRequest.php',
-        'App\\Models\\Area' => __DIR__ . '/../..' . '/app/Models/Area.php',
         'App\\Models\\Banner' => __DIR__ . '/../..' . '/app/Models/Banner.php',
+        'App\\Models\\Base' => __DIR__ . '/../..' . '/app/Models/Base.php',
         'App\\Models\\Booking' => __DIR__ . '/../..' . '/app/Models/Booking.php',
         'App\\Models\\BookingDetail' => __DIR__ . '/../..' . '/app/Models/BookingDetail.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
+        'App\\Models\\Cinema' => __DIR__ . '/../..' . '/app/Models/Cinema.php',
         'App\\Models\\ComboFood' => __DIR__ . '/../..' . '/app/Models/ComboFood.php',
         'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/Models/Comment.php',
         'App\\Models\\HoTro' => __DIR__ . '/../..' . '/app/Models/HoTro.php',
         'App\\Models\\KhuyenMai' => __DIR__ . '/../..' . '/app/Models/KhuyenMai.php',
-        'App\\Models\\Payment' => __DIR__ . '/../..' . '/app/Models/Payment.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\Room' => __DIR__ . '/../..' . '/app/Models/Room.php',
         'App\\Models\\Seat' => __DIR__ . '/../..' . '/app/Models/Seat.php',
         'App\\Models\\SeatType' => __DIR__ . '/../..' . '/app/Models/SeatType.php',
+        'App\\Models\\StatusSeat' => __DIR__ . '/../..' . '/app/Models/StatusSeat.php',
         'App\\Models\\TinTuc' => __DIR__ . '/../..' . '/app/Models/TinTuc.php',
         'App\\Models\\Type' => __DIR__ . '/../..' . '/app/Models/Type.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Voucher' => __DIR__ . '/../..' . '/app/Models/Voucher.php',
+        'App\\Models\\movie' => __DIR__ . '/../..' . '/app/Models/movie.php',
         'App\\Models\\showtime' => __DIR__ . '/../..' . '/app/Models/showtime.php',
         'App\\Policies\\KhuyenMaiPolicy' => __DIR__ . '/../..' . '/app/Policies/KhuyenMaiPolicy.php',
         'App\\Policies\\SeatPolicy' => __DIR__ . '/../..' . '/app/Policies/SeatPolicy.php',
@@ -726,6 +729,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Database\\Factories\\SeatFactory' => __DIR__ . '/../..' . '/database/factories/SeatFactory.php',
         'Database\\Factories\\SeatTypeFactory' => __DIR__ . '/../..' . '/database/factories/SeatTypeFactory.php',
         'Database\\Factories\\ShowtimeFactory' => __DIR__ . '/../..' . '/database/factories/ShowtimeFactory.php',
+        'Database\\Factories\\StatusSeatFactory' => __DIR__ . '/../..' . '/database/factories/StatusSeatFactory.php',
         'Database\\Factories\\TypeFactory' => __DIR__ . '/../..' . '/database/factories/TypeFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Factories\\VoucherFactory' => __DIR__ . '/../..' . '/database/factories/VoucherFactory.php',
@@ -6378,7 +6382,6 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Symfony\\Component\\String\\Inflector\\FrenchInflector' => __DIR__ . '/..' . '/symfony/string/Inflector/FrenchInflector.php',
         'Symfony\\Component\\String\\Inflector\\InflectorInterface' => __DIR__ . '/..' . '/symfony/string/Inflector/InflectorInterface.php',
         'Symfony\\Component\\String\\LazyString' => __DIR__ . '/..' . '/symfony/string/LazyString.php',
-        'Symfony\\Component\\String\\Resources\\WcswidthDataGenerator' => __DIR__ . '/..' . '/symfony/string/Resources/WcswidthDataGenerator.php',
         'Symfony\\Component\\String\\Slugger\\AsciiSlugger' => __DIR__ . '/..' . '/symfony/string/Slugger/AsciiSlugger.php',
         'Symfony\\Component\\String\\Slugger\\SluggerInterface' => __DIR__ . '/..' . '/symfony/string/Slugger/SluggerInterface.php',
         'Symfony\\Component\\String\\UnicodeString' => __DIR__ . '/..' . '/symfony/string/UnicodeString.php',
@@ -6694,9 +6697,9 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9c491b8531eec05ba41a11d9276a5749::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9c491b8531eec05ba41a11d9276a5749::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit9c491b8531eec05ba41a11d9276a5749::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit27ddd7ce61e57896ae3e274856e0014c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit27ddd7ce61e57896ae3e274856e0014c::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit27ddd7ce61e57896ae3e274856e0014c::$classMap;
 
         }, null, ClassLoader::class);
     }
