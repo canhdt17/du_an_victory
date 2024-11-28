@@ -3,6 +3,7 @@
 
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\API\SeatTypeController;
 use App\Http\Controllers\Api\TintucController;
 use App\Http\Controllers\Api\TypeController;
@@ -52,7 +53,11 @@ Route::apiResource('types', TypeController::class);
 Route::apiResource('tin-tuc', TintucController::class);
 Route::get('tin-tucs', [TinTucController::class, 'index']); // Route để lấy danh sách tin tức
 Route::get('tin-tucs/{id}', [TinTucController::class, 'show']); // Route để hiển thị chi tiết tin tức
-
+Route::get('roles', [RoleController::class, 'index']);
+Route::get('roles/{id}', [RoleController::class, 'show']);
+Route::post('roles', [RoleController::class, 'store']);
+Route::put('/roles/{id}', [RoleController::class, 'update']);
+Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
 
 Route::apiResource('rooms', RoomController::class);
 Route::apiResource('areas', AreaController::class);
