@@ -28,6 +28,19 @@ class showtime extends Model
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
+    public function seat()
+    {
+        return $this->hasMany(Seat::class, 'room_id', 'room_id');
+    }
+    public function seatType()
+    {
+        return $this->hasMany(SeatType::class, 'id', 'id');
+    }
+    public function statusSeat()
+    {
+        return $this->hasMany(StatusSeat::class, 'showtime_id', 'id');
+        
+    }
     // public function cinemas():BelongsTo
     // {
     //     return $this->belongsTo(Cinema::class,'base_id');

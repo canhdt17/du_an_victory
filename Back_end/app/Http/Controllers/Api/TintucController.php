@@ -51,13 +51,14 @@ class TintucController extends Controller
            'content' => 'required',
            'imager' => 'required'
        ]);
-       $file = $request->file('imager');
-       $path_image = $file->getClientOriginalName();
+    //    $file = $request->file('imager');
+    //    $path_image = $file->getClientOriginalName();
+
        $tinTuc = TinTuc::create([
            'name_TinTuc' => $request->name_TinTuc,
            'sub_title' => $request->sub_title,
            'content' => $request->content,
-           'imager' => $path_image,
+           'imager' => $request->imager,
            'slug' => Str::slug($request->name_TinTuc),
        ]);
 
@@ -80,12 +81,12 @@ class TintucController extends Controller
        }
 
         //neu cap nhap anh 
-        if($request->hasFile('imager')){
-            $file = $request->file('imager');
-            $path_image = $file->getClientOriginalName();
-            $tinTuc->imager=$path_image;
+        $image= $request->image;
+        //neu cap nhap anh 
+        if( $image == ""){
+            $data['image'] = $tinTuc->image;
         }else{
-            $tinTuc->imager= $tinTuc->imager;
+            $data['image']=$image;
         }
        $tinTuc->name_TinTuc = $request->name_TinTuc;
        $tinTuc->sub_title = $request->sub_title;

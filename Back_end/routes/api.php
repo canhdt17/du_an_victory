@@ -23,6 +23,8 @@ use App\Http\Controllers\Api\UserController;
 
 use App\Http\Controllers\Api;
 use App\Http\Controllers\Api\CinemaController;
+use App\Http\Controllers\Api\InvoiceController;
+use App\Models\Invoice;
 // use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -72,6 +74,8 @@ Route::apiResource('seatTypes', SeatTypeController::class);
 Route::apiResource('seats', SeatController::class);
 Route::apiResource('khuyenmai', KhuyenMaiController::class);
 Route::apiResource('vouchers', VoucherController::class);
+Route::apiResource('invoices', InvoiceController::class);
+
 Route::get('/categories/{id}/movies', [MovieController::class, 'listFilmByCategory']);
 Route::get('/phim-dang-chieu', [MovieController::class, 'phimDangChieu']);
 Route::get('/phim-sap-chieu', [MovieController::class, 'phimSapChieu']);
@@ -81,5 +85,5 @@ Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
 // Route::post('/bookings', [BookingController::class, 'store'])->middleware('auth:sanctum');
 // Route::get('/bookings/{id}', [BookingDetailController::class, 'show']);
 // Route::get('/bookings-by-user/{id}', [BookingDetailController::class, 'showByUser']);
-Route::post('/getSeatShowtime', [ShowtimeController::class, 'getSeatShowtime']);
+Route::get('/getSeatShowtime/{ids}', [ShowtimeController::class, 'getSeatShowtime']);
 
