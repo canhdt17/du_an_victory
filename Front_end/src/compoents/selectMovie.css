@@ -1,5 +1,13 @@
 .select-movie-container * {
-    
-        color:#fff;
-    
+  color: #fff;
+}
+.select-movie-container .movie-info::after {
+  content: "";
+  background: #363333;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0.5;
 }

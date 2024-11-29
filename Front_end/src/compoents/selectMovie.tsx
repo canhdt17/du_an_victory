@@ -1,85 +1,41 @@
-import { FormSelect } from "react-bootstrap";
+import { Alert, FormSelect } from "react-bootstrap";
 import "./selectMovie.css";
 import { useEffect, useState } from "react";
 import anh from "../assets/anhphim.jpg";
+import constants from "../utils/constants";
+import {
+  IArea,
+  ICimena,
+  IMovie,
+  IRoom,
+  ISeat,
+  ITime,
+} from "./interface/orderMovie";
+import { useNavigate } from "react-router-dom";
+import { ISeatType } from "../interface/seat_type";
 
-interface ICemina {
-  id: number;
-  areaId: number;
-  name: string;
-  address: string;
-}
-interface IArea {
-  id: number;
-  name: string;
-}
-interface ITime {
-  id: number;
-  showTimeDate: string;
-  startTime: string;
-  endTime: string;
-}
-interface IRoom {
-  id: number;
-  showTimeDate: string;
-  startTime: string;
-  endTime: string;
-}
-interface ISeat {
-  id: number;
-  seatId: number;
-  showtimeId: number;
-  seatInfo: ISeatInfo;
-  seatType: ISeatType;
-  status: boolean;
-}
-
-interface ISeatInfo {
-  id: number;
-  seatTypeId: number;
-  seatNumber: number;
-  roomId: number;
-}
-interface ISeatType {
-  id: number;
-  seatTypeName: string;
-  seatPrice: string;
-}
-interface IMovie {
-    id: string | number;
-    name_movie: string;
-    image: string;
-    type_id: string | number;
-    duration: string;
-    nation: string;
-    director: string;
-    performer: string;
-    show:string;
-    content: string | null;
-    link_trailler: string;
-    category_id: string | number;
-    name_type: string;
-    name_category: string;
-  }
 const SelectMovie = () => {
+
+  const navigate = useNavigate()
   const [movieDetail, setMovieDetailt] = useState<IMovie>({
     id: 1,
-    name_movie: 'NGÀY XƯA CÓ MỘT CHUYỆN TÌNH',
+    name_movie: "NGÀY XƯA CÓ MỘT CHUYỆN TÌNH",
     image: anh,
     type_id: 1,
-    duration: '135 phút',
-    nation: 'Viet Nam',
-    director: 'Trịnh Đình Lê Minh',
-    performer: '',
-    show:'2024-10-31',
-    content: 'Ngày Xưa Có Một Chuyện Tình xoay quanh câu chuyện tình bạn, tình yêu giữa hai chàng trai và một cô gái từ thuở ấu thơ cho đến khi trưởng thành, phải đối mặt với những thử thách của số phận. Trải dài trong 4 giai đoạn từ năm 1987 - 2000, ba người bạn cùng tuổi - Vinh, Miền, Phúc đã cùng yêu, cùng bỡ ngỡ bước vào đời, va vấp và vượt qua.',
-    link_trailler: 'https://youtu.be/IcpKkCzvcU4?si=gtrJxkEn-1FJCEzg',
+    duration: "135 phút",
+    nation: "Viet Nam",
+    director: "Trịnh Đình Lê Minh",
+    performer: "",
+    show: "2024-10-31",
+    content:
+      "Ngày Xưa Có Một Chuyện Tình xoay quanh câu chuyện tình bạn, tình yêu giữa hai chàng trai và một cô gái từ thuở ấu thơ cho đến khi trưởng thành, phải đối mặt với những thử thách của số phận. Trải dài trong 4 giai đoạn từ năm 1987 - 2000, ba người bạn cùng tuổi - Vinh, Miền, Phúc đã cùng yêu, cùng bỡ ngỡ bước vào đời, va vấp và vượt qua.",
+    link_trailler: "https://youtu.be/IcpKkCzvcU4?si=gtrJxkEn-1FJCEzg",
     category_id: 5,
-    name_type: '3D',
-    name_category: 'Hành động',
+    name_type: "3D",
+    name_category: "Hành động",
   });
   const [selectedArea, setSelectedArea] = useState<IArea | null>(null);
-  const [selectedCimena, setSelectedCemina] = useState<ICemina | null>(null);
+  const [selectedCimena, setSelectedCimena] = useState<ICimena | null>(null);
   const [selectedTime, setSelectedTime] = useState<ITime | null>(null);
   const [selectedRoom, setSelectedRoom] = useState<IRoom | null>(null);
   const [selectedSeats, setSelectedSeats] = useState<ISeat[]>([]);
@@ -117,7 +73,7 @@ const SelectMovie = () => {
       name: "Đà Nẵng",
     },
   ]);
-  const [ceminas, setCeminas] = useState<ICemina[]>([
+  const [cimenas, setCimenas] = useState<ICimena[]>([
     {
       id: 1,
       areaId: 1,
@@ -515,6 +471,7 @@ const SelectMovie = () => {
   ]);
 
   const [totalPrice, setTotalPrice] = useState(0);
+  const [showNotifySelectSeat, setShowNotifySelectSeat] = useState(false);
 
   useEffect(() => {
     let total = 0;
@@ -525,12 +482,20 @@ const SelectMovie = () => {
     setTotalPrice(total);
   }, [selectedSeats]);
 
+  useEffect(() => {
+    if (showNotifySelectSeat) {
+      setTimeout(() => {
+        setShowNotifySelectSeat(false);
+      }, 5000);
+    }
+  }, [showNotifySelectSeat]);
+
   const handleChangeArea = (event) => {
     const area = areas?.find((e) => e.id.toString() === event.target.value);
     setSelectedArea(area ? area : null);
   };
-  const handleToggleSelectCemina = (ceminaId: ICemina) => {
-    setSelectedCemina(ceminaId);
+  const handleToggleSelectCimena = (cimenaId: ICimena) => {
+    setSelectedCimena(cimenaId);
   };
   const handleSelectTime = (timeId: ITime) => {
     setSelectedTime(timeId);
@@ -563,38 +528,58 @@ const SelectMovie = () => {
     return "bg-pink-700";
   };
 
-  const handlePayment =()=>{
-    const paymentData = {
-        selectedSeats:selectedSeats,
-        selectedCimena: selectedCimena,
-        selectedRoom: selectedRoom,
-        movieDetail: movieDetail,
-        totalPrice: totalPrice
+  const handlePayment = () => {
+    if (!selectedSeats || selectedSeats?.length === 0) {
+      setShowNotifySelectSeat(true);
+      return;
     }
-    localStorage.setItem('orderInfo',JSON.stringify(paymentData))
-  }
+    const paymentData = {
+      selectedSeats: selectedSeats,
+      selectedCimena: selectedCimena,
+      selectedRoom: selectedRoom,
+      movieDetail: movieDetail,
+      totalPrice: totalPrice,
+    };
+    localStorage.setItem(constants.orderInfoKey, JSON.stringify(paymentData));
+    navigate('/payment')
+  };
 
   return (
     <div className="select-movie-container p-6 mt-14">
-      <div className={`movie-info flex gap-8 mb-10 p-14`} style={{backgroundImage:` url(${anh})`, backgroundRepeat: 'no-repeat', backgroundSize:'100%', backgroundPosition:'center center'}}>
-        <div className="image w-80 h-auto flex-shrink-0 rounded-xl overflow-hidden">
+      <div
+        className={`movie-info flex gap-8 mb-10 p-14 relative`}
+        style={{
+          backgroundImage: ` url(${anh})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100%",
+          backgroundPosition: "center center",
+        }}
+      >
+        <div className="image w-80 h-auto flex-shrink-0 rounded-xl overflow-hidden z-[2]">
           <img src={anh} />
         </div>
-        <div className="movie-content flex flex-col gap-3">
+        <div className="movie-content flex flex-col gap-3 z-[2]">
           <div className="movie-name text-4xl font-semibold text-white mb-8">
             {movieDetail.name_movie}
           </div>
-          <div className="movie-duration">Thể loại: {movieDetail.name_category}</div>
-          <div className="movie-duration">Định dạng: {movieDetail.name_type}</div>
-          <div className="movie-duration">Thời lượng: {movieDetail.duration}</div>
+          <div className="movie-duration">
+            Thể loại: {movieDetail.name_category}
+          </div>
+          <div className="movie-duration">
+            Định dạng: {movieDetail.name_type}
+          </div>
+          <div className="movie-duration">
+            Thời lượng: {movieDetail.duration}
+          </div>
           <div className="movie-national">Quốc gia: {movieDetail.nation}</div>
           <div className="movie-director">Giám đốc: {movieDetail.director}</div>
           <div className="movie-show">Ngày phát hành: {movieDetail.show}</div>
-          <div className="movie-description">Nội dung: {movieDetail.content}
+          <div className="movie-description">
+            Nội dung: {movieDetail.content}
           </div>
           <div className="movie-trailler flex items-center gap-10 ">
             <div className="label">Trailler: </div>
-            
+
             <a
               className="!text-blue-600 underline"
               href={movieDetail.link_trailler}
@@ -606,19 +591,25 @@ const SelectMovie = () => {
         </div>
       </div>
 
-
       <div className="option-movie">
-        <div className="booking-title uppercase text-5xl font-bold text-center mt-20 mb-20">Đặt vé</div>
+        <div className="booking-title uppercase text-5xl font-bold text-center mt-20 mb-20">
+          Đặt vé
+        </div>
         <div className="area-list w-64">
           <label className="w-full font-semibold text-lg text-white">
             Chọn khu vực:
           </label>
           <FormSelect
+          defaultValue={undefined}
+            value={selectedArea?.id}
             className="text-black"
             onChange={(event) => {
               handleChangeArea(event);
             }}
           >
+            <option className="text-black" key={undefined} value={undefined}>
+                  Chọn khu vực
+                </option>
             {areas?.map((e) => {
               return (
                 <option className="text-black" key={e.id} value={e.id}>
@@ -629,11 +620,11 @@ const SelectMovie = () => {
           </FormSelect>
         </div>
         {selectedArea && (
-          <div className="cemina-list mt-4 w-1/5 min-w-64">
+          <div className="cimena-list mt-4 w-1/5 min-w-64">
             <label className="w-full font-semibold text-lg text-white">
               Chọn rạp:
             </label>
-            {ceminas?.map((e) => {
+            {cimenas?.map((e) => {
               return (
                 <div
                   className={`cimena-item p-3 rounded-xl mb-3 bg-[#313332] cursor-pointer hover:bg-[#3e403f] ${
@@ -641,7 +632,7 @@ const SelectMovie = () => {
                   }`}
                   key={e.id}
                   onClick={() => {
-                    handleToggleSelectCemina(e);
+                    handleToggleSelectCimena(e);
                   }}
                 >
                   <div className="cimena-name text-2xl mb-2">{e.name}</div>
@@ -697,7 +688,7 @@ const SelectMovie = () => {
               <div className="seat-type flex justify-center items-center gap-2">
                 <div
                   className={`seat-type-icon w-8 h-8 flex justify-center items-center rounded-lg bg-red-600`}
-                ></div>
+                >X</div>
                 <div className="name">Ghế đã đặt</div>
               </div>
               <div className="seat-type flex justify-center items-center gap-2">
@@ -735,11 +726,21 @@ const SelectMovie = () => {
               <div className="total-price">Tổng tiền: {totalPrice}đ</div>
             </div>
             <div className="payment mt-8 mx-auto flex justify-end ">
-              <button className="bg-red-600" onClick={()=>{handlePayment()}}>Thanh toán</button>
+              <button
+                className="bg-red-600"
+                onClick={() => {
+                  handlePayment();
+                }}
+              >
+                Thanh toán
+              </button>
             </div>
           </div>
         )}
       </div>
+      <Alert show={showNotifySelectSeat} key={"warning"} variant={"warning"}>
+        Bạn chưa chọn ghế
+      </Alert>
       {/* <div className="back-list mt-6"><button className="bg-slate-500">Quay lại</button></div> */}
     </div>
   );

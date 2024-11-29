@@ -51,6 +51,7 @@ import AddMovie from "./admin/movie/Addmovie";
 import EditMovie from "./admin/movie/EditMovie";
 import Product from "./compoents/product";
 import SelectMovie from "./compoents/selectMovie";
+import Payment from "./compoents/payment";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -271,6 +272,7 @@ function App() {
         {/* trang chu admin - trang giao dien phim - phim  */}
         <Route path="/" element={<HomePage><Product></Product></HomePage>}></Route>
         <Route path="/select-movie" element={<HomePage><SelectMovie></SelectMovie></HomePage>}></Route>
+        <Route path="/payment" element={<HomePage><Payment></Payment></HomePage>}></Route>
         <Route
           path="/admin/dashboard"
           element={<Dashboard></Dashboard>}
