@@ -17,8 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('base_id');
             $table->timestamps();
             $table->softDeletes();
-
-
             $table->foreign('base_id')->references('id')->on('bases')->onDelete('cascade');
         });
     }

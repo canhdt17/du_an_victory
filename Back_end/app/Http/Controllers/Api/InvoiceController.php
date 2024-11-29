@@ -57,7 +57,7 @@ class InvoiceController extends Controller
             $totalPrice = 0;
             $invoice = Invoice::create([
                 
-                'total_price' => 0,
+                'total_price' => $totalPrice,
                 'showtime_id' => $data['showtime_id'],
                 'user_id' => 1,
                 'combofood_id' => $data['combofood_id'],
@@ -97,9 +97,6 @@ class InvoiceController extends Controller
 
             }
             
-            foreach ($data['seats'] as $seat_id) {
-
-            }
             if (!empty($data['combofood_id'])) {
                     $combofood = ComboFood::find($data['combofood_id']);
                     $totalPrice += $combofood->combofood_price;
@@ -109,15 +106,7 @@ class InvoiceController extends Controller
                 $voucher = Voucher::find($data['voucher_id']);
                 $totalPrice += $voucher->discount_amount;
             }
-            $invoice = Invoice::create([
-                'showtime_id' => $data['showtime_id'],
-                'user_id' => 1,
-                'time_date' => now(),
-                'combofood_id' => $data['combofood_id'],
-                'voucher_id' => $data['voucher_id'],
-                'total_price' => $totalPrice,
 
-            ]);
             $invoice->total_price = $totalPrice;
             $invoice->save();  // Lưu lại thay đổi vào cơ sở dữ liệu
             DB::commit();
