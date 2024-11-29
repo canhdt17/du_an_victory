@@ -48,9 +48,10 @@ class ShowtimeController extends Controller
      */
     public function show(showtime $showtime)
     {
-        $showtime->load(['movie','room']);
+        $showtime->load(['movie','room','seat','seatType','statusSeat']);
         return response()->json(['showtime' => $showtime]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -84,23 +85,16 @@ class ShowtimeController extends Controller
         $showtime->delete();
         return response()->json($showtime);
         }
-    public function getSeatShowtime(Request $request)
+    public function getSeatShowtime($ids)
     {
-        // $listSeat = DB::table('showtimes')
-        // ->whereNull('showtimes.deleted_at') // Kiểm tra trạng thái xóa mềm cho bảng movies
-        // ->select('showtimes.*')
-        // ->where('movie_id', '=', $request->movie_id)
-        // ->where('start_time', '=', $request->start_time)
-        // ->where('showtime_date', '=', $request->showtime_date)
-        // // ->orderByDesc('showtimes.room_id')
-        // ->get();
-        $data = $request->validate([
-            'movie_id' => 'required',
-            'showtime_date' => 'required',
-            'start_time' => 'required',
-        ]);
-    
-    return response()->json($data);
+
+    // Tách danh sách ID bằng dấu phẩy
+    $idArray = explode(',', $ids);
+    $movie_id=$idArray[0];
+    $showtime_date=$idArray[1];
+    $start_time=$idArray[2];
+    $showtimeID = showtime::where('movie_id', '=' ,$movie_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->get();
+    return response()->json($showtimeID);
     
     }
 

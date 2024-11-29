@@ -42,10 +42,11 @@ class BaseController extends Controller
         //
         $base = Base::findOrFail($id);
 
-        // if (!$base) {
-        //     return response()->json(['message' => 'Base not found'], 404);
-        // }
-        return response()->json($base);
+        if (!$base) {
+            return response()->json(['message' => 'Base not found'], 404);
+        }else{
+            return response()->json($base);
+        }
     }
 
     /**

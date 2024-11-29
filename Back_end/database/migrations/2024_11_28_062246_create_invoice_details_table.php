@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('seat_id');
             $table->foreign('seat_id')->references('id')->on('seats')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('total_price');
             $table->softDeletes(); 
             $table->timestamps();
         });

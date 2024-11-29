@@ -4,10 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Invoice;
+use App\Models\StatusSeat;
+use App\Models\Seat;
+use App\Models\ComboFood;
+use App\Models\Voucher;
+
+
 use Illuminate\Http\Request;
 use App\Models\Invoice_detail;
+use Illuminate\Support\Facades\Auth;
 
 
 class InvoiceController extends Controller
@@ -36,18 +44,97 @@ class InvoiceController extends Controller
     {
         $data = $request->validate([
             'showtime_id'=> 'required',
-            'user_id'=> 'required',
-            'time_date'=> 'required',
-            'total_price'=> 'required',
-            'combofood_id'=> 'required',
-            'total_price'=> 'required',
+            'user_id' => 'required',
             'voucher_id'=> 'required',
-            'status'=> 'required',
+            'combofood_id'=> 'required',
+            'seats' => 'required|array',
+            'seats.*' => 'exists:seats,id',
         ]);
-        // them vao database
-        $invoice=Invoice::query()->create($data);
+        // $data = $request->all();
+        // $seats = $data['seat'] ?? null; // Nếu không có seat, gán null
 
-        return response()->json($invoice);
+        // if (is_array($seats) && !empty($seats)) {
+        //     // Xử lý seats
+        //     $firstSeat = $seats[0];
+        // } else {
+        //     // Xử lý khi không có seat
+        //     return response()->json(['error' => 'Seats data is invalid'], 400);
+        // }
+
+        DB::beginTransaction();
+        try{
+
+            $totalPrice = 0;
+            $invoice = Invoice::create([
+                'showtime_id' => $data['showtime_id'],
+                'user_id' => 1,
+                'time_date' => now(),
+                'combofood_id' => $data['combofood_id'],
+                'voucher_id' => $data['voucher_id'],
+                'total_price' => $totalPrice,
+
+            ]);
+            $unavailableSeats = [];
+
+            foreach ($data['seats'] as $seat_id) {
+                $seat= DB::table('seats')
+                    ->join('seat_types','seat_types.id','=','seats.seat_type_id')
+                    ->select('seats.*','seat_price')
+                    ->orderByDesc('seats.seat_type_id')
+                    ->where('seats.id', '=',  $seat_id)
+                    ->get();
+                // $seat->save();
+
+                $invoices_detail = Invoice_detail::create([
+                    'invoice_id' => $invoice->id,
+                    'seat_id' => $seat_id,
+                    'total_price' => 20000,
+                ]);
+
+                $totalPrice += $invoices_detail->total_price;
+
+
+            }
+            
+            foreach ($data['seats'] as $seat_id) {
+                $statusSeat = StatusSeat::create([
+                    'showtime_id' => $data['showtime_id'],
+                    'seat_id' => $seat_id,
+                    'status' => "Đã đặt",
+                ]);
+            }
+            if (!empty($data['combofood_id'])) {
+                    $combofood = ComboFood::find($data['combofood_id']);
+                    $totalPrice += $combofood->price;
+                }else{
+                    $totalPrice += 0;
+                }
+            
+            if (!empty($data['voucher_id'])) {
+                $voucher = Voucher::find($data['voucher_id']);
+                $totalPrice += $voucher->discount_amount;
+            }else{
+                $totalPrice += 0;
+            }
+            $invoice = Invoice::create([
+                'showtime_id' => $data['showtime_id'],
+                'user_id' => 1,
+                'time_date' => now(),
+                'combofood_id' => $data['combofood_id'],
+                'voucher_id' => $data['voucher_id'],
+                'total_price' => $totalPrice,
+
+            ]);
+            // $invoice->total_price = $totalPrice;
+            // $invoice->save();
+            DB::commit();
+            return response()->json([
+                'message' => 'Đặt vé thành công',
+            ], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
     }
 
     /**

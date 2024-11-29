@@ -63,14 +63,12 @@ class BannerController extends Controller
         $data = $request->validate([
             'link'=> 'required',   
         ]);
-       
+       $image= $request->image;
         //neu cap nhap anh 
-        if($request->hasFile('image')){
-            // $file = $request->file('image');
-            // $path_image = $file->getClientOriginalName();
-            $data['image'] = $request->image;
-        }else{
+        if( $image == ""){
             $data['image'] = $banner->image;
+        }else{
+            $data['image']=$image;
         }
 
 
