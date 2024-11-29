@@ -16,7 +16,6 @@ class Invoice extends Model
         'time_date',
         'total_price',
         'combofood_id',
-        'total_price',
         'voucher_id',
         'status',
     ];
