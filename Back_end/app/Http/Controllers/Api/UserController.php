@@ -13,6 +13,21 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function index(){
+        $user = User::all();
+        return response()->json($user);
+    }
+    public function update(Request $request, $id){
+        $data = $request->validate([
+            'role' => 'required',
+        ]);
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['message' => 'User không tồn tại'], 404);
+        }
+        $user->save();
+        return response()->json($user);
+    }
     public function login(Request $request){
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password,$user->password,[])) {

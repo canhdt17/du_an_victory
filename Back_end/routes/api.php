@@ -81,9 +81,6 @@ Route::get('/phim-dang-chieu', [MovieController::class, 'phimDangChieu']);
 Route::get('/phim-sap-chieu', [MovieController::class, 'phimSapChieu']);
 Route::get('/lastest-tin-tuc', [TintucController::class, 'LastestTinTuc']);
 Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
-// dat ve
-// Route::post('/bookings', [BookingController::class, 'store'])->middleware('auth:sanctum');
-// Route::get('/bookings/{id}', [BookingDetailController::class, 'show']);
-// Route::get('/bookings-by-user/{id}', [BookingDetailController::class, 'showByUser']);
 Route::get('/getSeatShowtime/{ids}', [ShowtimeController::class, 'getSeatShowtime']);
+Route::post('/user/{id}', [UserController::class, 'update']);
 
