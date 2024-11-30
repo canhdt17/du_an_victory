@@ -37,6 +37,8 @@ class ShowtimeController extends Controller
             'showtime_date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
+            'base_id' => 'required',
+
         ]);
         // them vao database
         $showtime=showtime::query()->create($data);
@@ -72,6 +74,8 @@ class ShowtimeController extends Controller
             'showtime_date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
+            'base_id' => 'required',
+
         ]);
         $showtime->update($data);
         return response()->json($showtime);
@@ -91,25 +95,13 @@ class ShowtimeController extends Controller
     // Tách danh sách ID bằng dấu phẩy
     $idArray = explode(',', $ids);
     $movie_id=$idArray[0];
-    $showtime_date=$idArray[1];
-    $start_time=$idArray[2];
-    $showtimeID = showtime::where('movie_id', '=' ,$movie_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->get();
+    $base_id=$idArray[1];
+    $showtime_date=$idArray[2];
+    $start_time=$idArray[3];
+    
+    $showtimeID = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->get();
     return response()->json($showtimeID);
     
-    }
-
-
-
-    public function getItems(Request $request)
-    {
-        // Lấy các ID từ query parameter
-        $idArray = explode(',', $request->query('ids'));
-
-        // // Xử lý các ID
-        // $items = Item::whereIn('id', $idArray)->get();
-
-        // Trả về dữ liệu
-        return response()->json($idArray);
     }
 
 

@@ -18,13 +18,21 @@ class RoomController extends Controller
     {
         $rooms= DB::table('rooms')
         ->join('bases','bases.id','=','rooms.bases_id')
+        ->join('seats','seats.room_id','=','rooms.id')
         ->whereNull('rooms.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng bases
-        ->select('rooms.*','base_name')
+        ->select('rooms.*','base_name',DB::raw('COUNT(seats.room_id) as seat_count'))
         ->orderByDesc('rooms.id')
         // ->orderByDesc('rooms.base_id')
         ->latest('rooms.id')
         ->paginate();
         return response()->json($rooms);
+
+    }
+    public function seatCountRoom()
+    {
+        $seatCount = DB::table('seats')->where('room_id', '=' , )->count();
+
+        return response()->json($seatCount);
 
     }
 
