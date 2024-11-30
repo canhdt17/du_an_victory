@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\BookingDetailController;
 use App\Http\Controllers\Api\ComboFoodController;
 use App\Http\Controllers\Api\HoTroController;
 use App\Http\Controllers\Api\KhuyenMaiController;
-use App\Http\Controllers\API\SeatController;
+use App\Http\Controllers\Api\SeatController;
 use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\Api\UserController;
 

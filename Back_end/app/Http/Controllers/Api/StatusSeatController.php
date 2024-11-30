@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\StatusSeat;
@@ -24,8 +24,8 @@ class StatusSeatController extends Controller
     {
         $request->validate([
             'showtime_id' => 'required|exists:showtimes,id',
-            'seat_id' => 'required|exists:seats,id', 
-            'status' => 'required|in:Ghế trống,Đã đặt,Đang chọn', 
+            'seat_id' => 'required|exists:seats,id',
+            'status' => 'required|in:Ghế trống,Đã đặt,Đang chọn',
         ]);
         StatusSeat::create($request->all());
         return response()->json([
