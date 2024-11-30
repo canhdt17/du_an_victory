@@ -16,20 +16,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $users = User::with('role')->get(); // Lấy user cùng với thông tin role
-        return response()->json([
-            'message' => "Lấy thông tin user thành công ",
-            'users' => $users
-        ]);
-    }
-
-   
-
-    
-    public function login(Request $request)
-    {
+    public function login(Request $request){
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password, [])) {
             return response()->json(

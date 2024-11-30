@@ -61,9 +61,9 @@ class MovieController extends Controller
 
         // $path_image = $request->file('image')->store('images');
         // $data['image'] = $path_image;
-        $file = $request->file('image');
-        $path_image = $file->getClientOriginalName();
-        $data['image'] = $path_image;
+        // $file = $request->file('image');
+        // $path_image = $file->getClientOriginalName();
+        // $data['image'] = $path_image;
         // them vao database
         $movie=Movie::query()->create($data);
         return response()->json($movie);
@@ -79,11 +79,13 @@ class MovieController extends Controller
 
     if (!$movie) {
         return response()->json(['message' => 'Không tìm thấy phim'], 404);
+    }else{
+        return response()->json([
+            'movie' => $movie
+        ]);
     }
 
-    return response()->json([
-        'movie' => $movie
-    ]);
+
 }
 
     /**
@@ -104,23 +106,12 @@ class MovieController extends Controller
             'category_id'=> 'required',
         ]);
 
-        //neu cap nhap anh
-        // if($request->hasFile('image')){
-        //     if (file_exists('storage/' . $movie->image)) {
-        //         unlink('storage/' . $movie->image);
-        //     }
-        //     $path_image = $request->file('image')->store('images');
-        //     $data['image'] = $path_image;
-        // }else{
-        //     $data['image'] = $movie->image;
-        // }
-        if($request->hasFile('image')){
-   
-            $file = $request->file('image');
-            $path_image = $file->getClientOriginalName();
-            $data['image'] = $path_image;
-        }else{
+        $image= $request->image;
+        //neu cap nhap anh 
+        if( $image == ""){
             $data['image'] = $movie->image;
+        }else{
+            $data['image']=$image;
         }
 
         // cap nhap vao database

@@ -37,6 +37,8 @@ class ShowtimeController extends Controller
             'showtime_date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
+            'base_id' => 'required',
+
         ]);
         // them vao database
         $showtime=showtime::query()->create($data);
@@ -48,9 +50,10 @@ class ShowtimeController extends Controller
      */
     public function show(showtime $showtime)
     {
-        $showtime->load(['movie','room']);
+        $showtime->load(['movie','room','seat','seatType','statusSeat']);
         return response()->json(['showtime' => $showtime]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -71,6 +74,8 @@ class ShowtimeController extends Controller
             'showtime_date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
+            'base_id' => 'required',
+
         ]);
         $showtime->update($data);
         return response()->json($showtime);
@@ -84,4 +89,20 @@ class ShowtimeController extends Controller
         $showtime->delete();
         return response()->json($showtime);
         }
+    public function getSeatShowtime($ids)
+    {
+
+    // Tách danh sách ID bằng dấu phẩy
+    $idArray = explode(',', $ids);
+    $movie_id=$idArray[0];
+    $base_id=$idArray[1];
+    $showtime_date=$idArray[2];
+    $start_time=$idArray[3];
+    
+    $showtimeID = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->get();
+    return response()->json($showtimeID);
+    
+    }
+
+
     }

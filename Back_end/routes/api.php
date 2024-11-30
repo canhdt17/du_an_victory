@@ -10,16 +10,21 @@ use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\ShowtimeController ;
 use App\Http\Controllers\Api\MovieController;
 use App\Http\Controllers\Api\RoomController;
-use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\BookingDetailController;
 use App\Http\Controllers\Api\ComboFoodController;
 use App\Http\Controllers\Api\HoTroController;
 use App\Http\Controllers\Api\KhuyenMaiController;
-use App\Http\Controllers\API\SeatController;
+use App\Http\Controllers\Api\SeatController;
 use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\Api\UserController;
+
+use App\Http\Controllers\Api;
+use App\Http\Controllers\Api\CinemaController;
+use App\Http\Controllers\Api\InvoiceController;
+use App\Models\Invoice;
 // use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -64,7 +69,8 @@ Route::put('/users/{id}/role', [UserController::class, 'updateRole']); // Cập 
 
 
 Route::apiResource('rooms', RoomController::class);
-Route::apiResource('areas', AreaController::class);
+Route::apiResource('bases', BaseController::class);
+Route::apiResource('cinemas', CinemaController::class);
 Route::apiResource('banners', BannerController::class);
 Route::apiResource('combofoods', ComboFoodController::class);
 Route::apiResource('supports', HoTroController::class);
@@ -72,13 +78,13 @@ Route::apiResource('seatTypes', SeatTypeController::class);
 Route::apiResource('seats', SeatController::class);
 Route::apiResource('khuyenmai', KhuyenMaiController::class);
 Route::apiResource('vouchers', VoucherController::class);
+Route::apiResource('invoices', InvoiceController::class);
+
 Route::get('/categories/{id}/movies', [MovieController::class, 'listFilmByCategory']);
 Route::get('/phim-dang-chieu', [MovieController::class, 'phimDangChieu']);
 Route::get('/phim-sap-chieu', [MovieController::class, 'phimSapChieu']);
 Route::get('/lastest-tin-tuc', [TintucController::class, 'LastestTinTuc']);
 Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
-// dat ve
-Route::post('/bookings', [BookingController::class, 'store'])->middleware('auth:sanctum');
-Route::get('/bookings/{id}', [BookingDetailController::class, 'show']);
-Route::get('/bookings-by-user/{id}', [BookingDetailController::class, 'showByUser']);
+Route::get('/getSeatShowtime/{ids}', [ShowtimeController::class, 'getSeatShowtime']);
+Route::post('/user/{id}', [UserController::class, 'update']);
 

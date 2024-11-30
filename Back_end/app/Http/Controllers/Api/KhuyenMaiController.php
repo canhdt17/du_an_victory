@@ -30,9 +30,9 @@ class KhuyenMaiController extends Controller
             'time_date' => 'required',
         ]);
 
-        $file = $request->file('image');
-        $path_image = $file->getClientOriginalName();
-        $data['image'] = $path_image;
+        // $file = $request->file('image');
+        // $path_image = $file->getClientOriginalName();
+        // $data['image'] = $path_image;
         KhuyenMai::create($data);
         return response()->json([
             'message' => 'Thêm mới thành công'
@@ -60,13 +60,12 @@ class KhuyenMaiController extends Controller
             'content' => 'required',
             'time_date' => 'required',
         ]);
-        if($request->hasFile('image')){
-   
-            $file = $request->file('image');
-            $path_image = $file->getClientOriginalName();
-            $data['image'] = $path_image;
+        $image= $request->image;
+        //neu cap nhap anh 
+        if( $image == ""){
+            $data['image'] = $image->image;
         }else{
-            $data['image'] = $khuyenmai->image;
+            $data['image']=$image;
         }
 
         $khuyenmai->update($data);
