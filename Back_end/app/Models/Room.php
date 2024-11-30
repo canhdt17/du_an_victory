@@ -14,10 +14,11 @@ class Room extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'room_name',
-        'cinemas_id',
+        'bases_id',
     ];
-    public function cinema(){
-        return $this->belongsTo(Cinema::class, 'cinema_id');
+    public function base():BelongsTo
+    {
+        return $this->belongsTo(Base::class, 'bases_id');
     }
 
 }

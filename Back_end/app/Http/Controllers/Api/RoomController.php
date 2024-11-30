@@ -17,11 +17,11 @@ class RoomController extends Controller
     public function index()
     {
         $rooms= DB::table('rooms')
-        ->join('areas','areas.area_id','=','rooms.area_id')
-        ->whereNull('rooms.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng areas
-        ->select('rooms.*','area_name')
+        ->join('bases','bases.id','=','rooms.bases_id')
+        ->whereNull('rooms.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng bases
+        ->select('rooms.*','base_name')
         ->orderByDesc('rooms.id')
-        ->orderByDesc('rooms.area_id')
+        // ->orderByDesc('rooms.base_id')
         ->latest('rooms.id')
         ->paginate();
         return response()->json($rooms);
@@ -36,15 +36,10 @@ class RoomController extends Controller
     {
         $data = $request->validate([
             'room_name' => 'required',
-            'total_seat' => 'required',
-            'area_id' => 'required',
+            'bases_id' => 'required',
         ]);
 
-        // $data = Room::create([
-        //     'room_name' => $request->room_name,
-        //     'total_seat' => $request->total_seat,
-        //     'area_id' => $request->area_id,
-        // ]);
+
         $room=Room::query()->create($data);
         return response()->json($room);
     }
@@ -67,8 +62,7 @@ class RoomController extends Controller
         //
         $request->validate([
             'room_name' => 'required',
-            'area_id' => 'required',
-            'total_seat' => 'required',
+            'bases_id' => 'required',
         ]);
 
 
