@@ -20,8 +20,8 @@ return new class extends Migration
             $table->date('showtime_date');
             $table->time('start_time');
             $table->time('end_time');
-            // $table->unsignedBigInteger('base_id');
-            // $table->foreign('base_id')->references('id')->on('bases')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('base_id');
+            $table->foreign('base_id')->references('id')->on('bases')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();
 
