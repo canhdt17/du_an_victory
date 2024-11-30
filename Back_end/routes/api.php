@@ -2,6 +2,7 @@
 
 
 
+use App\Http\Controllers\Api\AdminUserControler;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\API\SeatTypeController;
@@ -64,8 +65,9 @@ Route::get('roles/{id}', [RoleController::class, 'show']);
 Route::post('roles', [RoleController::class, 'store']);
 Route::put('/roles/{id}', [RoleController::class, 'update']);
 Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
-Route::get('/users', [UserController::class, 'index']); // Lấy danh sách user
-Route::put('/users/{id}/role', [UserController::class, 'updateRole']); // Cập nhật role cho user
+
+Route::get('/users', [AdminUserControler::class, 'index']); // Lấy danh sách user
+Route::put('/users/{id}/role', [AdminUserControler::class, 'updateRole']); // Cập nhật role cho user
 
 
 Route::apiResource('rooms', RoomController::class);
