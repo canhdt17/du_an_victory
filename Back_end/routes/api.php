@@ -2,6 +2,7 @@
 
 
 
+use App\Http\Controllers\Api\AdminUserControler;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\API\SeatTypeController;
@@ -53,6 +54,7 @@ Route::post('/register',[UserController::class,'register']);
 Route::apiResource('movies',MovieController::class);
 Route::apiResource('showtimes',ShowtimeController::class);
 
+
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('types', TypeController::class);
 Route::apiResource('tin-tuc', TintucController::class);
@@ -63,6 +65,10 @@ Route::get('roles/{id}', [RoleController::class, 'show']);
 Route::post('roles', [RoleController::class, 'store']);
 Route::put('/roles/{id}', [RoleController::class, 'update']);
 Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
+
+Route::get('/users', [AdminUserControler::class, 'index']); // Lấy danh sách user
+Route::put('/users/{id}/role', [AdminUserControler::class, 'updateRole']); // Cập nhật role cho user
+
 
 Route::apiResource('rooms', RoomController::class);
 Route::apiResource('bases', BaseController::class);

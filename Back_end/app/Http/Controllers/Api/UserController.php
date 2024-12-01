@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -13,40 +16,26 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index(){
-        $user = User::all();
-        return response()->json($user);
-    }
-    public function update(Request $request, $id){
-        $data = $request->validate([
-            'role' => 'required',
-        ]);
-        $user = User::find($id);
-        if (!$user) {
-            return response()->json(['message' => 'User không tồn tại'], 404);
-        }
-        $user->save();
-        return response()->json($user);
-    }
     public function login(Request $request){
         $user = User::where('email', $request->email)->first();
-        if (!$user || !Hash::check($request->password,$user->password,[])) {
+        if (!$user || !Hash::check($request->password, $user->password, [])) {
             return response()->json(
                 [
                     'message' => "user not exist!"
                 ]
-                );
+            );
         }
         $token = $user->createToken('authToken')->plainTextToken;
         // return $user;
         return response()->json([
             'access_token' => $token,
             'type_token' => 'Baerer'
-            
-        ],404); 
+
+        ], 404);
 
     }
-    public function register(Request $request){
+    public function register(Request $request)
+    {
 
         $messages = [
             'fullname.required' => "loi fullname required!",
@@ -64,7 +53,7 @@ class UserController extends Controller
             'password' => 'required',
             'phone' => 'required',
             'gender' => 'required',
-        ],$messages);
+        ], $messages);
 
         if ($validate->fails()) {
             return response()->json(
@@ -72,28 +61,31 @@ class UserController extends Controller
                     'message' => $validate->errors()
                 ],
                 404
-                );
+            );
         }
-        $user = User::create([
-            'fullname'=> $request->fullname,
-            'username'=> $request->fullname,
-            'email'=> $request->email,
-            'password'=> Hash::make($request->password),
-            'phone'=> $request->phone,
-            'gender'=> $request->gender,
+        $user = User::create(
+            [
+                'fullname' => $request->fullname,
+                'username' => $request->fullname,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'gender' => $request->gender,
 
-        ]
-            
+            ]
+
         );
         return response()->json([
             'message' => "Dang ki thanh cong"
-        ],200);
+        ], 200);
     }
-    public function user(Request $request){
+    public function user(Request $request)
+    {
         return $request->user();
 
     }
-    public function logout(){
+    public function logout()
+    {
 
         // Revoke all tokens...
         // Auth()->user()->tokens()->delete();
@@ -102,7 +94,7 @@ class UserController extends Controller
         return response()->json([
             // 'data' => Auth()->user()->currentAccessToken()
             'message' => "đăng xuất thành công"
-        ],200);
+        ], 200);
 
     }
 
