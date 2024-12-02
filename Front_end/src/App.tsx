@@ -49,6 +49,10 @@ import UpdateShowtime from "./admin/showtime/updateshowtime";
 import Dashboard from "./admin/movie/dashboard";
 import AddMovie from "./admin/movie/Addmovie";
 import EditMovie from "./admin/movie/EditMovie";
+import DetailNews from "./compoents/detail-news/news";
+import News from "./compoents/detail-news/news";
+import Promotions from "./compoents/promotions/promotions";
+import DetailPromotions from "./compoents/promotions/detail-promotions";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -384,6 +388,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/news" element={<News></News>}></Route>
+        <Route path="/promotions" element={<Promotions></Promotions>}></Route>
+        <Route path="/promotions/:id" element={<DetailPromotions></DetailPromotions>}></Route>
       </Routes>
     </>
   );

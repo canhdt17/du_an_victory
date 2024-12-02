@@ -6,7 +6,7 @@ type Props = {}
 const Footer = (props: Props) => {
   return (
     <div>
-            <footer className="footer">
+            <footer className="footer ">
     <div className="page-up">
       <a href="#" id="scrollToTopButton"><img src='/src/img/icons8-arrow-up-80.png'></img></a>
     </div>
