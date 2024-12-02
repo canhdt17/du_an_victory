@@ -389,6 +389,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/news" element={<News></News>}></Route>
+        <Route path="/news/:id" element={<DetailNews></DetailNews>}></Route>
         <Route path="/promotions" element={<Promotions></Promotions>}></Route>
         <Route path="/promotions/:id" element={<DetailPromotions></DetailPromotions>}></Route>
       </Routes>
