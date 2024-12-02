@@ -1,0 +1,15 @@
+.payment-container *{
+    color: #fff;
+}
+.payment-container label{
+    /* font-size: 14px; */
+}
+.payment-container .value{
+    font-weight: 700;
+}
+.payment-container .infomation .payment-info .payment-detail .header{
+    grid-template-columns: 1fr 200px 200px;
+}
+.payment-container .infomation .payment-info .payment-detail .body{
+    grid-template-columns: 1fr 200px 200px;
+}
