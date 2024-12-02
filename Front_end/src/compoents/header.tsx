@@ -8,12 +8,18 @@ const Header = (props: Props) => {
 
   return (
     <div>
+      <div className='menuhead bg-gray-900 '>
+             
+ 
+
+
       <div className=" bg-gray-900 ">
         <header className="headermenu flex items-center justify-between px-6 py-4 bg-gray-900 text-white">
           {/* Left Side: Logo */}
           <div className="flex items-center space-x-8">
             {/* Logo */}
-            <img src="logo.png" alt="Logo" className="h-10" />
+           
+            <NavLink to={`/`}> <img src="/src/img//logo 2.png" alt="Logo" className="logo h-10" /></NavLink>
             {/* Navigation Links */}
             <nav className="flex space-x-6">
               <NavLink to="/" className="hover:text-red-500">
@@ -32,7 +38,8 @@ const Header = (props: Props) => {
                 Giá vé
               </NavLink>
               <NavLink to="/film-festival" className="hover:text-gray-300">
-                Liên hoan phim
+            Thể Loại Phim
+
               </NavLink>
               <NavLink to="/about" className="hover:text-gray-300">
                 Giới thiệu
@@ -49,17 +56,22 @@ const Header = (props: Props) => {
                 </button>
               </NavLink>
               {/* Đăng nhập Button */}
+              <NavLink to={`/login`}>
               <button
-                onClick={() => navigate("/login")}
+              
                 className="px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all"
               >
                 Đăng nhập
               </button>
+              </NavLink>
+              
             </div>
           </div>
           {/* Right Side: Buttons */}
         </header>
+
       </div>
+    </div>
     </div>
   );
 };
