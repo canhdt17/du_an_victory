@@ -31,7 +31,7 @@
 /* Template default CSS
 /*----------------------------------------*/
 .headermenu{
-	text-align: center;
+	justify-content: center;
 }
 html,
 body {
