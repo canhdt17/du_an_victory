@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
 {
@@ -15,9 +16,24 @@ class RoomController extends Controller
     ///--- hiển thị ----//
     public function index()
     {
-        //
-        $rooms = Room::all();
-        return response()->json($rooms, 200);
+        $rooms= DB::table('rooms')
+        ->join('bases','bases.id','=','rooms.bases_id')
+        ->join('seats','seats.room_id','=','rooms.id')
+        ->whereNull('rooms.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng bases
+        ->select('rooms.*','base_name',DB::raw('COUNT(seats.room_id) as seat_count'))
+        ->orderByDesc('rooms.id')
+        // ->orderByDesc('rooms.base_id')
+        ->latest('rooms.id')
+        ->paginate();
+        return response()->json($rooms);
+
+    }
+    public function seatCountRoom()
+    {
+        $seatCount = DB::table('seats')->where('room_id', '=' , )->count();
+
+        return response()->json($seatCount);
+
     }
 
     /**
@@ -28,15 +44,10 @@ class RoomController extends Controller
     {
         $data = $request->validate([
             'room_name' => 'required',
-            'total_seat' => 'required',
-            'area_id' => 'required',
+            'bases_id' => 'required',
         ]);
 
-        // $data = Room::create([
-        //     'room_name' => $request->room_name,
-        //     'total_seat' => $request->total_seat,
-        //     'area_id' => $request->area_id,
-        // ]);
+
         $room=Room::query()->create($data);
         return response()->json($room);
     }
@@ -59,8 +70,7 @@ class RoomController extends Controller
         //
         $request->validate([
             'room_name' => 'required',
-            'area_id' => 'required',
-            'total_seat' => 'required',
+            'bases_id' => 'required',
         ]);
 
 

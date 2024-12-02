@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\Models\Banner;
+
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 
 class BannerController extends Controller
@@ -21,7 +22,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('admin.banners.create');
+        // return view('admin.banners.create');
     }
 
     /**
@@ -36,9 +37,9 @@ class BannerController extends Controller
 
         // $path_image = $request->file('image')->store('images');
         // $data['image'] = $path_image;
-        $file = $request->file('image');
-        $path_image = $file->getClientOriginalName();
-        $data['image'] = $path_image;
+        // $file = $request->file('image');
+        // $path_image = $file->getClientOriginalName();
+        // $data['image'] = $path_image;
 
         // them vao database
         $banner = Banner::query()->create($data);
@@ -62,14 +63,12 @@ class BannerController extends Controller
         $data = $request->validate([
             'link'=> 'required',   
         ]);
-       
+       $image= $request->image;
         //neu cap nhap anh 
-        if($request->hasFile('image')){
-            $file = $request->file('image');
-            $path_image = $file->getClientOriginalName();
-            $data['image'] = $path_image;
-        }else{
+        if( $image == ""){
             $data['image'] = $banner->image;
+        }else{
+            $data['image']=$image;
         }
 
 

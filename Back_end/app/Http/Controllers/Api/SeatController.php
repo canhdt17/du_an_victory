@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Seat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class SeatController extends Controller
 {
@@ -13,7 +15,14 @@ class SeatController extends Controller
      */
     public function index()
     {
-        $seats = Seat::all();
+        $seats= DB::table('seats')
+        ->join('seat_types','seat_types.id','=','seats.seat_type_id')
+        ->whereNull('seats.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng seat_types
+        ->select('seats.*','seat_type_name')
+        ->orderByDesc('seats.id')
+        ->orderByDesc('seats.seat_type_id')
+        ->latest('seats.id')
+        ->paginate();
         return response()->json($seats);
     }
 
@@ -23,16 +32,16 @@ class SeatController extends Controller
     public function store(Request $request)
     {
         // $request->validate([
-        //     'seat_type_id' => 'required|exists:seat_types,id', 
-        //     'seat_number' => 'required|string|max:10',         
-        //     'room_id' => 'required|exists:rooms,id',           
-        //     'seat_status' => 'required|boolean', 
+        //     'seat_type_id' => 'required|exists:seat_types,id',
+        //     'seat_number' => 'required|string|max:10',
+        //     'room_id' => 'required|exists:rooms,id',
+        //     'seat_status' => 'required|boolean',
         // ]);
         $request->validate([
-            'seat_type_id' => 'required', 
-            'seat_number' => 'required',         
-            'room_id' => 'required',           
-            'seat_status' => 'required', 
+            'seat_type_id' => 'required',
+            'seat_number' => 'required',
+            'room_id' => 'required',
+            'seat_status' => 'required',
         ]);
         Seat::create($request->all());
         return response()->json([
@@ -55,10 +64,10 @@ class SeatController extends Controller
     public function update(Request $request, string $id)
     {
         $data= $request->validate([
-            'seat_type_id' => 'required', 
-            'seat_number' => 'required',         
-            'room_id' => 'required',           
-            'seat_status' => 'required', 
+            'seat_type_id' => 'required',
+            'seat_number' => 'required',
+            'room_id' => 'required',
+            'seat_status' => 'required',
         ]);
         $seats = Seat::query()->findOrFail($id);
         $seats->update($data);
