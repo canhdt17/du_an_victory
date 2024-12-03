@@ -20,31 +20,29 @@ const Trending = () => {
   },[])
   return (
     <div>
-      <div className="container mx-auto py-10">
-  <div className="grid grid-cols-4 gap-6">
-
-      {Array.isArray(trendings) && trendings.map((trending:ITrendings)=>(
-    <div className="  rounded-lg overflow-hidden shadow-lg" key={trending.id}>
-    
-         <div className="relative">
-        <img src="/src/img/hero/ngoimodomdom.jpg" alt="Movie 1" className="w-full h-64 object-cover" />
-        <span className="absolute top-2 left-2 bg-red-600 text-white text-sm font-bold px-2 py-1 rounded">{trending.type_id}</span>
-      </div>
-      <div className="p-4">
-        <div className="flex justify-between items-center mb-3 text-gray-400 text-sm">
-          <span><i className="fas fa-eye" /> 11</span>
-          <span><i className="fas fa-users" /> 9141</span>
-        </div>
-        
-        <h3 className="text-lg font-bold mb-2 text-white">{trending.name_movie}</h3>
-       
-      </div>
-      
-     
-    </div>
-    ))}
-  </div>
-</div>
+         <div className="row">
+          {Array.isArray(trendings) && trendings.map((trendings:ITrendings)=>(
+            <div className="col-lg-4 col-md-6 col-sm-6">
+                <div className="product__item">
+                  <div className="product__item__pic set-bg" >
+                  <img src="/src/img/recent/1.jpg"></img>
+                    <div className="ep">18 / 18</div>
+                    <div className="comment"><i className="fa fa-comments" /> {trendings.duration}</div>
+                    <div className="view"><i className="fa fa-eye" /> {trendings.nation}</div>
+                  </div>
+                  <div className="product__item__text">
+                    <ul>
+                      <li>Active</li>
+                      <li>Movie</li>
+                    </ul>
+                    <h5><a href="#">{trendings.name_movie}</a></h5>
+                  </div>
+                </div>
+              </div>
+          ))}
+              
+             
+            </div>
     </div>
   )
 }
