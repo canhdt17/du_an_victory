@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 30, 2024 at 09:25 AM
+-- Generation Time: Dec 03, 2024 at 04:28 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -20,30 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `du_an_victory`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `areas`
---
-
-CREATE TABLE `areas` (
-  `area_id` bigint UNSIGNED NOT NULL,
-  `area_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `areas`
---
-
-INSERT INTO `areas` (`area_id`, `area_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Hà Nội', '2024-10-30 02:08:07', '2024-10-30 02:08:07', NULL),
-(2, 'Hải Phòng', '2024-10-30 02:08:18', '2024-10-30 02:08:18', NULL),
-(3, 'Hồ Chí Minh', '2024-10-30 02:08:36', '2024-10-30 02:08:36', NULL),
-(4, 'Nam Định', '2024-10-30 02:08:48', '2024-10-30 02:08:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -65,15 +41,33 @@ CREATE TABLE `banners` (
 --
 
 INSERT INTO `banners` (`id`, `image`, `link`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'images/0PcK3MihK0gBrpVkb86jChRWzjxYGwVV2bf7cWZ6.webp', 'dsa', '2024-10-30 02:11:20', '2024-10-30 01:31:49', '2024-10-30 02:11:20'),
-(2, 'images/a5hGzL6bpFLkNHwmNwFRhCAxt99Zj6JW4ghr1ffl.webp', 'http://localhost/du_an_1/index.php?act=danhsachnhomsp&id_nhom_sp=14', NULL, '2024-10-30 02:11:54', '2024-10-30 02:11:54'),
-(3, 'images/5va4YWTMZlvyGj077H4sCy7hay47RcjLanX1mUSj.webp', 'http://localhost/du_an_1/index.php?act=danhsachnhomsp&id_nhom_sp=14', NULL, '2024-10-30 02:12:13', '2024-10-30 02:12:13'),
-(4, 'images/pioyATTvTZQ5Ss6Ze9WxtuanFavIE3snHGeZ8QDI.webp', 'http://localhost/du_an_1/index.php?act=danhsachnhomsp&id_nhom_sp=14', NULL, '2024-10-30 02:12:28', '2024-10-30 02:12:28'),
-(5, 'images/LsjHWpnKW5PUVSh8dPNsRBAtWC0aEdrnbgWi8AU6.webp', 'http://localhost/du_an_1/index.php?act=danhsachsp', NULL, '2024-10-30 02:12:50', '2024-10-30 02:12:50'),
-(6, 'images/E44z9bEEGFFgDOWsucDKjuz2McTWtzr5CSPnjRaL.webp', 'http://localhost/du_an_1/index.php?act=danhsachnhomsp&id_nhom_sp=14', NULL, '2024-10-30 02:13:09', '2024-10-30 02:13:09'),
-(7, 'images/V1CaQaQng7KT0T5ewCOK74nzxi1r6H39kG8Zzz4q.webp', 'http://localhost/du_an_1/index.php?act=danhsachgioitinhsp&id_gioitinh=2', NULL, '2024-10-30 02:13:24', '2024-10-30 02:13:24'),
-(8, 'images/NSUUx1IbXGgOqjkJJ2NzTCydZnkIA8NAPuKsYuxo.webp', 'http://localhost/du_an_1/index.php?act=danhsachgioitinhsp&id_gioitinh=1', NULL, '2024-10-30 02:13:41', '2024-10-30 02:13:41'),
-(9, 'images/vrFlIG8rgsU06G5FYdXIir8SYt2DA8bdmSSygGKI.webp', 'http://localhost/du_an_1/index.php?act=danhsachnhomsp&id_nhom_sp=14', NULL, '2024-10-30 02:13:56', '2024-10-30 02:13:56');
+(1, 'đa', 'đá', NULL, NULL, NULL),
+(2, 'dsad', 'dsa', NULL, NULL, NULL),
+(3, 'dá', 'dá', NULL, NULL, NULL),
+(4, 'dá', 'da', NULL, NULL, NULL),
+(5, 'sa', 'dfga', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bases`
+--
+
+CREATE TABLE `bases` (
+  `id` bigint UNSIGNED NOT NULL,
+  `base_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `bases`
+--
+
+INSERT INTO `bases` (`id`, `base_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'cơ sở 1', NULL, NULL, NULL),
+(2, 'cơ sở 1', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,11 +88,12 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name_category`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Hành động', NULL, NULL, NULL),
-(2, 'Khoa học viễn tưởng', NULL, NULL, NULL),
-(3, 'Hoạt hình', NULL, NULL, NULL),
-(4, 'Kinh dị', NULL, NULL, NULL),
-(5, 'Tình cảm', NULL, NULL, NULL);
+(1, 'Hoạt hình', NULL, NULL, NULL),
+(2, 'kinh dị', NULL, NULL, NULL),
+(3, 'Tình cảm', NULL, NULL, NULL),
+(4, 'Hài', NULL, NULL, NULL),
+(5, 'Hành động', NULL, NULL, NULL),
+(6, 'Khoa học viễn tưởng', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -120,7 +115,8 @@ CREATE TABLE `combo_foods` (
 --
 
 INSERT INTO `combo_foods` (`combofood_id`, `combofood_name`, `combofood_price`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'dsad', '100.00', NULL, '2024-10-30 01:32:08', '2024-10-30 01:32:08');
+(1, 'Nước cô ca + Bỏng', '100000.00', NULL, NULL, NULL),
+(2, 'khoai tây + Bảng + Nước ép', '150000.00', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -174,6 +170,40 @@ CREATE TABLE `ho_tro` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `invoices`
+--
+
+CREATE TABLE `invoices` (
+  `id` bigint UNSIGNED NOT NULL,
+  `time_date` date NOT NULL,
+  `total_price` int NOT NULL,
+  `showtime_id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `combofood_id` bigint UNSIGNED NOT NULL,
+  `voucher_id` bigint UNSIGNED NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice_details`
+--
+
+CREATE TABLE `invoice_details` (
+  `id` bigint UNSIGNED NOT NULL,
+  `invoice_id` bigint UNSIGNED NOT NULL,
+  `seat_id` bigint UNSIGNED NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `khuyen_mais`
 --
 
@@ -186,6 +216,17 @@ CREATE TABLE `khuyen_mais` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `khuyen_mais`
+--
+
+INSERT INTO `khuyen_mais` (`id`, `title`, `content`, `image`, `time_date`, `created_at`, `updated_at`) VALUES
+(1, 'RA MẮT BỎNG MIX VỊ - GIÁ KHÔNG ĐỔI', 'RA MẮT BỎNG MIX VỊ - GIÁ KHÔNG ĐỔI\r\n\r\n\r\nKể từ tháng 08/2024, Trung tâm Chiếu phim Quốc gia chính thức ra mắt BỎNG MIX VỊ \r\n\r\nKhán giả thưởng thức cùng lúc 2 vị bỏng: Phô Mai béo ngậy cùng Caramen ngọt ngào với mức giá không đổi chỉ 60.000đ/túi bỏng\r\n\r\nĐến Trung tâm Chiếu phim Quốc gia xem phim và thưởng thức ngay combo hay ho này nha!', 'dasd', '2024-12-03 14:52:29', NULL, NULL),
+(2, 'SIÊU ƯU ĐÃI ĐỒNG GIÁ BỎNG, NƯỚC NGÀY THỨ 3, THỨ 4', 'Chính thức kể từ tháng 8/2024, NCC tặng bạn ưu đãi bỏng, nước hấp dẫn\r\n\r\n\r\nThứ 3 - Tuần đầu tiên của tháng\r\nĂn bắp siêu rẻ đồng giá 25.000đ/bỏng ngọt/caramel/phô mai/mix 2 vị\r\n\r\n\r\n\r\nThứ 4 - Tuần thứ hai của tháng\r\nUống nước thả ga đồng giá 15.000đ/nước Pepsi/7up/Mirinda/Lipton\r\n\r\n\r\n\r\nThứ 2 - Cuối tháng\r\nXem phim xả láng đồng giá 50.000đ/vé 2D mọi loại ghế và suất chiếu\r\n\r\n\r\n\r\nĐến xem phim tại Trung tâm Chiếu phim Quốc gia và nhận ưu đãi thôi nào cả nhà ơi !!!!\r\n\r\n\r\n\r\n(*) Ưu đãi không áp dụng các ngày lễ, Tết ', 'dsad', '2024-12-03 14:53:07', NULL, NULL),
+(3, 'ƯU ĐÃI ĐẶC BIỆT THỨ 2 - THỨ 3 - THỨ 4 HÀNG THÁNG', 'Nhấn vào link sự kiện trên Fanpage Trung tâm Chiếu Phim Quốc gia dưới đây và chọn nút \"Sẽ tham gia\" hoặc \"Quan tâm\" ngay để nhận thông tin ưu đãi ĐẶC BIỆT khi sự kiện bắt đầu nha các bạn!\r\n\r\n\r\n\r\nhttps://www.facebook.com/events/893233799302232/?ref=newsfeed', 'dasd', '2024-12-03 14:53:33', NULL, NULL),
+(4, 'BẢNG GIÁ BỎNG, NƯỚC MỚI NHẤT 2024', 'Trung tâm Chiếu phim Quốc gia xin gửi tới quý vị khán giả menu bỏng, nước mới nhất sau đây:\r\n\r\n﻿', 'dsa', '2024-12-03 14:54:05', NULL, NULL),
+(5, 'THẺ U22 ƯU ĐÃI GIÁ VÉ CHO HỌC SINH, SINH VIÊN 55.000Đ/VÉ 2D', 'Học sinh, sinh viên từ 22 tuổi trở xuống sẽ tiếp tục được ưu đãi 55.000đ/Vé 2D, áp dụng cho tất cả các suất chiếu từ Thứ 2 đến Thứ 6.\r\n\r\n﻿\r\n\r\n1. Điều kiện áp dụng khi mua vé:\r\n\r\n- Áp dụng cho Học sinh, sinh viên từ 22 tuổi trở xuống.\r\n\r\n- Chỉ áp dụng khi mua vé trực tiếp tại quầy vé và không áp dụng cho ghế đôi.\r\n\r\n- Mỗi thẻ U22 chỉ được mua 01 vé xem phim/ngày.\r\n\r\n- Khi mua vé vui lòng xuất trình thẻ U22 kèm thẻ HSSV.\r\n\r\n2. Hướng dẫn đăng ký thẻ U22: \r\n\r\n- Khách hàng mang theo thẻ HSSV và căn cước công dân để đăng kí làm thẻ U22 tại quầy thông tin (Ưu đãi được áp dụng sau khi thẻ được kích hoạt; Thẻ được kích hoạt trong vòng 24h - 48h kể từ khi đăng ký).\r\n\r\n + Trường hợp khách hàng là sinh viên chưa có thẻ sinh viên thì sử dụng căn cước công dân + thẻ học sinh.\r\n\r\n + Trường hợp khách hàng là học sinh chưa có thẻ học sinh thì sử dụng căn cước công dân.\r\n\r\n + Trường hợp khách hàng là trẻ em chưa có thẻ học sinh và chưa có căn cước công dân thì bắt buộc có sự hiện diện của người làm thẻ (chủ thẻ).\r\n\r\n3. Lưu ý: \r\n\r\n- Học sinh, sinh viên chỉ được hưởng ưu đãi đồng giá 55.000đ/vé 2D khi đăng ký thẻ U22.\r\n\r\n- Không áp dụng vào các ngày Lễ, Tết (ngày bù Lễ) theo quy định của nhà nước; suất chiếu sớm và suất chiếu đặc biệt.\r\n\r\n\r\n\r\n  Mua vé ngay tại http://chieuphimquocgia.com.vn/PlanScreenings/Sessiontimes', 'dsad', '2024-12-03 14:55:26', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -204,25 +245,31 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(20, '2014_10_12_100000_create_password_reset_tokens_table', 1),
-(21, '2019_08_19_000000_create_failed_jobs_table', 1),
-(22, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(23, '2024_10_12_104920_create_users_table', 1),
-(24, '2024_10_15_092414_create_categories_table', 1),
-(25, '2024_10_15_094057_create_types_table', 1),
-(26, '2024_10_16_162556_create_seat_types_table', 1),
-(27, '2024_10_17_124255_create_areas_table', 1),
-(28, '2024_10_18_124245_create_rooms_table', 1),
-(29, '2024_10_19_094152_create_movies_table', 1),
-(30, '2024_10_19_162624_create_seats_table', 1),
-(31, '2024_10_20_000002_create_showtimes_table', 1),
-(32, '2024_10_27_005605_create_role_table', 1),
-(33, '2024_10_27_094510_create_banners_table', 1),
-(34, '2024_10_27_104725_create_comments_table', 1),
-(35, '2024_10_27_124100_create_khuyen_mais_table', 1),
-(36, '2024_10_27_133637_create_vouchers_table', 1),
-(37, '2024_10_27_162339_create_combo_foods_table', 2),
-(38, '2024_10_27_162432_create_ho_tro_table', 3);
+(1, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(2, '2019_08_19_000000_create_failed_jobs_table', 1),
+(3, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(4, '2024_10_12_104920_create_users_table', 1),
+(5, '2024_10_15_092414_create_categories_table', 1),
+(6, '2024_10_15_094057_create_types_table', 1),
+(7, '2024_10_16_124255_create_bases_table', 1),
+(8, '2024_10_16_162556_create_seat_types_table', 1),
+(9, '2024_10_18_124245_create_rooms_table', 1),
+(10, '2024_10_19_094152_create_movies_table', 1),
+(11, '2024_10_19_162624_create_seats_table', 1),
+(12, '2024_10_20_000002_create_showtimes_table', 1),
+(13, '2024_10_27_005605_create_role_table', 1),
+(14, '2024_10_27_094510_create_banners_table', 1),
+(15, '2024_10_27_104725_create_comments_table', 1),
+(16, '2024_10_27_124100_create_khuyen_mais_table', 1),
+(17, '2024_10_27_133637_create_vouchers_table', 1),
+(18, '2024_10_27_162339_create_combo_foods_table', 1),
+(19, '2024_10_27_162432_create_ho_tro_table', 1),
+(20, '2024_10_30_153838_create_tin_tucs_table', 1),
+(21, '2024_11_27_182902_update_users_table_change_role_to_role_id', 1),
+(22, '2024_11_27_183549_add_role_id_to_users_table', 1),
+(23, '2024_11_28_051215_create_status_seats_table', 1),
+(24, '2024_11_28_062202_create_invoices_table', 1),
+(25, '2024_11_28_062246_create_invoice_details_table', 1);
 
 -- --------------------------------------------------------
 
@@ -235,12 +282,12 @@ CREATE TABLE `movies` (
   `name_movie` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type_id` bigint UNSIGNED NOT NULL,
-  `duration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nation` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `duration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `director` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `performer` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `show` date NOT NULL,
-  `content` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `link_trailler` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_id` bigint UNSIGNED NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -253,19 +300,12 @@ CREATE TABLE `movies` (
 --
 
 INSERT INTO `movies` (`id`, `name_movie`, `image`, `type_id`, `duration`, `nation`, `director`, `performer`, `show`, `content`, `link_trailler`, `category_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'NGÀY XƯA CÓ MỘT CHUYỆN TÌNH', 'images/oirpoF5CV2okVIBUyCeurQK6yqghrX3bcjjr42bK.webp', 1, '135 phút', 'Viet Nam', 'Trịnh Đình Lê Minh', 'Avin Lu, Ngọc Xuân, Đỗ Nhật Hoàng, Thanh Tú, Bảo Tiên, Hạo Khang', '2024-10-31', 'Ngày Xưa Có Một Chuyện Tình xoay quanh câu chuyện tình bạn, tình yêu giữa hai chàng trai và một cô gái từ thuở ấu thơ cho đến khi trưởng thành, phải đối mặt với những thử thách của số phận. Trải dài trong 4 giai đoạn từ năm 1987 - 2000, ba người bạn cùng tuổi - Vinh, Miền, Phúc đã cùng yêu, cùng bỡ ngỡ bước vào đời, va vấp và vượt qua.', 'https://youtu.be/IcpKkCzvcU4?si=gtrJxkEn-1FJCEzg', 5, NULL, '2024-10-30 01:35:10', '2024-10-30 01:38:06'),
-(2, 'THẦN DƯỢC', 'images/ZD0ecDHxGykJBwqk5HNZ4tf0mIgtoqRA66ROHBK0.webp', 1, '139 phút', 'Mỹ', 'Coralie Fargeat', 'Demi Moore, Margaret Qualley, Dennis Quaid', '2024-11-03', 'Elizabeth Sparkle, minh tinh sở hữu vẻ đẹp hút hồn cùng với tài năng được mến mộ nồng nhiệt. Khi đã trải qua thời kỳ đỉnh cao, nhan sắc dần tàn phai, cô tìm đến những kẻ buôn lậu để mua một loại thuốc bí hiểm nhằm “thay da đổi vận\", tạo ra một phiên bản trẻ trung hơn của chính mình.', 'https://youtu.be/zBIDSp17AOo', 4, NULL, '2024-10-30 01:45:00', '2024-10-30 01:45:00'),
-(3, 'VENOM: THE LAST DANCE', 'images/iVRN4vrRmtDmQU8sKeeUfQCEaitXQmaNdruR1Umw.webp', 1, '100 phút', 'Mỹ', 'Kelly Marcel', 'Tom Hardy, Juno Temple, Chiwetel Ejiofor, Clark Backo, Stephen Graham', '2024-11-07', 'Tom Hardy sẽ tái xuất trong bom tấn Venom: The Last Dance (Tựa Việt: Venom: Kèo Cuối) và phải đối mặt với kẻ thù lớn nhất từ trước đến nay - toàn bộ chủng tộc Symbiote Venom: Kèo cuối - Dự kiến khởi chiếu 25.10.2024', 'https://youtu.be/IVbRJZyxdMQ', 2, NULL, '2024-10-30 01:46:55', '2024-10-30 01:46:55'),
-(4, 'TRÒ CHƠI NHÂN TÍNH', 'images/56m48kDP2oG6ZJ7wTraHfyXZbShMyGovD4W9vfFm.webp', 1, '125 phút', 'Thái Lan', 'WILLIAM AHERNE (FedZ KiiD)', 'Worranit Thawornwong; Wachirawit Phaisankulwong; Supachaya Sukbaiyen; Rapeepong Thapsuwan; Natnicha Lueanganan; Ngoc Lan Vy; Chalongrat Nob Samrong; Naphat Na Ranong', '2024-11-16', 'Lễ hội trường bỗng biến thành sân chơi \"khát máu\" của thế lực bí ẩn buộc nhóm học sinh phải tham gia vào những trò chơi kỳ dị và tàn bạo. Không có ngoại lệ nào dành cho kẻ yếu, thua một trò chơi mất cả mạng người. Liệu trong một thế giới tàn khốc sẽ luôn tồn tại một lối thoát hay đó chỉ là niềm tin \"ảo\" của những trái tim đang hoảng loạn trước cái chết?', 'https://youtu.be/DQo5G0YCxW0', 1, NULL, '2024-10-30 01:49:54', '2024-10-30 01:49:54'),
-(5, 'ÁC QUỶ TRUY HỒN', 'images/5MSF8bQuOTN2u8ODklZti2EHoi9Z1sPmSybAP9pV.webp', 1, '107 phút', 'Indonesia', 'Sidharta Tara', 'Indah Permatasari, Claresta Taufan Kusumarina, José Rizal Manua,...', '2024-11-17', 'Sau một tai nạn, cô gái trẻ Retno mất mẹ, trong khi cha cô rơi vào tình trạng hôn mê. Cô cùng chị gái mình quyết định đưa cha về chăm sóc, nhưng quãng thời gian này trở thành địa ngục với cả gia đình khi những sự kiện ghê rợn liên tiếp xảy ra. Cùng lúc đó, sự xuất hiện của người con trai ngoài giá thú của cha cô châm ngòi cho cuộc chiến tranh giành khoản thừa kế, đồng thời mở ra những bí ẩn kinh hoàng trong quá khứ.', 'https://youtu.be/_lRQp0B8Szc', 4, NULL, '2024-10-30 01:52:00', '2024-10-30 01:52:00'),
-(6, 'BIỆT ĐỘI HOT GIRL', 'images/5DhfsfrNhXc6PHngRHc1jLVEGQ4iP7djS9xRXA5I.webp', 1, '95 phút', 'Viet Nam', 'Vĩnh Khương', 'NSND Hoàng Dũng, Mr Kim, Yu CHU, Sam Sony, Bảo Uyên, Tuệ Minh, Thuỳ Trang, Ái Vân, Anna Linh,', '2024-11-07', 'Câu chuyện của 6 cô gái đến từ 3 quốc gia Châu Á. Họ không biết mình là ai? Đến từ quốc gia gia nào? HẮC VÔ ĐẠO một tay trùm mafia buôn ma túy, buôn người giải thoát cứu sống 6 cô gái từ lúc nhỏ và nuôi dạy các cô gái trên hoang đảo. Các cô gái trưởng thành, khao khát được yêu nhưng cuộc sống và số phận buộc họ phải thực hiện những phi vụ mạo hiểm, kể cả giết người để bảo vệ những trẻ em vô tội.', 'https://youtu.be/GCxopxk_BwY', 5, NULL, '2024-10-30 01:53:36', '2024-10-30 01:53:36'),
-(7, 'ELLI VÀ BÍ ẨN CHIẾC TÀU MA-K - Lồng tiếng', 'images/o6MNYt8WPnPAqY25uv4atoJpKDFKFKLMOZwUPv4e.webp', 1, '86 phút', 'Đức', 'Piet De Rycker, Jesper Møller, Jens Møller', 'Dalia Schmidt-Foß, Oliver Kalkofe', '2024-10-31', 'Một cuộc truy đuổi của những chiếc drone bí ẩn đã bị bắt đi người chú thân thiết của hồn ma Elli bé bỏng. Quyết định rời khỏi căn biệt thự ma ám để giải cứu người chú đáng thương khiến cô bé dấn thân vào một chuyến phiêu lưu đầy gay go với những thách thức, cũng chính là cơ hội cô bé gặp gỡ những người bạn quái vật thú vị và khám phá được năng lực bí ẩn của chính mình. Liệu Elli có chiến thắng cuộc truy đuổi căng thẳng và đoàn tụ với người chú của mình? Câu trả lời sẽ có trong bộ phim “Elli And The Ghostly Ghost Train / Elli và Bí Ẩn Chiếc Tàu Ma”', 'https://youtu.be/_lRQp0B8Szc', 3, NULL, '2024-10-30 01:55:53', '2024-10-30 01:55:53'),
-(8, 'CÔ DÂU HÀO MÔN- T18', 'images/TkcljQ5hbDMFXB0z1HOhTQ39vo5CsiX9oawmOQ2J.webp', 1, '114 phút', 'Viet Nam', 'Vũ Ngọc Đãng', 'Uyển Ân, Samuel An, Thu Trang, Lê Giang, Kiều Minh Tuấn, NSND Hồng Vân,.', '2024-10-17', 'Phim lấy đề tài làm dâu hào môn và khai thác câu chuyện môn đăng hộ đối, lối sống và quy tắc của giới thượng lưu dưới góc nhìn hài hước và châm biếm.', 'https://youtu.be/9gmv3hOp1pk', 5, NULL, '2024-10-30 02:00:12', '2024-10-30 02:00:12'),
-(9, 'TEE YOD: QUỶ ĂN TẠNG PHẦN 2-T18', 'images/dHQ0WwR9mxtC6P0hTiAFUr8KKc5H9P1aQYURLNaX.webp', 1, '111 phút', 'Thái Lan', 'Taweewat Wantha', 'Nadech Kugimiya, Denise Jelilcha Kapaun, Mim Rattawadee Wongthong, Junior Kajbhunditt Jaidee, Friend Peerakrit Phacharaboonyakiat, Nutthatcha Jessica Padovan', '2024-11-09', 'Ba năm sau cái chết của Yam, Yak vẫn tiếp tục săn lùng linh hồn bí ẩn mặc áo choàng đen. Gặp một cô gái có triệu chứng giống Yam, Yak phát hiện ra người bảo vệ linh hồn, pháp sư ẩn dật Puang, sống trong một khu rừng đầy nguy hiểm. Giữa những phép thuật ma quỷ và những sinh vật nguy hiểm. Khi họ đuổi theo linh hồn mặc áo choàng đen, tiếng kêu đầy ám ảnh của Tee Yod sắp quay trở lại một lần nữa...', 'https://youtu.be/vHONH3M9RYU', 1, NULL, '2024-10-30 02:01:48', '2024-10-30 02:01:48'),
-(10, 'ROBOT HOANG DÃ-P - Lồng tiếng', 'images/la8QcBf0QB8S9qZGLYJGoOG5m0B2BXsZo1lPkNSQ.webp', 1, '95 phút', 'Mỹ', 'Chris Sanders', 'Lupita Nyong\'o, Pedro Pascal, Catherine O’hara, Bill Nighy,...', '2024-11-12', 'Cuộc phiêu lưu hoành tráng theo chân hành trình của một robot — đơn vị ROZZUM 7134, gọi tắt là Roz. Roz vô tình dạt vào hoang đảo sau một sự cố và nơi đây trở thành địa điểm sống mới của cô. Tại đây, Roz kết thân và nhận nuôi một chú ngỗng con, đặt tên là Brightbill. Roz và Brightbill dần dần thân thiết với các bạn thú trên đảo, song sau đó phải chống chọi, bảo vệ “nhà mới” trước sự xâm lăng của nhà máy từng sản xuất ra Roz.', 'cxzcz', 2, NULL, '2024-10-30 02:03:39', '2024-10-30 02:03:39'),
-(11, 'TRANSFORMERS MỘT-T13 ( Phụ đề )', 'images/oaEOYdA51gEhsmrVyYbIqz89R7ytXDEkgjPm1WjO.webp', 1, '104 phút', 'Mỹ', 'Josh Cooley', 'Chris Hemsworth; Brian Tyree Henry; Scarlett Johansson', '2024-11-17', 'Câu chuyện về nguồn gốc chưa từng được hé lộ của Optimus Prime và Megatron. Hai nhân vật được biết đến như những kẻ thù truyền kiếp, nhưng cũng từng là những người anh em gắn bó, đã thay đổi vận mệnh của Cybertron mãi mãi.', 'https://youtu.be/ad5_EY2P6Vg', 1, NULL, '2024-10-30 02:05:32', '2024-10-30 02:05:32'),
-(12, 'ĐỐ ANH CÒNG ĐƯỢC TÔI - T18', 'images/4rzId3XFHzZJoTXufkHfuDuvXj5nky3nA3CdGW7r.webp', 1, '115 phút', 'Hàn Quốc', 'RYOO Seung-wan', 'HWANG Jung-min, JUNG Hae-in', '2024-11-13', 'Các thanh tra kỳ cựu nổi tiếng đã hoạt động trở lại! Thám tử Seo Do-cheol (HWANG Jung-min) và đội điều tra tội phạm nguy hiểm của anh không ngừng truy lùng tội phạm cả ngày lẫn đêm, đặt cược cả cuộc sống cá nhân của họ. Nhận một vụ án sát hại một giáo sư, đội thanh tra nhận ra những mối liên hệ với các vụ án trong quá khứ và nảy sinh những nghi ngờ về một kẻ giết người hàng loạt. Điều này đã khiến cả nước rơi vào tình trạng hỗn loạn. Khi đội thanh tra đi sâu vào cuộc điều tra, kẻ sát nhân đã chế nhạo họ bằng cách công khai tung ra một đoạn giới thiệu trực tuyến, chỉ ra nạn nhân tiếp theo và làm gia tăng sự hỗn loạn. Để giải quyết mối đe dọa ngày càng leo thang, nhóm đã kết nạp một sĩ quan tân binh trẻ Park Sun-woo (JUNG Hae-in), dẫn đến những khúc mắc và đầy rẫy bất ngờ trong vụ án.', 'https://youtu.be/JgUWVooKSrA', 1, NULL, '2024-10-30 02:07:12', '2024-10-30 02:07:12'),
-(13, 'MỘ ĐOM ĐÓM-K ( Phụ đề )', 'images/ArRAoOTs9AhcblFmIapTtKjMOouA9wBXgTmdlrAV.webp', 1, '89 phút', 'Nhật bản', 'Takahata Isao', 'Tatsumi Tsutomu, Shiraishi Ayano, Shinohara Yoshiko  Khởi chiếu: 04/10/2024', '2024-11-08', 'Hai anh em Seita và Setsuko mất mẹ sau cuộc thả bom dữ dội của không quân Mỹ. Cả hai phải vật lộn để tồn tại ở Nhật Bản hậu Thế chiến II. Nhưng xã hội khắc nghiệt và chúng vật lộn tìm kiếm thức ăn cũng như thoát khỏi những khó khăn giữa chiến tranh.', 'https://youtu.be/IcpKkCzvcU4?si=gtrJxkEn-1FJCEzg', 3, NULL, '2024-10-30 02:15:51', '2024-10-30 02:15:51');
+(1, 'VENOM: THE LAST DANCE-T13', 'dad', 1, '100 phút', 'Mỹ', 'Kelly Marcel', 'Tom Hardy, Juno Temple, Chiwetel Ejiofor, Clark Backo, Stephen Graham', '2024-11-15', 'Tom Hardy sẽ tái xuất trong bom tấn Venom: The Last Dance (Tựa Việt: Venom: Kèo Cuối) và phải đối mặt với kẻ thù lớn nhất từ trước đến nay - toàn bộ chủng tộc Symbiote Venom: Kèo cuối - Dự kiến khởi chiếu 25.10.2024', 'https://youtu.be/IVbRJZyxdMQ?si=cHB75FlrwnalG-1a', 6, NULL, NULL, NULL),
+(2, 'NGÀY XƯA CÓ MỘT CHUYỆN TÌNH - T16', 'dada', 1, '135 phút', 'Viet Nam', 'Trịnh Đình Lê Minh', 'Avin Lu, Ngọc Xuân, Đỗ Nhật Hoàng, Thanh Tú, Bảo Tiên, Hạo Khang', '2024-11-15', 'Ngày Xưa Có Một Chuyện Tình xoay quanh câu chuyện tình bạn, tình yêu giữa hai chàng trai và một cô gái từ thuở ấu thơ cho đến khi trưởng thành, phải đối mặt với những thử thách của số phận. Trải dài trong 4 giai đoạn từ năm 1987 - 2000, ba người bạn cùng tuổi - Vinh, Miền, Phúc đã cùng yêu, cùng bỡ ngỡ bước vào đời, va vấp và vượt qua.', 'https://youtu.be/IcpKkCzvcU4?si=meoK9jZ9fhOEziSH', 3, NULL, NULL, NULL),
+(3, 'MẬT MÃ ĐỎ-K - Phụ đề', 'dasdsa', 1, '120 phút', 'Mỹ', 'Jake Kasdan', 'Dwayne Johnson; Chris Evans; Lucy Liu', '2024-12-04', 'Sau khi Ông già Noel (mật danh: Red One) bị bắt cóc, Trưởng An ninh Bắc Cực (Dwayne Johnson) phải hợp tác với thợ săn tiền thưởng khét tiếng nhất thế giới (Chris Evans) trong một nhiệm vụ kịch tính xuyên lục địa để giải cứu Giáng Sinh.', 'https://youtu.be/2T_mKyH17mY?si=MbOM2jC7RyjWaxYm', 5, NULL, NULL, NULL),
+(4, 'CƯỜI XUYÊN BIÊN GIỚI - T13 - Phụ đề\r\n', 'ffdsaf', 1, '110 phút', 'Hàn Quốc', 'KIM Chang-ju', 'Ryu Seung-ryong , Jin Sun-kyu, Igor Rafael P EDROSO, Luan B RUM DE ABREU E LIMA, JB João Batista GOMES DE O LIVEIRA, Yeom Hye-ran và Go Kyoung- pyo, Lee Soon-won', '2024-12-09', 'Cười Xuyên Biên Giới kể về hành trình của Jin-bong (Ryu Seung-ryong) - cựu vô địch bắn cung quốc gia, sau khi nghỉ hưu, anh đã trở thành một nhân viên văn phòng bình thường. Đứng trước nguy cơ bị sa thải, Jin-bong phải nhận một nhiệm vụ bất khả thi là bay đến nửa kia của trái đất trong nỗ lực tuyệt vọng để sinh tồn. Sống sót sau một sự cố đe doạ tính mạng, Jin-bong đã “hạ cánh” xuống khu rừng Amazon, nơi anh gặp bộ ba thổ dân bản địa có kỹ năng bắn cung thượng thừa: Sika, Eeba và Walbu. Tin rằng đã tìm ra cách để tự cứu mình, Jin-bong hợp tác với phiên dịch ngáo ngơ Bbang-sik (Jin Sun-kyu) và đưa ba chiến thần cung thủ đến Hàn Quốc cho một nhiệm vụ táo bạo.', 'https://youtu.be/2T_mKyH17mY?si=MbOM2jC7RyjWaxYm', 4, NULL, NULL, NULL),
+(7, 'WICKED-K - Phụ đề', 'dada', 1, '161 phút', 'Mỹ', 'Jon M. Chu', 'Cynthia Erivo; Ariana Grande; Jonathan Bailey', '2024-12-09', 'Wicked, câu chuyện chưa kể về các phù thủy xứ Oz, có sự tham gia của nữ viên viên Cynthia Erivo người từng đoạt giải Emmy, Grammy và Tony trong vai Elphaba, một phù thủy trẻ với làn da xanh đặc biệt, người vẫn chưa khám phá ra sức mạnh tiềm ẩn bên trong mình và “công chúa nhạc pop” Ariana Grande trong vai Glinda, một phù thủy trẻ nổi tiếng, được tô điểm bởi đặc quyền và tham vọng, người vẫn chưa khám phá ra trái tim thực sự của mình.', 'https://youtu.be/Fliq31HOS1I?si=7I7gvVCKRtV7BCBl', 3, NULL, NULL, NULL),
+(8, 'LINH MIÊU-T18', 'dad', 1, '109 phút', 'Viet Nam', 'Lưu Thành Luân', 'Hồng Đào, Thiên An, Thuỳ Tiên, Văn Anh, Samuel An,...', '2024-12-09', 'Linh Miêu: Quỷ Nhập Tràng lấy cảm hứng từ truyền thuyết dân gian về “quỷ nhập tràng” để xây dựng cốt truyện. Phim lồng ghép những nét văn hóa đặc trưng của Huế như nghệ thuật khảm sành - một văn hóa đặc sắc của thời nhà Nguyễn, đề cập đến các vấn đề về giai cấp và quan điểm trọng nam khinh nữ. Đặc biệt, hình ảnh rước kiệu thây ma và những hình nhân giấy không chỉ biểu trưng cho tai ương hay điềm dữ mà còn là hiện thân của nghiệp quả.', 'https://youtu.be/4oxoPMxBO6s?si=TW4r1H9UCyjmTVUn', 2, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -313,6 +353,14 @@ CREATE TABLE `roles` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`role_id`, `role`, `description`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Admin', NULL, NULL, NULL, NULL),
+(2, 'User', NULL, NULL, '2024-12-01 02:26:12', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -322,12 +370,22 @@ CREATE TABLE `roles` (
 CREATE TABLE `rooms` (
   `id` bigint UNSIGNED NOT NULL,
   `room_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `area_id` bigint UNSIGNED NOT NULL,
-  `total_seat` int NOT NULL,
+  `bases_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rooms`
+--
+
+INSERT INTO `rooms` (`id`, `room_name`, `bases_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Phòng 01', 1, NULL, NULL, NULL),
+(2, 'Phòng 02', 1, NULL, NULL, NULL),
+(3, 'Phòng 03', 1, NULL, NULL, NULL),
+(4, 'Phòng 04', 1, NULL, NULL, NULL),
+(5, 'Phòng 05', 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -340,11 +398,166 @@ CREATE TABLE `seats` (
   `seat_type_id` bigint UNSIGNED NOT NULL,
   `seat_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `room_id` bigint UNSIGNED NOT NULL,
-  `seat_status` tinyint(1) NOT NULL DEFAULT '1',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `seats`
+--
+
+INSERT INTO `seats` (`id`, `seat_type_id`, `seat_number`, `room_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 'A1', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(2, 1, 'A2', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(3, 1, 'A3', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(4, 1, 'A4', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(5, 1, 'A5', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(6, 1, 'A6', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(7, 1, 'A7', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(8, 1, 'A8', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(9, 1, 'A9', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(10, 1, 'A10', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(11, 1, 'A11', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(12, 1, 'A12', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(13, 1, 'A13', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(14, 1, 'A14', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(15, 1, 'A15', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(16, 1, 'A16', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(17, 1, 'A17', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(18, 1, 'A18', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(19, 1, 'A19', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(20, 1, 'A20', 1, NULL, '2024-12-03 08:54:34', '2024-12-03 08:54:34'),
+(21, 2, 'B1', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(22, 2, 'B2', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(23, 2, 'B3', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(24, 2, 'B4', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(25, 2, 'B5', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(26, 2, 'B6', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(27, 2, 'B7', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(28, 2, 'B8', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(29, 2, 'B9', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(30, 2, 'B10', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(31, 2, 'B11', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(32, 2, 'B12', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(33, 2, 'B13', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(34, 2, 'B14', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(35, 2, 'B15', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(36, 2, 'B16', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(37, 2, 'B17', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(38, 2, 'B18', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(39, 2, 'B19', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(40, 2, 'B20', 1, NULL, '2024-12-03 09:13:33', '2024-12-03 09:13:33'),
+(41, 2, 'B1', 1, NULL, '2024-12-03 09:14:12', '2024-12-03 09:14:12'),
+(42, 2, 'B2', 1, NULL, '2024-12-03 09:14:12', '2024-12-03 09:14:12'),
+(43, 2, 'B3', 1, NULL, '2024-12-03 09:14:12', '2024-12-03 09:14:12'),
+(44, 2, 'B4', 1, NULL, '2024-12-03 09:14:12', '2024-12-03 09:14:12'),
+(45, 2, 'B5', 1, NULL, '2024-12-03 09:14:12', '2024-12-03 09:14:12'),
+(46, 2, 'B6', 1, NULL, '2024-12-03 09:14:12', '2024-12-03 09:14:12'),
+(47, 2, 'B7', 1, NULL, '2024-12-03 09:14:12', '2024-12-03 09:14:12'),
+(48, 2, 'B8', 1, NULL, '2024-12-03 09:14:12', '2024-12-03 09:14:12'),
+(49, 2, 'B9', 1, NULL, '2024-12-03 09:14:12', '2024-12-03 09:14:12'),
+(50, 2, 'B10', 1, NULL, '2024-12-03 09:14:12', '2024-12-03 09:14:12'),
+(51, 3, 'C1', 1, NULL, '2024-12-03 09:16:48', '2024-12-03 09:16:48'),
+(52, 3, 'C2', 1, NULL, '2024-12-03 09:16:48', '2024-12-03 09:16:48'),
+(53, 3, 'C3', 1, NULL, '2024-12-03 09:16:48', '2024-12-03 09:16:48'),
+(54, 3, 'C4', 1, NULL, '2024-12-03 09:16:48', '2024-12-03 09:16:48'),
+(55, 3, 'C5', 1, NULL, '2024-12-03 09:16:48', '2024-12-03 09:16:48'),
+(56, 3, 'C6', 1, NULL, '2024-12-03 09:16:48', '2024-12-03 09:16:48'),
+(57, 3, 'C7', 1, NULL, '2024-12-03 09:16:48', '2024-12-03 09:16:48'),
+(58, 3, 'C8', 1, NULL, '2024-12-03 09:16:48', '2024-12-03 09:16:48'),
+(59, 3, 'C9', 1, NULL, '2024-12-03 09:16:48', '2024-12-03 09:16:48'),
+(60, 3, 'C10', 1, NULL, '2024-12-03 09:16:48', '2024-12-03 09:16:48'),
+(61, 3, 'C1', 1, NULL, '2024-12-03 09:18:34', '2024-12-03 09:18:34'),
+(62, 3, 'C2', 1, NULL, '2024-12-03 09:18:34', '2024-12-03 09:18:34'),
+(63, 3, 'C3', 1, NULL, '2024-12-03 09:18:34', '2024-12-03 09:18:34'),
+(64, 3, 'C4', 1, NULL, '2024-12-03 09:18:34', '2024-12-03 09:18:34'),
+(65, 3, 'C5', 1, NULL, '2024-12-03 09:18:34', '2024-12-03 09:18:34'),
+(66, 3, 'C6', 1, NULL, '2024-12-03 09:18:34', '2024-12-03 09:18:34'),
+(67, 3, 'C7', 1, NULL, '2024-12-03 09:18:34', '2024-12-03 09:18:34'),
+(68, 3, 'C8', 1, NULL, '2024-12-03 09:18:34', '2024-12-03 09:18:34'),
+(69, 3, 'C9', 1, NULL, '2024-12-03 09:18:34', '2024-12-03 09:18:34'),
+(70, 3, 'C10', 1, NULL, '2024-12-03 09:18:34', '2024-12-03 09:18:34'),
+(71, 3, 'C1', 1, NULL, '2024-12-03 09:18:52', '2024-12-03 09:18:52'),
+(72, 3, 'C2', 1, NULL, '2024-12-03 09:18:52', '2024-12-03 09:18:52'),
+(73, 3, 'C3', 1, NULL, '2024-12-03 09:18:52', '2024-12-03 09:18:52'),
+(74, 3, 'C4', 1, NULL, '2024-12-03 09:18:52', '2024-12-03 09:18:52'),
+(75, 3, 'C5', 1, NULL, '2024-12-03 09:18:52', '2024-12-03 09:18:52'),
+(76, 3, 'C6', 1, NULL, '2024-12-03 09:18:52', '2024-12-03 09:18:52'),
+(77, 3, 'C7', 1, NULL, '2024-12-03 09:18:52', '2024-12-03 09:18:52'),
+(78, 3, 'C8', 1, NULL, '2024-12-03 09:18:52', '2024-12-03 09:18:52'),
+(79, 3, 'C9', 1, NULL, '2024-12-03 09:18:52', '2024-12-03 09:18:52'),
+(80, 3, 'C10', 1, NULL, '2024-12-03 09:18:52', '2024-12-03 09:18:52'),
+(81, 3, 'C1', 1, NULL, '2024-12-03 09:19:09', '2024-12-03 09:19:09'),
+(82, 3, 'C2', 1, NULL, '2024-12-03 09:19:09', '2024-12-03 09:19:09'),
+(83, 3, 'C3', 1, NULL, '2024-12-03 09:19:09', '2024-12-03 09:19:09'),
+(84, 3, 'C4', 1, NULL, '2024-12-03 09:19:09', '2024-12-03 09:19:09'),
+(85, 3, 'C5', 1, NULL, '2024-12-03 09:19:09', '2024-12-03 09:19:09'),
+(86, 3, 'C6', 1, NULL, '2024-12-03 09:19:09', '2024-12-03 09:19:09'),
+(87, 3, 'C7', 1, NULL, '2024-12-03 09:19:09', '2024-12-03 09:19:09'),
+(88, 3, 'C8', 1, NULL, '2024-12-03 09:19:09', '2024-12-03 09:19:09'),
+(89, 3, 'C9', 1, NULL, '2024-12-03 09:19:09', '2024-12-03 09:19:09'),
+(90, 3, 'C10', 1, NULL, '2024-12-03 09:19:09', '2024-12-03 09:19:09'),
+(91, 1, 'A1', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(92, 1, 'A2', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(93, 1, 'A3', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(94, 1, 'A4', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(95, 1, 'A5', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(96, 1, 'A6', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(97, 1, 'A7', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(98, 1, 'A8', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(99, 1, 'A9', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(100, 1, 'A10', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(101, 1, 'A11', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(102, 1, 'A12', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(103, 1, 'A13', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(104, 1, 'A14', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(105, 1, 'A15', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(106, 1, 'A16', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(107, 1, 'A17', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(108, 1, 'A18', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(109, 1, 'A19', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(110, 1, 'A20', 3, NULL, '2024-12-03 09:19:58', '2024-12-03 09:19:58'),
+(111, 1, 'A1', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(112, 1, 'A2', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(113, 1, 'A3', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(114, 1, 'A4', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(115, 1, 'A5', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(116, 1, 'A6', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(117, 1, 'A7', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(118, 1, 'A8', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(119, 1, 'A9', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(120, 1, 'A10', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(121, 1, 'A11', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(122, 1, 'A12', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(123, 1, 'A13', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(124, 1, 'A14', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(125, 1, 'A15', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(126, 1, 'A16', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(127, 1, 'A17', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(128, 1, 'A18', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(129, 1, 'A19', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(130, 1, 'A20', 3, NULL, '2024-12-03 09:20:14', '2024-12-03 09:20:14'),
+(131, 1, 'A1', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(132, 1, 'A2', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(133, 1, 'A3', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(134, 1, 'A4', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(135, 1, 'A5', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(136, 1, 'A6', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(137, 1, 'A7', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(138, 1, 'A8', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(139, 1, 'A9', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(140, 1, 'A10', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(141, 1, 'A11', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(142, 1, 'A12', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(143, 1, 'A13', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(144, 1, 'A14', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(145, 1, 'A15', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(146, 1, 'A16', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(147, 1, 'A17', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(148, 1, 'A18', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(149, 1, 'A19', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32'),
+(150, 1, 'A20', 3, NULL, '2024-12-03 09:20:32', '2024-12-03 09:20:32');
 
 -- --------------------------------------------------------
 
@@ -365,9 +578,9 @@ CREATE TABLE `seat_types` (
 --
 
 INSERT INTO `seat_types` (`id`, `seat_type_name`, `seat_price`, `created_at`, `updated_at`) VALUES
-(1, 'Ghế vip', '250000.00', '2024-10-30 02:09:29', '2024-10-30 02:10:49'),
-(2, 'Ghế thường', '150000.00', '2024-10-30 02:09:53', '2024-10-30 02:10:37'),
-(3, 'Ghế đôi', '300000.00', '2024-10-30 02:10:10', '2024-10-30 02:10:57');
+(1, 'Thường ', '100000.00', NULL, NULL),
+(2, 'vip', '250000.00', NULL, NULL),
+(3, 'Đôi', '200000.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -382,10 +595,72 @@ CREATE TABLE `showtimes` (
   `showtime_date` date NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
+  `base_id` bigint UNSIGNED NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `showtimes`
+--
+
+INSERT INTO `showtimes` (`id`, `movie_id`, `room_id`, `showtime_date`, `start_time`, `end_time`, `base_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, '2024-12-04', '09:00:00', '10:00:00', 1, NULL, NULL, NULL),
+(2, 2, 2, '2024-12-05', '09:00:00', '11:00:00', 1, NULL, NULL, NULL),
+(3, 3, 3, '2024-12-04', '10:00:00', '12:00:00', 1, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status_seats`
+--
+
+CREATE TABLE `status_seats` (
+  `id` bigint UNSIGNED NOT NULL,
+  `showtime_id` bigint UNSIGNED NOT NULL,
+  `seat_id` bigint UNSIGNED NOT NULL,
+  `status` enum('Ghế trống','Đã đặt','Đang chọn') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Ghế trống',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tin_tucs`
+--
+
+CREATE TABLE `tin_tucs` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name_TinTuc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sub_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci,
+  `imager` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tin_tucs`
+--
+
+INSERT INTO `tin_tucs` (`id`, `name_TinTuc`, `sub_title`, `content`, `imager`, `created_at`, `updated_at`) VALUES
+(1, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/1/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(2, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/2/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(3, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/3/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(4, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/4/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(5, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/5/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(6, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/6/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(7, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/7/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(8, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/8/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(9, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/9/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(10, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/10/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(11, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/11/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(12, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/12/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(13, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/13/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(14, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/14/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44'),
+(15, 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'VUI TẾT TRUNG THU - RINH QUÀ VI VU', 'Nhân dịp Tết Trung thu 2024, Trung tâm Chiếu phim Quốc gia xin được gửi những lời chúc ấm áp nhất tới quý khán giả, mong bình an sẽ gõ cửa đến mọi nhà\n\n\nTrung thu đã chạm ngõ, NCC dành tặng hàng trăm phần quà là những chiếc đèn lồng xinh xắn gửi tới các bạn thiếu nhi khi đến rạp xem phim:\n\n\n\n👉Thời gian tặng quà: từ 18h - 20h30 ngày 14/09/2024 (tối thứ 7) tại sảnh tầng 1 của Trung tâm.\n\n\n\nNCC mong rằng những chiếu đèn lồng sẽ mang lại những niềm vui nho nhỏ đến với các bạn thiếu nhi mùa Tết Trung thu năm nay!\n\n_______________________________________________\n\n📍 Trung tâm Chiếu phim Quốc gia\n\n📱 Website: https://chieuphimquocgia.com.vn/\n\n❤ Địa chỉ: 87 Láng Hạ, phường Thành Công, quận Ba Đình, Hà Nội\n\n☎️ Hotline: 024.3514.1791', 'https://picsum.photos/seed/15/600/400', '2024-12-03 09:26:44', '2024-12-03 09:26:44');
 
 -- --------------------------------------------------------
 
@@ -417,6 +692,7 @@ INSERT INTO `types` (`id`, `name_type`, `deleted_at`, `created_at`, `updated_at`
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
+  `role_id` bigint UNSIGNED DEFAULT NULL,
   `fullname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -424,7 +700,6 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` enum('admin','user') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -434,9 +709,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `fullname`, `username`, `email`, `email_verified_at`, `password`, `phone`, `gender`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'abc', 'cuong', 'abc@gmail.com', NULL, '12345678', '0483208497', 'cajkshcjk', 'user', NULL, NULL, NULL),
-(2, 'admin', 'admin', 'admin@gmail.com', NULL, '12345678', '0937823648', 'xzcz', 'admin', NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `role_id`, `fullname`, `username`, `email`, `email_verified_at`, `password`, `phone`, `gender`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 2, 'ta dong canh', 'canh123', 'tadongcanh123@gmail.com', NULL, '203881', '0938173821', 'nam', NULL, NULL, '2024-12-01 02:25:03');
 
 -- --------------------------------------------------------
 
@@ -459,15 +733,15 @@ CREATE TABLE `vouchers` (
 --
 
 --
--- Indexes for table `areas`
---
-ALTER TABLE `areas`
-  ADD PRIMARY KEY (`area_id`);
-
---
 -- Indexes for table `banners`
 --
 ALTER TABLE `banners`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bases`
+--
+ALTER TABLE `bases`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -503,6 +777,24 @@ ALTER TABLE `failed_jobs`
 ALTER TABLE `ho_tro`
   ADD PRIMARY KEY (`id`),
   ADD KEY `ho_tro_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `invoices_showtime_id_foreign` (`showtime_id`),
+  ADD KEY `invoices_user_id_foreign` (`user_id`),
+  ADD KEY `invoices_combofood_id_foreign` (`combofood_id`),
+  ADD KEY `invoices_voucher_id_foreign` (`voucher_id`);
+
+--
+-- Indexes for table `invoice_details`
+--
+ALTER TABLE `invoice_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `invoice_details_invoice_id_foreign` (`invoice_id`),
+  ADD KEY `invoice_details_seat_id_foreign` (`seat_id`);
 
 --
 -- Indexes for table `khuyen_mais`
@@ -550,7 +842,7 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `rooms`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `rooms_area_id_foreign` (`area_id`);
+  ADD KEY `rooms_bases_id_foreign` (`bases_id`);
 
 --
 -- Indexes for table `seats`
@@ -572,7 +864,22 @@ ALTER TABLE `seat_types`
 ALTER TABLE `showtimes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `showtimes_movie_id_foreign` (`movie_id`),
-  ADD KEY `showtimes_room_id_foreign` (`room_id`);
+  ADD KEY `showtimes_room_id_foreign` (`room_id`),
+  ADD KEY `showtimes_base_id_foreign` (`base_id`);
+
+--
+-- Indexes for table `status_seats`
+--
+ALTER TABLE `status_seats`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `status_seats_showtime_id_foreign` (`showtime_id`),
+  ADD KEY `status_seats_seat_id_foreign` (`seat_id`);
+
+--
+-- Indexes for table `tin_tucs`
+--
+ALTER TABLE `tin_tucs`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `types`
@@ -586,7 +893,8 @@ ALTER TABLE `types`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_username_unique` (`username`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `users_role_id_foreign` (`role_id`);
 
 --
 -- Indexes for table `vouchers`
@@ -599,28 +907,28 @@ ALTER TABLE `vouchers`
 --
 
 --
--- AUTO_INCREMENT for table `areas`
---
-ALTER TABLE `areas`
-  MODIFY `area_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `bases`
+--
+ALTER TABLE `bases`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `combo_foods`
 --
 ALTER TABLE `combo_foods`
-  MODIFY `combofood_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `combofood_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -641,22 +949,34 @@ ALTER TABLE `ho_tro`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `invoice_details`
+--
+ALTER TABLE `invoice_details`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `khuyen_mais`
 --
 ALTER TABLE `khuyen_mais`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -668,19 +988,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `role_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `role_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `seats`
 --
 ALTER TABLE `seats`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
 -- AUTO_INCREMENT for table `seat_types`
@@ -692,7 +1012,19 @@ ALTER TABLE `seat_types`
 -- AUTO_INCREMENT for table `showtimes`
 --
 ALTER TABLE `showtimes`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `status_seats`
+--
+ALTER TABLE `status_seats`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tin_tucs`
+--
+ALTER TABLE `tin_tucs`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `types`
@@ -704,7 +1036,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `vouchers`
@@ -730,6 +1062,22 @@ ALTER TABLE `ho_tro`
   ADD CONSTRAINT `ho_tro_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD CONSTRAINT `invoices_combofood_id_foreign` FOREIGN KEY (`combofood_id`) REFERENCES `combo_foods` (`combofood_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `invoices_showtime_id_foreign` FOREIGN KEY (`showtime_id`) REFERENCES `showtimes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `invoices_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `invoices_voucher_id_foreign` FOREIGN KEY (`voucher_id`) REFERENCES `vouchers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `invoice_details`
+--
+ALTER TABLE `invoice_details`
+  ADD CONSTRAINT `invoice_details_invoice_id_foreign` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `invoice_details_seat_id_foreign` FOREIGN KEY (`seat_id`) REFERENCES `seats` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `movies`
 --
 ALTER TABLE `movies`
@@ -740,7 +1088,7 @@ ALTER TABLE `movies`
 -- Constraints for table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD CONSTRAINT `rooms_area_id_foreign` FOREIGN KEY (`area_id`) REFERENCES `areas` (`area_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `rooms_bases_id_foreign` FOREIGN KEY (`bases_id`) REFERENCES `bases` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `seats`
@@ -753,8 +1101,22 @@ ALTER TABLE `seats`
 -- Constraints for table `showtimes`
 --
 ALTER TABLE `showtimes`
+  ADD CONSTRAINT `showtimes_base_id_foreign` FOREIGN KEY (`base_id`) REFERENCES `bases` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `showtimes_movie_id_foreign` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `showtimes_room_id_foreign` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `status_seats`
+--
+ALTER TABLE `status_seats`
+  ADD CONSTRAINT `status_seats_seat_id_foreign` FOREIGN KEY (`seat_id`) REFERENCES `seats` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `status_seats_showtime_id_foreign` FOREIGN KEY (`showtime_id`) REFERENCES `showtimes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
