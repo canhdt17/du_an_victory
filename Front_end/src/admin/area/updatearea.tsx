@@ -11,7 +11,6 @@ import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
 
-
 type Props = {
   updateArea: (id: number | string, dataArea: IArea) => void;
 };
@@ -33,23 +32,21 @@ const UpdateArea: React.FC<Props> = ({ updateArea }) => {
 
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
-
   useEffect(() => {
     const fetchArea = async () => {
       try {
-        const data = await AreaById(id!); 
-        reset(data);
-        setFetchError(null);
+        setLoading(true);
+        const area = await AreaById(id!); // Gọi API
+        reset(area); // Reset form với dữ liệu nhận được
       } catch (error: any) {
-        setFetchError("Không thể lấy dữ liệu khu vực.");
-        console.error(error);
+        setFetchError(error.message); // Hiển thị lỗi từ API
       } finally {
         setLoading(false);
       }
     };
+  
     fetchArea();
   }, [id, reset]);
-
   const onSubmit = async (dataArea: IArea) => {
     console.log("Submitting dataArea:", dataArea);
     try {
@@ -88,9 +85,10 @@ const UpdateArea: React.FC<Props> = ({ updateArea }) => {
                 </div>
                 {loading ? (
                   <p>Đang tải dữ liệu...</p>
+                ) : fetchError ? (
+                  <p className="text-danger">{fetchError}</p>
                 ) : (
                   <form onSubmit={handleSubmit(onSubmit)}>
-                    {fetchError && <p className="text-danger">{fetchError}</p>}
                     <div className="mb-3">
                       <label htmlFor="area_name" className="form-label">
                         Tên Khu Vực:
