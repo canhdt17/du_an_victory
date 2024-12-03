@@ -61,7 +61,7 @@ const MovieList: React.FC<Props> = ({
                 <td className="p-3 border-b">{movie.name_movie}</td>
                 <td className="p-3 border-b">
                   <img
-                    src={`${baseImageUrl}${movie.image}`}
+                    src={`${movie.image}`}
                     alt={movie.name_movie}
                     className="w-14 h-14 object-cover rounded-md mx-auto"
                   />

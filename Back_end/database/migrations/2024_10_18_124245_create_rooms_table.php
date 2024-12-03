@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('room_name');
-            $table->unsignedBigInteger('area_id');
-            $table->foreign('area_id')->references('area_id')->on('areas')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('total_seat');
+            $table->unsignedBigInteger('bases_id');
+            $table->foreign('bases_id')->references('id')->on('bases')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
             $table->softDeletes();
 

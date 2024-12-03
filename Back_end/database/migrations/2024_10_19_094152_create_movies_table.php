@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('director');
             $table->string('performer');
             $table->date('show');
-            $table->string('content');
+            $table->text('content');
             $table->string('link_trailler');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');   

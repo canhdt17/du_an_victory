@@ -12,18 +12,34 @@ class TintucController extends Controller
    // Lấy danh sách tất cả tin tức
    public function index()
    {
-       $tinTuc = TinTuc::all();
-       return response()->json($tinTuc, 200);
+    try {
+        $tinTucs = TinTuc::all(); // Lấy tất cả các tin tức
+        return response()->json($tinTucs, 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Đã xảy ra lỗi khi lấy danh sách tin tức',
+            'error' => $e->getMessage()
+        ], 500);
+    }
    }
 
    // Lấy thông tin của một tin tức
    public function show($id)
    {
-       $tinTuc = TinTuc::find($id);
-       if (!$tinTuc) {
-           return response()->json(['message' => 'Tin tức không tồn tại'], 404);
-       }
-       return response()->json($tinTuc, 200);
+    try {
+        $tinTuc = TinTuc::find($id); // Tìm tin tức theo ID
+        if (!$tinTuc) {
+            return response()->json(['message' => 'Tin tức không tồn tại'], 404);
+        }
+
+        return response()->json($tinTuc, 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Đã xảy ra lỗi khi lấy tin tức',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+
    }
 
    // Tạo mới tin tức
@@ -35,14 +51,14 @@ class TintucController extends Controller
            'content' => 'required',
            'imager' => 'required'
        ]);
-       $file = $request->file('imager');
-       $path_image = $file->getClientOriginalName();
+    //    $file = $request->file('imager');
+    //    $path_image = $file->getClientOriginalName();
+
        $tinTuc = TinTuc::create([
            'name_TinTuc' => $request->name_TinTuc,
            'sub_title' => $request->sub_title,
            'content' => $request->content,
-           'imager' => $path_image,
-           'slug' => Str::slug($request->name_TinTuc),
+           'imager' => $request->imager,
        ]);
 
        return response()->json($tinTuc, 201);
@@ -64,20 +80,16 @@ class TintucController extends Controller
        }
 
         //neu cap nhap anh 
-        if($request->hasFile('imager')){
-            $file = $request->file('imager');
-            $path_image = $file->getClientOriginalName();
-            $tinTuc->imager=$path_image;
+        $image= $request->image;
+        //neu cap nhap anh 
+        if( $image == ""){
+            $data['image'] = $tinTuc->image;
         }else{
-            $tinTuc->imager= $tinTuc->imager;
+            $data['image']=$image;
         }
        $tinTuc->name_TinTuc = $request->name_TinTuc;
        $tinTuc->sub_title = $request->sub_title;
        $tinTuc->content = $request->content;
-
-       if ($tinTuc->isDirty('name_TinTuc')) {
-           $tinTuc->slug = Str::slug($request->name_TinTuc);
-       }
 
        $tinTuc->save();
 

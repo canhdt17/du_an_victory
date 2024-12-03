@@ -16,7 +16,7 @@ import MenuDashboard from "../movie/menudashboard";
 
 const Category: React.FC = () => {
   const [categories, setCategories] = useState<ICategoryMovie[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);         
   const [error, setError] = useState<string | null>(null);
 
   // fetch
