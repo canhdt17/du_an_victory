@@ -58,6 +58,10 @@ import DetailPromotions from "./compoents/promotions/detail-promotions";
 import Product from "./compoents/product";
 import SelectMovie from "./compoents/selectMovie";
 import Payment from "./compoents/payment";
+import User from "./client/user/user";
+import Showtimes from "./compoents/showtimes/showtimes";
+import ShowtimesId from "./compoents/showtimes/showtimesid";
+
 
 
 function App() {
@@ -400,6 +404,9 @@ function App() {
         <Route path="/news/:id" element={<DetailNews></DetailNews>}></Route>
         <Route path="/promotions" element={<Promotions></Promotions>}></Route>
         <Route path="/promotions/:id" element={<DetailPromotions></DetailPromotions>}></Route>
+        <Route path="/user" element={<User></User>}></Route>
+        <Route path="/showtimes" element={<Showtimes></Showtimes>}></Route>
+        <Route path="/showtimes/:id" element={<Showtimes></Showtimes>}></Route>
       </Routes>
     </>
   );

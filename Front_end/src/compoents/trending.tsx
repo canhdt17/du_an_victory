@@ -26,7 +26,7 @@ const Trending = () => {
                 <div className="product__item">
                   <div className="product__item__pic set-bg" >
                   <img src="/src/img/recent/1.jpg"></img>
-                    <div className="ep">18 / 18</div>
+                    <div className="ep">{trendings.type_id}</div>
                     <div className="comment"><i className="fa fa-comments" /> {trendings.duration}</div>
                     <div className="view"><i className="fa fa-eye" /> {trendings.nation}</div>
                   </div>

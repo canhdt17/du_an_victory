@@ -3,6 +3,7 @@ import React from 'react'
 type Props = {}
 
 const TopView = (props: Props) => {
+  
   return (
     <div>
         <div className="product__sidebar__view">

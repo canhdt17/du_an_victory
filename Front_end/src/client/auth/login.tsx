@@ -18,8 +18,8 @@ const onSubmit = async(registerData:IUser)=>{
     const {data} = await axios.post(`http://127.0.0.1:8000/api/login`,registerData)
    alert("Đăng Nhập Thành Công.")
   
-    
-  navigate('/')
+   localStorage.setItem('token', data)
+  navigate('/user')
   } catch (error) {
     alert("Sai Email Hoặc Mật Khẩu");
     
