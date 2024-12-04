@@ -6,7 +6,7 @@
 }
 
 .dashboards {
-  background-color: var(--background-color);
+  background-color: #fbb4b4;
   color: var(--text-light);
   padding: 1rem;
 }
@@ -48,7 +48,7 @@ main {
 }
 
 .sidebar {
-  background-color: #1e1e1e; 
+  background-color: #ffa0a0; 
   color: var(--text-muted); 
   min-height: 100vh;
   padding: 1rem;
@@ -81,9 +81,10 @@ main {
 
 .navbar-brand {
   padding: 0.75rem;
-  background-color: #1c1c1c; 
+  background-color:#ffa0a0; 
   color: #ffffff; 
   box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.1);
+  /* text-color  */
 }
 
 .navbar .form-control {
@@ -270,7 +271,7 @@ main {
 .movie-list-container {
   max-height: 82vh; 
   overflow-y: auto; 
-  background-color: #2f2f2f; 
+  background-color: #f39e9e; 
   border: 1px solid #444; 
   border-radius: 8px; 
   padding: 1rem; 

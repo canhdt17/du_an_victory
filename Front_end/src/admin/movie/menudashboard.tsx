@@ -1,8 +1,6 @@
 
 import { NavLink } from "react-router-dom";
 
-
-
 const MenuDashboard = () => {
   return (
     <div>
@@ -11,7 +9,7 @@ const MenuDashboard = () => {
           <li className="nav-item">
             <NavLink
               to="/admin/dashboard"
-              className="flex items-center gap-2 p-3 text-blue-600 hover:bg-gray-100"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">
                 <use xlinkHref="#house-fill" />
@@ -22,7 +20,7 @@ const MenuDashboard = () => {
           <li className="nav-item">
             <NavLink
               to="/room"
-              className="flex items-center gap-2 p-3 text-blue-600 hover:bg-gray-100"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">
                 <use xlinkHref="#file-earmark" />
@@ -33,7 +31,7 @@ const MenuDashboard = () => {
           <li className="nav-item">
             <NavLink
               to="/admin/area"
-              className="flex items-center gap-2 p-3 text-blue-600 hover:bg-gray-100"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">
                 <use xlinkHref="#cart" />
@@ -44,7 +42,7 @@ const MenuDashboard = () => {
           <li className="nav-item">
             <NavLink
               to="/admin/category"
-              className="flex items-center gap-2 p-3 text-blue-600 hover:bg-gray-100"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">
                 <use xlinkHref="#people" />
@@ -55,7 +53,7 @@ const MenuDashboard = () => {
           <li className="nav-item">
             <NavLink
               to="/admin/seat_type"
-              className="flex items-center gap-2 p-3 text-blue-600 hover:bg-gray-100"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">
                 <use xlinkHref="#graph-up" />
@@ -66,7 +64,7 @@ const MenuDashboard = () => {
           <li className="nav-item">
             <NavLink
               to="/admin/seat"
-              className="flex items-center gap-2 p-3 text-blue-600 hover:bg-gray-100"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">
                 <use xlinkHref="#puzzle" />
@@ -77,7 +75,7 @@ const MenuDashboard = () => {
           <li className="nav-item">
             <NavLink
               to="/admin/showtime"
-              className="flex items-center gap-2 p-3 text-blue-600 hover:bg-gray-100"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">
                 <use xlinkHref="#puzzle" />
@@ -87,8 +85,19 @@ const MenuDashboard = () => {
           </li>
           <li className="nav-item">
             <NavLink
+              to="/admin/typemovie"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
+            >
+              <svg className="w-3 h-0">
+                <use xlinkHref="#puzzle" />
+              </svg>
+              Loại Phim
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
               to="/"
-              className="flex items-center gap-2 p-3 text-blue-600 hover:bg-gray-100"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">
                 <use xlinkHref="#puzzle" />
@@ -103,23 +112,23 @@ const MenuDashboard = () => {
           <li className="nav-item">
             <a
               href="#"
-              className="flex items-center gap-2 p-3 text-blue-600 hover:bg-gray-100"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">
                 <use xlinkHref="#gear-wide-connected" />
               </svg>
-              Settings
+              Cài Đặt
             </a>
           </li>
           <li className="nav-item">
             <a
               href="#"
-              className="flex items-center gap-2 p-3 text-blue-600 hover:bg-gray-100"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">
                 <use xlinkHref="#door-closed" />
               </svg>
-              Sign out
+              Đăng xuất 
             </a>
           </li>
         </ul>

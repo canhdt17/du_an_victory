@@ -603,7 +603,7 @@ const SelectMovie = () => {
           defaultValue={undefined}
             value={selectedArea?.id}
             className="text-black"
-            onChange={(event) => {
+            onChange={(event) => {      
               handleChangeArea(event);
             }}
           >
@@ -633,6 +633,7 @@ const SelectMovie = () => {
                   key={e.id}
                   onClick={() => {
                     handleToggleSelectCimena(e);
+                  
                   }}
                 >
                   <div className="cimena-name text-2xl mb-2">{e.name}</div>

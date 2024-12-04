@@ -54,11 +54,13 @@ import DetailNews from "./compoents/detail-news/news";
 import News from "./compoents/detail-news/news";
 import Promotions from "./compoents/promotions/promotions";
 import DetailPromotions from "./compoents/promotions/detail-promotions";
-
 import Product from "./compoents/product";
 import SelectMovie from "./compoents/selectMovie";
 import Payment from "./compoents/payment";
-
+import Type from "./admin/type movie/typemovie";
+import AddTypeMovie from "./admin/type movie/addtypemovie";
+import UpdateTypeMovie from "./admin/type movie/updatetypemovie";
+import { ITypeMovie } from "./interface/typemovie";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -68,6 +70,8 @@ function App() {
   const [categoryMovies, setCategoryMovies] = useState<ICategoryMovie[]>([]);
   const [showTimes, setShowTimes] = useState<IShowTime[]>([]);
   const [seats, setSeats] = useState<ISeat[]>([]);
+  const [types, setTypes] = useState<ITypeMovie[]>([]);
+
   const navigate = useNavigate();
 
   //Danh muc phim
@@ -273,13 +277,59 @@ function App() {
     }
   };
 
+  //TypeMovie - Loai phim ( )
+  const addTypeMovie = async (typeData: ITypeMovie) => {
+    try {
+      const type = await SeatAdd(typeData);
+      alert("Thêm loại phim thành công.");
+      setTypes([...types, type]);
+      navigate("/admin/typemovie");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const updateTypeMovie = async (typeData: ITypeMovie, id: number | string) => {
+    try {
+      const updatedSeat = await SeatUpdate(typeData, id);
+      alert("Cập nhật loại phim  thành công.");
+      const newTypes = types.map((type) =>
+        type.id === id ? updatedSeat : type
+      );
+      setTypes(newTypes);
+      navigate("/admin/typemovie");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Routes>
         {/* trang chu admin - trang giao dien phim - phim  */}
-        <Route path="/" element={<HomePage><Product></Product></HomePage>}></Route>
-        <Route path="/select-movie" element={<HomePage><SelectMovie></SelectMovie></HomePage>}></Route>
-        <Route path="/payment" element={<HomePage><Payment></Payment></HomePage>}></Route>
+        <Route
+          path="/"
+          element={
+            <HomePage>
+              <Product></Product>
+            </HomePage>
+          }
+        ></Route>
+        <Route
+          path="/select-movie"
+          element={
+            <HomePage>
+              <SelectMovie></SelectMovie>
+            </HomePage>
+          }
+        ></Route>
+        <Route
+          path="/payment"
+          element={
+            <HomePage>
+              <Payment></Payment>
+            </HomePage>
+          }
+        ></Route>
         <Route
           path="/admin/dashboard"
           element={<Dashboard></Dashboard>}
@@ -376,6 +426,21 @@ function App() {
           }
         ></Route>
 
+        {/* loai phim */}
+        <Route path="/admin/typemovie" element={<Type></Type>}></Route>
+        <Route
+          path="/admin/addtypemovie"
+          element={<AddTypeMovie addTypeMovie={addTypeMovie}></AddTypeMovie>}
+        ></Route>
+        <Route
+          path="/admin/typemovie/edit/:id"
+          element={
+            <UpdateTypeMovie
+              updateTypeMovies={updateTypeMovie}
+            ></UpdateTypeMovie>
+          }
+        ></Route>
+
         {/* gio chieu */}
         <Route path="/admin/showtime" element={<ShowTime></ShowTime>}></Route>
         <Route
@@ -399,7 +464,10 @@ function App() {
         <Route path="/news" element={<News></News>}></Route>
         <Route path="/news/:id" element={<DetailNews></DetailNews>}></Route>
         <Route path="/promotions" element={<Promotions></Promotions>}></Route>
-        <Route path="/promotions/:id" element={<DetailPromotions></DetailPromotions>}></Route>
+        <Route
+          path="/promotions/:id"
+          element={<DetailPromotions></DetailPromotions>}
+        ></Route>
       </Routes>
     </>
   );

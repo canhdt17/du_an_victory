@@ -1,4 +1,5 @@
 export interface ISeatType{
+    name_type: sting;
     id?:number|string,
     seat_type_name:string,
     seat_price:number,
