@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { ListArea } from "../../service/area";
+import { BaseList } from "../../service/base";
 import { IRoom } from "../../interface/room";
-import { IArea } from "../../interface/area";
+import { IBase } from "../../interface/base";
 import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
@@ -15,7 +15,7 @@ type Props = {
 };
 const roomScheama = Joi.object({
   room_name: Joi.string().required().label("Room Name "),
-  area_id: Joi.string().required().label("ID Area"),
+  id: Joi.string().required().label("ID Area"),
   total_seat: Joi.number().required().label(" Total Seat"),
 });
 const CreateRoom: React.FC<Props> = ({ onAdd }) => {
@@ -26,10 +26,10 @@ const CreateRoom: React.FC<Props> = ({ onAdd }) => {
   } = useForm<IRoom>({
     resolver: joiResolver(roomScheama),
   });
-  const [areas, setAreas] = useState<IArea[]>([]);
+  const [areas, setAreas] = useState<IBase[]>([]);
   useEffect(() => {
     (async () => {
-      const data = await ListArea();
+      const data = await BaseList();
       setAreas(data || []);
     })();
   }, []);
@@ -44,9 +44,9 @@ const CreateRoom: React.FC<Props> = ({ onAdd }) => {
           <HeaderDashboard></HeaderDashboard>
           <div className="container-fluid">
             <div className="row">
-              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
                 <div
-                  className="offcanvas-md offcanvas-end bg-body-tertiary"
+                  className="offcanvas-md offcanvas-end "
                   tabIndex={-1}
                   id="sidebarMenu"
                   aria-labelledby="sidebarMenuLabel"
@@ -86,20 +86,20 @@ const CreateRoom: React.FC<Props> = ({ onAdd }) => {
                     <select
                       className="form-control"
                       aria-label="Large select example"
-                      {...register("area_id")}
+                      {...register("id")}
                     >
                       <option selected>Chọn Khu Vực</option>
-                      {areas.map((area: IArea, i: number) => (
-                        <option key={i + 1} value={area.area_id}>
-                          {area.area_name}
+                      {areas.map((area: IBase, i: number) => (
+                        <option key={i + 1} value={area.id}>
+                          {area.base_name}
                         </option>
                       ))}
                     </select>
 
                     <div id="emailHelp" className="form-text">
-                      {errors.area_id && (
+                      {errors.id && (
                         <div className="text-danger ">
-                          {errors.area_id.message}
+                          {errors.id.message}
                         </div>
                       )}
                     </div>

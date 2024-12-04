@@ -1,26 +1,24 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NavLink } from "react-router-dom";
-
-import ListAreas from "./listarea";
-import { IArea } from "../../interface/area";
 import { useEffect, useState } from "react";
-import { AreaDelete, AreaUpdate, ListArea } from "../../service/area";
 import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
+import { IBase } from "../../interface/base";
+import { BaseList, DeleteBase, UpdateBase } from "../../service/base";
+import ListBases from "./listbase";
 
-const Area: React.FC = () => {
-  const [areas, setAreas] = useState<IArea[]>([]);
+const Base: React.FC = () => {
+  const [bases, setBases] = useState<IBase[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   // Hàm fetch dữ liệu
-  const fetchAreas = async () => {
+  const fetchBases = async () => {
     try {
-      const data = await ListArea();
-
-      setAreas(data || []);
+      const data = await BaseList();
+      setBases(data?.bases || []);
     } catch (error: any) {
       setError(error.response ? error.response.data.message : error.message);
     } finally {
@@ -29,16 +27,16 @@ const Area: React.FC = () => {
   };
 
   // Hàm cập nhật khu vực
-  const updateAreas = async (
-    area_id: number | string,
-    updateArea: IArea
+  const updateBases = async (
+    id: number | string,
+    updateBase: IBase
   ): Promise<void> => {
     try {
-      const data = await AreaUpdate(area_id, updateArea);
-      if (data?.areas) {
-        setAreas(data.areas);
+      const data = await UpdateBase(id, updateBase);
+      if (data?.bases) {
+        setBases(data.bases);
       }
-      await fetchAreas();
+      await fetchBases();
       alert("Cập nhật danh mục phim thành công");
     } catch (error: any) {
       alert("Cập nhật danh mục phim thất bại!");
@@ -47,23 +45,23 @@ const Area: React.FC = () => {
   };
 
   // Hàm xóa khu vực
-  const deleteArea = async (area_id: number | string) => {
+  const deleteBases = async (id: number | string) => {
     try {
       const confirmDelete = window.confirm(
         "Bạn có chắc chắn muốn xóa khu vực này?"
       );
       if (!confirmDelete) return;
 
-      await AreaDelete(area_id);
+      await DeleteBase(id);
       alert("Xóa khu vực thành công!");
-      setAreas(areas.filter((area) => area.area_id !== area_id));
+      setBases(bases.filter((base) => base.id !== id));
     } catch (error) {
       console.error("Xóa khu vực thất bại!");
     }
   };
 
   useEffect(() => {
-    fetchAreas();
+    fetchBases();
   }, []);
 
   return (
@@ -74,9 +72,9 @@ const Area: React.FC = () => {
           <HeaderDashboard />
           <div className="container-fluid">
             <div className="row">
-              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
                 <div
-                  className="offcanvas-md offcanvas-end bg-body-tertiary"
+                  className="offcanvas-md offcanvas-end "
                   tabIndex={-1}
                   id="sidebarMenu"
                   aria-labelledby="sidebarMenuLabel"
@@ -86,15 +84,15 @@ const Area: React.FC = () => {
               </div>
               <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 className="h2">Danh Sách Khu Vực</h1>
+                  <h1 className="h2">Danh Sách Cơ Sở</h1>
                   <div className="btn-toolbar mb-2 mb-md-0">
                     <div className="btn-group me-2">
-                      <NavLink to={`/admin/area/createarea`}>
+                      <NavLink to={`/admin/base/addbase`}>
                         <button
                           type="button"
                           className="btn btn-sm btn-outline-secondary"
                         >
-                          Thêm Khu Vực
+                          Thêm Cơ Sở
                         </button>
                       </NavLink>
                     </div>
@@ -103,12 +101,12 @@ const Area: React.FC = () => {
                 {loading && <p>Đang tải dữ liệu...</p>}
                 {error && <p>Lỗi: {error}</p>}
                 {!loading && !error && (
-                  <ListAreas
-                    areas={areas}
+                  <ListBases
+                    bases={bases}
                     loading={loading}
                     error={error}
-                    updateAreas={updateAreas}
-                    deleteArea={deleteArea}
+                    updateBases={updateBases}
+                    deleteBases={deleteBases}
                   />
                 )}
               </main>
@@ -120,4 +118,4 @@ const Area: React.FC = () => {
   );
 };
 
-export default Area;
+export default Base;

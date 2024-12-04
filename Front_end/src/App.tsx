@@ -3,10 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./compoents/page";
 import MovieDetail from "./moviedetail/moviedetail";
-
-import Area from "./admin/area/area";
-import CreateArea from "./admin/area/addarea";
-import UpdateArea from "./admin/area/updatearea";
 import Category from "./admin/category movie/category";
 import AddMovieCategory from "./admin/category movie/addmoviecategory";
 import UpdateCategoryMovie from "./admin/category movie/updatecategorymovie";
@@ -23,12 +19,10 @@ import Login from "./client/auth/login";
 import Profile from "./client/profile/profile";
 import { IRoom } from "./interface/room";
 import { AddRoom, ListRoom } from "./service/room";
-import { IArea } from "./interface/area";
 import { ISeatType } from "./interface/seat_type";
 import { ICategoryMovie } from "./interface/categorymovie";
 import { IShowTime } from "./interface/shotime";
 import { ISeat } from "./interface/seat";
-import { AddArea, AreaUpdate } from "./service/area";
 import { SeatsTypeAdd, SeatsTypeUpdate } from "./service/seat_type";
 import {
   AddCategoryMovie,
@@ -44,12 +38,10 @@ import UpdateSeat from "./admin/seat/UpdateSeat";
 import Seat from "./admin/seat/seat";
 import { IMovie } from "./interface/movie";
 import { MovieAdd, MovieUpdate } from "./service/movie";
-
 import UpdateShowtime from "./admin/showtime/updateshowtime";
 import Dashboard from "./admin/movie/dashboard";
 import AddMovie from "./admin/movie/Addmovie";
 import EditMovie from "./admin/movie/EditMovie";
-
 import DetailNews from "./compoents/detail-news/news";
 import News from "./compoents/detail-news/news";
 import Promotions from "./compoents/promotions/promotions";
@@ -61,11 +53,15 @@ import Type from "./admin/type movie/typemovie";
 import AddTypeMovie from "./admin/type movie/addtypemovie";
 import UpdateTypeMovie from "./admin/type movie/updatetypemovie";
 import { ITypeMovie } from "./interface/typemovie";
+import { IBase } from "./interface/base";
+import BaseAdd from "./admin/base/addbase";
+import UpdateBase from "./admin/base/updatearea";
+import Base from "./admin/base/base";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
   const [rooms, setRooms] = useState<IRoom[]>([]);
-  const [areas, setAreas] = useState<IArea[]>([]);
+  const [bases, setBases] = useState<IBase[]>([]);
   const [seatTypes, setSeatTypes] = useState<ISeatType[]>([]);
   const [categoryMovies, setCategoryMovies] = useState<ICategoryMovie[]>([]);
   const [showTimes, setShowTimes] = useState<IShowTime[]>([]);
@@ -135,25 +131,25 @@ function App() {
   };
 
   //AREA - KHU VỰC ( DONE )
-  const addArea = async (areaData: IArea) => {
+  const addBase = async (baseData: IBase) => {
     try {
-      const area = await AddArea(areaData);
-      alert("Thêm khu vực thành công.");
-      setAreas([...areas, area]);
-      navigate("/admin/area");
+      const base = await BaseAdd(baseData);
+      alert("Thêm cơ sở thành công.");
+      setBases([...bases, base]);
+      navigate("/admin/base");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const updateArea = async (area_id: number | string, areaData: IArea) => {
+  const updateBase = async (id: number | string, baseData: IBase) => {
     try {
-      const areaDta = await AreaUpdate(area_id, areaData);
+      const baseDta = await UpdateBase(id, baseData);
       alert("Cập nhật thành công.");
-      const newAreas = areas.map((area) =>
-        area.area_id === area_id ? areaDta : area
+      const newBases = bases.map((base) =>
+        base.id === id ? baseDta : base
       );
-      setAreas(newAreas);
+      setBases(newBases);
       navigate("/admin/area");
     } catch (error) {
       console.log(error);
@@ -360,15 +356,15 @@ function App() {
           element={<UpdateRoom updateRoom={updateRoom}></UpdateRoom>}
         ></Route>
 
-        {/* Khu vuc */}
-        <Route path="/admin/area" element={<Area></Area>}></Route>
+        {/* Co so  */}
+        <Route path="/admin/base" element={<Base></Base>}></Route>
         <Route
-          path="/admin/area/createarea"
-          element={<CreateArea addArea={addArea}></CreateArea>}
+          path="/admin/base/addbase"
+          element={<BaseAdd addBase={addBase}></BaseAdd>}
         ></Route>
         <Route
           path="/admin/area/edit/:id"
-          element={<UpdateArea updateArea={updateArea}></UpdateArea>}
+          element={<UpdateBase updateBase={updateBase}></UpdateBase>}
         ></Route>
 
         {/* the loai - danh muc phim */}

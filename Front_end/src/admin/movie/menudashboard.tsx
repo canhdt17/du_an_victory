@@ -30,13 +30,13 @@ const MenuDashboard = () => {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/admin/area"
+              to="/admin/base"
               className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">
                 <use xlinkHref="#cart" />
               </svg>
-              Khu Vực
+              Cơ Sở 
             </NavLink>
           </li>
           <li className="nav-item">
@@ -92,6 +92,17 @@ const MenuDashboard = () => {
                 <use xlinkHref="#puzzle" />
               </svg>
               Loại Phim
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              to="/admin/user"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
+            >
+              <svg className="w-3 h-0">
+                <use xlinkHref="#puzzle" />
+              </svg>
+              Tài Khoản
             </NavLink>
           </li>
           <li className="nav-item">

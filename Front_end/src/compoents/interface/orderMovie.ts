@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ICimena {
   id: number;
   areaId: number;
   name: string;
   address: string;
 }
-export interface IArea {
-  id: number;
-  name: string;
+export interface IBase {
+  id: number | string;
+  base_name: string;
 }
 export interface ITime {
   id: number;
@@ -15,18 +16,22 @@ export interface ITime {
   endTime: string;
 }
 export interface IRoom {
-  id: number;
-  showTimeDate: string;
-  startTime: string;
-  endTime: string;
+  id?: number | string;
+  room_name: string;
+  area_id: number | string;
+  total_seat: number;
 }
 export interface ISeat {
-  id: number;
-  seatId: number;
-  showtimeId: number;
-  seatInfo: ISeatInfo;
-  seatType: ISeatType;
-  status: boolean;
+  seatType: any;
+  status: any;
+  id?: number | string,
+  seat_number: number | string,
+  seat_type_id: number | string,
+  room_id: number | string,
+  seat_status: string,
+  deleted_at: null,
+  created_at: null,
+  updated_at: null,
 }
 
 export interface ISeatInfo {
@@ -35,10 +40,11 @@ export interface ISeatInfo {
   seatNumber: number;
   roomId: number;
 }
-export interface ISeatType {
-  id: number;
-  seatTypeName: string;
-  seatPrice: string;
+export interface ISeatType{
+  name_type: string;
+  id?:number|string,
+  seat_type_name:string,
+  seat_price:number,
 }
 export interface IMovie {
   id: string | number;

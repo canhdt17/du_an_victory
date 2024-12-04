@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import constants from "../utils/constants";
 import { IOrderInfoStorage } from "./interface/orderMovie";
 import "./payment.css";
-import BankQRCode from "./bankQRCode";
 import qrCode from '../assets/qrCode.png'
 
 const Payment = () => {
