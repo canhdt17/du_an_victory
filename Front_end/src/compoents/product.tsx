@@ -3,8 +3,7 @@ import TopView from './topview'
 import NewComment from './newcomment'
 import Trending from './trending'
 import Popular from './popular'
-import Recently from './recently'
-import LiveAction from './liveaction'
+
 
 type Props = {}
 

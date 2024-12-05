@@ -1,5 +1,5 @@
 import React from "react";
-import {  NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 
 const Header = () => {
@@ -16,6 +16,7 @@ const Header = () => {
 
   return (
     <div>
+
       <div className='menuhead bg-gray-900 '>            
       <div className=" bg-gray-900 ">
         <header className="headermenu flex items-center justify-between px-6 py-4 bg-gray-900 text-white">
@@ -119,6 +120,7 @@ const Header = () => {
            
           </div>
         </header>
+
 
       </div>
     </div>
