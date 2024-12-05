@@ -1,32 +1,31 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { ICategoryMovie } from "../../interface/categorymovie";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
-
+import { ITypeMovie } from "../../interface/typemovie";
 
 type Props = {
-  addCreateMovie: (category: ICategoryMovie) => void;
+  addTypeMovie: (type: ITypeMovie) => void;
 };
 
 const createMovieSchema = Joi.object({
-  name_category: Joi.string().required().label("Category Name"),
+  name_type: Joi.string().required().label("Type Name"),
 });
 
-const AddMovieCategory: React.FC<Props> = ({ addCreateMovie }) => {
+const AddTypeMovie: React.FC<Props> = ({ addTypeMovie }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ICategoryMovie>({
+  } = useForm<ITypeMovie>({
     resolver: joiResolver(createMovieSchema),
   });
 
-  const onSubmit = (data: ICategoryMovie) => {
-    addCreateMovie(data);
+  const onSubmit = (data: ITypeMovie) => {
+    addTypeMovie(data);
   };
 
   return (
@@ -49,23 +48,23 @@ const AddMovieCategory: React.FC<Props> = ({ addCreateMovie }) => {
               </div>
               <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 className="h2">Thêm Khu Vực</h1>
+                  <h1 className="h2">Thêm Kiểu Phim</h1>
                   <div className="btn-toolbar mb-2 mb-md-0"></div>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="mb-3">
-                    <label htmlFor="categoryName" className="form-label">
-                      Tên Danh Mục:
+                    <label htmlFor="typeName" className="form-label">
+                      Tên Loại Phim:
                     </label>
                     <input
                       type="text"
                       className="form-control"
-                      id="categoryName"
-                      {...register("name_category")}
+                      id="typeName"
+                      {...register("name_type")}
                     />
-                    {errors.name_category && (
+                    {errors.name_type && (
                       <div className="text-danger">
-                        {errors.name_category.message}
+                        {errors.name_type.message}
                       </div>
                     )}
                   </div>
@@ -82,4 +81,4 @@ const AddMovieCategory: React.FC<Props> = ({ addCreateMovie }) => {
   );
 };
 
-export default AddMovieCategory;
+export default AddTypeMovie;

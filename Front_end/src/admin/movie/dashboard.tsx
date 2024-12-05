@@ -51,23 +51,21 @@ const Dashboard: React.FC = () => {
     []
   );
 
-  // Delete Movie
   const deleteMovie = useCallback(async (id: number | string) => {
+    if (!window.confirm("Bạn có chắc muốn xóa phim này?")) return;
+  
     try {
-      const confirmDelete = window.confirm("Bạn có chắc muốn xóa phim này?");
-      if (!confirmDelete) return;
-
       setLoading(true);
       await MovieDelete(id);
       setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== id));
       alert("Xóa phim thành công!");
     } catch (error: any) {
-      console.error("Xóa phim thất bại", error);
       alert("Xóa phim thất bại!");
     } finally {
       setLoading(false);
     }
   }, []);
+  
 
   useEffect(() => {
     fetchMovies();
@@ -79,9 +77,9 @@ const Dashboard: React.FC = () => {
       <HeaderDashboard />
       <div className="container-fluid">
         <div className="row">
-          <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+          <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
             <div
-              className="offcanvas-md offcanvas-end bg-body-tertiary"
+              className="offcanvas-md offcanvas-end "
               tabIndex={-1}
               id="sidebarMenu"
               aria-labelledby="sidebarMenuLabel"
@@ -89,7 +87,7 @@ const Dashboard: React.FC = () => {
               <MenuDashboard />
             </div>
           </div>
-          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
             <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <h1 className="h2">Danh Sách Phim</h1>
               <div className="btn-toolbar mb-2 mb-md-0">

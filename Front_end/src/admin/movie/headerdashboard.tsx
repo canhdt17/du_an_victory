@@ -6,14 +6,13 @@ const HeaderDashboard = (props: Props) => {
   return (
     <div>
       <header
-        className="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow"
-        data-bs-theme="dark"
+        className="navbar sticky-top flex-md-nowrap p-0 shadow"
       >
         <a
           className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
           href="/"
         >
-          Company name
+          COMPANY NAME 
         </a>
         <ul className="navbar-nav flex-row d-md-none">
           <li className="nav-item text-nowrap">

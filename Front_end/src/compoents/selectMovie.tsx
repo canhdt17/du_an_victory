@@ -1,40 +1,54 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Alert, FormSelect } from "react-bootstrap";
 import "./selectMovie.css";
-import { useEffect, useState } from "react";
-import anh from "../assets/anhphim.jpg";
+import {
+  ChangeEvent,
+  // JSXElementConstructor,
+  // Key,
+  // ReactElement,
+  // ReactNode,
+  // ReactPortal,
+  useEffect,
+  useState,
+} from "react";
 import constants from "../utils/constants";
 import {
-  IArea,
+  IBase,
   ICimena,
   IMovie,
   IRoom,
   ISeat,
   ITime,
 } from "./interface/orderMovie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ISeatType } from "../interface/seat_type";
+import api from "../axios/config";
 
 const SelectMovie = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-  const navigate = useNavigate()
-  const [movieDetail, setMovieDetailt] = useState<IMovie>({
-    id: 1,
-    name_movie: "NGÀY XƯA CÓ MỘT CHUYỆN TÌNH",
-    image: anh,
-    type_id: 1,
-    duration: "135 phút",
-    nation: "Viet Nam",
-    director: "Trịnh Đình Lê Minh",
-    performer: "",
-    show: "2024-10-31",
-    content:
-      "Ngày Xưa Có Một Chuyện Tình xoay quanh câu chuyện tình bạn, tình yêu giữa hai chàng trai và một cô gái từ thuở ấu thơ cho đến khi trưởng thành, phải đối mặt với những thử thách của số phận. Trải dài trong 4 giai đoạn từ năm 1987 - 2000, ba người bạn cùng tuổi - Vinh, Miền, Phúc đã cùng yêu, cùng bỡ ngỡ bước vào đời, va vấp và vượt qua.",
-    link_trailler: "https://youtu.be/IcpKkCzvcU4?si=gtrJxkEn-1FJCEzg",
-    category_id: 5,
-    name_type: "3D",
-    name_category: "Hành động",
-  });
-  const [selectedArea, setSelectedArea] = useState<IArea | null>(null);
+  const [movieDetail, setMovieDetail] = useState<IMovie | null>(null);
+
+  useEffect(() => {
+    const fetchMovieDetail = async () => {
+      try {
+        const { data } = await api.get<{ movie: IMovie }>(`movies/${id}`);
+        console.log("Fetched movie details:", data.movie);
+        setMovieDetail(data.movie);
+      } catch (error) {
+        console.error("Error fetching movie details:", error);
+      }
+    };
+  
+    if (id) {
+      fetchMovieDetail();
+    }
+  }, [id]);
+  
+
+  const [selectedBase, setSelectedBase] = useState<IBase | null>(null);
   const [selectedCimena, setSelectedCimena] = useState<ICimena | null>(null);
   const [selectedTime, setSelectedTime] = useState<ITime | null>(null);
   const [selectedRoom, setSelectedRoom] = useState<IRoom | null>(null);
@@ -59,20 +73,20 @@ const SelectMovie = () => {
       endTime: "21:00",
     },
   ]);
-  const [areas, setAreas] = useState<IArea[]>([
-    {
-      id: 1,
-      name: "Hà Nội",
-    },
-    {
-      id: 2,
-      name: "TP Hồ Chí Minh",
-    },
-    {
-      id: 3,
-      name: "Đà Nẵng",
-    },
-  ]);
+
+  const [bases, setBases] = useState<IBase | null>(null);
+  useEffect(() => {
+    const fetchBase = async () => {
+      try {
+        const { data } = await api.get<{ base: IBase[] }>(`bases/${id}`);
+        setBases(data.base);
+      } catch (error) {
+        console.error("Error fetching base details:", error);
+      }
+    };
+    fetchBase();
+  }, [id]);
+
   const [cimenas, setCimenas] = useState<ICimena[]>([
     {
       id: 1,
@@ -93,384 +107,45 @@ const SelectMovie = () => {
       address: "Hoàn Kiếm, Hà Nội",
     },
   ]);
-  const [seats, setSeats] = useState<ISeat[]>([
-    {
-      id: 1,
-      showtimeId: 1,
-      seatId: 1,
-      seatInfo: {
-        id: 1,
-        seatNumber: 1,
-        seatTypeId: 1,
-        roomId: 1,
-      },
-      seatType: {
-        id: 1,
-        seatTypeName: "Normal",
-        seatPrice: "150000",
-      },
-      status: true,
-    },
-    {
-      id: 2,
-      showtimeId: 1,
-      seatId: 2,
-      seatInfo: {
-        id: 2,
-        seatNumber: 2,
-        seatTypeId: 2,
-        roomId: 1,
-      },
-      seatType: {
-        id: 2,
-        seatTypeName: "Vip",
-        seatPrice: "200000",
-      },
-      status: true,
-    },
-    {
-      id: 3,
-      showtimeId: 1,
-      seatId: 3,
-      seatInfo: {
-        id: 3,
-        seatNumber: 3,
-        seatTypeId: 1,
-        roomId: 1,
-      },
-      seatType: {
-        id: 1,
-        seatTypeName: "Normal",
-        seatPrice: "150000",
-      },
-      status: false,
-    },
-    {
-      id: 4,
-      showtimeId: 1,
-      seatId: 4,
-      seatInfo: {
-        id: 3,
-        seatNumber: 4,
-        seatTypeId: 2,
-        roomId: 1,
-      },
-      seatType: {
-        id: 2,
-        seatTypeName: "Vip",
-        seatPrice: "200000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-    {
-      id: 5,
-      showtimeId: 1,
-      seatId: 5,
-      seatInfo: {
-        id: 3,
-        seatNumber: 5,
-        seatTypeId: 3,
-        roomId: 1,
-      },
-      seatType: {
-        id: 3,
-        seatTypeName: "Doi",
-        seatPrice: "300000",
-      },
-      status: false,
-    },
-  ]);
-  const [seatTypes, setSeatTypes] = useState<ISeatType[]>([
-    {
-      id: 1,
-      seatTypeName: "Normal",
-      seatPrice: "150000",
-    },
-    {
-      id: 2,
-      seatTypeName: "Vip",
-      seatPrice: "200000",
-    },
-    {
-      id: 3,
-      seatTypeName: "Doi",
-      seatPrice: "300000",
-    },
-  ]);
+
+  const [seats, setSeats] = useState<ISeat[]>([]);
+  useEffect(() => {
+    const fetchSeatTypes = async () => {
+      try {
+        const { data } = await api.get<{ seattype: ISeatType[] }>(
+          `types/${id}`
+        );
+        setSeatTypes(data.seattype);
+      } catch (error) {
+        console.error("Error fetching seat type details:", error);
+      }
+    };
+    fetchSeatTypes();
+  }, [id]);
+
+  const [seatTypes, setSeatTypes] = useState<ISeatType | null>([]);
+  useEffect(() => {
+    const fetchSeatTypes = async () => {
+      try {
+        const { data } = await api.get<{ seattype: ISeatType }>(`types/${id}`);
+        // return data.seattype;
+        setBases(data.seattype);
+      } catch (error) {
+        console.error("Error fetching seattype details:", error);
+      }
+    };
+
+    fetchSeatTypes();
+  }, []);
 
   const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
+    let total = selectedSeats.reduce((sum, seat) => {
+      return sum + Number(seat.seatType.seatPrice);
+    }, 0);
+    setTotalPrice(total);
+  }, [selectedSeats]); // Cập nhật lại tổng mỗi khi selectedSeats thay đổi
+
   const [showNotifySelectSeat, setShowNotifySelectSeat] = useState(false);
 
   useEffect(() => {
@@ -490,25 +165,37 @@ const SelectMovie = () => {
     }
   }, [showNotifySelectSeat]);
 
-  const handleChangeArea = (event) => {
-    const area = areas?.find((e) => e.id.toString() === event.target.value);
-    setSelectedArea(area ? area : null);
+  const handleChangeBase = (event: ChangeEvent<HTMLSelectElement>) => {
+    const base = bases?.find(
+      (e: { id: { toString: () => any } }) =>
+        e.id.toString() === event.target.value
+    );
+    setSelectedBase(base ? base : null);
   };
-  const handleToggleSelectCimena = (cimenaId: ICimena) => {
-    setSelectedCimena(cimenaId);
+
+  const handleToggleSelectCimena = (cimena: ICimena) => {
+    setSelectedCimena(cimena);
   };
-  const handleSelectTime = (timeId: ITime) => {
-    setSelectedTime(timeId);
+
+  const handleSelectTime = (time: ITime) => {
+    setSelectedTime(time);
   };
+
   const handleSelectedSeat = (seat: ISeat) => {
-    if (seat.status) return;
-    const isSelected = selectedSeats.find((e) => e.id === seat.id);
-    let newSelectedSeats: ISeat[] = JSON.parse(JSON.stringify(selectedSeats));
+    if (seat.status) return; // Nếu ghế đã bị chọn hoặc đã bị đặt thì không chọn được
+    const isSelected = selectedSeats.some(
+      (selected) => selected.id === seat.id
+    );
+
+    let newSelectedSeats = [...selectedSeats]; // Tránh sửa trực tiếp state
     if (isSelected) {
-      newSelectedSeats = newSelectedSeats?.filter((e) => e.id !== seat.id);
+      newSelectedSeats = newSelectedSeats.filter(
+        (selected) => selected.id !== seat.id
+      );
     } else {
       newSelectedSeats.push(seat);
     }
+
     setSelectedSeats(newSelectedSeats);
   };
 
@@ -541,7 +228,7 @@ const SelectMovie = () => {
       totalPrice: totalPrice,
     };
     localStorage.setItem(constants.orderInfoKey, JSON.stringify(paymentData));
-    navigate('/payment')
+    navigate("/payment");
   };
 
   return (
@@ -549,14 +236,14 @@ const SelectMovie = () => {
       <div
         className={`movie-info flex gap-8 mb-10 p-14 relative`}
         style={{
-          backgroundImage: ` url(${anh})`,
+          backgroundImage: `url(${movieDetail.image})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "100%",
           backgroundPosition: "center center",
         }}
       >
         <div className="image w-80 h-auto flex-shrink-0 rounded-xl overflow-hidden z-[2]">
-          <img src={anh} />
+          <img src={movieDetail.image} alt={movieDetail.name_movie} />
         </div>
         <div className="movie-content flex flex-col gap-3 z-[2]">
           <div className="movie-name text-4xl font-semibold text-white mb-8">
@@ -577,13 +264,13 @@ const SelectMovie = () => {
           <div className="movie-description">
             Nội dung: {movieDetail.content}
           </div>
-          <div className="movie-trailler flex items-center gap-10 ">
+          <div className="movie-trailler flex items-center gap-10">
             <div className="label">Trailler: </div>
-
             <a
               className="!text-blue-600 underline"
               href={movieDetail.link_trailler}
               target="_blank"
+              rel="noopener noreferrer"
             >
               <button className="bg-red-500">Xem trailler</button>
             </a>
@@ -595,31 +282,27 @@ const SelectMovie = () => {
         <div className="booking-title uppercase text-5xl font-bold text-center mt-20 mb-20">
           Đặt vé
         </div>
-        <div className="area-list w-64">
+        <div className="base-list w-64">
           <label className="w-full font-semibold text-lg text-white">
-            Chọn khu vực:
+            Chọn cơ sở:
           </label>
           <FormSelect
-          defaultValue={undefined}
-            value={selectedArea?.id}
+            defaultValue={undefined}
+            value={selectedBase?.id}
             className="text-black"
-            onChange={(event) => {
-              handleChangeArea(event);
-            }}
+            onChange={(event) => handleChangeBase(event)}
           >
             <option className="text-black" key={undefined} value={undefined}>
-                  Chọn khu vực
-                </option>
-            {areas?.map((e) => {
-              return (
-                <option className="text-black" key={e.id} value={e.id}>
-                  {e.name}
-                </option>
-              );
-            })}
+              Chọn cơ sở
+            </option>
+            {bases?.map((e) => (
+              <option key={e.id} value={e.id}>
+                {e.name}
+              </option>
+            ))}
           </FormSelect>
         </div>
-        {selectedArea && (
+        {selectedBase && (
           <div className="cimena-list mt-4 w-1/5 min-w-64">
             <label className="w-full font-semibold text-lg text-white">
               Chọn rạp:
@@ -640,9 +323,6 @@ const SelectMovie = () => {
                 </div>
               );
             })}
-
-            {/* <div className="cimena-name">CGV Mỹ ĐÌnh</div>
-            <div className="cimena-name">CGV Hai Bà Trưng</div> */}
           </div>
         )}
         {selectedCimena && (
@@ -668,7 +348,7 @@ const SelectMovie = () => {
           <div className="movie-room p-4 bg-[#293a47] my-8 mx-auto w-1/2 rounded-3xl">
             <div className="room-name text-3xl text-center my-8">Tên phòng</div>
 
-            <div className="seats-area grid grid-cols-12 gap-2 w-fit mx-auto">
+            <div className="seats-base grid grid-cols-12 gap-2 w-fit mx-auto">
               {seats?.map((e) => {
                 return (
                   <div
@@ -688,7 +368,9 @@ const SelectMovie = () => {
               <div className="seat-type flex justify-center items-center gap-2">
                 <div
                   className={`seat-type-icon w-8 h-8 flex justify-center items-center rounded-lg bg-red-600`}
-                >X</div>
+                >
+                  X
+                </div>
                 <div className="name">Ghế đã đặt</div>
               </div>
               <div className="seat-type flex justify-center items-center gap-2">

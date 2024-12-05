@@ -5,38 +5,38 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { ICategoryMovie } from "../../interface/categorymovie";
-import { CategoryMovieById } from "../../service/categorymovie";
 import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
+import { ITypeMovie } from "../../interface/typemovie";
+import { TypeMovieById } from "../../service/typemovie";
 
 
 type Props = {
-  updateCategoryMovies: (id: number | string, data: ICategoryMovie) => void;
+  updateTypeMovies: (id: number | string, data: ITypeMovie) => void;
 };
 
-const updateMovieSchema = Joi.object({
-  name_category: Joi.string().required().label("Category Name"),
+const updateTypeSchema = Joi.object({
+  name_type: Joi.string().required().label("Type Name"),
 });
 
-const UpdateCategoryMovie: React.FC<Props> = ({ updateCategoryMovies }) => {
+const UpdateTypeMovie: React.FC<Props> = ({ updateTypeMovies }) => {
   const { id } = useParams<{ id: string }>();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ICategoryMovie>({
-    resolver: joiResolver(updateMovieSchema),
+  } = useForm<ITypeMovie>({
+    resolver: joiResolver(updateTypeSchema),
   });
 
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
   useEffect(() => {
-    const fetchCategory = async () => {
+    const fetchType = async () => {
       try {
-        const data = await CategoryMovieById(id!); 
+        const data = await TypeMovieById(id!); 
         reset(data); // Reset form
       } catch (error: any) {
         setFetchError("Không thể lấy dữ liệu danh mục.");
@@ -46,15 +46,15 @@ const UpdateCategoryMovie: React.FC<Props> = ({ updateCategoryMovies }) => {
       }
     };
   
-    fetchCategory();
+    fetchType();
   }, [id, reset]);
   
 
-  const onSubmit = async (data: ICategoryMovie) => {
+  const onSubmit = async (data: ITypeMovie) => {
     console.log("Submitting Data:", data);
     try {
       setLoading(true);
-      await updateCategoryMovies(id!, data);
+      await updateTypeMovies(id!, data);
       alert("Danh sách khu vực đã được cập nhật thành công!");
     } catch (error) {
       setFetchError("Cập nhật khu vực thất bại. Vui lòng thử lại.");
@@ -98,11 +98,11 @@ const UpdateCategoryMovie: React.FC<Props> = ({ updateCategoryMovies }) => {
                         type="text"
                         className="form-control"
                         id="categoryName"
-                        {...register("name_category")}
+                        {...register("name_type")}
                       />
-                      {errors.name_category && (
+                      {errors.name_type && (
                         <div className="text-danger">
-                          {errors.name_category.message}
+                          {errors.name_type.message}
                         </div>
                       )}
                     </div>
@@ -120,4 +120,4 @@ const UpdateCategoryMovie: React.FC<Props> = ({ updateCategoryMovies }) => {
   );
 };
 
-export default UpdateCategoryMovie;
+export default UpdateTypeMovie;

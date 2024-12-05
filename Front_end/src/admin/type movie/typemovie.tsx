@@ -2,27 +2,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ICategoryMovie } from "../../interface/categorymovie";
-import {
-  CategoryMovie,
-  DeleteCategoryMovie,
-  UpdateCategoryMovies,
-} from "../../service/categorymovie";
-import ListCategoryMovie from "./listcartegorymovie";
 import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
+import { DeleteTypeMovie, TypeMovie, UpdateTypeMovies } from "../../service/typemovie";
+import ListTypeMovie from "./listtypemovie";
+import { ITypeMovie } from "../../interface/typemovie";
 
-const Category: React.FC = () => {
-  const [categories, setCategories] = useState<ICategoryMovie[]>([]);
+const Type: React.FC = () => {
+  const [types, setTypes] = useState<ITypeMovie[]>([]);
   const [loading, setLoading] = useState(true);         
   const [error, setError] = useState<string | null>(null);
 
   // fetch
-  const fetchCategories = async () => {
+  const fetchTypes = async () => {
     try {
-      const data = await CategoryMovie();
-      setCategories(data?.categories || []);
+      const data = await TypeMovie();
+      setTypes(data?.types || []);
     } catch (error: any) {
       setError(error.response ? error.response.data.message : error.message);
     } finally {
@@ -31,41 +27,41 @@ const Category: React.FC = () => {
   };
 
   //update
-  const updateCategoryMovies = async (
+  const updateTypeMovies = async (
     id: number | string,
-    updatedCategory: ICategoryMovie
+    updateType: ITypeMovie
   ): Promise<void> => {
     try {
-      const data = await UpdateCategoryMovies(id, updatedCategory);
-      if (data?.categories) {
-        setCategories(data.categories);
+      const data = await UpdateTypeMovies(id, updateType);
+      if (data?.types) {
+        setTypes(data.types);
       }
-      await fetchCategories();
-      alert("Cập nhật danh mục phim thành công!");
+      await fetchTypes();
+      alert("Cập nhật loại phim thành công!");
     } catch (error: any) {
-      alert("Cập nhật danh mục phim thất bại!");
-      console.error("Update Category Error:", error?.message || error);
+      alert("Cập nhật loại phim thất bại!");
+      console.error("Update TypeMovie Error:", error?.message || error);
     }
   };
 
   // Hàm xóa
-  const deleteCategoryMovie = async (id: number | string) => {
+  const deleteTypeMovies = async (id: number | string) => {
     try {
       const confirmDelete = window.confirm(
-        "Bạn có chắc chắn muốn xóa danh mục này?"
+        "Bạn có chắc chắn muốn xóa loại này?"
       );
       if (!confirmDelete) return;
 
-      await DeleteCategoryMovie(id);
-      alert("Xóa danh mục phim thành công!");
-      setCategories(categories.filter((category) => category.id !== id));
+      await DeleteTypeMovie(id);
+      alert("Xóa loại phim thành công!");
+      setTypes(types.filter((category) => category.id !== id));
     } catch (error) {
-      console.error("Xóa danh mục phim thất bại!");
+      console.error("Xóa loại phim thất bại!");
     }
   };
 
   useEffect(() => {
-    fetchCategories();
+    fetchTypes();
   }, []);
 
   return (
@@ -83,7 +79,7 @@ const Category: React.FC = () => {
                 <h1 className="h2">Danh Mục Phim</h1>
                 <div className="btn-toolbar mb-2 mb-md-0">
                   <div className="btn-group me-2">
-                    <NavLink to={`/admin/createmovie`}>
+                    <NavLink to={`/admin/addtypemovie`}>
                       <button
                         type="button"
                         className="btn btn-sm btn-outline-secondary"
@@ -94,15 +90,15 @@ const Category: React.FC = () => {
                   </div>
                 </div>
               </div>
-              {loading && <p>Loading categories...</p>}
-              {error && <p>Error fetching categories: {error}</p>}
+              {loading && <p>Loading types...</p>}
+              {error && <p>Error fetching types: {error}</p>}
               {!loading && !error && (
-                <ListCategoryMovie
-                  categories={categories}
+                <ListTypeMovie
+                  types={types}
                   loading={false}
                   error={null}
-                  updateCategoryMovies={updateCategoryMovies}
-                  deleteCategoryMovie={deleteCategoryMovie}
+                  updateTypeMovies={updateTypeMovies}
+                  deleteTypeMovie={deleteTypeMovies}
                 />
               )}
             </main>
@@ -113,4 +109,4 @@ const Category: React.FC = () => {
   );
 };
 
-export default Category;
+export default Type;
