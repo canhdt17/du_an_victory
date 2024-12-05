@@ -3,15 +3,5 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ],
-    "compilerOptions": {
-      "allowJs": true,          // Cho phép biên dịch file .js
-      "checkJs": false,         // Không kiểm tra lỗi trong file .js (mặc định)
-      "outDir": "./dist",       // Thư mục chứa file biên dịch
-      "target": "ES6",          // Phiên bản JavaScript đích
-      "module": "ESNext"        // Hỗ trợ import/export hiện đại
-    },
-    "include": ["src/**/*"],    // Bao gồm file .ts và .js trong thư mục src
-    "exclude": ["node_modules"] // Loại trừ thư mục node_modules
-  
+  ]
 }
