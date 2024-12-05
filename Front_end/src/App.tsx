@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./compoents/page";
-import MovieDetail from "./moviedetail/moviedetail";
+
 
 import Area from "./admin/area/area";
 import CreateArea from "./admin/area/addarea";
@@ -61,6 +61,8 @@ import Payment from "./compoents/payment";
 import User from "./client/user/user";
 import Showtimes from "./compoents/showtimes/showtimes";
 import ShowtimesId from "./compoents/showtimes/showtimesid";
+import MovieDetail from "./compoents/moviedetail/moviedetail";
+import LoginPage from "./client/auth/login";
 
 
 
@@ -397,7 +399,7 @@ function App() {
         <Route path="/admin/edituser/:id" element={<EditUser />} />
 
         {/* client */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/news" element={<News></News>}></Route>
@@ -407,6 +409,7 @@ function App() {
         <Route path="/user" element={<User></User>}></Route>
         <Route path="/showtimes" element={<Showtimes></Showtimes>}></Route>
         <Route path="/showtimes/:id" element={<Showtimes></Showtimes>}></Route>
+        <Route path="/movie-detail/:id" element={<MovieDetail></MovieDetail>}></Route>
       </Routes>
     </>
   );

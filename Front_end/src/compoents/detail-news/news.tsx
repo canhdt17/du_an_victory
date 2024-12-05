@@ -23,6 +23,7 @@ const News = (props: Props) => {
   return (
     <div>
       <Header></Header>
+      <div className='bg-[#070720]'>
       <div className="bg-[#070720] container mx-auto py-10 text-center">
     <h1 className="text-2xl font-bold text-white">Tin Tức</h1>
   
@@ -41,6 +42,7 @@ const News = (props: Props) => {
   
   </div>
 </div>
+      </div>
       <Footer></Footer>
     </div>
   )
