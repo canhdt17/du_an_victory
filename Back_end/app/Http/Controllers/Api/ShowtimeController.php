@@ -135,6 +135,22 @@ class ShowtimeController extends Controller
     
     }
     // tim phòng 
+    public function getIDRoomShowtime($ids)
+    {
+
+    // Tách danh sách ID bằng dấu phẩy
+    $idArray = explode(',', $ids);
+    $movie_id=$idArray[1];
+    $base_id=$idArray[0];
+    $showtime_date=$idArray[2];
+    $start_time=$idArray[3];
+
+    
+    $showtimeTime = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->groupBy('room_id')->select('room_id')->get();
+    return response()->json($showtimeTime);
+    
+    }
+    // list ghe va hien thi trang thai ghe
     public function getSeatShowtime($id)
     {
         $seats= DB::table('seats')
