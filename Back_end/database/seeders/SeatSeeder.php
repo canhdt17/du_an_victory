@@ -14,10 +14,10 @@ class SeatSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 20; $i++) {
-            $numberSeat = "A".$i;
+        for ($i = 1; $i <= 10; $i++) {
+            $numberSeat = "C".$i;
             Seat::create([
-                'seat_type_id' => "1",
+                'seat_type_id' => "3",
                 'seat_number' => $numberSeat,
                 'room_id' => '3',
             ]);
