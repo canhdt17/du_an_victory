@@ -17,8 +17,8 @@ return new class extends Migration
         });
 
         Schema::table('vouchers', function (Blueprint $table) {
-            $table->enum('status', ['Đã sử dùng', 'Chưa sử dùng'])
-                  ->default('Chưa sử dùng')
+            $table->enum('status', ['On', 'Off'])
+                  ->default('On')
                   ->nullable();
         });
     }
@@ -31,6 +31,7 @@ return new class extends Migration
         Schema::table('vouchers', function (Blueprint $table) {
             // Xóa cột enum và thêm lại cột với kiểu integer
             $table->dropColumn('status');
+            
         });
 
         Schema::table('vouchers', function (Blueprint $table) {
