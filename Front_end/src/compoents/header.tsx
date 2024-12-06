@@ -42,7 +42,7 @@ const Header = () => {
         <NavLink to="/ticket-prices" className="hover:text-gray-300">
           Giá vé
         </NavLink>
-        <NavLink to="/film-festival" className="hover:text-gray-300">
+        <NavLink to="/category" className="hover:text-gray-300">
       Thể Loại Phim
 
         </NavLink>
@@ -83,7 +83,7 @@ const Header = () => {
         <NavLink to="/ticket-prices" className="hover:text-gray-300">
           Giá vé
         </NavLink>
-        <NavLink to="/film-festival" className="hover:text-gray-300">
+        <NavLink to="/category" className="hover:text-gray-300">
       Thể Loại Phim
 
         </NavLink>

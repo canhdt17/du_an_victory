@@ -72,6 +72,7 @@ import BaseAdd from "./admin/base/addbase";
 import UpdateBase from "./admin/base/updatearea";
 import Base from "./admin/base/base";
 import MovieDetail from "./compoents/moviedetail/moviedetail";
+import Categorys from "./compoents/categorys/categorys";
 
 
 function App() {
@@ -483,10 +484,7 @@ function App() {
         <Route path="/showtimes/:id" element={<Showtimes></Showtimes>}></Route>
         <Route path="/movie-detail/:id" element={<MovieDetail></MovieDetail>}></Route>
 
-        <Route
-          path="/promotions/:id"
-          element={<DetailPromotions></DetailPromotions>}
-        ></Route>
+       <Route path="/category" element={<Categorys></Categorys>}></Route>
 
       </Routes>
     </>

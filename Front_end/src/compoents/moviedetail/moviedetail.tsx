@@ -55,7 +55,7 @@ const MovieDetail = () => {
                   <a href="#"><i className="fa fa-star" /></a>
                   <a href="#"><i className="fa fa-star-half-o" /></a>
                 </div>
-                <span>{detail.show}</span>
+                <span></span>
               </div>
               <p>{detail.content}</p>
               <div className="anime__details__widget">
