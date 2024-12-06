@@ -134,8 +134,8 @@ class ShowtimeController extends Controller
     return response()->json($showtimeTime);
     
     }
-    // tim phòng 
-    public function getIDRoomShowtime($ids)
+     // list ghe va hien thi trang thai ghe the id room
+    public function getSeatShowtime($ids)
     {
 
     // Tách danh sách ID bằng dấu phẩy
@@ -146,21 +146,29 @@ class ShowtimeController extends Controller
     $start_time=$idArray[3];
 
     
-    $showtimeTime = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->groupBy('room_id')->select('room_id')->get();
-    return response()->json($showtimeTime);
+    $room_id = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->value('room_id');
+    $seats= DB::table('seats')
+    ->leftJoin('status_seats', 'status_seats.seat_id', '=', 'seats.id')  // Dùng leftJoin để lấy tất cả ghế, kể cả không có trạng thái
+    ->whereNull('seats.deleted_at')  // Kiểm tra trạng thái xóa mềm cho ghế
+    ->where('seats.room_id', $room_id)  // Lọc theo phòng
+    ->select('seats.*', 'status_seats.status')  // Chọn tất cả các cột của ghế và trạng thái ghế
+    ->orderByDesc('seats.id')  // Sắp xếp theo id của ghế
+    ->get();
+    return response()->json($seats);
+    
     
     }
-    // list ghe va hien thi trang thai ghe
-    public function getSeatShowtime($id)
-    {
-        $seats= DB::table('seats')
-        ->leftJoin('status_seats', 'status_seats.seat_id', '=', 'seats.id')  // Dùng leftJoin để lấy tất cả ghế, kể cả không có trạng thái
-        ->whereNull('seats.deleted_at')  // Kiểm tra trạng thái xóa mềm cho ghế
-        ->where('seats.room_id', $id)  // Lọc theo phòng
-        ->select('seats.*', 'status_seats.status')  // Chọn tất cả các cột của ghế và trạng thái ghế
-        ->orderByDesc('seats.id')  // Sắp xếp theo id của ghế
-        ->get();
-        return response()->json($seats);
+   
+    // public function getSeatShowtime($id)
+    // {
+    //     $seats= DB::table('seats')
+    //     ->leftJoin('status_seats', 'status_seats.seat_id', '=', 'seats.id')  // Dùng leftJoin để lấy tất cả ghế, kể cả không có trạng thái
+    //     ->whereNull('seats.deleted_at')  // Kiểm tra trạng thái xóa mềm cho ghế
+    //     ->where('seats.room_id', $id)  // Lọc theo phòng
+    //     ->select('seats.*', 'status_seats.status')  // Chọn tất cả các cột của ghế và trạng thái ghế
+    //     ->orderByDesc('seats.id')  // Sắp xếp theo id của ghế
+    //     ->get();
+    //     return response()->json($seats);
     
-    }
+    // }
     }
