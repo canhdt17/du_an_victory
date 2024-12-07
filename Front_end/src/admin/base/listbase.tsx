@@ -1,16 +1,16 @@
 import { NavLink } from "react-router-dom";
-import { IArea } from "../../interface/area";
+import { IBase } from "../../interface/base";
 
 type Props = {
-  areas: IArea[];
+  bases: IBase[];
   loading: boolean;
   error: string | null;
-  updateAreas: (id: number | string, updateArea: IArea) => void;
-  deleteArea: (id: number | string) => void;
+  updateBases: (id: number | string, updateBase: IBase) => void;
+  deleteBases: (id: number | string) => void;
 };
 
-const ListAreas: React.FC<Props> = ({ areas, loading, error, deleteArea }) => {
-  const safeAreas = Array.isArray(areas) ? areas : [];
+const ListBases: React.FC<Props> = ({ bases, loading, error, deleteBases }) => {
+  const safeBases = Array.isArray(bases) ? bases : [];
 
   return (
     <div>
@@ -19,8 +19,8 @@ const ListAreas: React.FC<Props> = ({ areas, loading, error, deleteArea }) => {
           <thead>
             <tr className="text-center">
               <th scope="col">STT</th>
-              <th scope="col">Tên Khu Vực</th>
-              <th scope="col">Hành động</th>
+              <th scope="col">Tên Cơ Sở </th>
+              <th scope="col">Thao Tác</th>
             </tr>
           </thead>
           <tbody className="text-center">
@@ -34,14 +34,14 @@ const ListAreas: React.FC<Props> = ({ areas, loading, error, deleteArea }) => {
                 <td colSpan={3}>Lỗi: {error}</td>
               </tr>
             )}
-            {safeAreas.length > 0 ? (
-              safeAreas.map((area, index) => (
-                <tr key={area.area_id}>
+            {safeBases.length > 0 ? (
+              safeBases.map((base, index) => (
+                <tr key={base.id}>
                   <td>{index + 1}</td>
-                  <td>{area.area_name}</td>
+                  <td>{base.base_name}</td>
                   <td>
                     <div className="action-buttons">
-                      <NavLink to={`/admin/area/edit/${area.area_id}`}>
+                      <NavLink to={`/admin/base/edit/${base.id}`}>
                         <button type="button" className="btn btn-warning">
                           Cập nhật
                         </button>
@@ -49,7 +49,7 @@ const ListAreas: React.FC<Props> = ({ areas, loading, error, deleteArea }) => {
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => deleteArea(area.area_id)}
+                        onClick={() => deleteBases(base.id)}
                       >
                         Xóa
                       </button>
@@ -69,4 +69,4 @@ const ListAreas: React.FC<Props> = ({ areas, loading, error, deleteArea }) => {
   );
 };
 
-export default ListAreas;
+export default ListBases;

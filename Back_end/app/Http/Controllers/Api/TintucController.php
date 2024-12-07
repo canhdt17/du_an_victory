@@ -59,7 +59,6 @@ class TintucController extends Controller
            'sub_title' => $request->sub_title,
            'content' => $request->content,
            'imager' => $request->imager,
-           'slug' => Str::slug($request->name_TinTuc),
        ]);
 
        return response()->json($tinTuc, 201);
@@ -91,10 +90,6 @@ class TintucController extends Controller
        $tinTuc->name_TinTuc = $request->name_TinTuc;
        $tinTuc->sub_title = $request->sub_title;
        $tinTuc->content = $request->content;
-
-       if ($tinTuc->isDirty('name_TinTuc')) {
-           $tinTuc->slug = Str::slug($request->name_TinTuc);
-       }
 
        $tinTuc->save();
 

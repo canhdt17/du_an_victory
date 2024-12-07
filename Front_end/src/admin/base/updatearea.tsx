@@ -5,60 +5,57 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { IArea } from "../../interface/area";
-import { AreaById } from "../../service/area";
 import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
-
+import { IBase } from "../../interface/base";
+import { BaseById } from "../../service/base";
 
 type Props = {
-  updateArea: (id: number | string, dataArea: IArea) => void;
+  updateBase: (id: number | string, dataBase: IBase) => void;
 };
 
-const updateAreaSchema = Joi.object({
-  area_name: Joi.string().required().label("Area Name"),
+const updateBaseSchema = Joi.object({
+  base_name: Joi.string().required().label("Area Name"),
 });
 
-const UpdateArea: React.FC<Props> = ({ updateArea }) => {
+const UpdateBase: React.FC<Props> = ({ updateBase }) => {
   const { id } = useParams<{ id: string }>();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IArea>({
-    resolver: joiResolver(updateAreaSchema),
+  } = useForm<IBase>({
+    resolver: joiResolver(updateBaseSchema),
   });
 
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
-
   useEffect(() => {
-    const fetchArea = async () => {
+    const fetchBase = async () => {
       try {
-        const data = await AreaById(id!); 
-        reset(data);
-        setFetchError(null);
+        setLoading(true);
+        const base = await BaseById(id!); // Gọi API
+        reset(base); // Reset form với dữ liệu nhận được
       } catch (error: any) {
-        setFetchError("Không thể lấy dữ liệu khu vực.");
-        console.error(error);
+        setFetchError(error.message); // Hiển thị lỗi từ API
       } finally {
         setLoading(false);
       }
     };
-    fetchArea();
+  
+    fetchBase();
   }, [id, reset]);
-
-  const onSubmit = async (dataArea: IArea) => {
-    console.log("Submitting dataArea:", dataArea);
+  const onSubmit = async (dataBase: IBase) => {
+    console.log("Submitting dataBase:", dataBase);
     try {
       setLoading(true);
-      await updateArea(id!, dataArea);
+      await updateBase(id!, dataBase);
       alert("Khu vực đã được cập nhật thành công!");
     } catch (error) {
       setFetchError("Cập nhật khu vực thất bại. Vui lòng thử lại.");
-      console.error("Error updating area:", error);
+      console.error("Error updating base:", error);
     } finally {
       setLoading(false);
     }
@@ -72,9 +69,9 @@ const UpdateArea: React.FC<Props> = ({ updateArea }) => {
           <HeaderDashboard />
           <div className="container-fluid">
             <div className="row">
-              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
                 <div
-                  className="offcanvas-md offcanvas-end bg-body-tertiary"
+                  className="offcanvas-md offcanvas-end "
                   tabIndex={-1}
                   id="sidebarMenu"
                   aria-labelledby="sidebarMenuLabel"
@@ -84,26 +81,27 @@ const UpdateArea: React.FC<Props> = ({ updateArea }) => {
               </div>
               <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 className="h2">Cập Nhật Khu Vực</h1>
+                  <h1 className="h2">Cập Nhật Cơ Sở</h1>
                 </div>
                 {loading ? (
                   <p>Đang tải dữ liệu...</p>
+                ) : fetchError ? (
+                  <p className="text-danger">{fetchError}</p>
                 ) : (
                   <form onSubmit={handleSubmit(onSubmit)}>
-                    {fetchError && <p className="text-danger">{fetchError}</p>}
                     <div className="mb-3">
-                      <label htmlFor="area_name" className="form-label">
-                        Tên Khu Vực:
+                      <label htmlFor="base_name" className="form-label">
+                        Tên Cơ Sở:
                       </label>
                       <input
                         type="text"
                         className="form-control"
-                        id="area_name"
-                        {...register("area_name")}
+                        id="base_name"
+                        {...register("base_name")}
                       />
-                      {errors.area_name && (
+                      {errors.base_name && (
                         <div className="text-danger">
-                          {errors.area_name.message}
+                          {errors.base_name.message}
                         </div>
                       )}
                     </div>
@@ -121,4 +119,4 @@ const UpdateArea: React.FC<Props> = ({ updateArea }) => {
   );
 };
 
-export default UpdateArea;
+export default UpdateBase;

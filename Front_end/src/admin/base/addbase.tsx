@@ -1,29 +1,28 @@
-
 import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { IArea } from "../../interface/area";
+import { IBase } from "../../interface/base";
 import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
 
 type Props = {
-  addArea: (area: IArea) => void;
+  addBase: (area: IBase) => void;
 };
-const areaScheama = Joi.object({
-  area_name: Joi.string().required().label("Area Name"),
+const baseSchema = Joi.object({
+  base_name: Joi.string().required().label("Base Name"),
 });
-const AddArea: React.FC<Props> = ({ addArea }) => {
+const BaseAdd: React.FC<Props> = ({ addBase }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IArea>({
-    resolver: joiResolver(areaScheama),
+  } = useForm<IBase>({
+    resolver: joiResolver(baseSchema),
   });
 
-  const onsubumit = (areaData: IArea) => {
-    addArea(areaData);
+  const onsubumit = (data: IBase) => {
+    addBase(data);
   };
   return (
     <div>
@@ -33,9 +32,9 @@ const AddArea: React.FC<Props> = ({ addArea }) => {
           <HeaderDashboard></HeaderDashboard>
           <div className="container-fluid">
             <div className="row">
-              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
                 <div
-                  className="offcanvas-md offcanvas-end bg-body-tertiary"
+                  className="offcanvas-md offcanvas-end "
                   tabIndex={-1}
                   id="sidebarMenu"
                   aria-labelledby="sidebarMenuLabel"
@@ -45,25 +44,25 @@ const AddArea: React.FC<Props> = ({ addArea }) => {
               </div>
               <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 className="h2">Thêm Khu Vực</h1>
+                  <h1 className="h2">Thêm Cơ Sở</h1>
                   <div className="btn-toolbar mb-2 mb-md-0"></div>
                 </div>
 
                 <form onSubmit={handleSubmit(onsubumit)}>
                   <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label">
-                      Tên Khu Vực:
+                    <label htmlFor="baseName" className="form-label">
+                      Tên Cơ Sở :
                     </label>
                     <input
                       type="text"
                       className="form-control"
-                      id="exampleInputEmail1"
-                      {...register("area_name")}
+                      id="baseName"
+                      {...register("base_name")}
                     />
 
-                    {errors.area_name && (
+                    {errors.base_name && (
                       <div className="text-danger ">
-                        {errors.area_name.message}
+                        {errors.base_name.message}
                       </div>
                     )}
                   </div>
@@ -81,4 +80,4 @@ const AddArea: React.FC<Props> = ({ addArea }) => {
   );
 };
 
-export default AddArea;
+export default BaseAdd;
