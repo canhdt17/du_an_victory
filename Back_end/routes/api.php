@@ -23,7 +23,9 @@ use App\Http\Controllers\Api\UserController;
 
 use App\Http\Controllers\Api;
 use App\Http\Controllers\Api\CinemaController;
+use App\Http\Controllers\Api\DonateCombofoodController;
 use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\PointVoucherController;
 use App\Models\Invoice;
 // use App\Models\User;
 use Illuminate\Http\Request;
@@ -75,6 +77,8 @@ Route::apiResource('seats', SeatController::class);
 Route::apiResource('khuyenmai', KhuyenMaiController::class);
 Route::apiResource('vouchers', VoucherController::class);
 Route::apiResource('invoices', InvoiceController::class);
+Route::apiResource('donatecombofoods', DonateCombofoodController::class);
+Route::apiResource('pointvouchers', PointVoucherController::class);
 
 Route::get('/categories/{id}/movies', [MovieController::class, 'listFilmByCategory']);
 Route::get('/phim-dang-chieu', [MovieController::class, 'phimDangChieu']);
