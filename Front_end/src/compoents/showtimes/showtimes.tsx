@@ -4,7 +4,7 @@ import Footer from '../footer'
 import { IShowTime } from '../../interface/shotime'
 import axios from 'axios'
 import { Link} from 'react-router-dom'
-import ShowtimesID from './showtimesid'
+
 import ShowtimesId from './showtimesid'
 
 

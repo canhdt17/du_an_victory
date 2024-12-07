@@ -7,7 +7,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
 
   if (!token) {
-    // Nếu không có token, điều hướng về trang đăng nhập
+    
     navigate("/");
     return null;
   }

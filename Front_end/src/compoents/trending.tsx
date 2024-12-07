@@ -15,7 +15,7 @@ const Trending = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/movies`);
+        const { data } = await axios.get(`http://127.0.0.1:8000/api/phim-dang-chieu`);
         setTrendings(data.data);
       } catch (error) {
         console.log(error);
@@ -31,8 +31,8 @@ const Trending = () => {
    
     <div>
     <div className="row">
-      {trendings.map((trending:ITrendings)=>(
-         <div className="col-lg-4 col-md-6 col-sm-6">
+      {Array.isArray(trendings) && trendings.map((trending:ITrendings)=>(
+         <div className="col-lg-4 col-md-6 col-sm-6" key={trending.id}>
             <div className="product__item">
               <div className="product__item__pic set-bg">
               <img src="/src/img/popular/1.jpg"></img>

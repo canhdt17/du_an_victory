@@ -21,7 +21,7 @@ const ShowtimesId = () => {
   },[])
   return (
     <div>
-        <h1>Các sản phẩm có id danh mục là:{param?.id as number | string}</h1>
+      
           <div className="grid grid-cols-2 gap-6">
              <div className="bg-gray-800 p-4 rounded-lg flex space-x-4">
   <img src="https://via.placeholder.com/120x180" alt="Movie Poster" className="w-32 h-48 object-cover rounded-md" />

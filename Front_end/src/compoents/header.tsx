@@ -8,10 +8,10 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Xóa token và avatar khỏi localStorage
+   
     localStorage.removeItem("token");
     localStorage.removeItem("avatar");
-    navigate("/login"); // Quay về trang đăng nhập
+    navigate("/login"); 
   };
 
   return (
@@ -42,7 +42,7 @@ const Header = () => {
         <NavLink to="/ticket-prices" className="hover:text-gray-300">
           Giá vé
         </NavLink>
-        <NavLink to="/category" className="hover:text-gray-300">
+        <NavLink to="/moviegender" className="hover:text-gray-300">
       Thể Loại Phim
 
         </NavLink>
@@ -83,7 +83,7 @@ const Header = () => {
         <NavLink to="/ticket-prices" className="hover:text-gray-300">
           Giá vé
         </NavLink>
-        <NavLink to="/category" className="hover:text-gray-300">
+        <NavLink to="/moviegender" className="hover:text-gray-300">
       Thể Loại Phim
 
         </NavLink>

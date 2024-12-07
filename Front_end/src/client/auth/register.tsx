@@ -33,7 +33,7 @@ const onSubmit = async(registerData:IUser)=>{
         <h2>Đăng Ký Tài Khoản</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
 
-          {/* Tên người dùng */}
+       
           <div className="form-group">
             <label htmlFor="username">Tên Người Dùng</label>
             <input
@@ -44,7 +44,7 @@ const onSubmit = async(registerData:IUser)=>{
               required
             />
           </div>
-          {/* Email */}
+        
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -55,7 +55,7 @@ const onSubmit = async(registerData:IUser)=>{
               required
             />
           </div>
-          {/* Mật khẩu */}
+         
           <div className="form-group">
             <label htmlFor="password">Mật Khẩu</label>
             <input
@@ -102,13 +102,13 @@ const onSubmit = async(registerData:IUser)=>{
             Đăng Ký
           </button>
         </form>
-        {/* Đăng nhập */}
+
         <div className="text-center">
           <p>
             Bạn đã có tài khoản? <a href="/login">Đăng Nhập</a>
           </p>
         </div>
-        {/* Đăng ký bằng mạng xã hội */}
+
         <div className="social-buttons">
           <a href="#" className="btn facebook">
             <i className="fab fa-facebook"></i>
