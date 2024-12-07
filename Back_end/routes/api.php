@@ -24,7 +24,9 @@ use App\Http\Controllers\Api\UserController;
 
 use App\Http\Controllers\Api;
 use App\Http\Controllers\Api\CinemaController;
+use App\Http\Controllers\Api\DonatePointController;
 use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\PointUserController;
 use App\Models\Invoice;
 // use App\Models\User;
 use Illuminate\Http\Request;
@@ -89,13 +91,18 @@ Route::get('/lastest-tin-tuc', [TintucController::class, 'LastestTinTuc']);
 Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
 // api time id showtime
 Route::get('/getIDShowtime/{ids}', [ShowtimeController::class, 'getIDShowtime']);
-// api tim những ngày chiếu của phim 
+// api tim những ngày chiếu của phim
 Route::get('/getDateShowtime/{ids}', [ShowtimeController::class, 'getDateShowtime']);
-// api tim những thời gian chiếu của ngày chiếu phim 
+// api tim những thời gian chiếu của ngày chiếu phim
 Route::get('/getTimeShowtime/{ids}', [ShowtimeController::class, 'getTimeShowtime']);
-// // api tim id room theo thời gian chiếu của ngày chiếu phim 
+// // api tim id room theo thời gian chiếu của ngày chiếu phim
 // Route::get('/getIDRoomShowtime/{ids}', [ShowtimeController::class, 'getIDRoomShowtime']);
-// api tim list ghế theo thời gian chiếu của ngày chiếu phim 
+// api tim list ghế theo thời gian chiếu của ngày chiếu phim
 Route::get('/getSeatShowtime/{ids}', [ShowtimeController::class, 'getSeatShowtime']);
 // Route::post('/user/{id}', [UserController::class, 'update']);
+
+//api diem tich luy
+Route::apiResource('point-users', PointUserController::class);
+
+Route::apiResource('donate-points', DonatePointController::class);
 
