@@ -3,7 +3,7 @@ import Header from '../header'
 import Footer from '../footer'
 import { IShowTime } from '../../interface/shotime'
 import axios from 'axios'
-import { Link} from 'react-router-dom'
+import { Link, useParams} from 'react-router-dom'
 
 import ShowtimesId from './showtimesid'
 
@@ -11,19 +11,23 @@ import ShowtimesId from './showtimesid'
 
 
 const Showtimes = () => {
-    const [showtimes,setShowtimes] = useState<IShowTime[]>([])
-   
-    useEffect(()=>{
-        (async()=>{
-            try {
-                const {data} = await axios.get(`http://127.0.0.1:8000/api/showtimes`)
-                setShowtimes(data.data)
-            } catch (error) {
-               console.log(error);
-                
-            }
-        })()
-    },[])
+  const [times, setTimes] = useState<IShowTime[]>([]);
+
+  
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axios.get(`http://127.0.0.1:8000/api/showtimes`);
+      
+        setTimes(data.data);
+        
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
+
    
   return (
     <div>
@@ -36,8 +40,8 @@ const Showtimes = () => {
     <div>
    
      <div className="flex justify-center space-x-4 mb-6">
-   {Array.isArray(showtimes) && showtimes.map((showtime:IShowTime)=>(
-     <Link to={`/showtimes/${showtime.id}`}><button key={showtime.id} className="px-4 py-2 bg-gray-700 rounded-md text-sm font-medium">{showtime.showtime_date}</button></Link>
+   {Array.isArray(times) && times.map((times:IShowTime)=>(
+     <Link to={`/showtimes/${times.id}`}><button key={times.id} className="px-4 py-2 bg-gray-700 rounded-md text-sm font-medium">{times.showtime_date}</button></Link>
    
    ))}
      </div>

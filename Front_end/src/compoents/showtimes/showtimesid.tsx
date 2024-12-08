@@ -13,7 +13,10 @@ const ShowtimesId = () => {
     (async()=>{
      try {
       const {data} = await axios.get(`http://127.0.0.1:8000/api/showtimes/${param?.id as number |string}`) 
-      setTimes(data.showtime);
+     setTimes(data.showtime);
+     
+      
+      
    
       
       
