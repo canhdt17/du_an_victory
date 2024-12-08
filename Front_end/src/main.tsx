@@ -12,9 +12,14 @@ import './css/slicknav.min.css'
 import './css/style.css'
 import './App.css'
 import { BrowserRouter } from 'react-router-dom'
+import { AuthProvider } from './contexts/AuthContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter><App /></BrowserRouter>
+    <AuthProvider>
+    <BrowserRouter>
+    <App />
+      
+      </BrowserRouter></AuthProvider>
   </StrictMode>,
 )

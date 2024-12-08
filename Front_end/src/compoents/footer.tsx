@@ -21,7 +21,7 @@ const Footer = (props: Props) => {
           <div className="footer__nav">
             <ul>
               <li className="active"><NavLink to={`/`}>Homepage</NavLink></li>
-              <li><a href="./categories.html">Categories</a></li>
+              <li><NavLink to={`/categoryfilms`}>Categories</NavLink></li>
               <li><a href="./blog.html">Our Blog</a></li>
               <li><a href="#">Contacts</a></li>
             </ul>

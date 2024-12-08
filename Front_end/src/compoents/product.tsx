@@ -29,9 +29,9 @@ const Product = (props: Props) => {
           </div>
           <div className="popular__product">
             <div className="row">
-              <div className="col-lg-3 col-md-8 col-sm-8">
+              <div className="col-lg-4 col-md-8 col-sm-8">
                 <div className="section-title">
-                  <h4>Sắp Ra Mắt</h4>
+                  <h4>Phim sắp chiếu</h4>
                 </div>
               </div>
           
@@ -43,7 +43,7 @@ const Product = (props: Props) => {
         <div className="col-lg-4 col-md-6 col-sm-8">
           <div className="product__sidebar">
             <TopView></TopView>
-            <NewComment></NewComment>
+            
           </div>
         </div>
       </div>
