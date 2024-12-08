@@ -54,9 +54,9 @@ import AddTypeMovie from "./admin/type movie/addtypemovie";
 import UpdateTypeMovie from "./admin/type movie/updatetypemovie";
 import { ITypeMovie } from "./interface/typemovie";
 import { IBase } from "./interface/base";
+import Base from "./admin/base/base";
 import BaseAdd from "./admin/base/addbase";
 import UpdateBase from "./admin/base/updatearea";
-import Base from "./admin/base/base";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -311,7 +311,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/select-movie"
+          path="/select-movie/:id"
           element={
             <HomePage>
               <SelectMovie></SelectMovie>

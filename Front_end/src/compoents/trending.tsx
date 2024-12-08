@@ -19,7 +19,7 @@ const Trending = () => {
   }, []);
 
   const handleDetails = (id: number) => {
-    navigate(`/select-movie`);
+    navigate(`/select-movie/${id}`);
   };
 
   return (

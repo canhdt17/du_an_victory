@@ -22,6 +22,7 @@ export interface IRoom {
   total_seat: number;
 }
 export interface ISeat {
+  seatInfo: any;
   seatType: any;
   status: any;
   id?: number | string,
