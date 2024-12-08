@@ -10,18 +10,21 @@ const CategoryFilmID = () => {
   const [trends, setTrends] = useState<ITrendings[]>([]);
   const param = useParams();
   useEffect(() => {
+    console.log('useEffect');
     (async () => {
+      console.log(param.id)
       try {
-        const { data } = await axios.get(
-          `http://127.0.0.1:8000/api/movies/${param?.id as number | string}`
+        const { data } =  await axios.get(
+          `http://127.0.0.1:8000/api/categories/${param?.id as number | string}/movies`
         );
-        setTrends([data]);
+        setTrends(data);
+        console.log(data);
         
       } catch (error) {
         console.log(error);
       }
     })();
-  }, []);
+  }, [param.id]);
 
   return (
     <div>
@@ -30,7 +33,7 @@ const CategoryFilmID = () => {
    {Array.isArray(trends) && trends.map((trend:ITrendings)=>(
          <div className="grid grid-cols-2 gap-6" key={trend.id}>
          <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden flex">
-         <img src="https://via.placeholder.com/200x300" alt="Poster phim" className="w-1/3 object-cover" />
+         <img src={trend.image} alt="Poster phim" className="w-1/3 object-cover" />
          <div className="p-4 flex-grow">
            <h3 className="text-lg font-semibold"> {trend.name_movie}</h3>
            <p className="text-sm text-gray-400">{trend.category_id}</p>

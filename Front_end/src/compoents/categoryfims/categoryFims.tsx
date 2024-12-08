@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { ICategoryMovie } from '../../interface/categorymovie'
 import axios from 'axios'
-import { ITrendings } from '../../interface/trendings';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+
+import {NavLink, Link  } from 'react-router-dom';
 import Header from '../header';
 import Footer from '../footer';
 import CategoryFilmID from './categoryfimsid';
@@ -11,13 +11,14 @@ import CategoryFilmID from './categoryfimsid';
 
 const CategoryFilms = () => {
    
-    const [trendings, setTrendings] = useState<ITrendings[]>([]);
+    const [categorys, setCategorys] = useState<ICategoryMovie[]>([]);
   
     useEffect(() => {
       (async () => {
         try {
-          const { data } = await axios.get(`http://127.0.0.1:8000/api/movies`);
-          setTrendings(data.data);
+          const { data } = await axios.get(`http://127.0.0.1:8000/api/categories`);
+        
+          setCategorys(data.categories);
         } catch (error) {
           console.log(error);
         }
@@ -39,8 +40,8 @@ const CategoryFilms = () => {
     <div>
    
      <div className="flex justify-center space-x-4 mb-6">
-     {Array.isArray(trendings) && trendings.map((trending:ITrendings)=>(
-    <NavLink to={`/categoryfilms/${trending.id}`}> <button key={trending.id} className="px-4 py-2 bg-gray-700 rounded-md text-sm font-medium">{trending.name_category}</button></NavLink>
+     {Array.isArray(categorys) && categorys.map((category:ICategoryMovie)=>(
+    <Link to={`/categoryfilms/${category.id}`}> <button key={category.id} className="px-4 py-2 bg-gray-700 rounded-md text-sm font-medium">{category.name_category}</button></Link>
    
    ))}
      </div>

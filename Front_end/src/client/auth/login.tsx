@@ -15,17 +15,29 @@ const LoginPage = () => {
         email,
         password,
       });
-  
-   
-      localStorage.setItem("token", response.data.token);
-      console.log("Đăng nhập thành công:", response.data);
-  
+      console.log(response)
+      //resopnse
+      // response ={
+      //   data:{
+      //     access_token:"ffgasdfg"
+      //   }
+      // }
+      if(response.data.access_token){
+        localStorage.setItem("token", response.data.access_token);
+        console.log("Đăng nhập thành công:", response.data);
+        navigate("/"); 
+      }else{
+        console.log("Đăng nhập thất bại")
+      };
+
       return response.data;
     } catch (error) {
       console.error("Lỗi khi đăng nhập:", error);
       throw error;
     }
   };
+
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault(); 
 
@@ -36,7 +48,7 @@ const LoginPage = () => {
    
       const token = localStorage.getItem("token");
       if (token) {
-        navigate("/"); 
+        //navigate("/"); 
       } else {
         console.error("Token không tồn tại.");
       }
