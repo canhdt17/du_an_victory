@@ -5,7 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Donate_combofood>
+
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DonateCombofood>
+
  */
 class DonateCombofoodFactory extends Factory
 {
