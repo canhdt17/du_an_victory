@@ -48,7 +48,7 @@ import UpdateShowtime from "./admin/showtime/updateshowtime";
 import Dashboard from "./admin/movie/dashboard";
 import AddMovie from "./admin/movie/Addmovie";
 import EditMovie from "./admin/movie/EditMovie";
-import DetailNews from "./compoents/detail-news/news";
+
 import News from "./compoents/detail-news/news";
 import Promotions from "./compoents/promotions/promotions";
 import DetailPromotions from "./compoents/promotions/detail-promotions";
@@ -72,8 +72,10 @@ import BaseAdd from "./admin/base/addbase";
 import UpdateBase from "./admin/base/updatearea";
 import Base from "./admin/base/base";
 import MovieDetail from "./compoents/moviedetail/moviedetail";
-import Categorys from "./compoents/categorys/categorys";
-import MovieGender from "./compoents/moviegender/moviegender";
+import CategoryFilms from "./compoents/categoryfims/categoryFims";
+import NewsDetails from "./compoents/detail-news/detail-news";
+import CategoryFilmID from "./compoents/categoryfims/categoryfimsid";
+
 
 
 function App() {
@@ -476,7 +478,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/news" element={<News></News>}></Route>
-        <Route path="/news/:id" element={<DetailNews></DetailNews>}></Route>
+        <Route path="/detail-news/:id" element={<NewsDetails></NewsDetails>}></Route>
         <Route path="/promotions" element={<Promotions></Promotions>}></Route>
 
         <Route path="/promotions/:id" element={<DetailPromotions></DetailPromotions>}></Route>
@@ -484,8 +486,8 @@ function App() {
         <Route path="/showtimes" element={<Showtimes></Showtimes>}></Route>
         <Route path="/showtimes/:id" element={<Showtimes></Showtimes>}></Route>
         <Route path="/movie-details" element={<MovieDetail></MovieDetail>}></Route>
-          <Route path="/moviegender" element={<MovieGender></MovieGender>}></Route>
-  
+        <Route path="/categoryfilms" element={<CategoryFilms></CategoryFilms>}></Route>
+        <Route path="/categoryfilms/:id" element={<CategoryFilms></CategoryFilms>}></Route>
 
       </Routes>
     </>

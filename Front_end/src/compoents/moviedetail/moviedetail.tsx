@@ -10,19 +10,19 @@ import { useParams } from 'react-router-dom'
 
 
 const MovieDetail = () => {
-  const [moviedetails,setMoviedetails] = useState<ITrendings[]>([])
-  const param = useParams()
-  useEffect(()=>{
-    (async()=>{
+  const [trendings, setTrendings] = useState<ITrendings[]>([]);
+const param = useParams()
+  useEffect(() => {
+    (async () => {
       try {
-        const {data} = await axios.get(`http://127.0.0.1:8000/api/movies/${param?.id as number|string}`)
-        setMoviedetails([data])
+        const { data } = await axios.get(`http://127.0.0.1:8000/api/movies/${param?.id as number|string}`);
+        setTrendings(data.data);
       } catch (error) {
         console.log(error);
-        
       }
-    })()
-  },[])
+    })();
+  }, []);
+
   return (
     <div>
     <div>
@@ -34,10 +34,11 @@ const MovieDetail = () => {
     <div className="container">
  
        <div className="anime__details__content">
-      <div className="row">
+      
+          <div className="row">
           <div className="col-lg-3">
             <div className="anime__details__pic set-bg" data-setbg="img/trending/2.jpg">
-              <div className="comment"><i className="fa fa-comments" /> sss</div>
+              <div className="comment"><i className="fa fa-comments" /> {trendings.name_movie}</div>
               <div className="view"><i className="fa fa-eye" /> sss</div>
             </div>
           </div>
@@ -87,6 +88,8 @@ const MovieDetail = () => {
             </div>
           </div>
         </div>
+   
+      
       </div>
 
 
