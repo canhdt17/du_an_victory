@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\ComboFood;
+use Exception;
 use Illuminate\Http\Request;
 use PhpParser\Node\Arg;
 
@@ -24,14 +25,20 @@ class ComboFoodController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $request->validate([
-            'combofood_name' => 'required|string|max:255',
-        ]);
+        try{
+            $request->validate([
+                'combofood_name' => 'required|string|max:255',
+                'combofood_price' => 'required',
+                'image' => 'required',
+            ]);
+    
+            $combofood=ComboFood::create($request->all());
 
-        ComboFood::create($request->all());
+            return response()->json(['message' => 'Thêm mới combofood thành công', 'combofood' => $combofood], 201);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Error creating combofood.'], 500);
+        }
 
-        return response()->json(['message' => 'Thêm mới combofood thành công'],200);
     }
 
     /**
@@ -51,9 +58,11 @@ class ComboFoodController extends Controller
         //
         $request->validate([
             'combofood_name' => 'required|string|max:255',
+            'combofood_price' => 'required',
+            'image' => 'required',
         ]);
 
-        // $combofood = ComboFood::findOrFail($combofood);
+        $combofood = ComboFood::findOrFail($combofood);
         $combofood->update($request->all());
 
         return response()->json(['message' => 'Cập nhật thành công','combofood'=>$combofood],200);
