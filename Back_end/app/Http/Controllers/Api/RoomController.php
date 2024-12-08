@@ -21,8 +21,8 @@ class RoomController extends Controller
         ->join('seats','seats.room_id','=','rooms.id')
         ->whereNull('rooms.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng bases
         ->select('rooms.*','base_name',DB::raw('COUNT(seats.room_id) as seat_count'))
+        ->groupBy('rooms.id', 'bases.base_name') // Group by necessary columns
         ->orderByDesc('rooms.id')
-        // ->orderByDesc('rooms.base_id')
         ->latest('rooms.id')
         ->paginate();
         return response()->json($rooms);
