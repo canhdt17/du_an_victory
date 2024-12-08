@@ -3,15 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-<<<<<<< HEAD
-<<<<<<< HEAD
-        'reference' => 'df79400aa2b9f6ef613dc6a403c0ad4c1d239b44',
-=======
-        'reference' => 'd3042116455418b7f9c48e755cf558ba15a46c79',
->>>>>>> d2425b55bc093fffeb477b32f2a977d425d5974e
-=======
-        'reference' => '43070b78701f4fc2bb00baf7e39001e9edf2741d',
->>>>>>> b9300c0aaed4e1b751c7871f3e3842bae118268c
+        'reference' => 'c87d75f41c753c0c1151e8c76bf86d957ec7268d',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -426,15 +418,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-<<<<<<< HEAD
-<<<<<<< HEAD
-            'reference' => 'df79400aa2b9f6ef613dc6a403c0ad4c1d239b44',
-=======
-            'reference' => 'd3042116455418b7f9c48e755cf558ba15a46c79',
->>>>>>> d2425b55bc093fffeb477b32f2a977d425d5974e
-=======
-            'reference' => '43070b78701f4fc2bb00baf7e39001e9edf2741d',
->>>>>>> b9300c0aaed4e1b751c7871f3e3842bae118268c
+            'reference' => 'c87d75f41c753c0c1151e8c76bf86d957ec7268d',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -495,9 +479,9 @@
             'dev_requirement' => false,
         ),
         'league/commonmark' => array(
-            'pretty_version' => '2.5.3',
-            'version' => '2.5.3.0',
-            'reference' => 'b650144166dfa7703e62a22e493b853b58d874b0',
+            'pretty_version' => '2.6.0',
+            'version' => '2.6.0.0',
+            'reference' => 'd150f911e0079e90ae3c106734c93137c184f932',
             'type' => 'library',
             'install_path' => __DIR__ . '/../league/commonmark',
             'aliases' => array(),
@@ -549,9 +533,9 @@
             'dev_requirement' => true,
         ),
         'monolog/monolog' => array(
-            'pretty_version' => '3.8.0',
-            'version' => '3.8.0.0',
-            'reference' => '32e515fdc02cdafbe4593e30a9350d486b125b67',
+            'pretty_version' => '3.8.1',
+            'version' => '3.8.1.0',
+            'reference' => 'aef6ee73a77a66e404dd6540934a9ef1b3c855b4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../monolog/monolog',
             'aliases' => array(),
