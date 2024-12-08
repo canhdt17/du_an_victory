@@ -31,7 +31,7 @@ class UserController extends Controller
             'access_token' => $token,
             'type_token' => 'Baerer'
 
-        ], 404);
+        ], 200);
 
     }
     public function register(Request $request)

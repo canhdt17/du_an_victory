@@ -2,7 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./compoents/page";
-import MovieDetail from "./moviedetail/moviedetail";
+
+
+
+
+
+
+
 import Category from "./admin/category movie/category";
 import AddMovieCategory from "./admin/category movie/addmoviecategory";
 import UpdateCategoryMovie from "./admin/category movie/updatecategorymovie";
@@ -26,7 +32,7 @@ import UserList from "./admin/user/UserList";
 import CreateUser from "./admin/user/CreatUser";
 import EditUser from "./admin/user/EditUser";
 import Register from "./client/auth/register";
-import Login from "./client/auth/login";
+
 import Profile from "./client/profile/profile";
 import { IRoom } from "./interface/room";
 import { AddRoom, ListRoom } from "./service/room";
@@ -55,13 +61,21 @@ import UpdateShowtime from "./admin/showtime/updateshowtime";
 import Dashboard from "./admin/movie/dashboard";
 import AddMovie from "./admin/movie/Addmovie";
 import EditMovie from "./admin/movie/EditMovie";
-import DetailNews from "./compoents/detail-news/news";
+
 import News from "./compoents/detail-news/news";
 import Promotions from "./compoents/promotions/promotions";
 import DetailPromotions from "./compoents/promotions/detail-promotions";
 import Product from "./compoents/product";
 import SelectMovie from "./compoents/selectMovie";
 import Payment from "./compoents/payment";
+
+import User from "./client/user/user";
+import Showtimes from "./compoents/showtimes/showtimes";
+
+import LoginPage from "./client/auth/login";
+
+
+
 import Type from "./admin/type movie/typemovie";
 import AddTypeMovie from "./admin/type movie/addtypemovie";
 import UpdateTypeMovie from "./admin/type movie/updatetypemovie";
@@ -70,10 +84,8 @@ import { IBase } from "./interface/base";
 import BaseAdd from "./admin/base/addbase";
 import UpdateBase from "./admin/base/updatearea";
 import Base from "./admin/base/base";
-
-// import CreateKhuyenMai from "./admin/khuyen_mai/AddKhuyenMais";
-
-// import CreateKhuyenMai from "./admin/khuyen_mai/AddKhuyenMais";
+import MovieDetail from "./compoents/moviedetail/moviedetail";
+import NewsDetails from "./compoents/detail-news/detail-news";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -537,49 +549,46 @@ function App() {
           path="/admin/showtime/edit/:id"
           element={<UpdateShowtime updateShowtimes={updateShowtime} />}
         />
-
+        {/* Khuyen mai */}
+        <Route path="/admin/khuyen_mai" element={<KhuyenMai></KhuyenMai>}></Route>
+        <Route
+          path="/admin/create_khuyen_mai"
+          element={<CreateKhuyenMai onAddKhuyenMai={addKhuyenMai}></CreateKhuyenMai>}
+        ></Route>
+        {/* <Route
+          path="/admin/seat_type/edit/:id"
+          element={
+            <UpdateSeatType updateSeatType={updateSeatType}></UpdateSeatType>
+          }
+        ></Route> */}
+        {/* Tin tuc */}
+        <Route path="/admin/tin_tuc" element={<TinTuc></TinTuc>}></Route>
+        <Route
+          path="/admin/create_tin_tuc"
+          element={<CreateTinTuc onAddTinTuc={addTinTuc}></CreateTinTuc>}
+        ></Route>
+        {/* <Route
+          path="/admin/seat_type/edit/:id"
+          element={
+            <UpdateSeatType updateSeatType={updateSeatType}></UpdateSeatType>
+          }
+        ></Route> */}
         {/* admin / quan li nguoi dung */}
         <Route path="/admin/user" element={<UserList />} />
         <Route path="/admin/createuser" element={<CreateUser />} />
         <Route path="/admin/edituser/:id" element={<EditUser />} />
 
         {/* client */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/news" element={<News></News>}></Route>
-        <Route path="/news/:id" element={<DetailNews></DetailNews>}></Route>
+        <Route path="/detail-news/:id" element={<NewsDetails></NewsDetails>}></Route>
         <Route path="/promotions" element={<Promotions></Promotions>}></Route>
         <Route
           path="/promotions/:id"
           element={<DetailPromotions></DetailPromotions>}
         ></Route>
-        {/* Khuyen mai */}
-        <Route path="/admin/khuyen_mai" element={<KhuyenMai></KhuyenMai>}></Route>
-        <Route
-          path="/admin/create_khuyen_mai"
-          element={<CreateKhuyenMai onAddKhuyenMai={addKhuyenMai} />}
-        ></Route>
-        <Route
-          path="/admin/khuyen_mai/edit/:id"
-          element={
-            <UpdateKhuyenMai updateKhuyenMai={updateKhuyenMai}></UpdateKhuyenMai>
-          }
-        ></Route>
-        {/* Khuyen mai */}
-        <Route path="/admin/tin_tuc" element={<TinTuc></TinTuc>}></Route>
-
-        <Route
-          path="/admin/create_tin_tuc"
-          element={<CreateTinTuc onAddTinTuc={addTinTuc} />}
-
-        ></Route>
-        {/* <Route
-          path="/admin/khuyen_mai/edit/:id"
-          element={
-            <updateKhuyenMai updateKhuyenMai={updateKhuyenMai}></UpdateKhuyenMai>
-          }
-        ></Route> */}
       </Routes>
     </>
   );
