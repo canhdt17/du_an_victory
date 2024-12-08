@@ -108,12 +108,12 @@ Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
 // api time id showtime
 Route::get('/getIDShowtime/{ids}', [ShowtimeController::class, 'getIDShowtime']);
 // api tim những ngày chiếu của phim 
-Route::get('/getDateShowtime/{ids}', [ShowtimeController::class, 'getDateShowtime']);
+Route::get('/getDateShowtime/{movieId}/bases/{baseId}/dates', [ShowtimeController::class, 'getDateShowtime']);
 // api tim những thời gian chiếu của ngày chiếu phim 
-Route::get('/getTimeShowtime/{ids}', [ShowtimeController::class, 'getTimeShowtime']);
+Route::get('/getTimeShowtime/{movieId}/bases/{baseId}/dates/{date}/times', [ShowtimeController::class, 'getTimeShowtime']);
 // // api tim id room theo thời gian chiếu của ngày chiếu phim 
 // Route::get('/getIDRoomShowtime/{ids}', [ShowtimeController::class, 'getIDRoomShowtime']);
 // api tim list ghế theo thời gian chiếu của ngày chiếu phim 
-Route::get('/getSeatShowtime/{ids}', [ShowtimeController::class, 'getSeatShowtime']);
+Route::get('/getSeatShowtime/{movieId}/bases/{baseId}/dates/{date}/times/{time}/seats', [ShowtimeController::class, 'getSeatShowtime']);
 // Route::post('/user/{id}', [UserController::class, 'update']);
 
