@@ -92,17 +92,10 @@ class ShowtimeController extends Controller
         return response()->json($showtime);
         }
     // tim id showtime
-    public function getIDShowtime($ids)
+    public function getIDShowtime($movieId,$baseId,$date,$time)
     {
-
-    // Tách danh sách ID bằng dấu phẩy
-    $idArray = explode(',', $ids);
-    $movie_id=$idArray[1];
-    $base_id=$idArray[0];
-    $showtime_date=$idArray[2];
-    $start_time=$idArray[3];
     
-    $showtimeID = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->get();
+    $showtimeID = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->where('showtime_date', $date)->where('start_time', $time)->value('id');
     return response()->json($showtimeID);
     
     }
