@@ -2,35 +2,40 @@
 
 
 
+use App\Models\Invoice;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Api;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\BaseController;
+use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\RoomController;
+use App\Http\Controllers\Api\SeatController;
+use App\Http\Controllers\Api\TypeController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\HoTroController;
+use App\Http\Controllers\Api\MovieController;
+use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\CinemaController;
+use App\Http\Controllers\Api\TintucController;
+use App\Http\Controllers\Api\BookingController;
+use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\VoucherController;
+use App\Http\Controllers\ArchiveUserController;
+
 use App\Http\Controllers\Api\AdminUserControler;
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\API\SeatTypeController;
-use App\Http\Controllers\Api\TintucController;
-use App\Http\Controllers\Api\TypeController;
-use App\Http\Controllers\Api\ShowtimeController ;
-use App\Http\Controllers\Api\MovieController;
-use App\Http\Controllers\Api\RoomController;
-use App\Http\Controllers\Api\BannerController;
-use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Api\BookingController;
-use App\Http\Controllers\Api\BookingDetailController;
 use App\Http\Controllers\Api\ComboFoodController;
-use App\Http\Controllers\Api\HoTroController;
-use App\Http\Controllers\Api\KhuyenMaiController;
-use App\Http\Controllers\Api\SeatController;
-use App\Http\Controllers\Api\VoucherController;
-use App\Http\Controllers\Api\UserController;
-
-use App\Http\Controllers\Api;
 use App\Http\Controllers\Api\CinemaController;
 use App\Http\Controllers\Api\DonateCombofoodController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\PointVoucherController;
-use App\Models\Invoice;
+
 // use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\KhuyenMaiController;
+use App\Http\Controllers\Api\ShowtimeController ;
+use App\Http\Controllers\Api\StyleVoucherController;
+use App\Http\Controllers\Api\BookingDetailController;
 
 
 
@@ -67,9 +72,19 @@ Route::get('roles/{id}', [RoleController::class, 'show']);
 Route::post('roles', [RoleController::class, 'store']);
 Route::put('/roles/{id}', [RoleController::class, 'update']);
 Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
-
 Route::get('/users', [AdminUserControler::class, 'index']); // Lấy danh sách user
 Route::put('/users/{id}/role', [AdminUserControler::class, 'updateRole']); // Cập nhật role cho user
+Route::prefix('style_vouchers')->group(function () {
+    Route::get('/', [StyleVoucherController::class, 'index']); // Lấy danh sách
+    Route::post('/', [StyleVoucherController::class, 'store']); // Thêm mới
+    Route::put('/{id}', [StyleVoucherController::class, 'update']); // Cập nhật
+    Route::delete('/{id}', [StyleVoucherController::class, 'destroy']); // Xóa
+});
+Route::get('archive_users', [ArchiveUserController::class, 'index']);
+Route::post('archive_users', [ArchiveUserController::class, 'store']);
+Route::put('archive_users/{id}', [ArchiveUserController::class, 'update']);
+Route::get('archive_users/{id}', [ArchiveUserController::class, 'show']);
+Route::delete('archive_users/{id}', [ArchiveUserController::class, 'destroy']);
 
 
 Route::apiResource('rooms', RoomController::class);
