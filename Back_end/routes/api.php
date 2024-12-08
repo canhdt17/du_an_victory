@@ -106,7 +106,7 @@ Route::get('/phim-sap-chieu', [MovieController::class, 'phimSapChieu']);
 Route::get('/lastest-tin-tuc', [TintucController::class, 'LastestTinTuc']);
 Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
 // api time id showtime
-Route::get('/getIDShowtime/{ids}', [ShowtimeController::class, 'getIDShowtime']);
+Route::get('/getIDShowtime/{movieId}/bases/{baseId}/dates/{date}/times/{time}/showtimeId', [ShowtimeController::class, 'getIDShowtime']);
 // api tim những ngày chiếu của phim 
 Route::get('/getDateShowtime/{movieId}/bases/{baseId}/dates', [ShowtimeController::class, 'getDateShowtime']);
 // api tim những thời gian chiếu của ngày chiếu phim 
