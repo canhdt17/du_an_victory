@@ -2,7 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./compoents/page";
-import MovieDetail from "./moviedetail/moviedetail";
+
+
+
+
+
+
+
 import Category from "./admin/category movie/category";
 import AddMovieCategory from "./admin/category movie/addmoviecategory";
 import UpdateCategoryMovie from "./admin/category movie/updatecategorymovie";
@@ -15,7 +21,7 @@ import UserList from "./admin/user/UserList";
 import CreateUser from "./admin/user/CreatUser";
 import EditUser from "./admin/user/EditUser";
 import Register from "./client/auth/register";
-import Login from "./client/auth/login";
+
 import Profile from "./client/profile/profile";
 import { IRoom } from "./interface/room";
 import { AddRoom, ListRoom } from "./service/room";
@@ -42,13 +48,21 @@ import UpdateShowtime from "./admin/showtime/updateshowtime";
 import Dashboard from "./admin/movie/dashboard";
 import AddMovie from "./admin/movie/Addmovie";
 import EditMovie from "./admin/movie/EditMovie";
-import DetailNews from "./compoents/detail-news/news";
+
 import News from "./compoents/detail-news/news";
 import Promotions from "./compoents/promotions/promotions";
 import DetailPromotions from "./compoents/promotions/detail-promotions";
 import Product from "./compoents/product";
 import SelectMovie from "./compoents/selectMovie";
 import Payment from "./compoents/payment";
+
+import User from "./client/user/user";
+import Showtimes from "./compoents/showtimes/showtimes";
+
+import LoginPage from "./client/auth/login";
+
+
+
 import Type from "./admin/type movie/typemovie";
 import AddTypeMovie from "./admin/type movie/addtypemovie";
 import UpdateTypeMovie from "./admin/type movie/updatetypemovie";
@@ -57,6 +71,12 @@ import { IBase } from "./interface/base";
 import BaseAdd from "./admin/base/addbase";
 import UpdateBase from "./admin/base/updatearea";
 import Base from "./admin/base/base";
+import MovieDetail from "./compoents/moviedetail/moviedetail";
+import CategoryFilms from "./compoents/categoryfims/categoryFims";
+import NewsDetails from "./compoents/detail-news/detail-news";
+import CategoryFilmID from "./compoents/categoryfims/categoryfimsid";
+
+
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -454,16 +474,21 @@ function App() {
         <Route path="/admin/edituser/:id" element={<EditUser />} />
 
         {/* client */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/news" element={<News></News>}></Route>
-        <Route path="/news/:id" element={<DetailNews></DetailNews>}></Route>
+        <Route path="/detail-news/:id" element={<NewsDetails></NewsDetails>}></Route>
         <Route path="/promotions" element={<Promotions></Promotions>}></Route>
-        <Route
-          path="/promotions/:id"
-          element={<DetailPromotions></DetailPromotions>}
-        ></Route>
+
+        <Route path="/promotions/:id" element={<DetailPromotions></DetailPromotions>}></Route>
+        <Route path="/user" element={<User></User>}></Route>
+        <Route path="/showtimes" element={<Showtimes></Showtimes>}></Route>
+        <Route path="/showtimes/:id" element={<Showtimes></Showtimes>}></Route>
+        <Route path="/movie-details" element={<MovieDetail></MovieDetail>}></Route>
+        <Route path="/categoryfilms" element={<CategoryFilms></CategoryFilms>}></Route>
+        <Route path="/categoryfilms/:id" element={<CategoryFilms></CategoryFilms>}></Route>
+
       </Routes>
     </>
   );

@@ -23,6 +23,7 @@ const News = (props: Props) => {
   return (
     <div>
       <Header></Header>
+      <div className='bg-[#070720]'>
       <div className="bg-[#070720] container mx-auto py-10 text-center">
     <h1 className="text-2xl font-bold text-white">Tin Tức</h1>
   
@@ -30,10 +31,10 @@ const News = (props: Props) => {
     <div className="grid grid-cols-4 gap-6">
       {tintucs.map((tintuc:INews)=>(
       <div className=" rounded-lg overflow-hidden shadow-lg">
-        <img src="https://via.placeholder.com/300x200" className="w-full h-40 object-cover" />
+        <img src={tintucs.imager} className="w-full h-40 object-cover" />
         <div className="p-4">
-        <NavLink to={`/promotions/${tintuc.id}`}><p className="text-sm text-gray-400">{tintuc.name_TinTuc}</p></NavLink>
-          <NavLink to={`/promotions/${tintuc.id}`}><h2 className="text-lg font-bold mt-2 text-white">{tintuc.content}</h2></NavLink>
+        <NavLink to={`/detail-news/${tintuc.id}`}><p className="text-sm text-gray-400">{tintuc.name_TinTuc}</p></NavLink>
+          <NavLink to={`/detail-news/${tintuc.id}`}><h2 className="text-lg font-bold mt-2 text-white">{tintuc.sub_title}</h2></NavLink>
         </div>
       </div>
   ))}    
@@ -41,6 +42,7 @@ const News = (props: Props) => {
   
   </div>
 </div>
+      </div>
       <Footer></Footer>
     </div>
   )
