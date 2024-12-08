@@ -10,51 +10,29 @@ import {
 import constants from "../utils/constants";
 import {
   IBase,
-  ICimena,
-  IMovie,
   IRoom,
-  ISeat,
   ITime,
+  IMovie,
 } from "./interface/orderMovie";
 import { useNavigate, useParams } from "react-router-dom";
-import { ISeatType } from "../interface/seat_type";
 import api from "../axios/config";
 
 const SelectMovie = () => {
   const navigate = useNavigate();
   const { id } = useParams(); // `id` này là ID của movie
 
+  // States
   const [movieDetail, setMovieDetail] = useState<IMovie | null>(null);
-  const [bases, setBases] = useState<IBase[] | null>(null);
+  const [bases, setBases] = useState<IBase[]>([]);
   const [selectedBase, setSelectedBase] = useState<IBase | null>(null);
-  const [selectedCimena, setSelectedCimena] = useState<ICimena | null>(null);
-  const [selectedTime, setSelectedTime] = useState<ITime | null>(null);
+
+  const [dates, setDates] = useState<string[]>([]);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+
+  const [rooms, setRooms] = useState<IRoom[]>([]);
   const [selectedRoom, setSelectedRoom] = useState<IRoom | null>(null);
-  const [selectedSeats, setSelectedSeats] = useState<ISeat[]>([]);
-  const [seatTypes, setSeatTypes] = useState<ISeatType[]>([]);
-  const [seats, setSeats] = useState<ISeat[]>([]);
-  const [times, setTimes] = useState<ITime[]>([
-    {
-      id: 1,
-      showTimeDate: "20-10-2024",
-      startTime: "22:00",
-      endTime: "24:00",
-    },
-    {
-      id: 2,
-      showTimeDate: "20-10-2024",
-      startTime: "21:00",
-      endTime: "23:00",
-    },
-    {
-      id: 3,
-      showTimeDate: "20-10-2024",
-      startTime: "19:00",
-      endTime: "21:00",
-    },
-  ]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [showNotifySelectSeat, setShowNotifySelectSeat] = useState(false);
+
+  const [showNotifySelectRoom, setShowNotifySelectRoom] = useState(false);
 
   // Fetch movie details
   useEffect(() => {
@@ -67,9 +45,7 @@ const SelectMovie = () => {
       }
     };
 
-    if (id) {
-      fetchMovieDetail();
-    }
+    if (id) fetchMovieDetail();
   }, [id]);
 
   // Fetch bases
@@ -83,92 +59,64 @@ const SelectMovie = () => {
         setBases([]);
       }
     };
-
     fetchBases();
   }, []);
 
-  // Fetch seat types
-  useEffect(() => {
-    const fetchSeatTypes = async () => {
-      try {
-        const { data } = await api.get<{ seattype: ISeatType[] }>(`types`);
-        setSeatTypes(data.seattype);
-      } catch (error) {
-        console.error("Error fetching seat types:", error);
-      }
-    };
-
-    fetchSeatTypes();
-  }, []);
-
-  // Calculate total price
-  useEffect(() => {
-    const total = selectedSeats.reduce((sum, seat) => {
-      return sum + Number(seat.seatType.seatPrice);
-    }, 0);
-    setTotalPrice(total);
-  }, [selectedSeats]);
-
-  // Notify select seat
-  useEffect(() => {
-    if (showNotifySelectSeat) {
-      setTimeout(() => {
-        setShowNotifySelectSeat(false);
-      }, 5000);
-    }
-  }, [showNotifySelectSeat]);
-
-  const handleChangeBase = (event: ChangeEvent<HTMLSelectElement>) => {
+  // Fetch dates when a base is selected
+  const handleChangeBase = async (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedBaseId = event.target.value;
-    const base = bases?.find((e) => e.id.toString() === selectedBaseId);
+    const base = bases.find((e) => e.id.toString() === selectedBaseId);
     setSelectedBase(base || null);
+
+    // Reset dates and rooms
+    setSelectedDate(null);
+    setSelectedRoom(null);
+    setDates([]);
+    setRooms([]);
+
+    if (base) {
+      try {
+        const { data } = await api.get<string[]>(`bases/${base.id}/dates`);
+        setDates(data || []);
+      } catch (error) {
+        console.error("Error fetching dates:", error);
+        setDates([]);
+      }
+    }
   };
 
-  const handleSelectedSeat = (seat: ISeat) => {
-    if (seat.status) return;
-    const isSelected = selectedSeats.some(
-      (selected) => selected.id === seat.id
-    );
+  // Fetch rooms when a date is selected
+  const handleChangeDate = async (event: ChangeEvent<HTMLSelectElement>) => {
+    const selectedDateValue = event.target.value;
+    setSelectedDate(selectedDateValue || null);
 
-    let newSelectedSeats = [...selectedSeats];
-    if (isSelected) {
-      newSelectedSeats = newSelectedSeats.filter(
-        (selected) => selected.id !== seat.id
-      );
-    } else {
-      newSelectedSeats.push(seat);
-    }
+    // Reset rooms
+    setSelectedRoom(null);
+    setRooms([]);
 
-    setSelectedSeats(newSelectedSeats);
-  };
-
-  const getStyleSeat = (seat: ISeat) => {
-    if (seat.status) {
-      return "bg-red-600";
+    if (selectedDateValue) {
+      try {
+        const { data } = await api.get<IRoom[]>(
+          `dates/${selectedDateValue}/rooms`
+        );
+        setRooms(data || []);
+      } catch (error) {
+        console.error("Error fetching rooms:", error);
+        setRooms([]);
+      }
     }
-    if (selectedSeats.map((selected) => selected.id).includes(seat.id)) {
-      return "bg-blue-600";
-    }
-    if (seat.seatType.id === 1) {
-      return "bg-slate-500";
-    }
-    if (seat.seatType.id === 2) {
-      return "bg-orange-400";
-    }
-    return "bg-pink-700";
   };
 
   const handlePayment = () => {
-    if (!selectedSeats || selectedSeats.length === 0) {
-      setShowNotifySelectSeat(true);
+    if (!selectedRoom) {
+      setShowNotifySelectRoom(true);
       return;
     }
     const paymentData = {
-      selectedSeats,
-      selectedCimena,
+      selectedBase,
+      selectedDate,
       selectedRoom,
       movieDetail,
-      totalPrice,
     };
     localStorage.setItem(constants.orderInfoKey, JSON.stringify(paymentData));
     navigate("/payment");
@@ -177,7 +125,7 @@ const SelectMovie = () => {
   return (
     <div className="select-movie-container p-6 mt-14">
       <div
-        className={`movie-info flex gap-8 mb-10 p-14 relative`}
+        className="movie-info flex gap-8 mb-10 p-14 relative"
         style={{
           backgroundImage: `url(${movieDetail?.image})`,
           backgroundRepeat: "no-repeat",
@@ -206,17 +154,6 @@ const SelectMovie = () => {
           <div className="movie-description">
             Nội dung: {movieDetail?.content}
           </div>
-          <div className="movie-trailler flex items-center gap-10">
-            <div className="label">Trailler: </div>
-            <a
-              className="!text-blue-600 underline"
-              href={movieDetail?.link_trailler}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="bg-red-500">Xem trailler</button>
-            </a>
-          </div>
         </div>
       </div>
 
@@ -224,7 +161,9 @@ const SelectMovie = () => {
         <div className="booking-title uppercase text-5xl font-bold text-center mt-20 mb-20">
           Đặt vé
         </div>
-        <div className="base-list w-64">
+
+        {/* Chọn cơ sở */}
+        <div className="base-list w-64 mb-4">
           <label className="w-full font-semibold text-lg text-white">
             Chọn cơ sở:
           </label>
@@ -232,23 +171,85 @@ const SelectMovie = () => {
             defaultValue={undefined}
             value={selectedBase?.id}
             className="text-black"
-            onChange={(event) => handleChangeBase(event)}
+            onChange={handleChangeBase}
           >
-            <option className="text-black" key={undefined} value={undefined}>
+            <option className="text-black" value={undefined}>
               Chọn cơ sở
             </option>
-            {bases?.map((e) => (
-              <option key={e.id} value={e.id}>
-                {e.base_name}
+            {bases.map((base) => (
+              <option key={base.id} value={base.id}>
+                {base.base_name}
               </option>
             ))}
           </FormSelect>
         </div>
-      </div>
 
-      <Alert show={showNotifySelectSeat} key={"warning"} variant={"warning"}>
-        Bạn chưa chọn ghế
-      </Alert>
+        {/* Chọn ngày */}
+        <div className="date-list w-64 mb-4">
+          <label className="w-full font-semibold text-lg text-white">
+            Chọn ngày:
+          </label>
+          <FormSelect
+            defaultValue={undefined}
+            value={selectedDate || undefined}
+            className="text-black"
+            onChange={handleChangeDate}
+            disabled={!selectedBase}
+          >
+            <option className="text-black" value={undefined}>
+              Chọn ngày
+            </option>
+            {dates.map((date, index) => (
+              <option key={index} value={date}>
+                {date}
+              </option>
+            ))}
+          </FormSelect>
+        </div>
+
+        {/* Chọn phòng */}
+        <div className="room-list w-64 mb-4">
+          <label className="w-full font-semibold text-lg text-white">
+            Chọn phòng chiếu:
+          </label>
+          <FormSelect
+            defaultValue={undefined}
+            value={selectedRoom?.id || undefined}
+            className="text-black"
+            onChange={(e) =>
+              setSelectedRoom(
+                rooms.find((room) => room.id.toString() === e.target.value) ||
+                  null
+              )
+            }
+            disabled={!selectedDate}
+          >
+            <option className="text-black" value={undefined}>
+              Chọn phòng
+            </option>
+            {rooms.map((room) => (
+              <option key={room.id} value={room.id}>
+                {room.roomName}
+              </option>
+            ))}
+          </FormSelect>
+        </div>
+
+        {/* Hiển thị thông báo */}
+        <Alert show={showNotifySelectRoom} key={"warning"} variant={"warning"}>
+          Bạn chưa chọn phòng chiếu
+        </Alert>
+
+        {/* Nút đặt vé */}
+        <div className="text-center mt-10">
+          <button
+            className="bg-blue-500 text-white px-6 py-3 rounded-lg"
+            onClick={handlePayment}
+          >
+            Đặt vé
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
