@@ -1,19 +1,23 @@
 import React from 'react'
 import Header from './header'
 import Banner from './banner'
-import Product from './product'
+// import Product from './product'
 import Footer from './footer'
 
-type Props = {}
+type Props = {
+    children: React.ReactNode
+}
 
-const HomePage = (props: Props) => {
+const HomePage = ({children}: Props) => {
   return (
     <div>
         <div>
             <Header></Header>
             <div className="maintain">
                 <Banner></Banner>
-                <Product></Product>
+                <div className="main-area">
+                    {children}
+                </div>
             </div>
             <Footer></Footer>
         <div className="search-model">

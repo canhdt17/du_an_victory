@@ -6,12 +6,9 @@ import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useParams } from "react-router-dom";
 import { IRoom } from "../../interface/room";
-// import { GetRoomById } from "../../service/room";
 import { GetRoomById } from "../../service/room";
-
-
-import { IArea } from "../../interface/area";
-import { ListArea } from "../../service/area";
+import { IBase } from "../../interface/base";
+import { BaseList } from "../../service/base";
 import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
@@ -22,7 +19,7 @@ type Props = {
 
 const roomSchema = Joi.object({
   room_name: Joi.string().required().label("Room Name"),
-  area_id: Joi.string().required().label("ID Area"),
+  id: Joi.string().required().label("ID Area"),
   total_seat: Joi.number().required().label("Total Seat"),
 });
 
@@ -39,13 +36,13 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
 
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
-  const [areas, setAreas] = useState<IArea[]>([]);
+  const [areas, setAreas] = useState<IBase[]>([]);
 
   // Fetch areas
   useEffect(() => {
     (async () => {
       try {
-        const data = await ListArea();
+        const data = await BaseList();
         setAreas(data || []);
       } catch (error) {
         setFetchError("Failed to fetch areas.");
@@ -82,9 +79,9 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
           <HeaderDashboard />
           <div className="container-fluid">
             <div className="row">
-              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
                 <div
-                  className="offcanvas-md offcanvas-end bg-body-tertiary"
+                  className="offcanvas-md offcanvas-end "
                   tabIndex={-1}
                   id="sidebarMenu"
                   aria-labelledby="sidebarMenuLabel"
@@ -119,24 +116,24 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="area_id" className="form-label">
+                    <label htmlFor="id" className="form-label">
                       Khu Vực:
                     </label>
                     <select
                       className="form-control"
                       aria-label="Large select example"
-                      {...register("area_id")}
+                      {...register("id")}
                     >
                       <option value="">Chọn Khu Vực</option>
-                      {areas.map((area: IArea, i : number) => (
-                        <option key={area.area_id} value={area.area_id}>
-                          {area.area_name}
+                      {areas.map((area: IBase) => (
+                        <option key={area.id} value={area.id}>
+                          {area.base_name}
                         </option>
                       ))}
                     </select>
-                    {errors.area_id && (
+                    {errors.id && (
                       <div className="text-danger">
-                        {errors.area_id.message}
+                        {errors.id.message}
                       </div>
                     )}
                   </div>

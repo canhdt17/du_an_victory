@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\DonateCombofood;
+
 use Illuminate\Http\Request;
 
 class DonateCombofoodController extends Controller
@@ -34,7 +36,9 @@ class DonateCombofoodController extends Controller
     /**
      * Display the specified resource.
      */
+
     public function show(DonateCombofood $donateCombofood)
+
     {
         //
     }
@@ -42,7 +46,9 @@ class DonateCombofoodController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+
     public function edit(DonateCombofood $donateCombofood)
+
     {
         //
     }
@@ -50,7 +56,9 @@ class DonateCombofoodController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, DonateCombofood $donateCombofood)
+
     {
         //
     }
@@ -58,8 +66,9 @@ class DonateCombofoodController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy(DonateCombofood $donateCombofood)
-    {
+ {
         //
     }
 }

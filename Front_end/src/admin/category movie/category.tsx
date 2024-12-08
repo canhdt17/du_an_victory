@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-
 import { ICategoryMovie } from "../../interface/categorymovie";
 import {
   CategoryMovie,
@@ -16,7 +15,7 @@ import MenuDashboard from "../movie/menudashboard";
 
 const Category: React.FC = () => {
   const [categories, setCategories] = useState<ICategoryMovie[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);         
   const [error, setError] = useState<string | null>(null);
 
   // fetch
@@ -76,7 +75,7 @@ const Category: React.FC = () => {
         <HeaderDashboard />
         <div className="container-fluid">
           <div className="row">
-            <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
               <MenuDashboard />
             </div>
             <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
