@@ -26,9 +26,8 @@ use App\Http\Controllers\Api\AdminUserControler;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\API\SeatTypeController;
 use App\Http\Controllers\Api\ComboFoodController;
-use App\Http\Controllers\Api\CinemaController;
 use App\Http\Controllers\Api\DonateCombofoodController;
-use App\Http\Controllers\Api\InvoiceController;
+
 use App\Http\Controllers\Api\PointVoucherController;
 
 // use App\Models\User;

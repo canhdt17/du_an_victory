@@ -26,7 +26,10 @@ class VoucherController extends Controller
             'code' => 'required',
             'discount_amount' => 'required',
             'expiry_date' => 'required',
-            'is_active' => 'required',
+            'status' => 'required',
+            'name_voucher' => 'required',
+            'style_voucher_id' => 'required',
+            'image' => 'required',
         ]);
         Voucher::create($request->all());
         return response()->json([
