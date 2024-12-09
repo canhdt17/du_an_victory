@@ -2,13 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./compoents/page";
-
-
-
-
-
-
-
 import Category from "./admin/category movie/category";
 import AddMovieCategory from "./admin/category movie/addmoviecategory";
 import UpdateCategoryMovie from "./admin/category movie/updatecategorymovie";
@@ -19,12 +12,12 @@ import UpdateSeatType from "./admin/seat_type/UpdateSeatTypes";
 import KhuyenMai from "./admin/khuyen_mai/KhuyenMais";
 import CreateKhuyenMai from "./admin/khuyen_mai/AddKhuyenMais";
 import UpdateKhuyenMai from "./admin/khuyen_mai/UpdateKhuyenMais";
-import { Addkhuyen_mai,Updatekhuyen_mai } from "./service/khuyen_mai";
+import { Addkhuyen_mai, Updatekhuyen_mai } from "./service/khuyen_mai";
 // tin tuc
 import TinTuc from "./admin/tin_tuc/TinTucs";
 import CreateTinTuc from "./admin/tin_tuc/AddTinTucs";
 // // import UpdateKhuyenMai from "./admin/khuyen_mai/UpdateKhuyenMais";
-import { Addtin_tuc,Updatetin_tuc } from "./service/tin_tuc";
+import { Addtin_tuc, Updatetin_tuc } from "./service/tin_tuc";
 
 import ShowTime from "./admin/showtime/showtime";
 import CrateShowTime from "./admin/showtime/createshowtime";
@@ -74,8 +67,6 @@ import Showtimes from "./compoents/showtimes/showtimes";
 
 import LoginPage from "./client/auth/login";
 
-
-
 import Type from "./admin/type movie/typemovie";
 import AddTypeMovie from "./admin/type movie/addtypemovie";
 import UpdateTypeMovie from "./admin/type movie/updatetypemovie";
@@ -84,7 +75,9 @@ import { IBase } from "./interface/base";
 import Base from "./admin/base/base";
 import BaseAdd from "./admin/base/addbase";
 import UpdateBase from "./admin/base/updatearea";
-import Base from "./admin/base/base";
+import MovieDetail from "./compoents/moviedetail/moviedetail";
+import NewsDetails from "./compoents/detail-news/detail-news";
+
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -176,9 +169,7 @@ function App() {
     try {
       const baseDta = await UpdateBase(id, baseData);
       alert("Cập nhật thành công.");
-      const newBases = bases.map((base) =>
-        base.id === id ? baseDta : base
-      );
+      const newBases = bases.map((base) => (base.id === id ? baseDta : base));
       setBases(newBases);
       navigate("/admin/area");
     } catch (error) {
@@ -327,77 +318,77 @@ function App() {
       console.log(error);
     }
   };
-    //  Khuyen mai ( )
-        const addKhuyenMai = async (khuyen_maiData: IKhuyenMai) => {
-        try {
-          const khuyenmai = await Addkhuyen_mai(khuyen_maiData);
-          alert("Thêm danh mục thành công.");
-          setKhuyenMais([...khuyenmais, khuyenmai]);
-          navigate("/admin/khuyen_mai");
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      const updateKhuyenMai = async (
-        khuyenMaiData: ISeatType,
-        id: number | string
-      ) => {
-        try {
-          const updateKhuyenMai = await KhuyenMaiUpdate(khuyenMaiData, id);
-          alert("Cập nhật thành công.");
-          const newkhuyenMais = khuyenmais.map((khuyenMai) =>
-            khuyenMai.id === id ? updateKhuyenMai : khuyenMai
-          );
-          setKhuyenMais(newkhuyenMais);
-          navigate("/admin/khuyen_mai");
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      // const updateKhuyenMai = async (khuyenmaiData: IKhuyenMai, id: number | string) => {
-      //   try {
-      //     const updatedkhuyenMai = await UpdatekhuyenMais(
-      //       khuyenmaiData,
-      //     id
-      //   );
-      //     alert("Cập nhật thành công.");
-      //   const newkhuyenMais = khuyenMais.map((khuyenMai) =>
-      //     khuyenMai.cate_id === id ? updatedkhuyenMai : khuyenMai
-      //   );
-      //   setKhuyenMais(newkhuyenMais);
-      //   navigate("/admin/khuyen_mai");
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
-      // };
+  //  Khuyen mai ( )
+  const addKhuyenMai = async (khuyen_maiData: IKhuyenMai) => {
+    try {
+      const khuyenmai = await Addkhuyen_mai(khuyen_maiData);
+      alert("Thêm danh mục thành công.");
+      setKhuyenMais([...khuyenmais, khuyenmai]);
+      navigate("/admin/khuyen_mai");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const updateKhuyenMai = async (
+    khuyenMaiData: ISeatType,
+    id: number | string
+  ) => {
+    try {
+      const updateKhuyenMai = await KhuyenMaiUpdate(khuyenMaiData, id);
+      alert("Cập nhật thành công.");
+      const newkhuyenMais = khuyenmais.map((khuyenMai) =>
+        khuyenMai.id === id ? updateKhuyenMai : khuyenMai
+      );
+      setKhuyenMais(newkhuyenMais);
+      navigate("/admin/khuyen_mai");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // const updateKhuyenMai = async (khuyenmaiData: IKhuyenMai, id: number | string) => {
+  //   try {
+  //     const updatedkhuyenMai = await UpdatekhuyenMais(
+  //       khuyenmaiData,
+  //     id
+  //   );
+  //     alert("Cập nhật thành công.");
+  //   const newkhuyenMais = khuyenMais.map((khuyenMai) =>
+  //     khuyenMai.cate_id === id ? updatedkhuyenMai : khuyenMai
+  //   );
+  //   setKhuyenMais(newkhuyenMais);
+  //   navigate("/admin/khuyen_mai");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-      //  tin tuc ( )
-      const addTinTuc = async (tin_tucData: ITinTuc) => {
-        try {
-          const tintuc = await Addtin_tuc(tin_tucData);
-          alert("Thêm tin tuc thành công.");
-          setTinTucs([...tintucs, tintuc]);
-          navigate("/admin/tin_tuc");
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      // const updateKhuyenMai = async (khuyenmaiData: IKhuyenMai, id: number | string) => {
-      //   try {
-      //     const updatedkhuyenMai = await UpdatekhuyenMais(
-      //     khuyenMai,
-      //     id
-      //   );
-      //     alert("Cập nhật thành công.");
-      //   const newkhuyenMais = khuyenMais.map((khuyenMai) =>
-      //     khuyenMai.cate_id === id ? updatedkhuyenMai : khuyenMai
-      //   );
-      //   setkhuyenMais(newkhuyenMais);
-      //   navigate("/admin/khuyen_mai");
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
-      // };
+  //  tin tuc ( )
+  const addTinTuc = async (tin_tucData: ITinTuc) => {
+    try {
+      const tintuc = await Addtin_tuc(tin_tucData);
+      alert("Thêm tin tuc thành công.");
+      setTinTucs([...tintucs, tintuc]);
+      navigate("/admin/tin_tuc");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // const updateKhuyenMai = async (khuyenmaiData: IKhuyenMai, id: number | string) => {
+  //   try {
+  //     const updatedkhuyenMai = await UpdatekhuyenMais(
+  //     khuyenMai,
+  //     id
+  //   );
+  //     alert("Cập nhật thành công.");
+  //   const newkhuyenMais = khuyenMais.map((khuyenMai) =>
+  //     khuyenMai.cate_id === id ? updatedkhuyenMai : khuyenMai
+  //   );
+  //   setkhuyenMais(newkhuyenMais);
+  //   navigate("/admin/khuyen_mai");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>
@@ -549,10 +540,15 @@ function App() {
           element={<UpdateShowtime updateShowtimes={updateShowtime} />}
         />
         {/* Khuyen mai */}
-        <Route path="/admin/khuyen_mai" element={<KhuyenMai></KhuyenMai>}></Route>
+        <Route
+          path="/admin/khuyen_mai"
+          element={<KhuyenMai></KhuyenMai>}
+        ></Route>
         <Route
           path="/admin/create_khuyen_mai"
-          element={<CreateKhuyenMai onAddKhuyenMai={addKhuyenMai}></CreateKhuyenMai>}
+          element={
+            <CreateKhuyenMai onAddKhuyenMai={addKhuyenMai}></CreateKhuyenMai>
+          }
         ></Route>
         {/* <Route
           path="/admin/seat_type/edit/:id"
@@ -582,7 +578,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/news" element={<News></News>}></Route>
-        <Route path="/detail-news/:id" element={<NewsDetails></NewsDetails>}></Route>
+        <Route
+          path="/detail-news/:id"
+          element={<NewsDetails></NewsDetails>}
+        ></Route>
         <Route path="/promotions" element={<Promotions></Promotions>}></Route>
         <Route
           path="/promotions/:id"
