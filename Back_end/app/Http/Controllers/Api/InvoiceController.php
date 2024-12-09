@@ -32,10 +32,7 @@ class InvoiceController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -43,20 +40,20 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'showtime_id'=> 'required',
+            'showtime_id' => 'required',
             'user_id' => 'required',
-            'voucher_id'=> 'required',
-            'combofood_id'=> 'required',
+            'voucher_id' => 'required',
+            'combofood_id' => 'required',
             'seats' => 'required|array',
             'seats.*' => 'exists:seats,id',
         ]);
 
         DB::beginTransaction();
-        try{
+        try {
 
             $totalPrice = 0;
             $invoice = Invoice::create([
-                
+
                 'total_price' => $totalPrice,
                 'showtime_id' => $data['showtime_id'],
                 'user_id' => 1,
@@ -70,38 +67,36 @@ class InvoiceController extends Controller
             // $jsonString = json_encode($data['seats']);
 
             foreach ($data['seats'] as $seat_id) {
-                $seat= DB::table('seats')
-                    ->join('seat_types','seat_types.id','=','seats.seat_type_id')
-                    ->select('seats.*','seat_price')
+                $seat = DB::table('seats')
+                    ->join('seat_types', 'seat_types.id', '=', 'seats.seat_type_id')
+                    ->select('seats.*', 'seat_price')
                     ->orderByDesc('seats.seat_type_id')
                     ->where('seats.id', '=',  $seat_id)
                     ->first();
                 // $seat->save();
                 if ($seat) {
-                $invoices_detail = Invoice_detail::create([
-                    'invoice_id' => $invoice->id,
-                    'seat_id' => $seat->id,  // Lấy đúng `seat_id`
-                    'total_price' => $seat->seat_price,  // Lấy giá ghế từ `seat_price`
-                    // 'time_date' => now(),
+                    $invoices_detail = Invoice_detail::create([
+                        'invoice_id' => $invoice->id,
+                        'seat_id' => $seat->id,  // Lấy đúng `seat_id`
+                        'total_price' => $seat->seat_price,  // Lấy giá ghế từ `seat_price`
+                        // 'time_date' => now(),
 
-                ]);
-                $statusSeat = StatusSeat::create([
-                    'showtime_id' => $data['showtime_id'],
-                    'seat_id' => $seat->id,
-                    'status' => "Đã đặt",
+                    ]);
+                    $statusSeat = StatusSeat::create([
+                        'showtime_id' => $data['showtime_id'],
+                        'seat_id' => $seat->id,
+                        'status' => "Đã đặt",
 
-                ]);
+                    ]);
                 }
                 $totalPrice += $invoices_detail->total_price;
-
-
             }
-            
+
             if (!empty($data['combofood_id'])) {
-                    $combofood = ComboFood::find($data['combofood_id']);
-                    $totalPrice += $combofood->combofood_price;
-                }
-            
+                $combofood = ComboFood::find($data['combofood_id']);
+                $totalPrice += $combofood->combofood_price;
+            }
+
             if (!empty($data['voucher_id'])) {
                 $voucher = Voucher::find($data['voucher_id']);
                 $totalPrice += $voucher->discount_amount;
@@ -126,16 +121,16 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        $invoices_detail =DB::table('invoice_details')
-        ->join('invoices','invoices.id','=','invoice_details.invoice_id')
-        ->join('seats','seats.id','=','invoice_details.seat_id')
-        ->whereNull('invoice_details.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng invoice_details
-        ->select('invoice_details.*','invoices.*','seats.*')
-        ->orderByDesc('invoice_details.id')
-        ->orderByDesc('invoice_details.seat_id')
-        ->orderByDesc('invoice_details.invoice_id')
-        ->latest('invoice_details.id')
-        ->paginate();
+        $invoices_detail = DB::table('invoice_details')
+            ->join('invoices', 'invoices.id', '=', 'invoice_details.invoice_id')
+            ->join('seats', 'seats.id', '=', 'invoice_details.seat_id')
+            ->whereNull('invoice_details.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng invoice_details
+            ->select('invoice_details.*', 'invoices.*', 'seats.*')
+            ->orderByDesc('invoice_details.id')
+            ->orderByDesc('invoice_details.seat_id')
+            ->orderByDesc('invoice_details.invoice_id')
+            ->latest('invoice_details.id')
+            ->paginate();
 
         return response()->json($invoices_detail);
     }
@@ -144,10 +139,7 @@ class InvoiceController extends Controller
      * Show the form for editing the specified resource.
      */
     // sửa trạng thái hóa đơn
-    public function edit(Invoice $invoice)
-    {
-        
-    }
+    public function edit(Invoice $invoice) {}
 
     /**
      * Update the specified resource in storage.
@@ -162,7 +154,7 @@ class InvoiceController extends Controller
         $invoice = Invoice::findOrFail($invoice);
         $invoice->update($request->all());
 
-        return response()->json(['message' => 'Cập nhật trạng thái đơn hàng thành công','invoice'=>$invoice],200);
+        return response()->json(['message' => 'Cập nhật trạng thái đơn hàng thành công', 'invoice' => $invoice], 200);
     }
 
     /**
