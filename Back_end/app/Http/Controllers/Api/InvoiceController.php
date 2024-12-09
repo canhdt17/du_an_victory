@@ -42,8 +42,8 @@ class InvoiceController extends Controller
         $data = $request->validate([
             'showtime_id' => 'required',
             'user_id' => 'required',
-            'voucher_id' => 'required',
-            'combofood_id' => 'required',
+            'voucher_id'=> 'required',
+            'combofood_id'=> 'required',
             'seats' => 'required|array',
             'seats.*' => 'exists:seats,id',
         ]);
@@ -53,16 +53,15 @@ class InvoiceController extends Controller
 
             $totalPrice = 0;
             $invoice = Invoice::create([
-
+                
                 'total_price' => $totalPrice,
                 'showtime_id' => $data['showtime_id'],
                 'user_id' => 1,
-                'combofood_id' => $data['combofood_id'],
-                'voucher_id' => $data['voucher_id'],
+                'combofood_id' => $request->combofood_id,
+                'voucher_id' => $request->voucher_id,
                 'time_date' => now(), // Thêm giá trị cho cột `time_date`
-
-
             ]);
+
             // $unavailableSeats = [];
             // $jsonString = json_encode($data['seats']);
 
@@ -75,11 +74,11 @@ class InvoiceController extends Controller
                     ->first();
                 // $seat->save();
                 if ($seat) {
-                    $invoices_detail = Invoice_detail::create([
-                        'invoice_id' => $invoice->id,
-                        'seat_id' => $seat->id,  // Lấy đúng `seat_id`
-                        'total_price' => $seat->seat_price,  // Lấy giá ghế từ `seat_price`
-                        // 'time_date' => now(),
+                $invoices_detail = Invoice_detail::create([
+                    'invoice_id' => $invoice->id,
+                    'seat_id' => $seat->id,  // Lấy đúng `seat_id`
+                    'total_price' => $seat->seat_price,  // Lấy giá ghế từ `seat_price`
+                    // 'time_date' => now(),
 
                     ]);
                     $statusSeat = StatusSeat::create([
@@ -90,13 +89,15 @@ class InvoiceController extends Controller
                     ]);
                 }
                 $totalPrice += $invoices_detail->total_price;
-            }
 
+
+            }
+            
             if (!empty($data['combofood_id'])) {
-                $combofood = ComboFood::find($data['combofood_id']);
-                $totalPrice += $combofood->combofood_price;
-            }
-
+                    $combofood = ComboFood::find($data['combofood_id']);
+                    $totalPrice += $combofood->combofood_price;
+                }
+            
             if (!empty($data['voucher_id'])) {
                 $voucher = Voucher::find($data['voucher_id']);
                 $totalPrice += $voucher->discount_amount;
@@ -163,5 +164,30 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+    public function dailyRevenue()
+    {
+           // Lấy tham số ngày bắt đầu và kết thúc
+           $startDate = '2024-12-01';
+           $endDate = '2024-12-30';
+   
+   // Truy vấn tổng doanh thu theo ngày
+   $revenues = Invoice::select(
+    DB::raw('DATE(time_date) as revenue_date'),
+    DB::raw('SUM(total_price) as total_revenue')
+)
+    ->whereBetween(DB::raw('DATE(time_date)'), [$startDate, $endDate]) // Đảm bảo so sánh đúng định dạng ngày
+    ->groupBy('revenue_date')
+    ->orderBy('revenue_date', 'asc')
+    ->get();
+
+// Xử lý trường hợp không có dữ liệu
+
+
+// Trả về kết quả thành công
+return response()->json([
+ $revenues
+]);
+
     }
 }

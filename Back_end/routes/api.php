@@ -96,7 +96,10 @@ Route::apiResource('seatTypes', SeatTypeController::class);
 Route::apiResource('seats', SeatController::class);
 Route::apiResource('khuyenmai', KhuyenMaiController::class);
 Route::apiResource('vouchers', VoucherController::class);
+// hóa đơn
 Route::apiResource('invoices', InvoiceController::class);
+Route::get('dailyRevenue', [InvoiceController::class, 'dailyRevenue']);
+
 Route::apiResource('donatecombofoods', DonateCombofoodController::class);
 Route::apiResource('pointvouchers', PointVoucherController::class);
 
