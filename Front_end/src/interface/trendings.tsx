@@ -10,6 +10,7 @@ export interface ITrendings {
   show:Date,
   content:string,
   link_trailler:string,
-  category_id:number|string,
-
+  category_id:string,
+name_type: string,
+      name_category: string
 }
