@@ -86,6 +86,7 @@ import UpdateBase from "./admin/base/updatearea";
 import Base from "./admin/base/base";
 import MovieDetail from "./compoents/moviedetail/moviedetail";
 import NewsDetails from "./compoents/detail-news/detail-news";
+import CategoryFilms from "./compoents/categoryfims/categoryFims";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -589,6 +590,9 @@ function App() {
           path="/promotions/:id"
           element={<DetailPromotions></DetailPromotions>}
         ></Route>
+        <Route path="/categoryfilms" element={<CategoryFilms></CategoryFilms>}></Route>
+        <Route path="/categoryfilms/:id" element={<CategoryFilms></CategoryFilms>}></Route>
+        <Route path="/showtimes" element={<Showtimes></Showtimes>}></Route>
       </Routes>
     </>
   );

@@ -3,17 +3,44 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 
 const Header = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   const avatar = localStorage.getItem("avatar");
   const navigate = useNavigate();
+  const handleLogout = async () => {
 
-  const handleLogout = () => {
+  
+    if (token) {
+      try {
+        
+        const response = await fetch("http://127.0.0.1:8000/api/logout", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, 
+          },
+        });
+  
+        // Kiểm tra phản hồi từ server
+        if (response.ok) {
+          console.log("Đăng xuất thành công từ server!");
+        } else {
+          console.error("Không thể đăng xuất từ server!");
+        }
+      } catch (error) {
+        console.error("Lỗi khi gửi yêu cầu đăng xuất:", error);
+      }
+    }
+  
    
     localStorage.removeItem("token");
-    localStorage.removeItem("avatar");
-    navigate("/"); 
+  
+
+    alert("Bạn đã đăng xuất!");
+  
+    window.location.href = "/login";
   };
 
+ 
   return (
     <div>
 
@@ -58,7 +85,7 @@ const Header = () => {
               alt="Avatar"
               style={{ width: "40px", height: "40px", borderRadius: "50%", marginRight: "10px" }}
             />
-            <button onClick={handleLogout}>Đăng xuất</button>
+            <button onClick={handleLogout} >Đăng xuất</button>
       <div>
     
       </div>
