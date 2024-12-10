@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('style_vouchers', function (Blueprint $table) {
             $table->id();
             $table->string('name_stylevoucher');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

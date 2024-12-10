@@ -96,6 +96,28 @@ const MenuDashboard = () => {
           </li>
           <li className="nav-item">
             <NavLink
+              to="/admin/khuyen_mai"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
+            >
+              <svg className="w-3 h-0">
+                <use xlinkHref="#cart" />
+              </svg>
+              Khuyến Mãi 
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              to="/admin/tin_tuc"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
+            >
+              <svg className="w-3 h-0">
+                <use xlinkHref="#cart" />
+              </svg>
+              Tin Tức 
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
               to="/admin/user"
               className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >

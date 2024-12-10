@@ -92,61 +92,47 @@ class ShowtimeController extends Controller
         return response()->json($showtime);
         }
     // tim id showtime
-    public function getIDShowtime($ids)
+    public function getIDShowtime($movieId,$baseId,$date,$time)
     {
-
-    // Tách danh sách ID bằng dấu phẩy
-    $idArray = explode(',', $ids);
-    $movie_id=$idArray[1];
-    $base_id=$idArray[0];
-    $showtime_date=$idArray[2];
-    $start_time=$idArray[3];
     
-    $showtimeID = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->get();
+    $showtimeID = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->where('showtime_date', $date)->where('start_time', $time)->value('id');
     return response()->json($showtimeID);
     
     }
     // tìm ngày 
-    public function getDateShowtime($ids)
+    public function getDateShowtime($movieId,$baseId )
     {
 
-    // Tách danh sách ID bằng dấu phẩy
-    $idArray = explode(',', $ids);
-    $movie_id=$idArray[1];
-    $base_id=$idArray[0];
+    // // Tách danh sách ID bằng dấu phẩy
+    // $idArray = explode(',', $ids);
+    // $movie_id=$idArray[1];
+    // $base_id=$idArray[0];
 
     
-    $showtimeDate = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->groupBy('showtime_date')->select('showtime_date')->get();
+    $showtimeDate = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->groupBy('showtime_date')->select('showtime_date')->get();
     return response()->json($showtimeDate);
     
     }
     // tìm giờ     
-    public function getTimeShowtime($ids)
+    public function getTimeShowtime($movieId,$baseId,$date)
     {
-
-    // Tách danh sách ID bằng dấu phẩy
-    $idArray = explode(',', $ids);
-    $movie_id=$idArray[1];
-    $base_id=$idArray[0];
-    $showtime_date=$idArray[2];
-    
-    $showtimeTime = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->where('showtime_date', $showtime_date)->groupBy('start_time')->select('start_time')->get();
+    $showtimeTime = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->where('showtime_date', $date)->groupBy('start_time')->select('start_time')->get();
     return response()->json($showtimeTime);
     
     }
      // list ghe va hien thi trang thai ghe the id room
-    public function getSeatShowtime($ids)
+    public function getSeatShowtime($movieId,$baseId,$date,$time)
     {
 
-    // Tách danh sách ID bằng dấu phẩy
-    $idArray = explode(',', $ids);
-    $movie_id=$idArray[1];
-    $base_id=$idArray[0];
-    $showtime_date=$idArray[2];
-    $start_time=$idArray[3];
+    // // Tách danh sách ID bằng dấu phẩy
+    // $idArray = explode(',', $ids);
+    // $movie_id=$idArray[1];
+    // $base_id=$idArray[0];
+    // $showtime_date=$idArray[2];
+    // $start_time=$idArray[3];
 
-    $showtimeID = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->value('id');
-    $room_id = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->value('room_id');
+    $showtimeID = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->where('showtime_date', $date)->where('start_time', $time)->value('id');
+    $room_id = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->where('showtime_date', $date)->where('start_time', $time)->value('room_id');
     $seats= DB::table('seats')
     ->leftJoin('status_seats', 'status_seats.seat_id', '=', 'seats.id')  // Lấy cả ghế không có trạng thái
     ->whereNull('seats.deleted_at')  // Loại bỏ ghế đã bị xóa mềm
