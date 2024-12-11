@@ -133,18 +133,24 @@ class ShowtimeController extends Controller
 
     $showtimeID = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->where('showtime_date', $date)->where('start_time', $time)->value('id');
     $room_id = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->where('showtime_date', $date)->where('start_time', $time)->value('room_id');
-    $seats= DB::table('seats')
-    ->leftJoin('status_seats', 'status_seats.seat_id', '=', 'seats.id')  // Lấy cả ghế không có trạng thái
-    ->whereNull('seats.deleted_at')  // Loại bỏ ghế đã bị xóa mềm
-    ->where('seats.room_id', $room_id)  // Lọc ghế trong phòng
-    ->where(function ($query) use ($showtimeID) {
-        $query->where('status_seats.showtime_id', $showtimeID)
-              ->orWhereNull('status_seats.showtime_id');  // Bao gồm cả ghế chưa có trạng thái
+    $seats = DB::table('seats')
+    ->leftJoin('status_seats', function ($join) use ($showtimeID) {
+        $join->on('status_seats.seat_id', '=', 'seats.id')
+             ->where(function ($query) use ($showtimeID) {
+                 $query->where('status_seats.showtime_id', $showtimeID)
+                       ->orWhereNull('status_seats.showtime_id');
+             });
     })
-    ->select('seats.*', 'status_seats.status')  // Chọn ghế và trạng thái
-    ->orderByDesc('seats.id')  // Sắp xếp theo ID ghế
+    ->leftJoin('seat_types', 'seat_types.id', '=', 'seats.seat_type_id')
+    ->whereNull('seats.deleted_at')  // Exclude soft-deleted seats
+    ->where('seats.room_id', $room_id)
+    ->select('seats.*', 'status_seats.status', 'seat_types.seat_type_name')
+    ->orderByDesc('seats.id')
     ->get();
-    return response()->json($seats);
+    return response()->json([
+        'room_id' => $room_id,
+        'data' => $seats
+    ]);
     
     
     }
