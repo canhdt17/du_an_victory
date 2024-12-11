@@ -18,7 +18,12 @@ class PointUserController extends Controller
 
     public function show($id)
     {
-        $pointUser = PointUser::with('user')->findOrFail($id);
+        // $pointUser = PointUser::withTrashed()->with('user')->findOrFail($id);
+        $pointUser = PointUser::where('user_id', $id)
+        ->whereNull('deleted_at')
+        ->orderBy('updated_at', 'desc')
+        ->with('user')
+        ->first();
 
         if (!$pointUser) {
             return response()->json(['message' => 'Khong co diem'], 404);
