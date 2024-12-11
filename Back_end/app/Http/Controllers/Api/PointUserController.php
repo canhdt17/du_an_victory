@@ -30,18 +30,32 @@ class PointUserController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+
+        $validatedData = $request->validate([
             'user_id' => 'required',
             'point_user' => 'required',
         ]);
-        $pointUser = PointUser::where('user_id', $validated['user_id'])->first();
-        // cộng với số điểm hiện có của người dùng
-        $pointUser->point_user += $validated['point_user'];
-        $pointUser->save();
-        // $pointUser = PointUser::create($validated);
 
-        return response()->json($pointUser, 201);
+
+        $pointUser = PointUser::where('user_id', $validatedData['user_id'])->first();
+
+        if ($pointUser) {
+
+            $pointUser->point_user += $validatedData['point_user'];
+            $pointUser->save();
+        } else {
+
+            $pointUser = PointUser::create([
+                'user_id' => $validatedData['user_id'],
+                'point_user' => $validatedData['point_user'],
+
+            ]);
+        }
+
+
+        return response()->json($pointUser, 200);
     }
+
 
 
     public function update(Request $request, $id)
