@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::table('vouchers', function (Blueprint $table) {
             // Xóa cột cũ và thêm lại cột mới với kiểu enum
             $table->dropColumn('status');
-            $table->softDeletes();
         });
 
         Schema::table('vouchers', function (Blueprint $table) {
@@ -32,8 +31,7 @@ return new class extends Migration
         Schema::table('vouchers', function (Blueprint $table) {
             // Xóa cột enum và thêm lại cột với kiểu integer
             $table->dropColumn('status');
-            $table->dropColumn(['deleted_at']);
-            
+
         });
 
         Schema::table('vouchers', function (Blueprint $table) {
