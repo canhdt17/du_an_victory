@@ -2,20 +2,37 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./compoents/page";
-import MovieDetail from "./moviedetail/moviedetail";
+
+
+
+
+
+
+
 import Category from "./admin/category movie/category";
 import AddMovieCategory from "./admin/category movie/addmoviecategory";
 import UpdateCategoryMovie from "./admin/category movie/updatecategorymovie";
 import SeatType from "./admin/seat_type/SeatTypes";
 import CreateSeatType from "./admin/seat_type/AddSeatTypes";
 import UpdateSeatType from "./admin/seat_type/UpdateSeatTypes";
+// khuyen mai route
+import KhuyenMai from "./admin/khuyen_mai/KhuyenMais";
+import CreateKhuyenMai from "./admin/khuyen_mai/AddKhuyenMais";
+import UpdateKhuyenMai from "./admin/khuyen_mai/UpdateKhuyenMais";
+import { Addkhuyen_mai,Updatekhuyen_mai } from "./service/khuyen_mai";
+// tin tuc
+import TinTuc from "./admin/tin_tuc/TinTucs";
+import CreateTinTuc from "./admin/tin_tuc/AddTinTucs";
+// // import UpdateKhuyenMai from "./admin/khuyen_mai/UpdateKhuyenMais";
+import { Addtin_tuc,Updatetin_tuc } from "./service/tin_tuc";
+
 import ShowTime from "./admin/showtime/showtime";
 import CrateShowTime from "./admin/showtime/createshowtime";
 import UserList from "./admin/user/UserList";
 import CreateUser from "./admin/user/CreatUser";
 import EditUser from "./admin/user/EditUser";
 import Register from "./client/auth/register";
-import Login from "./client/auth/login";
+
 import Profile from "./client/profile/profile";
 import { IRoom } from "./interface/room";
 import { AddRoom, ListRoom } from "./service/room";
@@ -23,6 +40,8 @@ import { ISeatType } from "./interface/seat_type";
 import { ICategoryMovie } from "./interface/categorymovie";
 import { IShowTime } from "./interface/shotime";
 import { ISeat } from "./interface/seat";
+import { IKhuyenMai } from "./interface/khuyen_mai";
+import { ITinTuc } from "./interface/tin_tuc";
 import { SeatsTypeAdd, SeatsTypeUpdate } from "./service/seat_type";
 import {
   AddCategoryMovie,
@@ -42,13 +61,21 @@ import UpdateShowtime from "./admin/showtime/updateshowtime";
 import Dashboard from "./admin/movie/dashboard";
 import AddMovie from "./admin/movie/Addmovie";
 import EditMovie from "./admin/movie/EditMovie";
-import DetailNews from "./compoents/detail-news/news";
+
 import News from "./compoents/detail-news/news";
 import Promotions from "./compoents/promotions/promotions";
 import DetailPromotions from "./compoents/promotions/detail-promotions";
 import Product from "./compoents/product";
 import SelectMovie from "./compoents/selectMovie";
 import Payment from "./compoents/payment";
+
+import User from "./client/user/user";
+import Showtimes from "./compoents/showtimes/showtimes";
+
+import LoginPage from "./client/auth/login";
+
+
+
 import Type from "./admin/type movie/typemovie";
 import AddTypeMovie from "./admin/type movie/addtypemovie";
 import UpdateTypeMovie from "./admin/type movie/updatetypemovie";
@@ -57,6 +84,8 @@ import { IBase } from "./interface/base";
 import BaseAdd from "./admin/base/addbase";
 import UpdateBase from "./admin/base/updatearea";
 import Base from "./admin/base/base";
+import MovieDetail from "./compoents/moviedetail/moviedetail";
+import NewsDetails from "./compoents/detail-news/detail-news";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -67,6 +96,8 @@ function App() {
   const [showTimes, setShowTimes] = useState<IShowTime[]>([]);
   const [seats, setSeats] = useState<ISeat[]>([]);
   const [types, setTypes] = useState<ITypeMovie[]>([]);
+  const [khuyenmais, setKhuyenMais] = useState<IKhuyenMai[]>([]);
+  const [tintucs, setTinTucs] = useState<ITinTuc[]>([]);
 
   const navigate = useNavigate();
 
@@ -297,6 +328,77 @@ function App() {
       console.log(error);
     }
   };
+    //  Khuyen mai ( )
+        const addKhuyenMai = async (khuyen_maiData: IKhuyenMai) => {
+        try {
+          const khuyenmai = await Addkhuyen_mai(khuyen_maiData);
+          alert("Thêm danh mục thành công.");
+          setKhuyenMais([...khuyenmais, khuyenmai]);
+          navigate("/admin/khuyen_mai");
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      const updateKhuyenMai = async (
+        khuyenMaiData: ISeatType,
+        id: number | string
+      ) => {
+        try {
+          const updateKhuyenMai = await KhuyenMaiUpdate(khuyenMaiData, id);
+          alert("Cập nhật thành công.");
+          const newkhuyenMais = khuyenmais.map((khuyenMai) =>
+            khuyenMai.id === id ? updateKhuyenMai : khuyenMai
+          );
+          setKhuyenMais(newkhuyenMais);
+          navigate("/admin/khuyen_mai");
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      // const updateKhuyenMai = async (khuyenmaiData: IKhuyenMai, id: number | string) => {
+      //   try {
+      //     const updatedkhuyenMai = await UpdatekhuyenMais(
+      //       khuyenmaiData,
+      //     id
+      //   );
+      //     alert("Cập nhật thành công.");
+      //   const newkhuyenMais = khuyenMais.map((khuyenMai) =>
+      //     khuyenMai.cate_id === id ? updatedkhuyenMai : khuyenMai
+      //   );
+      //   setKhuyenMais(newkhuyenMais);
+      //   navigate("/admin/khuyen_mai");
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // };
+
+      //  tin tuc ( )
+      const addTinTuc = async (tin_tucData: ITinTuc) => {
+        try {
+          const tintuc = await Addtin_tuc(tin_tucData);
+          alert("Thêm tin tuc thành công.");
+          setTinTucs([...tintucs, tintuc]);
+          navigate("/admin/tin_tuc");
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      // const updateKhuyenMai = async (khuyenmaiData: IKhuyenMai, id: number | string) => {
+      //   try {
+      //     const updatedkhuyenMai = await UpdatekhuyenMais(
+      //     khuyenMai,
+      //     id
+      //   );
+      //     alert("Cập nhật thành công.");
+      //   const newkhuyenMais = khuyenMais.map((khuyenMai) =>
+      //     khuyenMai.cate_id === id ? updatedkhuyenMai : khuyenMai
+      //   );
+      //   setkhuyenMais(newkhuyenMais);
+      //   navigate("/admin/khuyen_mai");
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // };
 
   return (
     <>
@@ -447,18 +549,41 @@ function App() {
           path="/admin/showtime/edit/:id"
           element={<UpdateShowtime updateShowtimes={updateShowtime} />}
         />
-
+        {/* Khuyen mai */}
+        <Route path="/admin/khuyen_mai" element={<KhuyenMai></KhuyenMai>}></Route>
+        <Route
+          path="/admin/create_khuyen_mai"
+          element={<CreateKhuyenMai onAddKhuyenMai={addKhuyenMai}></CreateKhuyenMai>}
+        ></Route>
+        {/* <Route
+          path="/admin/seat_type/edit/:id"
+          element={
+            <UpdateSeatType updateSeatType={updateSeatType}></UpdateSeatType>
+          }
+        ></Route> */}
+        {/* Tin tuc */}
+        <Route path="/admin/tin_tuc" element={<TinTuc></TinTuc>}></Route>
+        <Route
+          path="/admin/create_tin_tuc"
+          element={<CreateTinTuc onAddTinTuc={addTinTuc}></CreateTinTuc>}
+        ></Route>
+        {/* <Route
+          path="/admin/seat_type/edit/:id"
+          element={
+            <UpdateSeatType updateSeatType={updateSeatType}></UpdateSeatType>
+          }
+        ></Route> */}
         {/* admin / quan li nguoi dung */}
         <Route path="/admin/user" element={<UserList />} />
         <Route path="/admin/createuser" element={<CreateUser />} />
         <Route path="/admin/edituser/:id" element={<EditUser />} />
 
         {/* client */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/news" element={<News></News>}></Route>
-        <Route path="/news/:id" element={<DetailNews></DetailNews>}></Route>
+        <Route path="/detail-news/:id" element={<NewsDetails></NewsDetails>}></Route>
         <Route path="/promotions" element={<Promotions></Promotions>}></Route>
         <Route
           path="/promotions/:id"

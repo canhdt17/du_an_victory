@@ -17,8 +17,7 @@ return new class extends Migration
             $table->foreign('showtime_id')->references('id')->on('showtimes')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('seat_id');
             $table->foreign('seat_id')->references('id')->on('seats')->onDelete('cascade')->onUpdate('cascade');
-            $table->enum('status', ['Ghế trống', 'Đã đặt', 'Đang chọn'])->default('Ghế trống');
-
+            $table->enum('status', ['Đã đặt'])->default('Đã đặt');
             $table->timestamps();
         });
     }

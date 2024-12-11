@@ -1,7 +1,12 @@
+
+
+
+
 import React, { useEffect, useState } from "react";
 import { ITrendings } from "../interface/trendings";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+
 
 const Trending = () => {
   const navigate = useNavigate();
@@ -23,49 +28,32 @@ const Trending = () => {
   };
 
   return (
+   
     <div>
-      <div className="container mx-auto py-10">
-        <div className="grid grid-cols-4 gap-6">
-          {Array.isArray(trendings) &&
-            trendings.map((trending: ITrendings) => (
-              <div
-                className="rounded-lg overflow-hidden shadow-lg"
-                key={trending.id}
-              >
-                <div className="relative">
-                  <div
-                    onClick={() => handleDetails(trending.id)} 
-                    className="cursor-pointer"
-                  >
-                     <img
-                      src={trending.image}  
-                      alt={trending.name_movie}  
-                      className="w-full h-64 object-cover transition-all duration-300 ease-in-out transform hover:scale-105 hover:opacity-80"
-                    />
-                  </div>
-                  <span className="absolute top-2 left-2 bg-red-600 text-white text-sm font-bold px-2 py-1 rounded">
-                    {trending.type_id}
-                  </span>
-                </div>
-                <div className="p-4">
-                  {/* <div className="flex justify-between items-center mb-3 text-gray-400 text-sm">
-                    <span>
-                      <i className="fas fa-eye" /> 11
-                    </span>
-                    <span>
-                      <i className="fas fa-users" /> 9141
-                    </span>
-                  </div> */}
-
-                  <h3 className="text-lg font-bold mb-2 text-white">
-                    {trending.name_movie}
-                  </h3>
-                </div>
+    <div className="row">
+      {Array.isArray(trendings) && trendings.map((trending:ITrendings)=>(
+         <div className="col-lg-4 col-md-6 col-sm-6" key={trending.id}>
+            <div className="product__item">
+              <div className="product__item__pic set-bg">
+              <img src={trending.image}></img>
+                <div className="ep">{trending.type_id}</div>
+                <div className="comment"><i className="fa fa-comments" />  {trending.duration}</div>
+                <div className="view"><i className="fa fa-eye" /> {trending.nation}</div>
               </div>
-            ))}
+              <div className="product__item__text">
+                <ul>
+                  <li>Active</li>
+                  <li>Movie</li>
+                </ul>
+                <NavLink to={`/movie-details/${trending.id}`}><h5><a href="#">{trending.name_movie}</a></h5></NavLink>
+              </div>
+            </div>
+          </div>
+      ))}
+         
+          
         </div>
-      </div>
-    </div>
+</div>
   );
 };
 

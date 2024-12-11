@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('vouchers', function (Blueprint $table) {
             // Xóa cột cũ và thêm lại cột mới với kiểu enum
-            $table->dropColumn('is_active');
+            $table->dropColumn('status');
         });
 
         Schema::table('vouchers', function (Blueprint $table) {
