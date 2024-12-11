@@ -90,7 +90,7 @@ const MovieList: React.FC<Props> = ({
                 <td className="p-3 border-b">{movie.name_category}</td>
                 <td className="p-3 border-b flex items-center justify-center gap-2">
                   <NavLink
-                    to={`/admin/dashboard/edit/${movie.id}`}
+                    to={`/admin/movie/edit/${movie.id}`}
                     className="px-3 py-1 text-sm font-medium bg-yellow-400 text-white rounded hover:bg-yellow-500"
                   >
                     EDIT

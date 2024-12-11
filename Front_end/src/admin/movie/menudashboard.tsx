@@ -6,7 +6,7 @@ const MenuDashboard = () => {
     <div>
       <div className="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
       <ul className="flex flex-col">
-          <li className="nav-item">
+      <li className="nav-item">
             <NavLink
               to="/admin/dashboard"
               className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
@@ -19,7 +19,18 @@ const MenuDashboard = () => {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/room"
+              to="/admin/movie"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
+            >
+              <svg className="w-3 h-0">
+                <use xlinkHref="#house-fill" />
+              </svg>
+              Danh sách phim
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              to="/admin/room"
               className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
             >
               <svg className="w-3 h-0">

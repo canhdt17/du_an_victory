@@ -113,7 +113,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
   };
 
   return (
-    <div className="dashboard">
+    <div className="movie">
       <Logo />
       <HeaderDashboard />
       <div className="container-fluid">

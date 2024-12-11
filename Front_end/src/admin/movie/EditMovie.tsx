@@ -69,7 +69,7 @@ const EditMovie: React.FC<Props> = ({ onEditMovie }) => {
     onEditMovie(id!, data);
   };
   return (
-    <div className="dashboard">
+    <div className="movie">
       <Logo />
       <HeaderDashboard />
       <div className="container-fluid">

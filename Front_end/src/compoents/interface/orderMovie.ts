@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ICimena {
+  _id: any;
   id: number;
   areaId: number;
   name: string;
@@ -11,9 +12,9 @@ export interface IBase {
 }
 export interface ITime {
   id: number;
-  showTimeDate: string;
-  startTime: string;
-  endTime: string;
+  showtime_date: string;
+  start_time: string;
+  end_time: string;
 }
 export interface IRoom {
   id?: number | string;
@@ -25,14 +26,13 @@ export interface ISeat {
   seatInfo: any;
   seatType: any;
   status: any;
-  id?: number | string,
-  seat_number: number | string,
-  seat_type_id: number | string,
-  room_id: number | string,
-  seat_status: string,
-  deleted_at: null,
-  created_at: null,
-  updated_at: null,
+  id?: number | string;
+  seat_number: number | string;
+  seat_type_id: number | string;
+  room_id: number | string;
+  deleted_at: null;
+  created_at: null;
+  updated_at: null;
 }
 
 export interface ISeatInfo {
@@ -41,13 +41,14 @@ export interface ISeatInfo {
   seatNumber: number;
   roomId: number;
 }
-export interface ISeatType{
+export interface ISeatType {
   name_type: string;
-  id?:number|string,
-  seat_type_name:string,
-  seat_price:number,
+  id?: number | string;
+  seat_type_name: string;
+  seat_price: number;
 }
 export interface IMovie {
+  category: ICategory;
   id: string | number;
   name_movie: string;
   image: string;
@@ -64,9 +65,16 @@ export interface IMovie {
   name_category: string;
 }
 export interface IOrderInfoStorage {
-    selectedSeats:ISeat[],
-    selectedCimena: ICimena,
-    selectedRoom: IRoom,
-    movieDetail: IMovie,
-    totalPrice: number
+  selectedSeats: ISeat[];
+  selectedCimena: ICimena;
+  selectedRoom: IRoom;
+  movieDetail: IMovie;
+  totalPrice: number;
+}
+export interface ICategory {
+  created_at: string;
+  deleted_at: string;
+  id: number;
+  name_category: string;
+  updated_at: string;
 }

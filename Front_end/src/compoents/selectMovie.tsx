@@ -1,25 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Alert, FormSelect } from "react-bootstrap";
 import "./selectMovie.css";
-import {
-  ChangeEvent,
-  useEffect,
-  useState,
-} from "react";
-import constants from "../utils/constants";
-import {
-  IBase,
-  IRoom,
-  ITime,
-  IMovie,
-} from "./interface/orderMovie";
+import { ChangeEvent, useEffect, useState } from "react";
+import { IBase, IRoom, ITime, IMovie } from "./interface/orderMovie";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../axios/config";
+import { ISeat } from "../interface/seat";
+import constants from "../utils/constants";
 
 const SelectMovie = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // `id` này là ID của movie
+  const { id } = useParams();
 
   // States
   const [movieDetail, setMovieDetail] = useState<IMovie | null>(null);
@@ -33,6 +26,7 @@ const SelectMovie = () => {
   const [selectedRoom, setSelectedRoom] = useState<IRoom | null>(null);
 
   const [showNotifySelectRoom, setShowNotifySelectRoom] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Fetch movie details
   useEffect(() => {
@@ -62,13 +56,11 @@ const SelectMovie = () => {
     fetchBases();
   }, []);
 
-  // Fetch dates when a base is selected
   const handleChangeBase = async (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedBaseId = event.target.value;
     const base = bases.find((e) => e.id.toString() === selectedBaseId);
     setSelectedBase(base || null);
 
-    // Reset dates and rooms
     setSelectedDate(null);
     setSelectedRoom(null);
     setDates([]);
@@ -76,8 +68,12 @@ const SelectMovie = () => {
 
     if (base) {
       try {
-        const { data } = await api.get<string[]>(`bases/${base.id}/dates`);
-        setDates(data || []);
+        // Gọi API lấy ngày chiếu
+        const { data } = await api.get<{ showtime_date: string }[]>(
+          `/getDateShowtime/${id}/bases/${id}/dates`
+        );
+        const formattedDates = data.map((item) => item.showtime_date);
+        setDates(formattedDates || []);
       } catch (error) {
         console.error("Error fetching dates:", error);
         setDates([]);
@@ -85,40 +81,98 @@ const SelectMovie = () => {
     }
   };
 
-  // Fetch rooms when a date is selected
+  const [times, setTimes] = useState<ITime[]>([]);
+  const [selectedTime, setSelectedTime] = useState<ITime | null>(null);
+
   const handleChangeDate = async (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedDateValue = event.target.value;
     setSelectedDate(selectedDateValue || null);
 
-    // Reset rooms
+    setSelectedTime(null);
     setSelectedRoom(null);
     setRooms([]);
+    setTimes([]);
 
     if (selectedDateValue) {
       try {
-        const { data } = await api.get<IRoom[]>(
-          `dates/${selectedDateValue}/rooms`
+        const { data } = await api.get<ITime[]>(
+          `/getTimeShowtime/${id}/bases/${selectedBase?.id}/dates/${selectedDateValue}/times`
         );
-        setRooms(data || []);
+        console.log("Fetched times:", data);
+        setTimes(data || []);
       } catch (error) {
-        console.error("Error fetching rooms:", error);
-        setRooms([]);
+        console.error("Error fetching times:", error);
+        setTimes([]);
       }
     }
   };
 
-  const handlePayment = () => {
-    if (!selectedRoom) {
-      setShowNotifySelectRoom(true);
+  const [seats, setSeats] = useState<any[]>([]);
+  const handleChangeTime = async (event: ChangeEvent<HTMLSelectElement>) => {
+    const selectedTimeId = event.target.value;
+    const time = times.find((t) => t.start_time === selectedTimeId);
+    setSelectedTime(time || null);
+
+    if (!time) {
+      console.error("Giờ chiếu không hợp lệ.");
       return;
     }
+    setSeats([]);
+    try {
+      const { data } = await api.get<ISeat[]>(
+        `/getSeatShowtime/${id}/bases/${selectedBase?.id}/dates/${selectedDate}/times/${selectedTimeId}/seats`
+      );
+      // console.log("Fetched seat data:", data);
+
+      setSeats(data || []);
+    } catch (error) {
+      console.error("Error fetching seats:", error);
+      setSeats([]);
+    }
+  };
+
+  const [selectedSeats, setSelectedSeats] = useState<ISeat[]>([]);
+
+  const handleSeatClick = (seat: ISeat) => {
+    if (seat.seat_status === "Đã đặt") {
+      console.error("Ghế đã được đặt, không thể chọn.");
+      return;
+    }
+
+    setSelectedSeats((prevSeats) => {
+      // Nếu ghế đã được chọn, bỏ chọn ghế
+      if (prevSeats.some((s) => s.seat_number === seat.seat_number)) {
+        return prevSeats.filter((s) => s.seat_number !== seat.seat_number);
+      }
+
+      // Thêm ghế vào danh sách đã chọn
+      return [...prevSeats, seat];
+    });
+  };
+
+  const handlePayment = () => {
+    if (
+      !selectedBase ||
+      !selectedDate ||
+      !selectedTime ||
+      selectedSeats.length === 0
+    ) {
+      console.error("Vui lòng chọn đủ thông tin trước khi đặt vé.");
+      return;
+    }
+
     const paymentData = {
-      selectedBase,
-      selectedDate,
-      selectedRoom,
-      movieDetail,
+      base: selectedBase,
+      date: selectedDate,
+      time: selectedTime,
+      movie: movieDetail,
+      seats: selectedSeats,
     };
+
+    // Lưu dữ liệu vào localStorage
     localStorage.setItem(constants.orderInfoKey, JSON.stringify(paymentData));
+
+    // Chuyển sang trang thanh toán
     navigate("/payment");
   };
 
@@ -141,7 +195,7 @@ const SelectMovie = () => {
             {movieDetail?.name_movie}
           </div>
           <div className="movie-duration">
-            Thể loại: {movieDetail?.name_category}
+            Thể loại: {movieDetail?.category?.name_category}
           </div>
           <div className="movie-duration">
             Thời lượng: {movieDetail?.duration}
@@ -207,7 +261,77 @@ const SelectMovie = () => {
           </FormSelect>
         </div>
 
-        {/* Chọn phòng */}
+        <div className="time-list w-64 mb-4">
+          <label className="w-full font-semibold text-lg text-white">
+            Chọn giờ chiếu:
+          </label>
+          <FormSelect
+            defaultValue={undefined}
+            value={selectedTime?.id?.toString() || undefined}
+            className="text-black"
+            onChange={handleChangeTime}
+            disabled={!selectedDate || times.length === 0}
+          >
+            <option className="text-black" value={undefined}>
+              Chọn giờ
+            </option>
+            {times.map((time, index) => (
+              <option key={time.start_time || index} value={time.start_time}>
+                {time.start_time}
+              </option>
+            ))}
+          </FormSelect>
+        </div>
+
+        {/* Hiển thị ghế */}
+        <div className="seat-selection-container max-w-[1200px] mx-auto">
+          <div className="seat-selection-container max-w-[1200px] mx-auto">
+            <div className="screen-area w-3/4 mx-auto bg-gray-700 text-white text-center py-3 mb-6">
+              MÀN HÌNH
+            </div>
+
+            <div className="seat-grid grid grid-cols-16 gap-2 mt-2 max-w-[1000px] mx-auto">
+              {seats.map((seat: ISeat, index: number) => (
+                <div
+                  key={index}
+                  className={`seat-item p-1 text-center rounded text-xs
+                  ${seat.seat_status === "Đã đặt" ? "bg-red-500" : ""}
+                  ${
+                    selectedSeats.some(
+                      (s) => s.seat_number === seat.seat_number
+                    )
+                      ? "bg-blue-500"
+                      : "bg-green-500"
+                  }
+                  ${seat.seat_type_id === 1 ? "vip-seat" : "seat-normal"}`}
+                  onClick={() => handleSeatClick(seat)}
+                >
+                  <span className="seat-number">{seat.seat_number}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="seat-legend flex justify-center gap-4 mt-4">
+              <div className="seat-legend-item flex items-center gap-2">
+                <div className="w-4 h-4 bg-green-500"></div>
+                <span className="text-sm">Ghế trống</span>
+              </div>
+              <div className="seat-legend-item flex items-center gap-2">
+                <div className="w-4 h-4 bg-red-500"></div>
+                <span className="text-sm">Ghế đã đặt</span>
+              </div>
+              <div className="seat-legend-item flex items-center gap-2">
+                <div className="w-4 h-4 bg-blue-500"></div>
+                <span className="text-sm">Ghế đang chọn</span>
+              </div>
+              <div className="seat-legend-item flex items-center gap-2">
+                <div className="w-4 h-4 bg-orange-500"></div>
+                <span className="text-sm">Ghế VIP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Chọn phòng
         <div className="room-list w-64 mb-4">
           <label className="w-full font-semibold text-lg text-white">
             Chọn phòng chiếu:
@@ -218,7 +342,7 @@ const SelectMovie = () => {
             className="text-black"
             onChange={(e) =>
               setSelectedRoom(
-                rooms.find((room) => room.id.toString() === e.target.value) ||
+                rooms.find((room) => room.id?.toString() === e.target.value) ||
                   null
               )
             }
@@ -229,16 +353,16 @@ const SelectMovie = () => {
             </option>
             {rooms.map((room) => (
               <option key={room.id} value={room.id}>
-                {room.roomName}
+                {room.room_name}
               </option>
             ))}
           </FormSelect>
-        </div>
+        </div> */}
 
         {/* Hiển thị thông báo */}
-        <Alert show={showNotifySelectRoom} key={"warning"} variant={"warning"}>
+        {/* <Alert show={showNotifySelectRoom} key={"warning"} variant={"warning"}>
           Bạn chưa chọn phòng chiếu
-        </Alert>
+        </Alert> */}
 
         {/* Nút đặt vé */}
         <div className="text-center mt-10">

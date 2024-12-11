@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { ITrendings } from "../interface/trendings";
 import axios from "axios";
+import "./trending.css";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const Trending = () => {
@@ -31,7 +32,13 @@ const Trending = () => {
             <div className="col-lg-4 col-md-6 col-sm-6" key={trending.id}>
               <div className="product__item">
                 <div className="product__item__pic set-bg">
-                  <img src={trending.image}></img>
+                  <NavLink to={`/select-movie/${trending.id}`}>
+                    <img
+                      className="img-hover"
+                      src={trending.image}
+                      alt={trending.name_movie}
+                    />
+                  </NavLink>
                   <div className="ep">{trending.type_id}</div>
                   <div className="comment">
                     <i className="fa fa-comments" /> {trending.duration}
@@ -40,6 +47,7 @@ const Trending = () => {
                     <i className="fa fa-eye" /> {trending.nation}
                   </div>
                 </div>
+
                 <div className="product__item__text">
                   <ul>
                     <li>Active</li>

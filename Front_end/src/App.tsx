@@ -51,7 +51,7 @@ import Seat from "./admin/seat/seat";
 import { IMovie } from "./interface/movie";
 import { MovieAdd, MovieUpdate } from "./service/movie";
 import UpdateShowtime from "./admin/showtime/updateshowtime";
-import Dashboard from "./admin/movie/dashboard";
+
 import AddMovie from "./admin/movie/Addmovie";
 import EditMovie from "./admin/movie/EditMovie";
 
@@ -62,8 +62,8 @@ import Product from "./compoents/product";
 import SelectMovie from "./compoents/selectMovie";
 import Payment from "./compoents/payment";
 
-import User from "./client/user/user";
-import Showtimes from "./compoents/showtimes/showtimes";
+// import User from "./client/user/user";
+// import Showtimes from "./compoents/showtimes/showtimes";
 
 import LoginPage from "./client/auth/login";
 
@@ -75,9 +75,9 @@ import { IBase } from "./interface/base";
 import Base from "./admin/base/base";
 import BaseAdd from "./admin/base/addbase";
 import UpdateBase from "./admin/base/updatearea";
-import MovieDetail from "./compoents/moviedetail/moviedetail";
 import NewsDetails from "./compoents/detail-news/detail-news";
-
+import Movie from "./admin/movie/movie";
+import Dashboard from "./admin/movie/dashboard";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -99,7 +99,7 @@ function App() {
       const movie = await MovieAdd(movieData);
       alert("Thêm phim thành công.");
       setMovies([...movies, movie]);
-      navigate("/admin/dashboard");
+      navigate("/admin/movie");
     } catch (error) {
       console.log(error);
       alert("Lỗi khi thêm phim.");
@@ -114,7 +114,7 @@ function App() {
         movie.id == id ? movieDta : movie
       );
       setMovies(newMovies);
-      navigate("/admin/dashboard");
+      navigate("/admin/movie");
     } catch (error) {
       console.log(error);
       alert("Lỗi khi cập nhật phim.");
@@ -422,23 +422,27 @@ function App() {
           path="/admin/dashboard"
           element={<Dashboard></Dashboard>}
         ></Route>
+         <Route
+          path="/admin/movie"
+          element={<Movie></Movie>}
+        ></Route>
         <Route
-          path="/admin/dashboard/addmovie"
+          path="/admin/movie/addmovie"
           element={<AddMovie onAddMovie={addMovie}></AddMovie>}
         ></Route>
         <Route
-          path="/admin/dashboard/edit/:id"
+          path="/admin/movie/edit/:id"
           element={<EditMovie onEditMovie={editMovie}></EditMovie>}
         ></Route>
 
-        {/* chi tiet phim */}
+        {/* chi tiet phim
         <Route
           path="/moviedetail"
           element={<MovieDetail></MovieDetail>}
-        ></Route>
+        ></Route> */}
 
         {/* phong */}
-        <Route path="/room" element={<Room></Room>}></Route>
+        <Route path="/admin/room" element={<Room></Room>}></Route>
         <Route
           path="/admin/room/createroom"
           element={<CreateRoom onAdd={addRoom}></CreateRoom>}

@@ -23,6 +23,8 @@ const ListRooms: React.FC<Props> = ({ rooms, loading, error, deleteRooms }) => {
               <th scope="col">Room Name</th>
               <th scope="col">Area</th>
               <th scope="col">Total Seat</th>
+              <th scope="col">Base Name</th>
+              <th scope="col">Total Seat</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>

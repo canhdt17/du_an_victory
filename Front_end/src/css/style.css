@@ -557,9 +557,9 @@ ol {
 	position: relative;
 	border-radius: 5px;
 }
-.product__item__pic img{
+/* .product__item__pic img{
 	height: 320px;
-}
+} */
 .product__item__pic .ep {
 	font-size: 13px;
 	color: #ffffff;
