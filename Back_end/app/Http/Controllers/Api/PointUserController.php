@@ -65,8 +65,13 @@ class PointUserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $pointUser = PointUser::findOrFail($id);
-
+        // $pointUser = PointUser::findOrFail($id);
+        $pointUser = PointUser::where('user_id', $id)
+        ->whereNull('deleted_at')
+        ->first();
+        if (!$pointUser) {
+            return response()->json(['error' => 'Khong tim thay'], 404);
+        }
         $validated = $request->validate([
             'user_id' => 'required',
             'point_user' => 'required',
