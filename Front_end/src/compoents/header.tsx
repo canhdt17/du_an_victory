@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { IUser } from "../interface/User";
 
 
 const Header = () => {
@@ -20,7 +21,7 @@ const Header = () => {
           },
         });
   
-        // Kiểm tra phản hồi từ server
+ 
         if (response.ok) {
           console.log("Đăng xuất thành công từ server!");
         } else {
@@ -40,7 +41,46 @@ const Header = () => {
     window.location.href = "/login";
   };
 
- 
+  const [user, setUser] = useState<IUser>();
+  const fetchUser = async () => {
+    const token = localStorage.getItem("token"); // Lấy token từ localStorage
+  
+    if (!token) {
+      console.error("Không tìm thấy token");
+      return null;
+    }
+  
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/user", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Gửi token qua header Authorization
+        },
+      });
+  
+      if (response.ok) {
+        const user = await response.json();
+        return user; // Trả về thông tin người dùng
+      } else {
+        console.error("Lỗi khi lấy thông tin người dùng");
+        return null;
+      }
+    } catch (error) {
+      console.error("Lỗi kết nối tới server:", error);
+      return null;
+    }
+  };
+  
+  useEffect(() => {
+    const loadUser = async () => {
+      const fetchedUser = await fetchUser(); // Gọi hàm fetchUser
+      setUser(fetchedUser); // Cập nhật state
+    };
+
+    loadUser();
+  }, []);
+
   return (
     <div>
 
@@ -80,11 +120,16 @@ const Header = () => {
           Admin
         </NavLink>
       </nav>
-        <img
+       <div className="flex mt-2"> <img
               src={avatar || "https://via.placeholder.com/40"}
               alt="Avatar"
               style={{ width: "40px", height: "40px", borderRadius: "50%", marginRight: "10px" }}
             />
+             <div>
+     {/* <NavLink to={`/userprofile`}><p className="mt-2 font-serif">{user.fullname}</p></NavLink> */}
+     
+     </div>
+    </div>
             <button onClick={handleLogout} >Đăng xuất</button>
       <div>
     
@@ -122,13 +167,13 @@ const Header = () => {
         </NavLink>
       </nav>
             <div className="space-x-4">
-            {/* Đăng ký Button */}
+          
            
               <button  onClick={() => navigate("/register")} className="px-6 py-2 border-2 border-white text-white rounded-full hover:bg-white hover:text-gray-900 transition-all">
                 Đăng ký
               </button>
         
-            {/* Đăng nhập Button */}
+          
            
             <button
             onClick={() => navigate("/login")}
