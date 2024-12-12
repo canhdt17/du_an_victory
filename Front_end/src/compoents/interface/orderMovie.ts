@@ -48,6 +48,7 @@ export interface ISeatType {
   seat_price: number;
 }
 export interface IMovie {
+  typemovie : ITypeMovie;
   category: ICategory;
   id: string | number;
   name_movie: string;
@@ -77,4 +78,11 @@ export interface ICategory {
   id: number;
   name_category: string;
   updated_at: string;
+}
+export interface ITypeMovie {
+  id: number | string;
+  name_type: string;
+  deleted_at: null;
+  created_at: null;
+  updated_at: null;
 }

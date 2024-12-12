@@ -8,24 +8,19 @@ import UpdateCategoryMovie from "./admin/category movie/updatecategorymovie";
 import SeatType from "./admin/seat_type/SeatTypes";
 import CreateSeatType from "./admin/seat_type/AddSeatTypes";
 import UpdateSeatType from "./admin/seat_type/UpdateSeatTypes";
-// khuyen mai route
 import KhuyenMai from "./admin/khuyen_mai/KhuyenMais";
 import CreateKhuyenMai from "./admin/khuyen_mai/AddKhuyenMais";
-import UpdateKhuyenMai from "./admin/khuyen_mai/UpdateKhuyenMais";
-import { Addkhuyen_mai, Updatekhuyen_mai } from "./service/khuyen_mai";
-// tin tuc
+import { Addkhuyen_mai } from "./service/khuyen_mai";
 import TinTuc from "./admin/tin_tuc/TinTucs";
 import CreateTinTuc from "./admin/tin_tuc/AddTinTucs";
 // // import UpdateKhuyenMai from "./admin/khuyen_mai/UpdateKhuyenMais";
-import { Addtin_tuc, Updatetin_tuc } from "./service/tin_tuc";
-
+import { Addtin_tuc } from "./service/tin_tuc";
 import ShowTime from "./admin/showtime/showtime";
 import CrateShowTime from "./admin/showtime/createshowtime";
 import UserList from "./admin/user/UserList";
 import CreateUser from "./admin/user/CreatUser";
 import EditUser from "./admin/user/EditUser";
 import Register from "./client/auth/register";
-
 import Profile from "./client/profile/profile";
 import { IRoom } from "./interface/room";
 import { AddRoom, ListRoom } from "./service/room";
@@ -51,22 +46,17 @@ import Seat from "./admin/seat/seat";
 import { IMovie } from "./interface/movie";
 import { MovieAdd, MovieUpdate } from "./service/movie";
 import UpdateShowtime from "./admin/showtime/updateshowtime";
-
 import AddMovie from "./admin/movie/Addmovie";
 import EditMovie from "./admin/movie/EditMovie";
-
 import News from "./compoents/detail-news/news";
 import Promotions from "./compoents/promotions/promotions";
 import DetailPromotions from "./compoents/promotions/detail-promotions";
 import Product from "./compoents/product";
 import SelectMovie from "./compoents/selectMovie";
 import Payment from "./compoents/payment";
-
 // import User from "./client/user/user";
 // import Showtimes from "./compoents/showtimes/showtimes";
-
 import LoginPage from "./client/auth/login";
-
 import Type from "./admin/type movie/typemovie";
 import AddTypeMovie from "./admin/type movie/addtypemovie";
 import UpdateTypeMovie from "./admin/type movie/updatetypemovie";
@@ -90,7 +80,6 @@ function App() {
   const [types, setTypes] = useState<ITypeMovie[]>([]);
   const [khuyenmais, setKhuyenMais] = useState<IKhuyenMai[]>([]);
   const [tintucs, setTinTucs] = useState<ITinTuc[]>([]);
-
   const navigate = useNavigate();
 
   //Danh muc phim
@@ -135,7 +124,7 @@ function App() {
       const room = await AddRoom(roomData);
       alert("Thêm phòng thành công.");
       setRooms([...rooms, room]);
-      navigate("/room");
+      navigate("/admin/room");
     } catch (error) {
       console.log(error);
     }
@@ -147,7 +136,7 @@ function App() {
       alert("Cập nhật thành công.");
       const newRooms = rooms.map((room) => (room.id === id ? roomDta : room));
       setRooms(newRooms);
-      navigate("/room");
+      navigate("/admin/room");
     } catch (error) {
       console.log(error);
     }
@@ -171,7 +160,7 @@ function App() {
       alert("Cập nhật thành công.");
       const newBases = bases.map((base) => (base.id === id ? baseDta : base));
       setBases(newBases);
-      navigate("/admin/area");
+      navigate("/admin/base");
     } catch (error) {
       console.log(error);
     }
@@ -422,10 +411,7 @@ function App() {
           path="/admin/dashboard"
           element={<Dashboard></Dashboard>}
         ></Route>
-         <Route
-          path="/admin/movie"
-          element={<Movie></Movie>}
-        ></Route>
+        <Route path="/admin/movie" element={<Movie></Movie>}></Route>
         <Route
           path="/admin/movie/addmovie"
           element={<AddMovie onAddMovie={addMovie}></AddMovie>}
@@ -459,7 +445,7 @@ function App() {
           element={<BaseAdd addBase={addBase}></BaseAdd>}
         ></Route>
         <Route
-          path="/admin/area/edit/:id"
+          path="/admin/base/edit/:id"
           element={<UpdateBase updateBase={updateBase}></UpdateBase>}
         ></Route>
 

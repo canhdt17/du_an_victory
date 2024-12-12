@@ -33,6 +33,7 @@ const SelectMovie = () => {
     const fetchMovieDetail = async () => {
       try {
         const { data } = await api.get<{ movie: IMovie }>(`movies/${id}`);
+        console.log("Movie detail:", data.movie); // Kiểm tra log này
         setMovieDetail(data.movie);
       } catch (error) {
         console.error("Error fetching movie details:", error);
@@ -98,7 +99,7 @@ const SelectMovie = () => {
         const { data } = await api.get<ITime[]>(
           `/getTimeShowtime/${id}/bases/${selectedBase?.id}/dates/${selectedDateValue}/times`
         );
-        console.log("Fetched times:", data);
+        // console.log("Fetched times:", data);
         setTimes(data || []);
       } catch (error) {
         console.error("Error fetching times:", error);
@@ -140,12 +141,9 @@ const SelectMovie = () => {
     }
 
     setSelectedSeats((prevSeats) => {
-      // Nếu ghế đã được chọn, bỏ chọn ghế
       if (prevSeats.some((s) => s.seat_number === seat.seat_number)) {
         return prevSeats.filter((s) => s.seat_number !== seat.seat_number);
       }
-
-      // Thêm ghế vào danh sách đã chọn
       return [...prevSeats, seat];
     });
   };
@@ -196,6 +194,9 @@ const SelectMovie = () => {
           </div>
           <div className="movie-duration">
             Thể loại: {movieDetail?.category?.name_category}
+          </div>
+          <div className="movie-duration">
+            Định dạng: {movieDetail?.typemovie?.name_type}
           </div>
           <div className="movie-duration">
             Thời lượng: {movieDetail?.duration}
@@ -294,16 +295,18 @@ const SelectMovie = () => {
               {seats.map((seat: ISeat, index: number) => (
                 <div
                   key={index}
-                  className={`seat-item p-1 text-center rounded text-xs
-                  ${seat.seat_status === "Đã đặt" ? "bg-red-500" : ""}
-                  ${
-                    selectedSeats.some(
-                      (s) => s.seat_number === seat.seat_number
-                    )
-                      ? "bg-blue-500"
-                      : "bg-green-500"
-                  }
-                  ${seat.seat_type_id === 1 ? "vip-seat" : "seat-normal"}`}
+                  className={`seat-item p-1 text-center rounded text-xs 
+                ${
+                  seat.seat_status === "Đã đặt"
+                    ? "bg-red-500 cursor-not-allowed"
+                    : ""
+                }
+                ${
+                  selectedSeats.some((s) => s.seat_number === seat.seat_number)
+                    ? "bg-blue-500"
+                    : "bg-green-500"
+                }
+                ${seat.seat_type_id === 1 ? "vip-seat" : "seat-normal"}`}
                   onClick={() => handleSeatClick(seat)}
                 >
                   <span className="seat-number">{seat.seat_number}</span>

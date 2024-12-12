@@ -21,22 +21,20 @@ const ListRooms: React.FC<Props> = ({ rooms, loading, error, deleteRooms }) => {
             <tr className="text-center">
               <th scope="col">STT</th>
               <th scope="col">Room Name</th>
-              <th scope="col">Area</th>
-              <th scope="col">Total Seat</th>
               <th scope="col">Base Name</th>
-              <th scope="col">Total Seat</th>
+              <th scope="col">Seat Count</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody className="text-center">
           {loading && (
               <tr>
-                <td colSpan={3}>Đang tải...</td>
+                <td colSpan={5}>Đang tải...</td>
               </tr>
             )}
             {error && (
               <tr>
-                <td colSpan={3}>Lỗi: {error}</td>
+                <td colSpan={5}>Lỗi: {error}</td>
               </tr>
             )}
             {rooms.length > 0 ? (
@@ -44,8 +42,8 @@ const ListRooms: React.FC<Props> = ({ rooms, loading, error, deleteRooms }) => {
               <tr key={room.id}>
                 <td>{index + 1}</td>
                 <td>{room.room_name}</td>
-                <td>{room.area_id}</td>
-                <td>{room.total_seat}</td>
+                <td>{room.base_name}</td>
+                <td>{room.seat_count}</td>
                 <td>
                 <div className="action-buttons">
                   <NavLink to={`/admin/room/edit/${room.id}`}>
@@ -66,7 +64,7 @@ const ListRooms: React.FC<Props> = ({ rooms, loading, error, deleteRooms }) => {
             ))
           ): (
               <tr>
-                <td colSpan={3}>Không có dữ liệu</td>
+                <td colSpan={5}>Không có dữ liệu</td>
               </tr>
             )}
           </tbody>
