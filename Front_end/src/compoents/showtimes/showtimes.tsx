@@ -18,9 +18,8 @@ const Showtimes = () => {
     (async () => {
       try {
         const { data } = await axios.get(`http://127.0.0.1:8000/api/showtimes`);
-      
+        console.log(data)
         setTimes(data.data);
-        
       } catch (error) {
         console.log(error);
       }
