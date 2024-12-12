@@ -16,12 +16,7 @@ const LoginPage = () => {
         password,
       });
       console.log(response)
-      //resopnse
-      // response ={
-      //   data:{
-      //     access_token:"ffgasdfg"
-      //   }
-      // }
+
       if(response.data.access_token){
         localStorage.setItem("token", response.data.access_token);
         console.log("Đăng nhập thành công:", response.data);

@@ -21,6 +21,7 @@ import UserList from "./admin/user/UserList";
 import CreateUser from "./admin/user/CreatUser";
 import EditUser from "./admin/user/EditUser";
 import Register from "./client/auth/register";
+
 import Profile from "./client/profile/profile";
 import { IRoom } from "./interface/room";
 import { AddRoom, ListRoom } from "./service/room";
@@ -66,8 +67,6 @@ import Base from "./admin/base/base";
 import BaseAdd from "./admin/base/addbase";
 import UpdateBase from "./admin/base/updatearea";
 import NewsDetails from "./compoents/detail-news/detail-news";
-import Movie from "./admin/movie/movie";
-import Dashboard from "./admin/movie/dashboard";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -577,6 +576,10 @@ function App() {
           path="/promotions/:id"
           element={<DetailPromotions></DetailPromotions>}
         ></Route>
+        <Route path="/categoryfilms" element={<CategoryFilms></CategoryFilms>}></Route>
+        <Route path="/categoryfilms/:id" element={<CategoryFilms></CategoryFilms>}></Route>
+        <Route path="/showtimes" element={<Showtimes></Showtimes>}></Route>
+        <Route path="/userprofile" element={<UserProfile></UserProfile>}></Route>
       </Routes>
     </>
   );
