@@ -20,7 +20,7 @@ const LoginPage = () => {
       if(response.data.access_token){
         localStorage.setItem("token", response.data.access_token);
         console.log("Đăng nhập thành công:", response.data);
-        navigate("/"); 
+        navigate("/userprofile"); 
       }else{
         console.log("Đăng nhập thất bại")
       };

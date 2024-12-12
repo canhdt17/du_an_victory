@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../compoents/header";
 import Footer from "../../compoents/footer";
+import { IUser } from "../../interface/User";
 
 const UserProfile = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<IUser>();
   const fetchUser = async () => {
     const token = localStorage.getItem("token"); // Lấy token từ localStorage
   
