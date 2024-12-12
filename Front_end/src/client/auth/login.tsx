@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom"; 
+import { toast } from "react-toastify";
 
 
 
@@ -19,15 +20,17 @@ const LoginPage = () => {
 
       if(response.data.access_token){
         localStorage.setItem("token", response.data.access_token);
-        console.log("Đăng nhập thành công:", response.data);
-        navigate("/userprofile"); 
+        console.log( response.data);
+        toast.success("Đăng Nhập Thành Công.")
+        navigate("/"); 
       }else{
-        console.log("Đăng nhập thất bại")
+        toast.success("Đăng Nhập Không Thành Công.")
       };
 
       return response.data;
     } catch (error) {
-      console.error("Lỗi khi đăng nhập:", error);
+      toast.success("Lỗi Đăng Nhập.")
+      console.error( error);
       throw error;
     }
   };
@@ -45,10 +48,11 @@ const LoginPage = () => {
       if (token) {
         //navigate("/"); 
       } else {
-        console.error("Token không tồn tại.");
+        toast.success("Người Dùng Không Tồn Tại.")
+       
       }
     } catch (error) {
-      console.error("Đăng nhập thất bại.");
+      toast.success("Đăng nhập thất bại.");
     }
   };
 

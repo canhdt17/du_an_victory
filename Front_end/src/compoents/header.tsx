@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IUser } from "../interface/User";
+import { toast } from "react-toastify";
 
 
 const Header = () => {
@@ -36,9 +37,9 @@ const Header = () => {
     localStorage.removeItem("token");
   
 
-    alert("Bạn đã đăng xuất!");
+    alert("Bạn đã đăng xuất!")
   
-    window.location.href = "/login";
+    window.location.href = "/";
   };
 
   const [user, setUser] = useState<IUser>();
@@ -120,13 +121,14 @@ const Header = () => {
           Admin
         </NavLink>
       </nav>
-       <div className="flex mt-2"> <img
-              src={avatar || "https://via.placeholder.com/40"}
+       <div className="flex mt-2"> <Link to={`/userprofile`}>
+       <img
+              src="/src/img/avatar.png"
               alt="Avatar"
               style={{ width: "40px", height: "40px", borderRadius: "50%", marginRight: "10px" }}
-            />
+            /></Link>
              <div>
-     {/* <NavLink to={`/userprofile`}><p className="mt-2 font-serif">{user.fullname}</p></NavLink> */}
+    
      
      </div>
     </div>

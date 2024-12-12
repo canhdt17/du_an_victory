@@ -56,7 +56,7 @@ class InvoiceController extends Controller
             $invoice = Invoice::create([
                 'total_price' => $totalPrice,
                 'showtime_id' => $data['showtime_id'],
-                'user_id' => 1,
+                'user_id' => $data['user_id'],
                 'combofood_id' => $request->combofood_id,
                 'voucher_id' => $request->voucher_id,
                 'time_date' => now(), // Thêm giá trị cho cột `time_date`
@@ -178,29 +178,41 @@ class InvoiceController extends Controller
     {
         //
     }
-    public function dailyRevenue()
+    public function dailyRevenue(Request $request)
     {
-           // Lấy tham số ngày bắt đầu và kết thúc
-           $startDate = '2024-12-01';
-           $endDate = '2024-12-30';
+        try{
+        $startDate = $request->input('start_date', now()->startOfMonth()->toDateString());
+        $endDate = $request->input('end_date', now()->toDateString());
    
-   // Truy vấn tổng doanh thu theo ngày
-   $revenues = Invoice::select(
-    DB::raw('DATE(time_date) as revenue_date'),
-    DB::raw('SUM(total_price) as total_revenue')
-)
-    ->whereBetween(DB::raw('DATE(time_date)'), [$startDate, $endDate]) // Đảm bảo so sánh đúng định dạng ngày
-    ->groupBy('revenue_date')
-    ->orderBy('revenue_date', 'asc')
-    ->get();
+        // Truy vấn tổng doanh thu theo ngày
+        $revenues = Invoice::select(
+            DB::raw('DATE(time_date) as revenue_date'),
+            DB::raw('SUM(total_price) as total_revenue')
+        )
+            ->whereBetween(DB::raw('DATE(time_date)'), [$startDate, $endDate]) // Đảm bảo so sánh đúng định dạng ngày
+            ->groupBy('revenue_date')
+            ->orderBy('revenue_date', 'asc')
+            ->get();
 
-// Xử lý trường hợp không có dữ liệu
+        // Xử lý trường hợp không có dữ liệu
 
-
-// Trả về kết quả thành công
-return response()->json([
- $revenues
-]);
+        if ($revenues->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No revenue data found for the selected date range.',
+                'data' => []
+            ]);
+        }
+        
+        // Trả về kết quả thành công
+        return response()->json([
+            'success' => true,
+            'data' => $revenues
+        ]);
+        } catch (\Exception $e) {
+        DB::rollBack();
+        return response()->json(['error' => $e->getMessage()], 400);
+        }
 
     }
 }

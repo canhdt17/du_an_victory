@@ -594,6 +594,7 @@ function App() {
         <Route path="/categoryfilms" element={<CategoryFilms></CategoryFilms>}></Route>
         <Route path="/categoryfilms/:id" element={<CategoryFilms></CategoryFilms>}></Route>
         <Route path="/showtimes" element={<Showtimes></Showtimes>}></Route>
+        <Route path="/showtimes/:idd" element={<Showtimes></Showtimes>}></Route>
         <Route path="/userprofile" element={<UserProfile></UserProfile>}></Route>
       </Routes>
     </>
