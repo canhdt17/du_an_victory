@@ -48,7 +48,7 @@ export interface ISeatType {
   seat_price: number;
 }
 export interface IMovie {
-  typemovie : ITypeMovie;
+  type : ITypeMovie;
   category: ICategory;
   id: string | number;
   name_movie: string;

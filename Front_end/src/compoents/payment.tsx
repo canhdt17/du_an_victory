@@ -7,14 +7,12 @@ import qrCode from '../assets/qrCode.png'
 const Payment = () => {
   const [paymentInfomation, setPaymentInfomation] =
     useState<IOrderInfoStorage | null>(null);
-
-  // Lấy thông tin thanh toán từ localStorage
   useEffect(() => {
     const infomationLocalStorage = localStorage.getItem(constants.orderInfoKey);
     if (infomationLocalStorage) {
       const infomationData = JSON.parse(infomationLocalStorage);
-
-      // Kiểm tra nếu dữ liệu hợp lệ trước khi cập nhật state
+      console.log("Dữ liệu từ localStorage:", infomationData);
+  
       if (infomationData && infomationData.base && infomationData.date && infomationData.time && infomationData.seats.length > 0) {
         setPaymentInfomation(infomationData);
       } else {
@@ -25,6 +23,7 @@ const Payment = () => {
       setPaymentInfomation(null);
     }
   }, []);
+  
 
   return (
     <div className="payment-container flex gap-10 px-28 py-10">
@@ -55,7 +54,7 @@ const Payment = () => {
             <div className="movie-type">
               <label>Định dạng</label>
               <div className="value">
-                {paymentInfomation?.movie?.name_type || "Không có thông tin định dạng"}
+                {paymentInfomation?.type?.name_type || "Không có thông tin định dạng"}
               </div>
             </div>
             <div className="movie-room">
