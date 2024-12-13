@@ -18,7 +18,7 @@ const Base: React.FC = () => {
   const fetchBases = async () => {
     try {
       const data = await BaseList();
-      setBases(data?.bases || []);
+      setBases(Array.isArray(data) ? data : []);
     } catch (error: any) {
       setError(error.response ? error.response.data.message : error.message);
     } finally {

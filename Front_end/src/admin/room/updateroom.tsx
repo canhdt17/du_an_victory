@@ -20,7 +20,7 @@ type Props = {
 const roomSchema = Joi.object({
   room_name: Joi.string().required().label("Room Name"),
   id: Joi.string().required().label("ID Area"),
-  total_seat: Joi.number().required().label("Total Seat"),
+  seat_count: Joi.number().required().label("Total Seat"),
 });
 
 const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
@@ -36,16 +36,17 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
 
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
-  const [areas, setAreas] = useState<IBase[]>([]);
+  const [bases, setBases] = useState<IBase[]>([]);
 
-  // Fetch areas
+  // Fetch bases
   useEffect(() => {
     (async () => {
       try {
         const data = await BaseList();
-        setAreas(data || []);
+        console.log("Base list fetched:", data); 
+        setBases(data || []);
       } catch (error) {
-        setFetchError("Failed to fetch areas.");
+        setFetchError("Failed to fetch bases.");
       }
     })();
   }, []);
@@ -54,8 +55,13 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const data = await GetRoomById(id!);
-        reset(data);
+        const room = await GetRoomById(id!);
+        console.log("Room data fetched:", room); // Log to check room data
+        reset({
+          room_name: room.room_name,
+          id: room.base_id, // Adjust if API uses a different field
+          seat_count: room.seat_count,
+        });
       } catch (error: any) {
         setFetchError("Failed to fetch room data.");
       } finally {
@@ -125,9 +131,9 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
                       {...register("id")}
                     >
                       <option value="">Chọn Khu Vực</option>
-                      {areas.map((area: IBase) => (
-                        <option key={area.id} value={area.id}>
-                          {area.base_name}
+                      {bases.map((base: IBase) => (
+                        <option key={base.id} value={base.id}>
+                          {base.base_name}
                         </option>
                       ))}
                     </select>
@@ -139,18 +145,18 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="total_seat" className="form-label">
+                    <label htmlFor="seat_count" className="form-label">
                       Số Ghế:
                     </label>
                     <input
                       type="number"
                       className="form-control"
-                      id="total_seat"
-                      {...register("total_seat")}
+                      id="seat_count"
+                      {...register("seat_count")}
                     />
-                    {errors.total_seat && (
+                    {errors.seat_count && (
                       <div className="text-danger">
-                        {errors.total_seat.message}
+                        {errors.seat_count.message}
                       </div>
                     )}
                   </div>
