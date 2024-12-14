@@ -1,5 +1,17 @@
-/* Add to your CSS */
-.img-hover:hover {
-    opacity: 0.8;
-  }
-  
+.product__item__pic img{
+	height: 320px;
+}
+.product__item__pic {
+  position: relative;
+  overflow: hidden; 
+}
+
+.product__item__pic .img-hover {
+  transition: transform 0.3s ease; 
+  transform-origin: center center; 
+}
+
+.product__item__pic .img-hover:hover {
+  transform: scale(1.1);
+}
+

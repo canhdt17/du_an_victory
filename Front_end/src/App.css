@@ -1,5 +1,5 @@
 :root {
-  --background-color: #2f2f2f;
+  --background-color: #3f3f3f;
   --text-light: #f5f5f5;
   --text-muted: #d3d3d3;
   --highlight-color: #3e8e41;
@@ -65,7 +65,7 @@ main {
 
 .sidebar .nav-link:hover {
   color: var(--text-light);
-  background-color: #2c2c2c;
+  background-color: #917878;
 }
 
 .sidebar .nav-link.active {
@@ -112,21 +112,21 @@ main {
 }
 
 .action-buttons .btn-warning {
-  background-color: #ffc107;
-  color: #1e1e1e;
+  background-color: #e45a6cb8;
+  color: #f1e9e9;
 }
 
 .action-buttons .btn-warning:hover {
-  background-color: #e0a800;
+  background-color: #ffc721;
 }
 
 .action-buttons .btn-danger {
-  background-color: #dc3545;
+  background-color: #e45a6cb8;
   color: #ffffff;
 }
 
 .action-buttons .btn-danger:hover {
-  background-color: #c82333;
+  background-color: #ff0019;
 }
 
 
@@ -136,7 +136,7 @@ main {
   overflow-y: auto;
   background-color: var(--background-color);
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(92, 81, 81, 0.1);
   padding: 1rem;
 }
 
@@ -157,35 +157,35 @@ main {
 }
 
 .table th {
-  background-color: #3c3c3c;
+  background-color: #fb8e8e;
   color: var(--text-light);
   font-weight: bold;
   text-align: center;
   padding: 10px;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #f68787;
 }
 
 .table td {
   text-align: center;
   padding: 10px;
   color: #dcdcdc;
-  border-top: 1px solid #4c4c4c;
+  border-top: 1px solid #fba8a8;
 }
 
 .table tr:nth-child(odd) td {
-  background-color: #2f2f2f;
+  background-color: #f99b9b;
   color: var(--text-light);
   font-weight: normal;
 }
 
 .table tr:nth-child(even) td {
-  background-color: #3a3a3a;
+  background-color: #f99b9b;
   color: var(--text-light);
   font-weight: bold;
 }
 
 .table tr:hover {
-  background-color: #424242;
+  background-color: #f7aaaa;
 }
 
 

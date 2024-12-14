@@ -16,16 +16,20 @@ class RoomController extends Controller
     ///--- hiển thị ----//
     public function index()
     {
-        $rooms= DB::table('rooms')
-        ->join('bases','bases.id','=','rooms.bases_id')
-        ->join('seats','seats.room_id','=','rooms.id')
-        ->whereNull('rooms.deleted_at')     // Kiểm tra trạng thái xóa mềm cho bảng bases
-        ->select('rooms.*','base_name',DB::raw('COUNT(seats.room_id) as seat_count'))
-        ->groupBy('rooms.id', 'bases.base_name') // Group by necessary columns
+        $rooms = DB::table('rooms')
+        ->join('bases', 'bases.id', '=', 'rooms.bases_id')
+        ->leftJoin('seats', 'seats.room_id', '=', 'rooms.id') // LEFT JOIN để đảm bảo lấy tất cả rooms
+        ->whereNull('rooms.deleted_at') // Kiểm tra trạng thái xóa mềm cho bảng rooms
+        ->select(
+            'rooms.*',  
+            'bases.base_name', 
+            DB::raw('COUNT(seats.id) as seat_count') // Đếm số ghế
+        )
+        ->groupBy('rooms.id','bases.base_name') // Group các cột cần thiết
         ->orderByDesc('rooms.id')
-        ->latest('rooms.id')
-        ->paginate();
-        return response()->json($rooms);
+        ->paginate(); // Phân trang, mỗi trang 10 bản ghi
+    
+    return response()->json($rooms);
 
     }
     public function seatCountRoom()

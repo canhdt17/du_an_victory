@@ -11,11 +11,20 @@ const Payment = () => {
     const infomationLocalStorage = localStorage.getItem(constants.orderInfoKey);
     if (infomationLocalStorage) {
       const infomationData = JSON.parse(infomationLocalStorage);
-      setPaymentInfomation(infomationData);
+      console.log("Dữ liệu từ localStorage:", infomationData);
+  
+      if (infomationData && infomationData.base && infomationData.date && infomationData.time && infomationData.seats.length > 0) {
+        setPaymentInfomation(infomationData);
+      } else {
+        console.error("Thông tin thanh toán không đầy đủ.");
+        setPaymentInfomation(null);
+      }
     } else {
       setPaymentInfomation(null);
     }
   }, []);
+  
+
   return (
     <div className="payment-container flex gap-10 px-28 py-10">
       <div className="infomation flex-1">
@@ -24,33 +33,35 @@ const Payment = () => {
           <div className="movie-name mb-10">
             <label>Phim</label>
             <div className="value">
-              {paymentInfomation?.movieDetail?.name_movie}
+              {paymentInfomation?.movie?.name_movie || "Không có thông tin phim"}
             </div>
           </div>
           <div className="grid grid-cols-2 gap-10 mb-10">
             <div className="movie-time">
               <label>Ngày giờ chiếu</label>
               <div className="value">
-                {paymentInfomation?.movieDetail?.show}
+                {paymentInfomation?.date || "Không có thông tin ngày giờ"}
               </div>
             </div>
             <div className="movie-seat">
               <label>Ghế</label>
               <div className="value">
-                {paymentInfomation?.selectedSeats
-                  ?.map((e) => e.seatInfo?.seatNumber)
-                  .join(", ")}
+                {paymentInfomation?.seats
+                  ?.map((seat) => seat.seat_number)
+                  .join(", ") || "Không có thông tin ghế"}
               </div>
             </div>
             <div className="movie-type">
               <label>Định dạng</label>
               <div className="value">
-                {paymentInfomation?.movieDetail?.name_type}
+                {paymentInfomation?.type?.name_type || "Không có thông tin định dạng"}
               </div>
             </div>
             <div className="movie-room">
               <label>Phòng chiếu</label>
-              <div className="value">{paymentInfomation?.selectedRoom?.id}</div>
+              <div className="value">
+                {paymentInfomation?.room?.room_name || "Không có thông tin phòng chiếu"}
+              </div>
             </div>
           </div>
         </div>
@@ -59,7 +70,7 @@ const Payment = () => {
             Thông tin thanh toán
           </div>
           <div className="payment-detail border rounded-2xl">
-            <div className="header grid  border-b">
+            <div className="header grid border-b">
               <div className="category p-3">Danh mục</div>
               <div className="quantity p-3">Số lượng</div>
               <div className="total-price p-3">Tổng tiền</div>
@@ -67,16 +78,16 @@ const Payment = () => {
             <div className="body grid">
               <div className="category p-3">
                 Ghế (
-                {paymentInfomation?.selectedSeats
-                  ?.map((e) => e.seatInfo?.seatNumber)
+                {paymentInfomation?.seats
+                  ?.map((e) => e.seat_number)
                   .join(", ")}
                 )
               </div>
               <div className="quantity p-3">
-                {paymentInfomation?.selectedSeats?.length || 0}
+                {paymentInfomation?.seats?.length || 0}
               </div>
               <div className="total-price p-3">
-                {paymentInfomation?.totalPrice}
+                {paymentInfomation?.totalPrice || "Chưa có giá"}
               </div>
             </div>
           </div>
