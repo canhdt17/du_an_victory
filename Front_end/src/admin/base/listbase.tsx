@@ -19,7 +19,7 @@ const ListBases: React.FC<Props> = ({ bases, loading, error, deleteBases }) => {
           <thead>
             <tr className="text-center">
               <th scope="col">STT</th>
-              <th scope="col">Tên Cơ Sở </th>
+              <th scope="col">Tên Cơ Sở</th>
               <th scope="col">Thao Tác</th>
             </tr>
           </thead>

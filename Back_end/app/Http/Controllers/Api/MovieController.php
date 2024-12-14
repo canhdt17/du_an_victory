@@ -75,7 +75,7 @@ class MovieController extends Controller
     public function show(Movie $movie)
 {
 
-    $movie->load(['category', 'showtimes', 'comments.user']);
+    $movie->load(['category','type', 'showtimes', 'comments.user']);
 
     if (!$movie) {
         return response()->json(['message' => 'Không tìm thấy phim'], 404);

@@ -26,7 +26,7 @@ const NewsDetails = (props: Props) => {
   return (
     <div>
         <Header></Header>
-       <div className='bg-[#070720] h-[450px]'>
+       <div className='bg-[#070720] h-full'>
        <div className="bg-[#070720] container mx-auto py-10 px-6">
   <h1 className="text-3xl font-bold text-center mb-8 text-white">{tintucs.name_TinTuc}</h1>
   <div className="flex flex-col md:flex-row items-center">

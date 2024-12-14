@@ -44,7 +44,7 @@ const UpdateBase: React.FC<Props> = ({ updateBase }) => {
         setLoading(false);
       }
     };
-  
+
     fetchBase();
   }, [id, reset]);
   const onSubmit = async (dataBase: IBase) => {

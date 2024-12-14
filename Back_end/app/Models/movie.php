@@ -29,7 +29,11 @@ class movie extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
-
+    public function type():BelongsTo
+    {
+        return $this->belongsTo(Type::class, 'type_id');
+        
+    }
     public function showtimes()
     {
         return $this->hasMany(Showtime::class, 'movie_id');

@@ -1,5 +1,5 @@
 import React from "react";
-import { IMovie } from "../../interface/movie"; 
+import { IMovie } from "../../interface/movie";
 import { NavLink } from "react-router-dom";
 
 type Props = {
@@ -10,7 +10,6 @@ type Props = {
   deleteMovies: (id: number | string) => void;
 };
 
-
 const MovieList: React.FC<Props> = ({
   movies,
   loading,
@@ -20,23 +19,23 @@ const MovieList: React.FC<Props> = ({
   const baseImageUrl = "http://127.0.0.1:8000/";
 
   return (
-    <div className="max-h-[82vh] overflow-y-auto border border-gray-300 rounded-lg shadow-lg bg-white">
+    <div className="max-h-[82vh] overflow-y-auto border border-gray-300 rounded-lg shadow-lg">
       <table className="w-full text-sm text-gray-700">
-        <thead className="bg-gray-50 text-gray-900 font-medium text-center">
+        <thead className=" text-gray-900 font-medium text-center">
           <tr>
-            <th className="p-3 border-b">ID</th>
-            <th className="p-3 border-b">Name Movie</th>
-            <th className="p-3 border-b">Image</th>
-            <th className="p-3 border-b">Type</th>
-            <th className="p-3 border-b">Duration</th>
-            <th className="p-3 border-b">Nation</th>
-            <th className="p-3 border-b">Director</th>
-            <th className="p-3 border-b">Performer</th>
-            <th className="p-3 border-b">Show</th>
-            <th className="p-3 border-b">Content</th>
+            <th className="p-3 border-b">STT</th>
+            <th className="p-3 border-b">Tên Phim</th>
+            <th className="p-3 border-b">Ảnh</th>
+            <th className="p-3 border-b">Định Dạng</th>
+            <th className="p-3 border-b">Thời Lượng</th>
+            <th className="p-3 border-b">Quốc Gia</th>
+            <th className="p-3 border-b">Đạo Diễn</th>
+            <th className="p-3 border-b">Diễn Viên</th>
+            <th className="p-3 border-b">Thời Gian</th>
+            <th className="p-3 border-b">Nội Dung</th>
             <th className="p-3 border-b">Link Trailer</th>
-            <th className="p-3 border-b">Category</th>
-            <th className="p-3 border-b">Actions</th>
+            <th className="p-3 border-b">Thể Loại</th>
+            <th className="p-3 border-b">Thao Tác</th>
           </tr>
         </thead>
         <tbody>
@@ -90,17 +89,17 @@ const MovieList: React.FC<Props> = ({
                 <td className="p-3 border-b">{movie.name_category}</td>
                 <td className="p-3 border-b flex items-center justify-center gap-2">
                   <NavLink
-                    to={`/admin/dashboard/edit/${movie.id}`}
+                    to={`/admin/movie/edit/${movie.id}`}
                     className="px-3 py-1 text-sm font-medium bg-yellow-400 text-white rounded hover:bg-yellow-500"
                   >
-                    EDIT
+                    Chỉnh Sửa
                   </NavLink>
                   <button
                     type="button"
                     onClick={() => deleteMovies(movie.id)}
                     className="px-3 py-1 text-sm font-medium bg-red-500 text-white rounded hover:bg-red-600"
                   >
-                    DELETE
+                    Xóa Bỏ
                   </button>
                 </td>
               </tr>
@@ -117,6 +116,5 @@ const MovieList: React.FC<Props> = ({
     </div>
   );
 };
-
 
 export default MovieList;

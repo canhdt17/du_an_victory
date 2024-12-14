@@ -5,9 +5,9 @@ import { INews } from '../../interface/news'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 
-type Props = {}
 
-const News = (props: Props) => {
+
+const News = () => {
   const [tintucs,setNews] = useState<INews[]>([])
   useEffect(()=>{
     (async()=>{
@@ -31,10 +31,11 @@ const News = (props: Props) => {
     <div className="grid grid-cols-4 gap-6">
       {tintucs.map((tintuc:INews)=>(
       <div className=" rounded-lg overflow-hidden shadow-lg">
-        <img src={tintucs.imager} className="w-full h-40 object-cover" />
+        <img src={tintuc.imager} className="w-full h-40 object-cover" />
         <div className="p-4">
-        <NavLink to={`/detail-news/${tintuc.id}`}><p className="text-sm text-gray-400">{tintuc.name_TinTuc}</p></NavLink>
+        
           <NavLink to={`/detail-news/${tintuc.id}`}><h2 className="text-lg font-bold mt-2 text-white">{tintuc.sub_title}</h2></NavLink>
+          <NavLink to={`/detail-news/${tintuc.id}`}><p className="text-sm text-gray-400">{tintuc.name_TinTuc}</p></NavLink>
         </div>
       </div>
   ))}    

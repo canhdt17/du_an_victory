@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -13,6 +14,7 @@ const baseSchema = Joi.object({
   base_name: Joi.string().required().label("Base Name"),
 });
 const BaseAdd: React.FC<Props> = ({ addBase }) => {
+  const form = useForm();
   const {
     register,
     handleSubmit,
@@ -21,7 +23,7 @@ const BaseAdd: React.FC<Props> = ({ addBase }) => {
     resolver: joiResolver(baseSchema),
   });
 
-  const onsubumit = (data: IBase) => {
+  const onSubmit = (data: IBase) => {
     addBase(data);
   };
   return (
@@ -48,7 +50,7 @@ const BaseAdd: React.FC<Props> = ({ addBase }) => {
                   <div className="btn-toolbar mb-2 mb-md-0"></div>
                 </div>
 
-                <form onSubmit={handleSubmit(onsubumit)}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="mb-3">
                     <label htmlFor="baseName" className="form-label">
                       Tên Cơ Sở :
