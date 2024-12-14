@@ -20,7 +20,7 @@ use App\Http\Controllers\Api\TintucController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\VoucherController;
-use App\Http\Controllers\ArchiveUserController;
+use App\Http\Controllers\Api\ArchiveUserController;
 
 use App\Http\Controllers\Api\AdminUserControler;
 use App\Http\Controllers\Api\CategoryController;
