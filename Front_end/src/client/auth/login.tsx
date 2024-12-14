@@ -24,12 +24,12 @@ const LoginPage = () => {
         toast.success("Đăng Nhập Thành Công.")
         navigate("/"); 
       }else{
-        toast.success("Đăng Nhập Không Thành Công.")
+        toast.error("Đăng Nhập Không Thành Công.")
       };
 
       return response.data;
     } catch (error) {
-      toast.success("Lỗi Đăng Nhập.")
+      toast.error("Lỗi Đăng Nhập.")
       console.error( error);
       throw error;
     }
@@ -48,11 +48,11 @@ const LoginPage = () => {
       if (token) {
         //navigate("/"); 
       } else {
-        toast.success("Người Dùng Không Tồn Tại.")
+        toast.error("Người Dùng Không Tồn Tại.")
        
       }
     } catch (error) {
-      toast.success("Đăng nhập thất bại.");
+      toast.error("Đăng nhập thất bại.");
     }
   };
 

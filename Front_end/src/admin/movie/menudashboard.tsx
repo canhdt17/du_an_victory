@@ -138,6 +138,18 @@ const MenuDashboard = () => {
               Victory
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink
+              to="/admin-dashboard"
+              className="flex items-center gap-2 p-3 text-white hover:bg-pink-200"
+            >
+              <svg className="w-3 h-0">
+                <use xlinkHref="#puzzle" />
+              </svg>
+              Thống Kê
+            </NavLink>
+          </li>
+          
         </ul>
       
         <hr className="my-3" />

@@ -88,6 +88,8 @@ import MovieDetail from "./compoents/moviedetail/moviedetail";
 import NewsDetails from "./compoents/detail-news/detail-news";
 import CategoryFilms from "./compoents/categoryfims/categoryFims";
 import UserProfile from "./client/profile/user";
+import PrivateRouter from "./compoents/auth/privateRouter";
+import AdminDashboard from "./admin/movie/admindashboard";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -430,9 +432,10 @@ function App() {
             </HomePage>
           }
         ></Route>
+        <Route path="/admin-dashboard" element={<AdminDashboard></AdminDashboard>}></Route>
         <Route
           path="/admin/dashboard"
-          element={<Dashboard></Dashboard>}
+          element={<PrivateRouter><Dashboard></Dashboard></PrivateRouter>}
         ></Route>
         <Route
           path="/admin/dashboard/addmovie"

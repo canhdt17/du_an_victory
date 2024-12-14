@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const Header = () => {
   const token = localStorage.getItem('token');
-  const avatar = localStorage.getItem("avatar");
+  // const avatar = localStorage.getItem("avatar");
   const navigate = useNavigate();
   const handleLogout = async () => {
 
@@ -42,45 +42,9 @@ const Header = () => {
     window.location.href = "/";
   };
 
-  const [user, setUser] = useState<IUser>();
-  const fetchUser = async () => {
-    const token = localStorage.getItem("token"); // Lấy token từ localStorage
   
-    if (!token) {
-      console.error("Không tìm thấy token");
-      return null;
-    }
   
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/user", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Gửi token qua header Authorization
-        },
-      });
-  
-      if (response.ok) {
-        const user = await response.json();
-        return user; // Trả về thông tin người dùng
-      } else {
-        console.error("Lỗi khi lấy thông tin người dùng");
-        return null;
-      }
-    } catch (error) {
-      console.error("Lỗi kết nối tới server:", error);
-      return null;
-    }
-  };
-  
-  useEffect(() => {
-    const loadUser = async () => {
-      const fetchedUser = await fetchUser(); // Gọi hàm fetchUser
-      setUser(fetchedUser); // Cập nhật state
-    };
 
-    loadUser();
-  }, []);
 
   return (
     <div>
