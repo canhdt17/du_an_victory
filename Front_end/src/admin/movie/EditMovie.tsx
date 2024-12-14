@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { IMovie } from "../../interface/movie"; 
 import Joi from "joi";
+import "./Movie.css"
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -52,6 +53,7 @@ const EditMovie: React.FC<Props> = ({ onEditMovie }) => {
     const fetchMovie = async () => {
       try {
         const data = await MovieById(id!);
+        console.log(data);  
         reset(data);
       } catch (error: any) {
         setFetchError("Failed to fetch category data.");
@@ -69,7 +71,7 @@ const EditMovie: React.FC<Props> = ({ onEditMovie }) => {
     onEditMovie(id!, data);
   };
   return (
-    <div className="dashboard">
+    <div className="movie">
       <Logo />
       <HeaderDashboard />
       <div className="container-fluid">
@@ -77,7 +79,7 @@ const EditMovie: React.FC<Props> = ({ onEditMovie }) => {
           <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
             <MenuDashboard />
           </div>
-          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 custom-main">
             <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <h1 className="h2">Cập nhật Phim</h1>
             </div>
@@ -113,17 +115,6 @@ const EditMovie: React.FC<Props> = ({ onEditMovie }) => {
                   )}
                 </div>
 
-                <div className="mb-3">
-                  <label className="form-label">Type ID:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    {...register("type_id")}
-                  />
-                  {errors.type_id && (
-                    <div className="text-danger">{errors.type_id.message}</div>
-                  )}
-                </div>
 
                 <div className="mb-3">
                   <label className="form-label">Duration:</label>
@@ -214,19 +205,6 @@ const EditMovie: React.FC<Props> = ({ onEditMovie }) => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label">Category ID:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    {...register("category_id")}
-                  />
-                  {errors.category_id && (
-                    <div className="text-danger">
-                      {errors.category_id.message}
-                    </div>
-                  )}
-                </div>
-                <div className="mb-3">
                   <label className="form-label">Name Type:</label>
                   <input
                     type="text"
@@ -239,6 +217,7 @@ const EditMovie: React.FC<Props> = ({ onEditMovie }) => {
                     </div>
                   )}
                 </div>
+                 
                 <div className="mb-3">
                   <label className="form-label">Name Category:</label>
                   <input

@@ -1,15 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import api from "../axios/config";
 import { IRoom } from './../interface/room';
 
 //List
-export const ListRoom = async () => {
+export const ListRoom = async (): Promise<IRoom[]> => {
   try {
-    const { data } = await api.get<IRoom[]>("rooms");
-    return data;
-  } catch (error) {
-    console.log(error);
+    const response = await api.get<{ data: IRoom[] }>("rooms");
+    // console.log("API response data:", response.data); // Log dữ liệu phản hồi
+    return response.data.data; // Trích xuất mảng `data` từ phản hồi
+  } catch (error: any) {
+    console.error("Error in ListRoom:", error);
+    throw error;
   }
 };
+
 
 //ID
 export const GetRoomById = async (id: number | string) => {

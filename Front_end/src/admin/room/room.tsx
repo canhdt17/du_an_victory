@@ -20,13 +20,15 @@ const Room: React.FC = () => {
     setLoading(true);
     try {
       const data = await ListRoom();
-      setRooms(data || []); // Đảm bảo dữ liệu được set đúng
+      setRooms(data); // Gán dữ liệu vào state
     } catch (error: any) {
-      setError(error.response ? error.response.data.message : error.message);
+      console.error("Error fetching rooms:", error);
+      setError(error.message || "Đã xảy ra lỗi khi tải danh sách phòng.");
     } finally {
       setLoading(false);
     }
   };
+  
 
   // Hàm cập nhật khu vực
   const updateRooms = async (id: number | string, updateRoom: IRoom) => {

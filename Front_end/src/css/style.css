@@ -341,8 +341,7 @@ ol {
 
 .hero {
 	padding-top: 50px;
-
-	background-color:  #070720;
+    background: #111827;
 }
 
 .hero__items {
@@ -557,9 +556,9 @@ ol {
 	position: relative;
 	border-radius: 5px;
 }
-.product__item__pic img{
+/* .product__item__pic img{
 	height: 320px;
-}
+} */
 .product__item__pic .ep {
 	font-size: 13px;
 	color: #ffffff;
@@ -2267,6 +2266,7 @@ ol {
 }
 .maintain{
 	/* text-align: center; */
+	background: #111827;
 }
 .bodytainer {
 
