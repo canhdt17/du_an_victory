@@ -5,9 +5,9 @@ import { IPromotions } from '../../interface/promotinons'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 
-type Props = {}
 
-const Promotions = (props: Props) => {
+
+const Promotions = () => {
   const [promotions,setPromotions] = useState<IPromotions[]>([])
   useEffect(()=>{
     (async()=>{
@@ -31,7 +31,7 @@ const Promotions = (props: Props) => {
     <div className="grid grid-cols-4 gap-6">
       {promotions.map((promotion:IPromotions)=>(
       <div className=" rounded-lg overflow-hidden shadow-lg">
-        <img src="https://via.placeholder.com/300x200" className="w-full h-40 object-cover" />
+        <img src={promotion.image} className="w-full h-40 object-cover" />
         <div className="p-4">
         <NavLink to={`/promotions/${promotion.id}`}><p className="text-sm text-gray-400">{promotion.time_date}</p></NavLink>
           <NavLink to={`/promotions/${promotion.id}`}><h2 className="text-lg font-bold mt-2 text-white">{promotion.title}</h2></NavLink>

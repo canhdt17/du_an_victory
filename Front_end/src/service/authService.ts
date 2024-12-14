@@ -1,41 +1,32 @@
-import axios from 'axios';
+import axios from "axios";
+import { AuthResponse, IUser } from "../interface/User";
 
-const API_URL = 'http://127.0.0.1:8000'; // Thay đổi URL nếu cần
 
 // Đăng ký người dùng
-const register = async (username: string, email: string, password: string) => {
-    const response = await axios.post (`${API_URL}/register`, {
-        username,
-        email,
-        password,
-    });
-    return response.data; // Trả về dữ liệu từ API
+export const registerUser = async (user: IUser): Promise<AuthResponse> => {
+  const response = await axios.post<AuthResponse>("http://127.0.0.1:8000/api/register", user);
+  return response.data;
 };
 
 // Đăng nhập người dùng
-const login = async (username: string, password: string) => {
-    const response = await axios.post(`${API_URL}/login`, {
-        username,
-        password,
-    });
-    
-    if (response.data.token) {
-        // Lưu token vào localStorage nếu đăng nhập thành công
-        localStorage.setItem('user', JSON.stringify(response.data));
+export const loginUser = async (email: string, password: string): Promise<AuthResponse> => {
+  const response = await axios.post<AuthResponse>("http://127.0.0.1:8000/api/login", { email, password });
+  return response.data;
+};
+export const logoutUser = async (): Promise<void> => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("Người dùng chưa đăng nhập.");
+  }
+
+  await axios.post(
+    "http://127.0.0.1:8000/api/logout",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     }
-
-    return response.data; // Trả về dữ liệu từ API
+  );
+  localStorage.removeItem("token"); 
 };
-
-// Đăng xuất
-const logout = () => {
-    localStorage.removeItem('user'); // Xóa thông tin người dùng
-};
-
-const authService = {
-    register,
-    login,
-    logout,
-};
-
-export default authService;

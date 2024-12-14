@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 use App\Models\showtime;
+use App\Models\Seat;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class ShowtimeController extends Controller
 {
@@ -89,20 +91,61 @@ class ShowtimeController extends Controller
         $showtime->delete();
         return response()->json($showtime);
         }
-    public function getSeatShowtime($ids)
+    // tim id showtime
+    public function getIDShowtime($movieId,$baseId,$date,$time)
     {
-
-    // Tách danh sách ID bằng dấu phẩy
-    $idArray = explode(',', $ids);
-    $movie_id=$idArray[0];
-    $base_id=$idArray[1];
-    $showtime_date=$idArray[2];
-    $start_time=$idArray[3];
     
-    $showtimeID = showtime::where('movie_id', '=' ,$movie_id)->where('base_id', '=' ,$base_id)->where('showtime_date', $showtime_date)->where('start_time', $start_time)->get();
+    $showtimeID = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->where('showtime_date', $date)->where('start_time', $time)->value('id');
     return response()->json($showtimeID);
     
     }
+    // tìm ngày 
+    public function getDateShowtime($movieId,$baseId )
+    {
+
+    // // Tách danh sách ID bằng dấu phẩy
+    // $idArray = explode(',', $ids);
+    // $movie_id=$idArray[1];
+    // $base_id=$idArray[0];
+
+    
+    $showtimeDate = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->groupBy('showtime_date')->select('showtime_date')->get();
+    return response()->json($showtimeDate);
+    
+    }
+    // tìm giờ     
+    public function getTimeShowtime($movieId,$baseId,$date)
+    {
+    $showtimeTime = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->where('showtime_date', $date)->groupBy('start_time')->select('start_time')->get();
+    return response()->json($showtimeTime);
+    
+    }
+     // list ghe va hien thi trang thai ghe the id room
+    public function getSeatShowtime($movieId,$baseId,$date,$time)
+    {
 
 
+    $showtimeID = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->where('showtime_date', $date)->where('start_time', $time)->value('id');
+    $room_id = showtime::where('movie_id', '=' ,$movieId)->where('base_id', '=' ,$baseId)->where('showtime_date', $date)->where('start_time', $time)->value('room_id');
+    $seats = DB::table('seats')
+    ->leftJoin('status_seats', function ($join) use ($showtimeID) {
+        $join->on('status_seats.seat_id', '=', 'seats.id')
+             ->where(function ($query) use ($showtimeID) {
+                 $query->where('status_seats.showtime_id', $showtimeID)
+                       ->orWhereNull('status_seats.showtime_id');
+             });
+    })
+    ->leftJoin('seat_types', 'seat_types.id', '=', 'seats.seat_type_id')
+    ->whereNull('seats.deleted_at')  // Exclude soft-deleted seats
+    ->where('seats.room_id', $room_id)
+    ->select('seats.*', 'status_seats.status', 'seat_types.seat_type_name', 'seat_types.seat_price')
+    ->orderByDesc('seats.id')
+    ->get();
+    return response()->json([
+        'room_id' => $room_id,
+        'data' => $seats
+    ]);
+    
+    
+    }
     }

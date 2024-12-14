@@ -1,121 +1,121 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import authService from "../../service/authService";
+
 import "../css/client.css"
+import { useForm } from "react-hook-form";
+
+import axios from "axios";
+import { IUser } from "../../interface/User";
+import Joi from "joi";
+import { joiResolver } from "@hookform/resolvers/joi";
+const registerScheama = Joi.object({
+  fulname:Joi.string().required().min(5),
+  username:Joi.string().required().min(1),
+  email:Joi.string().required(),
+  password:Joi.string().required().min(3),
+  gender:Joi.string().required().min(1),
+  phone:Joi.string().required().min(9)
+})
+
 const Register = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
-
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-
-    if (formData.password !== formData.confirmPassword) {
-      setErrorMessage("Mật khẩu không khớp");
-      return;
-    }
-
-    try {
-      const response = await authService.register(
-        formData.username,
-        formData.email,
-        formData.password
-      );
-      if (response) {
-        navigate("/login");
-      }
-    } catch (error) {
-      setErrorMessage("Đã xảy ra lỗi khi đăng ký");
-    }
-  };
+const {register,handleSubmit,formState:{errors}} = useForm<IUser>({
+  resolver:joiResolver(registerScheama)
+})
+const navigate = useNavigate()
+const onSubmit = async (registerData:IUser)=>{
+  try {
+    const {data} = await axios.post(`http://127.0.0.1:8000/api/register`,registerData);
+    alert("Đăng Ký Thành Công");
+    navigate('/login')
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
 
   return (
     <div className="register-container">
       <div className="register-box">
         <h2>Đăng Ký Tài Khoản</h2>
-        <form onSubmit={handleSubmit}>
-          {/* Tên người dùng */}
-          <div className="form-group">
-            <label htmlFor="username">Tên Người Dùng</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              placeholder="Nhập tên người dùng"
-              required
-            />
-          </div>
-          {/* Email */}
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Nhập địa chỉ email"
-              required
-            />
-          </div>
-          {/* Mật khẩu */}
-          <div className="form-group">
-            <label htmlFor="password">Mật Khẩu</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Nhập mật khẩu"
-              required
-            />
-          </div>
-          {/* Xác nhận mật khẩu */}
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Xác Nhận Mật Khẩu</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Nhập lại mật khẩu"
-              required
-            />
-          </div>
-
-          {/* Hiển thị lỗi nếu có */}
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-          <button type="submit" className="btn btn-primary">
-            Đăng Ký
-          </button>
-        </form>
-        {/* Đăng nhập */}
+       
+        <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-group">
+          <label htmlFor="username">Tên Đăng Nhập:</label>
+          <input
+            type="text"
+           {...register('username')}
+           
+            placeholder="Nhập tên..."
+            
+          />
+        </div>
+        {errors.username && (
+              <div className="text-red-600 ">
+                {errors.username.message}
+              </div>
+            )}
+        <div className="form-group">
+          <label htmlFor="fullname">Họ:</label>
+          <input
+            type="text"
+           {...register('fullname')}
+           
+            placeholder="Nhập họ..."
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Nhập Email:</label>
+          <input
+            type="text"
+           {...register('email')}
+           
+            placeholder="Nhập email..."
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Nhập Mật Khẩu:</label>
+          <input
+            type="password"
+           {...register('password')}
+           
+            placeholder="Nhập mật khẩu..."
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="gender">Giới Tính:</label>
+          <input
+            type="text"
+           {...register('gender')}
+           
+            placeholder="Nhập giới tính..."
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="phone">Nhập Số Điện Thoại:</label>
+          <input
+            type="text"
+           {...register('phone')}
+           
+            placeholder="Nhập số điện thoại..."
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Đăng Ký
+        </button>
+      </form>
         <div className="text-center">
           <p>
             Bạn đã có tài khoản? <a href="/login">Đăng Nhập</a>
           </p>
         </div>
-        {/* Đăng ký bằng mạng xã hội */}
+
         <div className="social-buttons">
           <a href="#" className="btn facebook">
             <i className="fab fa-facebook"></i>

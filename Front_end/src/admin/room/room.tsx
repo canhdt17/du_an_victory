@@ -20,13 +20,15 @@ const Room: React.FC = () => {
     setLoading(true);
     try {
       const data = await ListRoom();
-      setRooms(data || []); // Đảm bảo dữ liệu được set đúng
+      setRooms(data); // Gán dữ liệu vào state
     } catch (error: any) {
-      setError(error.response ? error.response.data.message : error.message);
+      console.error("Error fetching rooms:", error);
+      setError(error.message || "Đã xảy ra lỗi khi tải danh sách phòng.");
     } finally {
       setLoading(false);
     }
   };
+  
 
   // Hàm cập nhật khu vực
   const updateRooms = async (id: number | string, updateRoom: IRoom) => {
@@ -65,9 +67,9 @@ const Room: React.FC = () => {
       <HeaderDashboard />
       <div className="container-fluid">
         <div className="row">
-          <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+          <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
             <div
-              className="offcanvas-md offcanvas-end bg-body-tertiary"
+              className="offcanvas-md offcanvas-end "
               tabIndex={-1}
               id="sidebarMenu"
               aria-labelledby="sidebarMenuLabel"

@@ -31,7 +31,7 @@ class UserController extends Controller
             'access_token' => $token,
             'type_token' => 'Baerer'
 
-        ], 404);
+        ], 200);
 
     }
     public function register(Request $request)
@@ -71,6 +71,7 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
                 'phone' => $request->phone,
                 'gender' => $request->gender,
+                'role_id' => 2,
 
             ]
 
@@ -81,7 +82,7 @@ class UserController extends Controller
     }
     public function user(Request $request)
     {
-        return $request->user();
+        return $request->user()->load('role');
 
     }
     public function logout()

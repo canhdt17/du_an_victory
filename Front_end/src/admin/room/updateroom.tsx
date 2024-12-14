@@ -6,12 +6,9 @@ import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useParams } from "react-router-dom";
 import { IRoom } from "../../interface/room";
-// import { GetRoomById } from "../../service/room";
 import { GetRoomById } from "../../service/room";
-
-
-import { IArea } from "../../interface/area";
-import { ListArea } from "../../service/area";
+import { IBase } from "../../interface/base";
+import { BaseList } from "../../service/base";
 import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
@@ -22,8 +19,8 @@ type Props = {
 
 const roomSchema = Joi.object({
   room_name: Joi.string().required().label("Room Name"),
-  area_id: Joi.string().required().label("ID Area"),
-  total_seat: Joi.number().required().label("Total Seat"),
+  id: Joi.string().required().label("ID Area"),
+  seat_count: Joi.number().required().label("Total Seat"),
 });
 
 const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
@@ -39,16 +36,17 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
 
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
-  const [areas, setAreas] = useState<IArea[]>([]);
+  const [bases, setBases] = useState<IBase[]>([]);
 
-  // Fetch areas
+  // Fetch bases
   useEffect(() => {
     (async () => {
       try {
-        const data = await ListArea();
-        setAreas(data || []);
+        const data = await BaseList();
+        console.log("Base list fetched:", data); 
+        setBases(data || []);
       } catch (error) {
-        setFetchError("Failed to fetch areas.");
+        setFetchError("Failed to fetch bases.");
       }
     })();
   }, []);
@@ -57,8 +55,13 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const data = await GetRoomById(id!);
-        reset(data);
+        const room = await GetRoomById(id!);
+        console.log("Room data fetched:", room); // Log to check room data
+        reset({
+          room_name: room.room_name,
+          id: room.base_id, // Adjust if API uses a different field
+          seat_count: room.seat_count,
+        });
       } catch (error: any) {
         setFetchError("Failed to fetch room data.");
       } finally {
@@ -82,9 +85,9 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
           <HeaderDashboard />
           <div className="container-fluid">
             <div className="row">
-              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
                 <div
-                  className="offcanvas-md offcanvas-end bg-body-tertiary"
+                  className="offcanvas-md offcanvas-end "
                   tabIndex={-1}
                   id="sidebarMenu"
                   aria-labelledby="sidebarMenuLabel"
@@ -119,41 +122,41 @@ const UpdateRoom: React.FC<Props> = ({ updateRoom }) => {
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="area_id" className="form-label">
+                    <label htmlFor="id" className="form-label">
                       Khu Vực:
                     </label>
                     <select
                       className="form-control"
                       aria-label="Large select example"
-                      {...register("area_id")}
+                      {...register("id")}
                     >
                       <option value="">Chọn Khu Vực</option>
-                      {areas.map((area: IArea, i : number) => (
-                        <option key={area.area_id} value={area.area_id}>
-                          {area.area_name}
+                      {bases.map((base: IBase) => (
+                        <option key={base.id} value={base.id}>
+                          {base.base_name}
                         </option>
                       ))}
                     </select>
-                    {errors.area_id && (
+                    {errors.id && (
                       <div className="text-danger">
-                        {errors.area_id.message}
+                        {errors.id.message}
                       </div>
                     )}
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="total_seat" className="form-label">
+                    <label htmlFor="seat_count" className="form-label">
                       Số Ghế:
                     </label>
                     <input
                       type="number"
                       className="form-control"
-                      id="total_seat"
-                      {...register("total_seat")}
+                      id="seat_count"
+                      {...register("seat_count")}
                     />
-                    {errors.total_seat && (
+                    {errors.seat_count && (
                       <div className="text-danger">
-                        {errors.total_seat.message}
+                        {errors.seat_count.message}
                       </div>
                     )}
                   </div>

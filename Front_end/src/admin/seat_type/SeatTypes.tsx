@@ -78,9 +78,9 @@ const SeatType: React.FC = () => {
             <HeaderDashboard></HeaderDashboard>
             <div className="container-fluid">
               <div className="row">
-                <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+                <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
                   <div
-                    className="offcanvas-md offcanvas-end bg-body-tertiary"
+                    className="offcanvas-md offcanvas-end"
                     tabIndex={-1}
                     id="sidebarMenu"
                     aria-labelledby="sidebarMenuLabel"

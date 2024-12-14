@@ -2,11 +2,13 @@
 import React, { useState } from "react";
 import { IMovie } from "../../interface/movie";
 import Joi from "joi";
+import "./Movie.css"
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useForm } from "react-hook-form";
 import Logo from "./logo";
 import HeaderDashboard from "./headerdashboard";
 import MenuDashboard from "./menudashboard";
+
 
 type Props = {
   onAddMovie: (movie: IMovie) => void;
@@ -48,32 +50,12 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
     "https://api.cloudinary.com/v1_1/dfcwk3b1b/image/upload";
   const onSubmit = async (areaData: IMovie) => {
     try {
-      // if (!file) return alert("Please select a file first.");
-
-      // const formData = new FormData();
-      // formData.append("file", file);
-      // formData.append("upload_preset", "upload"); // Thay 'your_upload_preset' bằng upload preset bạn đã tạo trong Cloudinary
-      // // Gửi yêu cầu POST tới Cloudinary
-      // await fetch(cloudinaryUrl, {
-      //   method: "POST",
-      //   body: formData,
-      // })
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     console.log("Uploaded Image URL:", data.secure_url);
-      //     setImageUrl(data.secure_url); // Lưu URL của ảnh đã upload
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error uploading image:", error);
-      //   });
-      
       console.log("imageUrl: ", imageUrl);
       const formattedShowData = {
         ...areaData,
         show: new Date(areaData.show).toISOString().split("T")[0],
         image: imageUrl
       };
-      // formattedShowData.image = imageUrl;
       console.log("formattedShowData: ", formattedShowData);
 
       await onAddMovie(formattedShowData);
@@ -95,7 +77,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "upload"); // Thay 'your_upload_preset' bằng upload preset bạn đã tạo trong Cloudinary
+    formData.append("upload_preset", "upload"); 
 
     // Gửi yêu cầu POST tới Cloudinary
     fetch(cloudinaryUrl, {
@@ -113,15 +95,15 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
   };
 
   return (
-    <div className="dashboard">
+    <div className="movie">
       <Logo />
       <HeaderDashboard />
       <div className="container-fluid">
         <div className="row">
-          <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+          <div className="sidebar border border-right col-md-3 col-lg-2 p-0 " >
             <MenuDashboard />
           </div>
-          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 custom-main" >
             <div className="max-h-[66.8vh] text-white overflow-y-auto rounded-lg shadow-md custom-scrollbar">
               <h1 className="h2">Thêm Phim</h1>
             </div>
@@ -143,7 +125,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
                 </div>
 
                 <div>
-                  <label className="form-label text-white font-bold">Choose Image:</label>
+                  <label className="form-label text-white font-bold">Ảnh:</label>
                   {/* <input
                     type="text"
                     className="form-control"
@@ -167,7 +149,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label text-white font-bold">Type ID:</label>
+                  <label className="form-label text-white font-bold">Định Dạng:</label>
                   <input
                     type="text"
                     className="form-control"
@@ -179,7 +161,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label text-white font-bold">Duration:</label>
+                  <label className="form-label text-white font-bold">Thời Lượng:</label>
                   <input
                     type="text"
                     className="form-control"
@@ -191,7 +173,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label text-white font-bold">Nation:</label>
+                  <label className="form-label text-white font-bold">Quốc Gia:</label>
                   <input
                     type="text"
                     className="form-control"
@@ -203,7 +185,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label text-white font-bold">Director:</label>
+                  <label className="form-label text-white font-bold">Đạo Diễn:</label>
                   <input
                     type="text"
                     className="form-control"
@@ -215,7 +197,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label text-white font-bold">Performer:</label>
+                  <label className="form-label text-white font-bold">Diễn Viên:</label>
                   <input
                     type="text"
                     className="form-control"
@@ -229,7 +211,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label text-white font-bold">Show Status:</label>
+                  <label className="form-label text-white font-bold">Thời Gian:</label>
                   <input
                     type="date"
                     className="form-control"
@@ -241,7 +223,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label text-white font-bold">Content:</label>
+                  <label className="form-label text-white font-bold">Nội Dung:</label>
                   <input
                     type="text"
                     className="form-control"
@@ -280,7 +262,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
                   )}
                 </div>
                 <div className="mb-3">
-                  <label className="form-label text-white font-bold">Name Type:</label>
+                  <label className="form-label text-white font-bold">Định Dạng :</label>
                   <input
                     type="text"
                     className="form-control"
@@ -293,7 +275,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
                   )}
                 </div>
                 <div className="mb-3">
-                  <label className="form-label text-white font-bold">Name Category:</label>
+                  <label className="form-label text-white font-bold">Thể Loại:</label>
                   <input
                     type="text"
                     className="form-control"

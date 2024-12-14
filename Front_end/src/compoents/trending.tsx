@@ -1,52 +1,70 @@
-import React, { useEffect, useState } from 'react'
-import { ITrendings } from '../interface/trendings'
-import axios from 'axios'
-
-
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useEffect, useState } from "react";
+import { ITrendings } from "../interface/trendings";
+import axios from "axios";
+import "./trending.css";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Trending = () => {
-  const [trendings,setTrendings] = useState<ITrendings[]>([])
-  useEffect(()=>{
-    (async()=>{
+  const navigate = useNavigate();
+  const [trendings, setTrendings] = useState<ITrendings[]>([]);
+
+  useEffect(() => {
+    (async () => {
       try {
-        const {data} = await axios.get(`http://127.0.0.1:8000/api/movies`)
-        setTrendings(data.data)
+        const { data } = await axios.get(`http://127.0.0.1:8000/api/movies`);
+        setTrendings(data.data);
       } catch (error) {
         console.log(error);
-        
       }
-    })()
-  },[])
+    })();
+  }, []);
+
+  const handleDetails = (id: number) => {
+    navigate(`/select-movie/${id}`);
+  };
+
   return (
     <div>
-      <div className="container mx-auto py-10">
-  <div className="grid grid-cols-4 gap-6">
+      <div className="row">
+        {Array.isArray(trendings) &&
+          trendings.map((trending: ITrendings) => (
+            <div className="col-lg-4 col-md-6 col-sm-6" key={trending.id}>
+              <div className="product__item">
+                <div className="product__item__pic set-bg">
+                  <NavLink to={`/select-movie/${trending.id}`}>
+                    <img
+                      className="img-hover"
+                      src={trending.image}
+                      alt={trending.name_movie}
+                    />
+                  </NavLink>
+                  <div className="ep">{trending.type_id}</div>
+                  <div className="comment">
+                    <i className="fa fa-comments" /> {trending.duration}
+                  </div>
+                  <div className="view">
+                    <i className="fa fa-eye" /> {trending.nation}
+                  </div>
+                </div>
 
-      {Array.isArray(trendings) && trendings.map((trending:ITrendings)=>(
-    <div className="  rounded-lg overflow-hidden shadow-lg" key={trending.id}>
-    
-         <div className="relative">
-        <img src="/src/img/hero/ngoimodomdom.jpg" alt="Movie 1" className="w-full h-64 object-cover" />
-        <span className="absolute top-2 left-2 bg-red-600 text-white text-sm font-bold px-2 py-1 rounded">{trending.type_id}</span>
+                <div className="product__item__text">
+                  <ul>
+                    <li>Active</li>
+                    <li>Movie</li>
+                  </ul>
+                  <NavLink to={`/select-movie/${trending.id}`}>
+                    <h5>
+                      <a href="#">{trending.name_movie}</a>
+                    </h5>
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+          ))}
       </div>
-      <div className="p-4">
-        <div className="flex justify-between items-center mb-3 text-gray-400 text-sm">
-          <span><i className="fas fa-eye" /> 11</span>
-          <span><i className="fas fa-users" /> 9141</span>
-        </div>
-        
-        <h3 className="text-lg font-bold mb-2 text-white">{trending.name_movie}</h3>
-       
-      </div>
-      
-     
     </div>
-    ))}
-  </div>
-</div>
-    </div>
-  )
-}
+  );
+};
 
-export default Trending
+export default Trending;

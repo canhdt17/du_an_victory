@@ -1,82 +1,114 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import authService from '../../service/authService';
+import axios from "axios";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom"; 
 
-const Login: React.FC = () => {
-    const [formData, setFormData] = useState({
-        username: '',
-        password: ''
-    });
-    const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-            const response = await authService.login(formData.username, formData.password);
-            
-            if (response.token) {
-                navigate('/profile');
-            } else {
-                setErrorMessage('Đăng nhập thất bại, kiểm tra lại thông tin đăng nhập');
-            }
-        } catch (error: any) {
-            setErrorMessage('Đã xảy ra lỗi khi đăng nhập');
-        }
-    };
 
-    return (
-        <div className="login-container">
-            <div className="login-box">
-                <h2>Đăng Nhập</h2>
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
-                <form onSubmit={handleSubmit} autoComplete="off">
-                    <div className="form-group">
-                        <label htmlFor="username">Tên Người Dùng</label>
-                        <input 
-                            type="text"
-                            id="username"
-                            name="username"
-                            placeholder="Nhập tên người dùng"
-                            value={formData.username}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Mật Khẩu</label>
-                        <input 
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Nhập mật khẩu"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <button type="submit" className="btn">Đăng Nhập</button>
-                </form>
-                <div className="text-center">
-                    <p>Bạn chưa có tài khoản? <a href="/register">Đăng Ký</a></p>
-                </div>
-                <div className="social-buttons">
-                    <a href="#" className="facebook"><i className="fab fa-facebook"></i></a>
-                    <a href="#" className="google"><i className="fab fa-google"></i></a>
-                    <a href="#" className="twitter"><i className="fab fa-twitter"></i></a>
-                </div>
-            </div>
+const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const login = async (email: string, password: string) => {
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/login", {
+        email,
+        password,
+      });
+      console.log(response)
+
+      if(response.data.access_token){
+        localStorage.setItem("token", response.data.access_token);
+        console.log("Đăng nhập thành công:", response.data);
+        navigate("/"); 
+      }else{
+        console.log("Đăng nhập thất bại")
+      };
+
+      return response.data;
+    } catch (error) {
+      console.error("Lỗi khi đăng nhập:", error);
+      throw error;
+    }
+  };
+
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault(); 
+
+    try {
+    
+      const userData = await login(email, password);
+
+   
+      const token = localStorage.getItem("token");
+      if (token) {
+        //navigate("/"); 
+      } else {
+        console.error("Token không tồn tại.");
+      }
+    } catch (error) {
+      console.error("Đăng nhập thất bại.");
+    }
+  };
+
+  return (
+    <div className="register-container">
+    <div className="register-box">
+      <h2>Đăng Nhập Tài Khoản</h2>
+      <form onSubmit={handleLogin}>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+           
+            placeholder="Nhập địa chỉ email"
+            required
+          />
         </div>
-    );
+      
+        <div className="form-group">
+          <label htmlFor="password">Mật Khẩu</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+         
+         
+            placeholder="Nhập mật khẩu"
+            required
+          />
+        </div>
+       
+       
+      
+        <button type="submit" className="btn btn-primary">
+          Đăng Nhập
+        </button>
+      </form>
+      {/* Đăng nhập */}
+      <div className="text-center">
+        <p>
+          Bạn chưa có tài khoản?<NavLink to={`/register`}> <a href="/login">Đăng Ký</a></NavLink>
+        </p>
+      </div>
+      {/* Đăng ký bằng mạng xã hội */}
+      <div className="social-buttons">
+        <a href="#" className="btn facebook">
+          <i className="fab fa-facebook"></i>
+        </a>
+        <a href="#" className="btn google">
+          <i className="fab fa-google"></i>
+        </a>
+        <a href="#" className="btn twitter">
+          <i className="fab fa-twitter"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  );
 };
 
-export default Login;
+export default LoginPage;
