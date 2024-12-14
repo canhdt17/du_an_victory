@@ -16,12 +16,13 @@ use App\Http\Controllers\Api\MovieController;
 use App\Http\Controllers\Api\BannerController;
 // use App\Http\Controllers\Api\CinemaController;
 use App\Http\Controllers\Api\TintucController;
+use App\Http\Controllers\Api\BookingController;
 
-// use App\Http\Controllers\Api\InvoiceController;
-// use App\Http\Controllers\Api\VoucherController;
+use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\ArchiveUserController;
 
 use App\Http\Controllers\Api\AdminUserControler;
+use App\Http\Controllers\Api\ArchiveUserController as ApiArchiveUserController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\API\SeatTypeController;
 use App\Http\Controllers\Api\ComboFoodController;
@@ -32,7 +33,7 @@ use App\Http\Controllers\Api\PointVoucherController;
 // use App\Models\User;
 use App\Http\Controllers\Api\KhuyenMaiController;
 use App\Http\Controllers\Api\SeatController;
-use App\Http\Controllers\Api\VoucherController;
+
 use App\Http\Controllers\Api\UserController;
 
 // use App\Http\Controllers\Api;
@@ -89,11 +90,11 @@ Route::prefix('style_vouchers')->group(function () {
     Route::put('/{id}', [StyleVoucherController::class, 'update']); // Cập nhật
     Route::delete('/{id}', [StyleVoucherController::class, 'destroy']); // Xóa
 });
-Route::get('archive_users', [ArchiveUserController::class, 'index']);
-Route::post('archive_users', [ArchiveUserController::class, 'store']);
-Route::put('archive_users/{id}', [ArchiveUserController::class, 'update']);
-Route::get('archive_users/{id}', [ArchiveUserController::class, 'show']);
-Route::delete('archive_users/{id}', [ArchiveUserController::class, 'destroy']);
+Route::get('archive_users', [ApiArchiveUserController::class, 'index']);
+Route::post('archive_users', [ApiArchiveUserController::class, 'store']);
+Route::put('archive_users/{id}', [ApiArchiveUserController::class, 'update']);
+Route::get('archive_users/{id}', [ApiArchiveUserController::class, 'show']);
+Route::delete('archive_users/{id}', [ApiArchiveUserController::class, 'destroy']);
 
 
 Route::apiResource('rooms', RoomController::class);
