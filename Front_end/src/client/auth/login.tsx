@@ -4,6 +4,20 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 
+const fetchUserRole = async (token: string) => {
+  try {
+    const response = await axios.get("http://127.0.0.1:8000/api/user", {
+      headers: {
+        Authorization: `Bearer ${token}`, // Đính kèm token để xác thực
+      },
+    });
+
+    return response.data.role_id; // Trả về role_id
+  } catch (error) {
+    console.error("Không thể lấy thông tin người dùng:", error);
+    throw error;
+  }
+};
 
 
 const LoginPage = () => {
@@ -37,25 +51,35 @@ const LoginPage = () => {
 
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault(); 
-
+    e.preventDefault();
+  
     try {
-    
-      const userData = await login(email, password);
-
-   
+      const response = await login(email, password);
       const token = localStorage.getItem("token");
+  
       if (token) {
-        //navigate("/"); 
+        // Gọi API để lấy role_id
+        const roleId = await fetchUserRole(token);
+  
+        // Xử lý role_id với switch
+        switch (roleId) {
+          case 1:
+            navigate("/admin/dashboard");
+            break;
+          case 2:
+            navigate("/");
+            break;
+          default:
+            toast.error("Vai trò không hợp lệ.");
+        }
       } else {
-        toast.error("Người Dùng Không Tồn Tại.")
-       
+        toast.error("Token không tồn tại.");
       }
     } catch (error) {
       toast.error("Đăng nhập thất bại.");
     }
   };
-
+  
   return (
     <div className="register-container">
     <div className="register-box">

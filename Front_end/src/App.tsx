@@ -66,15 +66,15 @@ import BaseAdd from "./admin/base/addbase";
 import UpdateBase from "./admin/base/updatearea";
 import NewsDetails from "./compoents/detail-news/detail-news";
 import UserProfile from "./client/profile/user";
-<<<<<<< HEAD
+
 import PrivateRouter from "./compoents/auth/privateRouter";
 import AdminDashboard from "./admin/movie/admindashboard";
-=======
+
 import CategoryFilms from "./compoents/categoryfims/categoryFims";
 import Showtimes from "./compoents/showtimes/showtimes";
 import Dashboard from "./admin/movie/dashboard";
 import Movie from "./admin/movie/movie";
->>>>>>> 8af2404de8d6d2adac23e8f1a80ed0d1b4785a34
+
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -417,7 +417,7 @@ function App() {
         <Route path="/admin-dashboard" element={<AdminDashboard></AdminDashboard>}></Route>
         <Route
           path="/admin/dashboard"
-          element={<PrivateRouter><Dashboard></Dashboard></PrivateRouter>}
+          element={<Dashboard></Dashboard>}
         ></Route>
         <Route path="/admin/movie" element={<Movie></Movie>}></Route>
         <Route

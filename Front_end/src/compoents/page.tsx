@@ -14,7 +14,7 @@ const HomePage = ({children}: Props) => {
         <div>
             <Header></Header>
             <div className="maintain">
-                <Banner></Banner>
+                {/* <Banner></Banner> */}
                 <div className="main-area">
                     {children}
                 </div>

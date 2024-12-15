@@ -81,9 +81,9 @@ const Header = () => {
         <NavLink to="/about" className="hover:text-gray-300">
           Giới thiệu
         </NavLink>
-        <NavLink to="/admin/dashboard" className="hover:text-gray-300">
+        {/* <NavLink to="/admin/dashboard" className="hover:text-gray-300">
           Admin
-        </NavLink>
+        </NavLink> */}
       </nav>
        <div className="flex mt-2"> <Link to={`/userprofile`}>
        <img
@@ -128,9 +128,9 @@ const Header = () => {
         <NavLink to="/about" className="hover:text-gray-300">
           Giới thiệu
         </NavLink>
-        <NavLink to="/admin/dashboard" className="hover:text-gray-300">
+        {/* <NavLink to="/admin/dashboard" className="hover:text-gray-300">
           Admin
-        </NavLink>
+        </NavLink> */}
       </nav>
             <div className="space-x-4">
           
