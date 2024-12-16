@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->decimal('discount_amount', 10, 2);
-            $table->date('expiry_date');
+            $table->enum('status', ['On', 'Off'])
+                  ->default('On');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

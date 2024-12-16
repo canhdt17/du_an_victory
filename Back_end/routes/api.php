@@ -17,12 +17,13 @@ use App\Http\Controllers\Api\MovieController;
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\CinemaController;
 use App\Http\Controllers\Api\TintucController;
-use App\Http\Controllers\Api\BookingController;
-use App\Http\Controllers\Api\InvoiceController;
-use App\Http\Controllers\Api\VoucherController;
+
+// use App\Http\Controllers\Api\InvoiceController;
+// use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\ArchiveUserController;
 
 use App\Http\Controllers\Api\AdminUserControler;
+use App\Http\Controllers\Api\ArchiveUserController as ApiArchiveUserController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\API\SeatTypeController;
 use App\Http\Controllers\Api\ComboFoodController;
@@ -32,7 +33,15 @@ use App\Http\Controllers\Api\PointVoucherController;
 
 // use App\Models\User;
 use App\Http\Controllers\Api\KhuyenMaiController;
-use App\Http\Controllers\Api\ShowtimeController ;
+use App\Http\Controllers\Api\SeatController;
+use App\Http\Controllers\Api\VoucherController;
+use App\Http\Controllers\Api\UserController;
+
+// use App\Http\Controllers\Api;
+use App\Http\Controllers\Api\CinemaController;
+use App\Http\Controllers\Api\DonatePointController;
+use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\PointUserController;
 use App\Http\Controllers\Api\StyleVoucherController;
 use App\Http\Controllers\Api\BookingDetailController;
 
@@ -79,11 +88,11 @@ Route::prefix('style_vouchers')->group(function () {
     Route::put('/{id}', [StyleVoucherController::class, 'update']); // Cập nhật
     Route::delete('/{id}', [StyleVoucherController::class, 'destroy']); // Xóa
 });
-Route::get('archive_users', [ArchiveUserController::class, 'index']);
-Route::post('archive_users', [ArchiveUserController::class, 'store']);
-Route::put('archive_users/{id}', [ArchiveUserController::class, 'update']);
-Route::get('archive_users/{id}', [ArchiveUserController::class, 'show']);
-Route::delete('archive_users/{id}', [ArchiveUserController::class, 'destroy']);
+Route::get('archive_users', [ApiArchiveUserController::class, 'index']);
+Route::post('archive_users', [ApiArchiveUserController::class, 'store']);
+Route::put('archive_users/{id}', [ApiArchiveUserController::class, 'update']);
+Route::get('archive_users/{id}', [ApiArchiveUserController::class, 'show']);
+Route::delete('archive_users/{id}', [ApiArchiveUserController::class, 'destroy']);
 
 
 Route::apiResource('rooms', RoomController::class);
@@ -110,13 +119,13 @@ Route::get('/lastest-tin-tuc', [TintucController::class, 'LastestTinTuc']);
 Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
 // api time id showtime
 Route::get('/getIDShowtime/{movieId}/bases/{baseId}/dates/{date}/times/{time}/showtimeId', [ShowtimeController::class, 'getIDShowtime']);
-// api tim những ngày chiếu của phim 
+// api tim những ngày chiếu của phim
 Route::get('/getDateShowtime/{movieId}/bases/{baseId}/dates', [ShowtimeController::class, 'getDateShowtime']);
-// api tim những thời gian chiếu của ngày chiếu phim 
+// api tim những thời gian chiếu của ngày chiếu phim
 Route::get('/getTimeShowtime/{movieId}/bases/{baseId}/dates/{date}/times', [ShowtimeController::class, 'getTimeShowtime']);
-// // api tim id room theo thời gian chiếu của ngày chiếu phim 
+// // api tim id room theo thời gian chiếu của ngày chiếu phim
 // Route::get('/getIDRoomShowtime/{ids}', [ShowtimeController::class, 'getIDRoomShowtime']);
-// api tim list ghế theo thời gian chiếu của ngày chiếu phim 
+// api tim list ghế theo thời gian chiếu của ngày chiếu phim
 Route::get('/getSeatShowtime/{movieId}/bases/{baseId}/dates/{date}/times/{time}/seats', [ShowtimeController::class, 'getSeatShowtime']);
 // Route::post('/user/{id}', [UserController::class, 'update']);
 
