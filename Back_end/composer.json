@@ -64,6 +64,12 @@
             "php-http/discovery": true
         }
     },
+    "repositories":
+    {
+        "type": "vcs",
+        "url": "git@github.com:laravel/pint.git"
+    },
     "minimum-stability": "stable",
     "prefer-stable": true
+    
 }
