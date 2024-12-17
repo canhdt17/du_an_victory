@@ -57,7 +57,6 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
         image: imageUrl
       };
       console.log("formattedShowData: ", formattedShowData);
-
       await onAddMovie(formattedShowData);
       alert("Thêm phim thành công!");
     } catch (error: any) {
@@ -70,14 +69,12 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
     setFile(selectedFile);
   };
 
-  
-
   const handleUpload = async () => {
     if (!file) return alert("Please select a file first.");
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "upload"); 
+    formData.append("upload_preset", "upload");
 
     // Gửi yêu cầu POST tới Cloudinary
     fetch(cloudinaryUrl, {
@@ -135,7 +132,7 @@ const AddMovie: React.FC<Props> = ({ onAddMovie }) => {
                   <button type='button' onClick={handleUpload}>Upload</button>
                   {imageUrl && (
                     <div>
-                      <h2  className="text-white font-bold">Ảnh đã upload:</h2>
+                      <h2 className="text-white font-bold">Ảnh đã upload:</h2>
                       <img
                         src={imageUrl}
                         alt="Uploaded"

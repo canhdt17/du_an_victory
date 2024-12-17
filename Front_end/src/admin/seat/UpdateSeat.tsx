@@ -11,7 +11,6 @@ import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
 
-
 type Props = {
   updateSeats: (id: number | string, data: ISeat) => void;
   seat_types: { id: number; name: string }[];
@@ -24,7 +23,7 @@ const updateSeatSchema = Joi.object({
   room_id: Joi.number().required().label("Room"),
 });
 
-const UpdateSeat: React.FC<Props> = ({ updateSeats }) => {
+const UpdateSeat: React.FC<Props> = ({ updateSeats, seat_types, rooms }) => {
   const { id } = useParams<{ id: string }>();
   const {
     register,
@@ -37,46 +36,11 @@ const UpdateSeat: React.FC<Props> = ({ updateSeats }) => {
 
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
-  const [seatTypes, setSeatTypes] = useState<
-    { id: number; seat_type_name: string }[]
-  >([]);
-  const [rooms, setRooms] = useState<{ id: number; room_name: string }[]>([]);
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const seatTypesResponse = await fetch(
-        "http://127.0.0.1:8000/api/seatTypes"
-      );
-      if (!seatTypesResponse.ok) {
-        throw new Error(
-          `Failed to fetch seat types: ${seatTypesResponse.statusText}`
-        );
-      }
-      const seatTypesData = await seatTypesResponse.json();
-      // console.log("Seat Types Data:", seatTypesData);
-      setSeatTypes(seatTypesData || []);
-
-      // Fetch rooms
-      const roomsResponse = await fetch("http://127.0.0.1:8000/api/rooms");
-      if (!roomsResponse.ok) {
-        throw new Error(`Failed to fetch rooms: ${roomsResponse.statusText}`);
-      }
-      const roomsData = await roomsResponse.json();
-      // console.log("Rooms Data:", roomsData);
-      setRooms(roomsData || []);
-    } catch (error) {
-      console.error("Failed to fetch data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   // Fetch dữ liệu ghế dựa trên ID
   useEffect(() => {
     const fetchSeat = async () => {
       try {
-        await fetchData();
         const data = await SeatByID(id!);
         reset(data);
       } catch (error: any) {
@@ -93,10 +57,10 @@ const UpdateSeat: React.FC<Props> = ({ updateSeats }) => {
     console.log("Submitting Data:", data);
     try {
       setLoading(true);
-      await updateSeats(id!, data);
+      await updateSeats(id!, data);  // Call updateSeats function from props
       alert("Ghế đã được cập nhật thành công!");
     } catch (error) {
-      console.error("lỗi cập nhật ghế:", error);
+      console.error("Lỗi cập nhật ghế:", error);
       setFetchError("Cập nhật ghế thất bại. Vui lòng thử lại.");
     } finally {
       setLoading(false);
@@ -107,8 +71,8 @@ const UpdateSeat: React.FC<Props> = ({ updateSeats }) => {
     <div>
       <div className="dashboards">
         <div>
-          <Logo></Logo>
-          <HeaderDashboard></HeaderDashboard>
+          <Logo />
+          <HeaderDashboard />
           <div className="container-fluid">
             <div className="row">
               <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
@@ -118,7 +82,7 @@ const UpdateSeat: React.FC<Props> = ({ updateSeats }) => {
                   id="sidebarMenu"
                   aria-labelledby="sidebarMenuLabel"
                 >
-                  <MenuDashboard></MenuDashboard>
+                  <MenuDashboard />
                 </div>
               </div>
               <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -131,13 +95,13 @@ const UpdateSeat: React.FC<Props> = ({ updateSeats }) => {
                   {fetchError && <p>{fetchError}</p>}
 
                   <div className="mb-3">
-                    <label htmlFor="seatName" className="form-label">
+                    <label htmlFor="seatNumber" className="form-label">
                       Số Ghế:
                     </label>
                     <input
                       type="text"
                       className="form-control"
-                      id="seatName"
+                      id="seatNumber"
                       {...register("seat_number")}
                     />
                     {errors.seat_number && (
@@ -157,10 +121,10 @@ const UpdateSeat: React.FC<Props> = ({ updateSeats }) => {
                       {...register("seat_type_id")}
                     >
                       <option value="">Chọn loại ghế</option>
-                      {seatTypes.length > 0 ? (
-                        seatTypes.map((type) => (
+                      {seat_types.length > 0 ? (
+                        seat_types.map((type) => (
                           <option key={type.id} value={type.id}>
-                            {type.seat_type_name}
+                            {type.name}
                           </option>
                         ))
                       ) : (
@@ -187,7 +151,7 @@ const UpdateSeat: React.FC<Props> = ({ updateSeats }) => {
                       {rooms.length > 0 ? (
                         rooms.map((room) => (
                           <option key={room.id} value={room.id}>
-                            {room.room_name}
+                            {room.name}
                           </option>
                         ))
                       ) : (

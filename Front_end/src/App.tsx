@@ -70,6 +70,7 @@ import CategoryFilms from "./compoents/categoryfims/categoryFims";
 import Showtimes from "./compoents/showtimes/showtimes";
 import Dashboard from "./admin/movie/dashboard";
 import Movie from "./admin/movie/movie";
+import UpdateKhuyenMai from "./admin/khuyen_mai/UpdateKhuyenMais";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -325,7 +326,7 @@ function App() {
     id: number | string
   ) => {
     try {
-      const updateKhuyenMai = await KhuyenMaiUpdate(khuyenMaiData, id);
+      const updateKhuyenMai = await UpdateKhuyenMai(khuyenMaiData, id);
       alert("Cập nhật thành công.");
       const newkhuyenMais = khuyenmais.map((khuyenMai) =>
         khuyenMai.id === id ? updateKhuyenMai : khuyenMai
@@ -364,23 +365,6 @@ function App() {
       console.log(error);
     }
   };
-  // const updateKhuyenMai = async (khuyenmaiData: IKhuyenMai, id: number | string) => {
-  //   try {
-  //     const updatedkhuyenMai = await UpdatekhuyenMais(
-  //     khuyenMai,
-  //     id
-  //   );
-  //     alert("Cập nhật thành công.");
-  //   const newkhuyenMais = khuyenMais.map((khuyenMai) =>
-  //     khuyenMai.cate_id === id ? updatedkhuyenMai : khuyenMai
-  //   );
-  //   setkhuyenMais(newkhuyenMais);
-  //   navigate("/admin/khuyen_mai");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <>
       <Routes>
@@ -486,7 +470,7 @@ function App() {
         {/* ghe */}
         <Route path="/admin/seat" element={<Seat></Seat>}></Route>
         <Route
-          path="/admin/creatseat"
+          path="/admin/addseat"
           element={
             <AddSeat
               addCreateSeat={addSeat}
@@ -554,12 +538,6 @@ function App() {
           path="/admin/create_tin_tuc"
           element={<CreateTinTuc onAddTinTuc={addTinTuc}></CreateTinTuc>}
         ></Route>
-        {/* <Route
-          path="/admin/seat_type/edit/:id"
-          element={
-            <UpdateSeatType updateSeatType={updateSeatType}></UpdateSeatType>
-          }
-        ></Route> */}
         {/* admin / quan li nguoi dung */}
         <Route path="/admin/user" element={<UserList />} />
         <Route path="/admin/createuser" element={<CreateUser />} />
