@@ -58,10 +58,10 @@ const LoginPage = () => {
       const token = localStorage.getItem("token");
   
       if (token) {
-        // Gọi API để lấy role_id
+    
         const roleId = await fetchUserRole(token);
   
-        // Xử lý role_id với switch
+      
         switch (roleId) {
           case 1:
             navigate("/admin/dashboard");
