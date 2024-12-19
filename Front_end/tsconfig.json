@@ -3,5 +3,9 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "allowJs": true,   // Cho phép TypeScript sử dụng file JavaScript
+    "checkJs": false   // Không kiểm tra lỗi trong file JavaScript
+  }
 }
