@@ -1,24 +1,24 @@
 <?php
 
-use App\Http\Controllers\Admin\ShowtimeController;
+
 // use App\Models\Invoice;
-// use Illuminate\Http\Request;
-// use App\Http\Controllers\Api;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Api;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\RoomController;
-use App\Http\Controllers\Api\SeatController;
+// use App\Http\Controllers\Api\SeatController;
 use App\Http\Controllers\Api\TypeController;
-use App\Http\Controllers\Api\UserController;
+// use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\HoTroController;
 use App\Http\Controllers\Api\MovieController;
 use App\Http\Controllers\Api\BannerController;
-use App\Http\Controllers\Api\CinemaController;
+// use App\Http\Controllers\Api\CinemaController;
 use App\Http\Controllers\Api\TintucController;
+use App\Http\Controllers\Api\BookingController;
 
-// use App\Http\Controllers\Api\InvoiceController;
-// use App\Http\Controllers\Api\VoucherController;
+use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\ArchiveUserController;
 
 use App\Http\Controllers\Api\AdminUserControler;
@@ -33,7 +33,7 @@ use App\Http\Controllers\Api\PointVoucherController;
 // use App\Models\User;
 use App\Http\Controllers\Api\KhuyenMaiController;
 use App\Http\Controllers\Api\SeatController;
-use App\Http\Controllers\Api\VoucherController;
+
 use App\Http\Controllers\Api\UserController;
 
 // use App\Http\Controllers\Api;
@@ -43,7 +43,10 @@ use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\PointUserController;
 use App\Http\Controllers\Api\ShowtimeController as ApiShowtimeController;
 use App\Http\Controllers\Api\StyleVoucherController;
-use App\Http\Controllers\Api\BookingDetailController;
+// use App\Models\Invoice;
+// use App\Models\User;
+// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Route;
 
 
 
@@ -118,14 +121,18 @@ Route::get('/phim-sap-chieu', [MovieController::class, 'phimSapChieu']);
 Route::get('/lastest-tin-tuc', [TintucController::class, 'LastestTinTuc']);
 Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
 // api time id showtime
-Route::get('/getIDShowtime/{ids}', [ShowtimeController::class, 'getIDShowtime']);
-// api tim những ngày chiếu của phim
-Route::get('/getDateShowtime/{ids}', [ShowtimeController::class, 'getDateShowtime']);
-// api tim những thời gian chiếu của ngày chiếu phim
-Route::get('/getTimeShowtime/{ids}', [ShowtimeController::class, 'getTimeShowtime']);
-// // api tim id room theo thời gian chiếu của ngày chiếu phim
+Route::get('/getIDShowtime/{movieId}/bases/{baseId}/dates/{date}/times/{time}/showtimeId', [ApiShowtimeController::class, 'getIDShowtime']);
+// api tim những ngày chiếu của phim 
+Route::get('/getDateShowtime/{movieId}/bases/{baseId}/dates', [ApiShowtimeController::class, 'getDateShowtime']);
+// api tim những thời gian chiếu của ngày chiếu phim 
+Route::get('/getTimeShowtime/{movieId}/bases/{baseId}/dates/{date}/times', [ApiShowtimeController::class, 'getTimeShowtime']);
+// // api tim id room theo thời gian chiếu của ngày chiếu phim 
 // Route::get('/getIDRoomShowtime/{ids}', [ShowtimeController::class, 'getIDRoomShowtime']);
-// api tim list ghế theo thời gian chiếu của ngày chiếu phim
-Route::get('/getSeatShowtime/{ids}', [ShowtimeController::class, 'getSeatShowtime']);
+// api tim list ghế theo thời gian chiếu của ngày chiếu phim 
+Route::get('/getSeatShowtime/{movieId}/bases/{baseId}/dates/{date}/times/{time}/seats', [ApiShowtimeController::class, 'getSeatShowtime']);
 // Route::post('/user/{id}', [UserController::class, 'update']);
 
+//api diem tich luy
+Route::apiResource('point-users', PointUserController::class);
+
+Route::apiResource('donate-points', DonatePointController::class);
