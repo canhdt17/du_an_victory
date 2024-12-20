@@ -74,6 +74,8 @@ import CategoryFilms from "./compoents/categoryfims/categoryFims";
 import Showtimes from "./compoents/showtimes/showtimes";
 import Dashboard from "./admin/movie/dashboard";
 import Movie from "./admin/movie/movie";
+import About from "./compoents/about/about";
+import ScreeningRoom from "./compoents/about/screening";
 
 
 function App() {
@@ -590,6 +592,8 @@ function App() {
         <Route path="/showtimes" element={<Showtimes></Showtimes>}></Route>
         <Route path="/showtimes/:idd" element={<Showtimes></Showtimes>}></Route>
         <Route path="/userprofile" element={<UserProfile></UserProfile>}></Route>
+        <Route path="/about" element={<About></About>}></Route>
+        <Route path="/screeningroom" element={<ScreeningRoom></ScreeningRoom>}></Route>
       </Routes>
     </>
   );

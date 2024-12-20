@@ -8,11 +8,11 @@ const fetchUserRole = async (token: string) => {
   try {
     const response = await axios.get("http://127.0.0.1:8000/api/user", {
       headers: {
-        Authorization: `Bearer ${token}`, // Đính kèm token để xác thực
+        Authorization: `Bearer ${token}`, 
       },
     });
 
-    return response.data.role_id; // Trả về role_id
+    return response.data.role_id; 
   } catch (error) {
     console.error("Không thể lấy thông tin người dùng:", error);
     throw error;

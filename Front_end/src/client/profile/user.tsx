@@ -6,7 +6,7 @@ import { IUser } from "../../interface/User";
 const UserProfile = () => {
   const [user, setUser] = useState<IUser>();
   const fetchUser = async () => {
-    const token = localStorage.getItem("token"); // Lấy token từ localStorage
+    const token = localStorage.getItem("token");
   
     if (!token) {
       console.error("Không tìm thấy token");
@@ -18,13 +18,13 @@ const UserProfile = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Gửi token qua header Authorization
+          Authorization: `Bearer ${token}`, 
         },
       });
   
       if (response.ok) {
         const user = await response.json();
-        return user; // Trả về thông tin người dùng
+        return user; 
       } else {
         console.error("Lỗi khi lấy thông tin người dùng");
         return null;
@@ -37,8 +37,8 @@ const UserProfile = () => {
   
   useEffect(() => {
     const loadUser = async () => {
-      const fetchedUser = await fetchUser(); // Gọi hàm fetchUser
-      setUser(fetchedUser); // Cập nhật state
+      const fetchedUser = await fetchUser(); 
+      setUser(fetchedUser); 
     };
 
     loadUser();
