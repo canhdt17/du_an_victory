@@ -74,6 +74,8 @@ import CategoryFilms from "./compoents/categoryfims/categoryFims";
 import Showtimes from "./compoents/showtimes/showtimes";
 import Dashboard from "./admin/movie/dashboard";
 import Movie from "./admin/movie/movie";
+import About from "./compoents/about/about";
+import ScreeningRoom from "./compoents/about/screening";
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
