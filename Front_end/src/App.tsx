@@ -421,7 +421,7 @@ function App() {
           path="/admin/dashboard"
           element={<Dashboard></Dashboard>}
         ></Route>
-        <Route path="/admin/movie" element={<Movie></Movie>}></Route>
+        <Route path="/admin/movie" element={<PrivateRouter><Movie></Movie></PrivateRouter>}></Route>
         <Route
           path="/admin/movie/addmovie"
           element={<AddMovie onAddMovie={addMovie}></AddMovie>}
