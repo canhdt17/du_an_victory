@@ -122,13 +122,13 @@ Route::get('/lastest-tin-tuc', [TintucController::class, 'LastestTinTuc']);
 Route::get('/lastest-khuyen-mai', [KhuyenMaiController::class, 'LastestKM']);
 // api time id showtime
 Route::get('/getIDShowtime/{movieId}/bases/{baseId}/dates/{date}/times/{time}/showtimeId', [ApiShowtimeController::class, 'getIDShowtime']);
-// api tim những ngày chiếu của phim 
+// api tim những ngày chiếu của phim
 Route::get('/getDateShowtime/{movieId}/bases/{baseId}/dates', [ApiShowtimeController::class, 'getDateShowtime']);
-// api tim những thời gian chiếu của ngày chiếu phim 
+// api tim những thời gian chiếu của ngày chiếu phim
 Route::get('/getTimeShowtime/{movieId}/bases/{baseId}/dates/{date}/times', [ApiShowtimeController::class, 'getTimeShowtime']);
-// // api tim id room theo thời gian chiếu của ngày chiếu phim 
+// // api tim id room theo thời gian chiếu của ngày chiếu phim
 // Route::get('/getIDRoomShowtime/{ids}', [ShowtimeController::class, 'getIDRoomShowtime']);
-// api tim list ghế theo thời gian chiếu của ngày chiếu phim 
+// api tim list ghế theo thời gian chiếu của ngày chiếu phim
 Route::get('/getSeatShowtime/{movieId}/bases/{baseId}/dates/{date}/times/{time}/seats', [ApiShowtimeController::class, 'getSeatShowtime']);
 // Route::post('/user/{id}', [UserController::class, 'update']);
 
@@ -136,4 +136,3 @@ Route::get('/getSeatShowtime/{movieId}/bases/{baseId}/dates/{date}/times/{time}/
 Route::apiResource('point-users', PointUserController::class);
 
 Route::apiResource('donate-points', DonatePointController::class);
-

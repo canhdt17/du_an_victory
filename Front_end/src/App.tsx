@@ -66,10 +66,17 @@ import BaseAdd from "./admin/base/addbase";
 import UpdateBase from "./admin/base/updatearea";
 import NewsDetails from "./compoents/detail-news/detail-news";
 import UserProfile from "./client/profile/user";
+
+import PrivateRouter from "./compoents/auth/privateRouter";
+import AdminDashboard from "./admin/movie/admindashboard";
+
 import CategoryFilms from "./compoents/categoryfims/categoryFims";
 import Showtimes from "./compoents/showtimes/showtimes";
 import Dashboard from "./admin/movie/dashboard";
 import Movie from "./admin/movie/movie";
+import About from "./compoents/about/about";
+import ScreeningRoom from "./compoents/about/screening";
+
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -409,11 +416,12 @@ function App() {
             </HomePage>
           }
         ></Route>
+        <Route path="/admin-dashboard" element={<AdminDashboard></AdminDashboard>}></Route>
         <Route
           path="/admin/dashboard"
           element={<Dashboard></Dashboard>}
         ></Route>
-        <Route path="/admin/movie" element={<Movie></Movie>}></Route>
+        <Route path="/admin/movie" element={<PrivateRouter><Movie></Movie></PrivateRouter>}></Route>
         <Route
           path="/admin/movie/addmovie"
           element={<AddMovie onAddMovie={addMovie}></AddMovie>}
@@ -582,7 +590,10 @@ function App() {
         <Route path="/categoryfilms" element={<CategoryFilms></CategoryFilms>}></Route>
         <Route path="/categoryfilms/:id" element={<CategoryFilms></CategoryFilms>}></Route>
         <Route path="/showtimes" element={<Showtimes></Showtimes>}></Route>
+        <Route path="/showtimes/:idd" element={<Showtimes></Showtimes>}></Route>
         <Route path="/userprofile" element={<UserProfile></UserProfile>}></Route>
+        <Route path="/about" element={<About></About>}></Route>
+        <Route path="/screeningroom" element={<ScreeningRoom></ScreeningRoom>}></Route>
       </Routes>
     </>
   );
