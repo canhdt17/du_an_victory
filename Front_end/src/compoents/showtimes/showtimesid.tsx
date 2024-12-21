@@ -7,43 +7,41 @@ import axios from 'axios'
 
 
 const ShowtimesId = () => {
-    const [trendings, setTrendings] = useState<ITrendings[]>([]);
+    const [times,setTimes] = useState<IShowTime[]>([])
   const param = useParams()
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/movies/${param?.id as number|string}`);
+  useEffect(()=>{
+    (async()=>{
+     try {
+      const {data} = await axios.get(`http://127.0.0.1:8000/api/showtimes/${param?.id as number |string}`) 
+     setTimes(data.showtime);
      
-        setTrendings(data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
-
+      
+      
+   
+      
+      
+     } catch (error) {
+      console.log(error);
+      
+     }
+    })()
+  },[])
   return (
     <div>
      
           <div className="grid grid-cols-2 gap-6">
-        
-         <div className="col-lg-4 col-md-6 col-sm-6" key={trendings.id}>
-            <div className="product__item">
-              <div className="product__item__pic set-bg">
-              <img src={trendings.image}></img>
-                <div className="ep">{trendings.type_id}</div>
-                <div className="comment"><i className="fa fa-comments" />  {trendings.duration}</div>
-                <div className="view"><i className="fa fa-eye" /> {trendings.nation}</div>
-              </div>
-              <div className="product__item__text">
-                <ul>
-                  <li>Active</li>
-                  <li>Movie</li>
-                </ul>
-                <NavLink to={`/movie-details/${trendings.id}`}><h5><a href="#">{trendings.name_movie}</a></h5></NavLink>
-              </div>
-            </div>
-          </div>
-
+             {Array.isArray(times) && times.map((time:IShowTime)=>(
+             <div className="bg-gray-800 p-4 rounded-lg flex space-x-4" key={time.id}>
+  <img src="https://via.placeholder.com/120x180" alt="Movie Poster" className="w-32 h-48 object-cover rounded-md" />
+  
+<div>
+    <h3 className="text-lg font-semibold mb-2 text-white">{time.movie_id}</h3>
+    
+  </div>
+ 
+  
+</div>
+  ))}
           </div>
       
 

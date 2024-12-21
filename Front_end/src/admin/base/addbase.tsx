@@ -8,13 +8,14 @@ import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
 
 type Props = {
-  addBase: (area: IBase) => void;
+  addBase: (baseData: IBase) => void;
 };
+
 const baseSchema = Joi.object({
   base_name: Joi.string().required().label("Base Name"),
 });
-const BaseAdd: React.FC<Props> = ({ addBase }) => {
-  const form = useForm();
+
+const BaseAdd = ({ addBase }: Props) => {
   const {
     register,
     handleSubmit,
@@ -23,25 +24,26 @@ const BaseAdd: React.FC<Props> = ({ addBase }) => {
     resolver: joiResolver(baseSchema),
   });
 
-  const onSubmit = (data: IBase) => {
-    addBase(data);
+  const onSubmit = (baseData: IBase) => {
+    addBase(baseData);
   };
+
   return (
     <div>
       <div className="dashboards">
         <div>
-          <Logo></Logo>
-          <HeaderDashboard></HeaderDashboard>
+          <Logo />
+          <HeaderDashboard />
           <div className="container-fluid">
             <div className="row">
-              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
+              <div className="sidebar border border-right col-md-3 col-lg-2 p-0">
                 <div
-                  className="offcanvas-md offcanvas-end "
+                  className="offcanvas-md offcanvas-end"
                   tabIndex={-1}
                   id="sidebarMenu"
                   aria-labelledby="sidebarMenuLabel"
                 >
-                  <MenuDashboard></MenuDashboard>
+                  <MenuDashboard />
                 </div>
               </div>
               <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -63,7 +65,7 @@ const BaseAdd: React.FC<Props> = ({ addBase }) => {
                     />
 
                     {errors.base_name && (
-                      <div className="text-danger ">
+                      <div className="text-danger">
                         {errors.base_name.message}
                       </div>
                     )}

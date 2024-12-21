@@ -53,7 +53,7 @@ const Movie: React.FC = () => {
 
   const deleteMovie = useCallback(async (id: number | string) => {
     if (!window.confirm("Bạn có chắc muốn xóa phim này?")) return;
-  
+
     try {
       setLoading(true);
       await MovieDelete(id);
@@ -65,7 +65,7 @@ const Movie: React.FC = () => {
       setLoading(false);
     }
   }, []);
-  
+
 
   useEffect(() => {
     fetchMovies();

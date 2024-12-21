@@ -9,15 +9,19 @@ export const SeatList = async () => {
   try {
     const { data } = await api.get<{ seats: ISeat[] }>("seats");
     return data;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    console.error("Error in SeatList:", error.message);
+    if (error.response) {
+      console.error("Server response:", error.response.data);
+    }
   }
 };
+
 
 // ID
 export const SeatByID = async (id: number | string): Promise<ISeat | null> => {
   try {
-    const { data } = await api.get<ISeat>(`seats/${id}`); 
+    const { data } = await api.get<ISeat>(`seats/${id}`);
     return data;
   } catch (error: any) {
     console.error(`Error fetching seat with ID ${id}:`, error);

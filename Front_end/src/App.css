@@ -5,6 +5,7 @@
   --highlight-color: #3e8e41;
 }
 
+
 .dashboards {
   background-color: #fbb4b4;
   color: var(--text-light);
@@ -17,10 +18,10 @@ main {
   max-width: 100%;
   overflow-y: auto;
   padding: 1rem;
-  box-shadow: 0 4px 8px zrgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-
+/* --------------------- MEDIA QUERIES --------------------- */
 @media (max-width: 768px) {
   .sidebar {
     display: none;
@@ -47,9 +48,10 @@ main {
   }
 }
 
+/* --------------------- SIDEBAR STYLES --------------------- */
 .sidebar {
-  background-color: #ffa0a0; 
-  color: var(--text-muted); 
+  background-color: #ffa0a0;
+  color: var(--text-muted);
   min-height: 100vh;
   padding: 1rem;
 }
@@ -57,7 +59,7 @@ main {
 .sidebar .nav-link {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #b0b0b0; 
+  color: #b0b0b0;
   padding: 0.5rem;
   border-radius: 4px;
   transition: background-color 0.3s, color 0.3s;
@@ -73,24 +75,21 @@ main {
   font-weight: bold;
 }
 
-
 .sidebar-heading {
   font-size: 0.75rem;
-  color: #a0a0a0; 
+  color: #a0a0a0;
 }
-
 .navbar-brand {
   padding: 0.75rem;
-  background-color:#ffa0a0; 
-  color: #ffffff; 
+  background-color: #ffa0a0;
+  color: #ffffff;
   box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.1);
-  /* text-color  */
 }
 
 .navbar .form-control {
   padding: 0.75rem 1rem;
-  background-color: #3c3c3c; 
-  border: 1px solid #5a5a5a; 
+  background-color: #3c3c3c;
+  border: 1px solid #5a5a5a;
   color: #ffffff;
 }
 
@@ -98,6 +97,7 @@ main {
   border-color: #3e8e41;
   box-shadow: 0 0 5px #3e8e41;
 }
+
 .action-buttons {
   display: flex;
   justify-content: center;
@@ -129,8 +129,6 @@ main {
   background-color: #ff0019;
 }
 
-
-
 .table-container {
   max-height: calc(100vh - 180px); 
   overflow-y: auto;
@@ -148,7 +146,6 @@ main {
   background-color: #3c3c3c;
   border-radius: 4px;
 }
-
 
 .table {
   width: 100%;
@@ -188,6 +185,32 @@ main {
   background-color: #f7aaaa;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3c3c3c;
+  border-radius: 4px;
+}
+
+.movie-list-container {
+  max-height: 82vh;
+  overflow-y: auto;
+  background-color: #f39e9e;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.movie-list-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.movie-list-container::-webkit-scrollbar-thumb {
+  background-color: #3c3c3c;
+  border-radius: 4px;
+}
 
 .bd-placeholder-img {
   font-size: 1.125rem;
@@ -204,13 +227,13 @@ main {
 }
 
 .btn-bd-primary {
-  background-color: #555555; 
+  background-color: #555555;
   color: #ffffff;
   border-radius: 4px;
 }
 
 .btn-bd-primary:hover {
-  background-color: #444444; 
+  background-color: #444444;
   transition: all 0.3s ease;
 }
 
@@ -252,36 +275,28 @@ main {
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 }
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: #3c3c3c;
-  border-radius: 4px;
-}
-.table tr:nth-child(odd) td {
-  color: #ffffff;
-  font-weight: normal; 
+/* Đặt header cố định ở trên cùng */
+.menuhead {
+  position: fixed; /* Cố định header ở vị trí cố định */
+  top: 0; /* Đảm bảo header ở trên cùng của trang */
+  left: 0; /* Đảm bảo header bắt đầu từ cạnh trái */
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  z-index: 1000; /* Đảm bảo header không bị chặn bởi các phần tử khác */
 }
 
-.table tr:nth-child(even) td {
-  color: #ffffff; 
-  font-weight: bold; 
-}
-.movie-list-container {
-  max-height: 82vh; 
-  overflow-y: auto; 
-  background-color: #f39e9e; 
-  border: 1px solid #444; 
-  border-radius: 8px; 
-  padding: 1rem; 
-}
-
-.movie-list-container::-webkit-scrollbar {
-  width: 8px; 
+/* Đảm bảo có khoảng trống dưới header để nội dung không bị che khuất */
+.headermenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  background-color: #121927; /* Màu nền đậm */
+  color: white;
+  padding: 10px 20px; /* Khoảng cách nội dung bên trong */
 }
 
-.movie-list-container::-webkit-scrollbar-thumb {
-  background-color: #3c3c3c; 
-  border-radius: 4px; 
+body {
+  /* padding-top: 70px; Thêm khoảng cách ở trên để nội dung không bị header che khuất */
 }

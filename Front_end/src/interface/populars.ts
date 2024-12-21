@@ -3,6 +3,7 @@ export interface IPopulars {
     name_movie:string,
     image:string,
     type_id:number|string,
+    name_type :string;
     duration:string,
     nation:string,
     director:string,

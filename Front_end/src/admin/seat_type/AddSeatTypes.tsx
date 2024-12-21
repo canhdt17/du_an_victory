@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useForm } from "react-hook-form";
 import { ISeatType } from "../../interface/seat_type";
 import Joi from "joi";

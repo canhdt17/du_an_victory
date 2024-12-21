@@ -15,8 +15,8 @@ export const BaseList = async () => {
 //ID
 export const BaseById = async (id: number | string) => {
   try {
-    const { data } = await api.get<{ base: IBase }>(`bases/${id}`);
-    return data.base;
+    const { data } = await api.get<IBase>(`bases/${id}`);
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -33,14 +33,19 @@ export const AddBase = async (baseData: IBase) => {
 };
 
 //Update
-export const UpdateBase = async (baseData: IBase,id: number | string ) => {
+export const BaseUpdate = async (baseData: IBase, id: number | string) => {
   try {
-    const { data } = await api.put<{ bases: IBase }>(`bases/${id}`,baseData);
-    return data; 
+    if (typeof id !== 'string' && typeof id !== 'number') {
+      throw new Error('Invalid ID: Must be a string or number');
+    }
+    const { data } = await api.put<{ bases: IBase }>(`bases/${id}`, baseData);
+    return data;
   } catch (error) {
-    console.log(error);
+    console.log('Error in BaseUpdate:', error);
+    throw error;
   }
 };
+
 
 // Delete
 export const DeleteBase = async (id: number | string) => {

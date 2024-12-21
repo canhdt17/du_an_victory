@@ -1,15 +1,143 @@
-.payment-container *{
+/* Cơ bản */
+.payment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px 28px; /* Giảm padding để phần tử nhỏ lại */
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    margin-top: -40px; /* Đẩy lên trên một chút */
+}
+
+/* Thông tin phần bên trái */
+.infomation {
+    flex: 1;
+    min-width: 300px;
+    max-width: 60%; /* Tối đa 60% chiều rộng */
+    box-sizing: border-box;
+}
+
+/* Phần thanh toán bên phải */
+.payment-method {
+    flex: 1;
+    min-width: 300px;
+    max-width: 35%; /* Tối đa 35% chiều rộng */
+    background-color: #1a1d23;
+    padding: 15px; /* Giảm padding để phần tử nhỏ lại */
+    border-radius: 15px; /* Giảm border-radius */
+    box-sizing: border-box;
+}
+
+/* Các phần con */
+.payment-info, .payment-method, .cost-info {
+    background-color: #1a1d23;
+    padding: 15px; /* Giảm padding */
+    border-radius: 15px; /* Giảm border-radius */
+    box-sizing: border-box;
+}
+
+.payment-methods label {
+    display: block;
+    margin-bottom: 8px; /* Giảm khoảng cách giữa các label */
+    font-size: 14px; /* Giảm kích thước font */
+    color: white;
+}
+
+/* Cải thiện grid cho thông tin thanh toán */
+.payment-container .infomation .payment-info .payment-detail .header {
+    display: grid;
+    grid-template-columns: 1fr 180px 180px; /* Giảm chiều rộng của các cột */
+    gap: 8px;
+}
+
+.payment-container .infomation .payment-info .payment-detail .body {
+    display: grid;
+    grid-template-columns: 1fr 180px 180px; /* Giảm chiều rộng của các cột */
+    gap: 8px;
+}
+
+.cost-info {
+    margin-top: 15px; /* Giảm khoảng cách trên */
+    border-radius: 15px; /* Giảm border-radius */
+    background-color: #1a1d23;
+}
+
+/* Cải thiện button */
+.btn-primary, .btn-secondary {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px; /* Giảm kích thước font */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    background-color: #ff6f00;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #c5c5c5;
+    color: black;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    opacity: 0.9;
+}
+
+/* QR code */
+.qrcode img {
+    max-width:50%;
+    height: auto;
+    margin: 0 auto;
+}
+
+/* Các phần tử chi phí */
+.cost-category, .cost-value {
+    padding: 8px; /* Giảm padding */
+    font-size: 14px; /* Giảm kích thước font */
+}
+
+.cost-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.cost-value {
+    text-align: right;
+}
+
+/* Tăng cường bố cục động */
+@media (max-width: 768px) {
+    .payment-container {
+        flex-direction: column; /* Khi màn hình nhỏ, chuyển về dạng cột */
+        gap: 20px;
+    }
+
+    .payment-method, .infomation {
+        max-width: 100%;
+        flex: none;
+    }
+}
+
+.text-orange-500 {
+    --tw-text-opacity: 1;
+    color: rgb(249 115 22 / var(--tw-text-opacity));
+}
+
+/* Chỉnh lại style chung cho tất cả các phần tử */
+.payment-container * {
     color: #fff;
 }
-.payment-container label{
-    /* font-size: 14px; */
+
+.payment-container label {
+    font-size: 14px;
 }
-.payment-container .value{
+
+.payment-container .value {
     font-weight: 700;
-}
-.payment-container .infomation .payment-info .payment-detail .header{
-    grid-template-columns: 1fr 200px 200px;
-}
-.payment-container .infomation .payment-info .payment-detail .body{
-    grid-template-columns: 1fr 200px 200px;
 }

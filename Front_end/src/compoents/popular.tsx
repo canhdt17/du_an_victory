@@ -27,7 +27,7 @@ const Popular = (props: Props) => {
             <div className="product__item">
               <div className="product__item__pic set-bg">
                 <img src="/src/img/popular/1.jpg"></img>
-                <div className="ep">{popular.type_id}</div>
+                {/* <div className="ep">{popular.type_id}</div> */}
                 <div className="comment">
                   <i className="fa fa-comments" /> {popular.duration}
                 </div>

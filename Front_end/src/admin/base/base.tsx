@@ -6,7 +6,7 @@ import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
 import { IBase } from "../../interface/base";
-import { BaseList, DeleteBase, UpdateBase } from "../../service/base";
+import { BaseList, BaseUpdate, DeleteBase } from "../../service/base";
 import ListBases from "./listbase";
 
 const Base: React.FC = () => {
@@ -32,7 +32,7 @@ const Base: React.FC = () => {
     updateBase: IBase
   ): Promise<void> => {
     try {
-      const data = await UpdateBase(id, updateBase);
+      const data = await BaseUpdate(id, updateBase);
       if (data?.bases) {
         setBases(data.bases);
       }
