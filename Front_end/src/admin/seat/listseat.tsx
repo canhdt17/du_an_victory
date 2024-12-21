@@ -18,7 +18,7 @@ interface IBase {
 interface IRoom {
   id: number;
   room_name: string;
-  bases_id: number;
+  bases_id: number;~
 }
 
 const ListSeat: React.FC<Props> = ({ seats, loading, error, deleteSeat }) => {
@@ -81,6 +81,9 @@ const ListSeat: React.FC<Props> = ({ seats, loading, error, deleteSeat }) => {
     setSelectedRoomId(e.target.value);
   };
 
+  // Chỉ hiển thị danh sách ghế khi đã chọn cả cơ sở và phòng
+  const isFormValid = selectedBaseId && selectedRoomId;
+
   return (
     <div className="table-responsive small">
       {/* Dropdown chọn cơ sở và phòng */}
@@ -113,7 +116,7 @@ const ListSeat: React.FC<Props> = ({ seats, loading, error, deleteSeat }) => {
             className="form-select"
             onChange={handleRoomChange}
             value={selectedRoomId}
-            disabled={!selectedBaseId} // Vô hiệu hóa nếu chưa chọn cơ sở
+            disabled={!selectedBaseId} 
           >
             <option value="">Chọn phòng</option>
             {filteredRooms.map((room) => (
@@ -126,63 +129,66 @@ const ListSeat: React.FC<Props> = ({ seats, loading, error, deleteSeat }) => {
       </div>
 
       {/* Bảng danh sách ghế với lớp table-wrapper */}
-      <div className="table-wrapper">
-        <table className="table table-striped table-sm">
-          <thead>
-            <tr className="text-center">
-              <th scope="col">STT</th>
-              <th scope="col">Số Ghế</th>
-              <th scope="col">Loại Ghế</th>
-              <th scope="col">Phòng</th>
-              <th scope="col">Hành Động</th>
-            </tr>
-          </thead>
-          <tbody className="text-center">
-            {loading && (
-              <tr>
-                <td colSpan={5}>Đang tải...</td>
+      {isFormValid && (
+        <div className="table-wrapper">
+          <table className="table table-striped table-sm">
+            <thead>
+              <tr className="text-center">
+                <th scope="col">STT</th>
+                <th scope="col">Số Ghế</th>
+                <th scope="col">Loại Ghế</th>
+                <th scope="col">Phòng</th>
+                <th scope="col">Hành Động</th>
               </tr>
-            )}
-            {error && (
-              <tr>
-                <td colSpan={5}>Error: {error}</td>
-              </tr>
-            )}
-            {filteredSeats.length > 0 ? (
-              filteredSeats.map((seat, index) => (
-                <tr key={seat.id}>
-                  <td>{index + 1}</td>
-                  <td>{seat.seat_number}</td>
-                  <td>{seat.seatType ? seat.seatType.name : seat.seat_type_name}</td>
-                  <td>{seat.room_id}</td>
-                  <td>
-                    <div className="action-buttons">
-                      <NavLink to={`/admin/seat/edit/${seat.id}`}>
-                        <button type="button" className="btn btn-warning me-2">
-                          Cập nhật
-                        </button>
-                      </NavLink>
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={() => deleteSeat(seat.id)}
-                      >
-                        Xóa
-                      </button>
-                    </div>
-                  </td>
+            </thead>
+            <tbody className="text-center">
+              {loading && (
+                <tr>
+                  <td colSpan={5}>Đang tải...</td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={5}>Không có dữ liệu</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+              )}
+              {error && (
+                <tr>
+                  <td colSpan={5}>Error: {error}</td>
+                </tr>
+              )}
+              {filteredSeats.length > 0 ? (
+                filteredSeats.map((seat, index) => (
+                  <tr key={seat.id}>
+                    <td>{index + 1}</td>
+                    <td>{seat.seat_number}</td>
+                    <td>{seat.seatType ? seat.seatType.name : seat.seat_type_name}</td>
+                    <td>{seat.room_id}</td>
+                    <td>
+                      <div className="action-buttons">
+                        <NavLink to={`/admin/seat/edit/${seat.id}`}>
+                          <button type="button" className="btn btn-warning me-2">
+                            Cập nhật
+                          </button>
+                        </NavLink>
+                        <button
+                          type="button"
+                          className="btn btn-danger"
+                          onClick={() => deleteSeat(seat.id)}
+                        >
+                          Xóa
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={5}>Không có dữ liệu</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
 
 export default ListSeat;
+

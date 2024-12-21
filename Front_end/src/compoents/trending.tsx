@@ -39,7 +39,7 @@ const Trending = () => {
                       alt={trending.name_movie}
                     />
                   </NavLink>
-                  <div className="ep">{trending.type_id}</div>
+                  {/* <div className="ep">{trending.type_id}</div> */}
                   <div className="comment">
                     <i className="fa fa-comments" /> {trending.duration}
                   </div>

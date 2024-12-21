@@ -1,80 +1,89 @@
 import React, { useEffect, useState } from "react";
-// import QRCode from "react-qr-code";
 import QRCode from "qrcode";
 
-const BankQRCode = () => {
+const PaymentQRCode = ({
+  amount,
+  accountNumber,
+  content,
+  ticketCode,
+}: {
+  amount: number;
+  accountNumber: string;
+  content: string;
+  ticketCode: string;
+}) => {
+  const [qrCodeUrl, setQRCodeUrl] = useState<string>("");
+  const [paymentMethod, setPaymentMethod] = useState<string>("vietcombank");
 
-    const [qrCodeUrl, setQRCodeUrl] = useState("");
+  const paymentMethods = [
+    { id: "vietcombank", name: "Vietcombank", bankCode: "VCB", merchantName: "Rạp chiếu phim Victory" },
+    { id: "momo", name: "MoMo", bankCode: "MM", merchantName: "Rạp chiếu phim Victory" },
+    { id: "zalopay", name: "ZaloPay", bankCode: "ZP", merchantName: "Rạp chiếu phim Victory" },
+  ];
 
-  // Thông tin tài khoản ngân hàng
-  const bankCode = "MB"; // Mã ngân hàng
-  const accountNumber = "290088888888"; // Số tài khoản
-  const amount = 100000; // Số tiền (đơn vị: VND)
-  const content = "Thanh toan hoa don"; // Nội dung chuyển khoản
-  const merchantName = "Vuong Hong Thach"; // Nội dung chuyển khoản
+  const generateQRData = (method: string) => {
+    const selectedMethod = paymentMethods.find((pm) => pm.id === method);
+    if (!selectedMethod) return "";
 
-
-  // Hàm tính CRC (dành cho chuẩn EMVCo)
-  const calculateCRC16 = (data) => {
-    let crc = 0xFFFF;
-
-    for (let i = 0; i < data.length; i++) {
-      crc ^= data.charCodeAt(i) << 8;
-
-      for (let j = 0; j < 8; j++) {
-        if (crc & 0x8000) {
-          crc = (crc << 1) ^ 0x1021;
-        } else {
-          crc<<= 1;
-        }
-      }
-    }
-
-    return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, "0");
-  };
-
-  // Tạo dữ liệu QR code theo chuẩn VietQR
-  const generateVietQRData = () => {
     const data = [
-      "000201", // Header
-      "010211", // Phiên bản
-      `26${("00A00000072701230006970480015" + bankCode + accountNumber).length}00A00000072701230006970480015${bankCode}${accountNumber}`, // Merchant Info
-      "5204", // Loại giao dịch
-      "5802VN", // Quốc gia
-      `59${merchantName.length}${merchantName}`, // Tên người nhận
-    //   `60${city.length}${city}`, // Thành phố
-    //   `62${content.length}${content}`, // Nội dung giao dịch
+      "000201", // Chuyển đến mã chuẩn QR
+      "010211", // Mã loại QR
+      `26${("00A00000072701230006970480015" + selectedMethod.bankCode + accountNumber).length}00A00000072701230006970480015${selectedMethod.bankCode}${accountNumber}`,
+      "5204", // Loại thanh toán
+      "5802VN", // Mã quốc gia
+      `59${selectedMethod.merchantName.length}${selectedMethod.merchantName}`, // Tên thương nhân
       `54${amount.toString().length}${amount}`, // Số tiền
+      `62${content.length}${content}`, // Nội dung thanh toán
+      `63${ticketCode.length}${ticketCode}`, // Mã vé
     ].join("");
 
-    // Tính CRC
     const crc = calculateCRC16(data + "6304");
     return data + `6304${crc}`;
   };
 
+  const calculateCRC16 = (data: string) => {
+    let crc = 0xffff;
+    for (let i = 0; i < data.length; i++) {
+      crc ^= data.charCodeAt(i) << 8;
+      for (let j = 0; j < 8; j++) {
+        crc = crc & 0x8000 ? (crc << 1) ^ 0x1021 : crc << 1;
+      }
+    }
+    return (crc & 0xffff).toString(16).toUpperCase().padStart(4, "0");
+  };
+
   useEffect(() => {
-    const qrData = generateVietQRData();
-    // Tạo mã QR với thư viện qrcode
+    const qrData = generateQRData(paymentMethod);
     QRCode.toDataURL(qrData)
-      .then((url) => {
-        setQRCodeUrl(url);
-      })
+      .then((url) => setQRCodeUrl(url))
       .catch((err) => console.error(err));
-  }, []);
-x
+  }, [paymentMethod, amount, accountNumber, ticketCode]);
+
   return (
-    <div className="mt-4">
-      <h5 className="mb-6">Quét QR để chuyển khoản</h5>
-      {qrCodeUrl ? <img src={qrCodeUrl} alt="QR Code" /> : "Đang tạo mã QR..."}
-      {/* <QRCode className="w-full" value={qrImageUrl} size={200} /> Hiển thị QR code */}
-      {/* <img src={qrImageUrl} alt="VietQR Code" style={{ width: "300px" }} /> */}
-      <img src={qrCode} alt='qrCode'/>
-      <p className="mt-6">Ngân hàng: <span className="font-bold">Vietcombank</span></p>
-      <p>Số tài khoản: <span className="font-bold">{accountNumber}</span></p>
-      <p>Số tiền: <span className="font-bold">{amount} VND</span></p>
-      <p>Nội dung: <span className="font-bold">{content}</span></p>
+    <div>
+      <h3>Chọn phương thức thanh toán</h3>
+      <select onChange={(e) => setPaymentMethod(e.target.value)} value={paymentMethod}>
+        {paymentMethods.map((method) => (
+          <option key={method.id} value={method.id}>
+            {method.name}
+          </option>
+        ))}
+      </select>
+      <div>
+        <h5>Quét mã QR để thanh toán</h5>
+        {qrCodeUrl ? (
+          <img src={qrCodeUrl} alt="QR Code" />
+        ) : (
+          <p>Đang tạo mã QR...</p>
+        )}
+        <p>Số tiền: {amount} VND</p>
+        <p>Nội dung: {content}</p>
+        <p>Mã vé: {ticketCode}</p>
+        <p>Tên tài khoản: Rạp chiếu phim Victory</p>
+        <p>Ngân hàng: {paymentMethods.find(pm => pm.id === paymentMethod)?.name}</p>
+      </div>
     </div>
   );
 };
 
-export default BankQRCode;
+export default PaymentQRCode;

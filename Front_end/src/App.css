@@ -5,6 +5,7 @@
   --highlight-color: #3e8e41;
 }
 
+
 .dashboards {
   background-color: #fbb4b4;
   color: var(--text-light);
@@ -273,4 +274,29 @@ main {
   text-align: center;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
+}
+/* Đặt header cố định ở trên cùng */
+.menuhead {
+  position: fixed; /* Cố định header ở vị trí cố định */
+  top: 0; /* Đảm bảo header ở trên cùng của trang */
+  left: 0; /* Đảm bảo header bắt đầu từ cạnh trái */
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  z-index: 1000; /* Đảm bảo header không bị chặn bởi các phần tử khác */
+}
+
+/* Đảm bảo có khoảng trống dưới header để nội dung không bị che khuất */
+.headermenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  background-color: #121927; /* Màu nền đậm */
+  color: white;
+  padding: 10px 20px; /* Khoảng cách nội dung bên trong */
+}
+
+body {
+  /* padding-top: 70px; Thêm khoảng cách ở trên để nội dung không bị header che khuất */
 }

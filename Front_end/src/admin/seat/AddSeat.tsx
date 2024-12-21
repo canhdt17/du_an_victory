@@ -32,7 +32,9 @@ const AddSeat: React.FC = () => {
 
   const fetchData = async () => {
     setLoading(true);
+    setError(null);
     try {
+      // Fetch seat types
       const seatTypesResponse = await fetch("http://127.0.0.1:8000/api/seatTypes");
       if (!seatTypesResponse.ok) {
         throw new Error(`Failed to fetch seat types: ${seatTypesResponse.statusText}`);
@@ -49,30 +51,35 @@ const AddSeat: React.FC = () => {
       setRooms(roomsData || []);
     } catch (error) {
       console.error("Error fetching data:", error);
-      setError(`Error: ${error}`);
+      setError(`Error fetching data: ${error.message || error}`);
     } finally {
       setLoading(false);
     }
   };
 
-
   useEffect(() => {
     fetchData();
   }, []);
+
   const onSubmit = async (data: ISeat) => {
     try {
-      const formattedData = { ...data, seat_status: 1 };
-      console.log("Payload:", formattedData);  // Đảm bảo payload chính xác trước khi gửi
-      await SeatAdd(formattedData);  // Gửi toàn bộ đối tượng ghế
-      setSuccessMessage("Thêm ghế thành công!");
       setErrorMessage(null);
+      setSuccessMessage(null);
+
+      // Format data
+      const formattedData = { ...data, seat_status: 1 };
+      console.log("Payload being sent:", formattedData);
+
+      // Call API to add seat
+      await SeatAdd(formattedData);
+
+      // Success message
+      setSuccessMessage("Thêm ghế thành công!");
     } catch (error) {
       console.error("Error adding seat:", error);
       setErrorMessage("Lỗi khi thêm ghế, vui lòng thử lại.");
-      setSuccessMessage(null);
     }
   };
-
 
   return (
     <div>
@@ -146,7 +153,6 @@ const AddSeat: React.FC = () => {
                   </>
                 )}
               </form>
-
             </main>
           </div>
         </div>

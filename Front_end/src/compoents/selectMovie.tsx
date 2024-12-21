@@ -10,7 +10,6 @@ import constants from "../utils/constants";
 const SelectMovie = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-
   // States
   const [movieDetail, setMovieDetail] = useState<IMovie | null>(null);
   const [bases, setBases] = useState<IBase[]>([]);
@@ -31,7 +30,6 @@ const SelectMovie = () => {
         console.error("Error fetching movie details:", error);
       }
     };
-
     if (id) fetchMovieDetail();
   }, [id]);
 
@@ -49,29 +47,35 @@ const SelectMovie = () => {
     fetchBases();
   }, []);
 
+  // Sửa lại phần lấy ngày chiếu:
   const handleChangeBase = async (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedBaseId = event.target.value;
     const base = bases.find((e) => e.id.toString() === selectedBaseId);
     setSelectedBase(base || null);
-
     setSelectedDate(null);
     setSelectedRoom(null);
-    setDates([]);
-    setRooms([]);
+    setDates([]);  // Reset dates
+    setRooms([]);  // Reset rooms
 
     if (base) {
       try {
         const { data } = await api.get<{ showtime_date: string }[]>(
-          `/getDateShowtime/${id}/bases/${id}/dates`
+          `/getDateShowtime/${id}/bases/${base.id}/dates`
         );
-        const formattedDates = data.map((item) => item.showtime_date);
-        setDates(formattedDates || []);
+        if (data && Array.isArray(data)) {
+          const formattedDates = data.map((item) => item.showtime_date);
+          setDates(formattedDates);  // Set dates correctly
+        } else {
+          console.error("Dữ liệu ngày chiếu không hợp lệ:", data);
+          setDates([]);  // Reset dates if data is invalid
+        }
       } catch (error) {
-        console.error("Error fetching dates:", error);
-        setDates([]);
+        console.error("Lỗi khi lấy ngày chiếu:", error);
+        setDates([]);  // Reset dates on error
       }
     }
   };
+
 
   const [times, setTimes] = useState<ITime[]>([]);
   const [selectedTime, setSelectedTime] = useState<ITime | null>(null);
@@ -79,7 +83,6 @@ const SelectMovie = () => {
   const handleChangeDate = async (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedDateValue = event.target.value;
     setSelectedDate(selectedDateValue || null);
-
     setSelectedTime(null);
     setSelectedRoom(null);
     setRooms([]);
@@ -99,18 +102,15 @@ const SelectMovie = () => {
   };
 
   const [seats, setSeats] = useState<ISeat[]>([]);
-
   const handleChangeTime = async (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedTimeId = event.target.value;
     const time = times.find((t) => t.start_time === selectedTimeId);
     setSelectedTime(time || null);
-
     if (!time) {
-      console.error("Giờ chiếu không hợp lệ.");
+      console.error("Giờ chiếu không hợp lệ.");             
       return;
     }
-
-    setSeats([]); 
+    setSeats([]);
     try {
       const { data } = await api.get<any>(
         `/getSeatShowtime/${id}/bases/${selectedBase?.id}/dates/${selectedDate}/times/${selectedTimeId}/seats`
@@ -134,7 +134,6 @@ const SelectMovie = () => {
       console.error("Ghế đã được đặt, không thể chọn.");
       return;
     }
-
     setSelectedSeats((prevSeats) => {
       if (prevSeats.some((s) => s.seat_number === seat.seat_number)) {
         return prevSeats.filter((s) => s.seat_number !== seat.seat_number);
@@ -153,7 +152,6 @@ const SelectMovie = () => {
       console.error("Vui lòng chọn đủ thông tin trước khi đặt vé.");
       return;
     }
-
     const paymentData = {
       base: selectedBase,
       date: selectedDate,
@@ -161,15 +159,18 @@ const SelectMovie = () => {
       movie: movieDetail,
       seats: selectedSeats,
     };
-
     localStorage.setItem(constants.orderInfoKey, JSON.stringify(paymentData));
-
     navigate("/payment");
   };
 
   return (
     <div className="select-movie-container p-6 mt-14">
-      <div className="movie-info flex gap-8 mb-10 p-14 relative">
+      <div
+        className="movie-info flex gap-8 mb-10 p-14 relative"
+        style={{
+          backgroundImage: movieDetail?.image ? `url(${movieDetail?.image})` : "",
+        }}
+      >
         <div className="image w-80 h-auto flex-shrink-0 rounded-xl overflow-hidden z-[2]">
           <img src={movieDetail?.image} alt={movieDetail?.name_movie} />
         </div>
@@ -197,13 +198,16 @@ const SelectMovie = () => {
         </div>
       </div>
 
+
       {errorMessage && <div className="error-message">{errorMessage}</div>}
+      <div className="booking-title uppercase text-5xl font-bold text-center mt-20 mb-20">
+        Đặt vé
+      </div>
 
       <div className="option-movie">
-        <div className="booking-title uppercase text-5xl font-bold text-center mt-20 mb-20">
+        {/* <div className="booking-title uppercase text-5xl font-bold text-center mt-20 mb-20">
           Đặt vé
-        </div>
-
+        </div> */}
         {/* Chọn cơ sở */}
         <div className="base-list w-64 mb-4">
           <label className="w-full font-semibold text-lg text-white">
@@ -271,19 +275,19 @@ const SelectMovie = () => {
         </div>
 
         {/* Chọn ghế */}
+
         <div className="seat-selection mb-4">
-          <label className="w-full font-semibold text-lg text-white">
-            Chọn ghế:
-          </label>
+          {/* <label className="w-full font-semibold text-lg text-white">
+              Chọn ghế:
+            </label> */}
           <div className="seat-grid">
             {seats.map((seat) => (
               <div
                 key={seat.id}
-                className={`seat-item ${
-                  seat.seat_status === "Đã đặt"
-                    ? "seat-disabled"
-                    : "seat-available"
-                }`}
+                className={`seat-item ${seat.seat_status === "Đã đặt"
+                  ? "seat-disabled"
+                  : "seat-available"
+                  }`}
                 onClick={() => handleSeatClick(seat)}
               >
                 {seat.seat_number}
@@ -293,7 +297,8 @@ const SelectMovie = () => {
         </div>
       </div>
 
-        {/* thanh toán  */}
+
+      {/* thanh toán  */}
       <div className="w-full text-center">
         <button
           className="btn-submit text-2xl bg-yellow-500 py-4 px-6 rounded-lg mt-5"

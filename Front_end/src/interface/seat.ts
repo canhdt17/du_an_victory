@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ISeat {
+  seat_status: string;
+  seat_price: ReactNode;
   seatType: any;
   id?: number | string,
   seat_number: number | string,

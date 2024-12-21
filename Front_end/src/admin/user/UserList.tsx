@@ -8,8 +8,8 @@ const UserList = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const data = await getUsers(); // Gọi API
-        setUsers(data); // Lưu danh sách user vào state
+        const data = await getUsers(); 
+        setUsers(data); 
         setLoading(false);
       } catch (err: any) {
         setError(err.message || "Đã xảy ra lỗi!");
