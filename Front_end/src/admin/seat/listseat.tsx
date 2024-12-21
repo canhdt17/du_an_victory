@@ -18,7 +18,7 @@ interface IBase {
 interface IRoom {
   id: number;
   room_name: string;
-  bases_id: number;~
+  bases_id: number;
 }
 
 const ListSeat: React.FC<Props> = ({ seats, loading, error, deleteSeat }) => {
