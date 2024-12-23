@@ -97,6 +97,9 @@ Route::put('archive_users/{id}', [ApiArchiveUserController::class, 'update']);
 Route::get('archive_users/{id}', [ApiArchiveUserController::class, 'show']);
 Route::delete('archive_users/{id}', [ApiArchiveUserController::class, 'destroy']);
 
+Route::get('/showVoucherUser/{user_id}', [ApiArchiveUserController::class, 'showVoucherUser']);
+
+
 
 Route::apiResource('rooms', RoomController::class);
 Route::apiResource('bases', BaseController::class);
@@ -108,6 +111,7 @@ Route::apiResource('seatTypes', SeatTypeController::class);
 Route::apiResource('seats', SeatController::class);
 Route::apiResource('khuyenmai', KhuyenMaiController::class);
 Route::apiResource('vouchers', VoucherController::class);
+Route::get('/searchCodeVoucher/{code}', [VoucherController::class, 'searchCodeVoucher']);
 // hóa đơn
 Route::apiResource('invoices', InvoiceController::class);
 Route::post('dailyRevenue', [InvoiceController::class, 'dailyRevenue']);

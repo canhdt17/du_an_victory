@@ -63,7 +63,7 @@ import { ITypeMovie } from "./interface/typemovie";
 import { IBase } from "./interface/base";
 import Base from "./admin/base/base";
 import BaseAdd from "./admin/base/addbase";
-import UpdateBase from "./admin/base/updatearea";
+import UpdateBase from "./admin/base/updatebase";
 import NewsDetails from "./compoents/detail-news/detail-news";
 import UserProfile from "./client/profile/user";
 
@@ -76,7 +76,6 @@ import Dashboard from "./admin/movie/dashboard";
 import Movie from "./admin/movie/movie";
 import About from "./compoents/about/about";
 import ScreeningRoom from "./compoents/about/screening";
-
 
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -136,6 +135,7 @@ function App() {
       navigate("/admin/room");
     } catch (error) {
       console.log(error);
+      alert("Đã xảy ra lỗi khi thêm phòng.");
     }
   };
 
@@ -144,7 +144,7 @@ function App() {
       const roomDta = await UpdateRoom(id, roomData);
       alert("Cập nhật thành công.");
       const newRooms = rooms.map((room) => (room.id === id ? roomDta : room));
-      setRooms(newRooms);
+      setRooms(newRooms); FF
       navigate("/admin/room");
     } catch (error) {
       console.log(error);
@@ -153,19 +153,20 @@ function App() {
 
   //AREA - KHU VỰC ( DONE )
   const addBase = async (baseData: IBase) => {
-    try {
-      const base = await BaseAdd(baseData);
+    const base = await AddBase(baseData);
+    if (base) {
       alert("Thêm cơ sở thành công.");
       setBases([...bases, base]);
       navigate("/admin/base");
-    } catch (error) {
-      console.log(error);
+    } else {
+      alert("Failed to add base. Please try again.");
     }
   };
+  
 
   const updateBase = async (id: number | string, baseData: IBase) => {
     try {
-      const baseDta = await UpdateBase(id, baseData);
+      const baseDta = await BaseUpdate(baseData,id);
       alert("Cập nhật thành công.");
       const newBases = bases.map((base) => (base.id === id ? baseDta : base));
       setBases(newBases);
@@ -227,7 +228,7 @@ function App() {
       );
       alert("Cập nhật thành công.");
       const newCategoryMovies = categoryMovies.map((categoryMovie) =>
-        categoryMovie.cate_id === id ? updatedCategoryMovie : categoryMovie
+        categoryMovie.id === id ? updatedCategoryMovie : categoryMovie
       );
       setCategoryMovies(newCategoryMovies);
       navigate("/admin/category");
@@ -332,7 +333,7 @@ function App() {
     id: number | string
   ) => {
     try {
-      const updateKhuyenMai = await KhuyenMaiUpdate(khuyenMaiData, id);
+      const updateKhuyenMai = await UpdateKhuyenMai(khuyenMaiData, id);
       alert("Cập nhật thành công.");
       const newkhuyenMais = khuyenmais.map((khuyenMai) =>
         khuyenMai.id === id ? updateKhuyenMai : khuyenMai
@@ -343,22 +344,6 @@ function App() {
       console.log(error);
     }
   };
-  // const updateKhuyenMai = async (khuyenmaiData: IKhuyenMai, id: number | string) => {
-  //   try {
-  //     const updatedkhuyenMai = await UpdatekhuyenMais(
-  //       khuyenmaiData,
-  //     id
-  //   );
-  //     alert("Cập nhật thành công.");
-  //   const newkhuyenMais = khuyenMais.map((khuyenMai) =>
-  //     khuyenMai.cate_id === id ? updatedkhuyenMai : khuyenMai
-  //   );
-  //   setKhuyenMais(newkhuyenMais);
-  //   navigate("/admin/khuyen_mai");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   //  tin tuc ( )
   const addTinTuc = async (tin_tucData: ITinTuc) => {
@@ -371,23 +356,6 @@ function App() {
       console.log(error);
     }
   };
-  // const updateKhuyenMai = async (khuyenmaiData: IKhuyenMai, id: number | string) => {
-  //   try {
-  //     const updatedkhuyenMai = await UpdatekhuyenMais(
-  //     khuyenMai,
-  //     id
-  //   );
-  //     alert("Cập nhật thành công.");
-  //   const newkhuyenMais = khuyenMais.map((khuyenMai) =>
-  //     khuyenMai.cate_id === id ? updatedkhuyenMai : khuyenMai
-  //   );
-  //   setkhuyenMais(newkhuyenMais);
-  //   navigate("/admin/khuyen_mai");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <>
       <Routes>
@@ -494,7 +462,7 @@ function App() {
         {/* ghe */}
         <Route path="/admin/seat" element={<Seat></Seat>}></Route>
         <Route
-          path="/admin/creatseat"
+          path="/admin/addseat"
           element={
             <AddSeat
               addCreateSeat={addSeat}
@@ -562,12 +530,6 @@ function App() {
           path="/admin/create_tin_tuc"
           element={<CreateTinTuc onAddTinTuc={addTinTuc}></CreateTinTuc>}
         ></Route>
-        {/* <Route
-          path="/admin/seat_type/edit/:id"
-          element={
-            <UpdateSeatType updateSeatType={updateSeatType}></UpdateSeatType>
-          }
-        ></Route> */}
         {/* admin / quan li nguoi dung */}
         <Route path="/admin/user" element={<UserList />} />
         <Route path="/admin/createuser" element={<CreateUser />} />

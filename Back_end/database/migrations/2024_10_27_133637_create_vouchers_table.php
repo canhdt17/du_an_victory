@@ -13,11 +13,16 @@ return new class extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
+            $table->text('name_voucher');
+            $table->text('image'); // Thêm cột mới
             $table->string('code');
             $table->decimal('discount_amount', 10, 2);
+            $table->date('expiry_date');
             $table->enum('status', ['On', 'Off'])
                   ->default('On');
-            $table->boolean('is_active')->default(true);
+            $table->unsignedBigInteger('style_voucher_id');
+            $table->foreign('style_voucher_id')->references('id')->on('style_vouchers')->onDelete('cascade')->onUpdate('cascade');
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }

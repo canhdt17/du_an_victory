@@ -3,22 +3,22 @@ import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { BaseList } from "../../service/base";
-import { IRoom } from "../../interface/room";
+import { IRoom, RoomData } from "../../interface/room";
 import { IBase } from "../../interface/base";
 import Logo from "../movie/logo";
 import HeaderDashboard from "../movie/headerdashboard";
 import MenuDashboard from "../movie/menudashboard";
 
-type Props = {
-  onAdd: (roomsData: IRoom) => void;
-};
-
-const roomScheama = Joi.object({
+// Joi validation schema for form
+const roomSchema = Joi.object({
   room_name: Joi.string().required().label("Room Name"),
-  base_id: Joi.string().required().label("ID Base"),
-  base_name: Joi.string().required().label("Base Name"),
-  seat_count: Joi.number().required().label("Total Seat"),
+  base_id: Joi.number().required().label("Base ID"),
+  seat_count: Joi.number().required().min(1).label("Total Seat"),
 });
+
+type Props = {
+  onAdd: (roomsData: RoomData) => void;
+};
 
 const CreateRoom: React.FC<Props> = ({ onAdd }) => {
   const {
@@ -26,11 +26,10 @@ const CreateRoom: React.FC<Props> = ({ onAdd }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<IRoom>({
-    resolver: joiResolver(roomScheama),
+    resolver: joiResolver(roomSchema),
   });
 
   const [bases, setBases] = useState<IBase[]>([]);
-  const [selectedBaseName, setSelectedBaseName] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -39,17 +38,24 @@ const CreateRoom: React.FC<Props> = ({ onAdd }) => {
     })();
   }, []);
 
-  const handleBaseChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedBase = bases.find((base) => base.id === event.target.value);
-    setSelectedBaseName(selectedBase?.base_name || "");
-  };
-
   const onSubmit = (roomsData: IRoom) => {
-    // Pass base_name dynamically
-    onAdd({
-      ...roomsData,
-      base_name: selectedBaseName,
-    });
+    console.log("Form data being submitted:", roomsData);
+
+    const selectedBase = bases.find((base) => base.id === Number(roomsData.base_id));
+    if (!selectedBase) {
+      console.error("Invalid Base ID selected!");
+      return;
+    }
+
+    const payload: RoomData = {
+      room_name: roomsData.room_name,
+      bases_id: Number(roomsData.base_id),
+      seat_count: Number(roomsData.seat_count),
+      base_name: selectedBase.base_name,
+    };
+
+    console.log("Payload being sent:", payload);
+    onAdd(payload);
   };
 
   return (
@@ -60,9 +66,9 @@ const CreateRoom: React.FC<Props> = ({ onAdd }) => {
           <HeaderDashboard />
           <div className="container-fluid">
             <div className="row">
-              <div className="sidebar border border-right col-md-3 col-lg-2 p-0 ">
+              <div className="sidebar border border-right col-md-3 col-lg-2 p-0">
                 <div
-                  className="offcanvas-md offcanvas-end "
+                  className="offcanvas-md offcanvas-end"
                   tabIndex={-1}
                   id="sidebarMenu"
                   aria-labelledby="sidebarMenuLabel"
@@ -88,9 +94,7 @@ const CreateRoom: React.FC<Props> = ({ onAdd }) => {
                     />
                     <div id="emailHelp" className="form-text">
                       {errors.room_name && (
-                        <div className="text-danger ">
-                          {errors.room_name.message}
-                        </div>
+                        <div className="text-danger">{errors.room_name.message}</div>
                       )}
                     </div>
                   </div>
@@ -103,9 +107,8 @@ const CreateRoom: React.FC<Props> = ({ onAdd }) => {
                       className="form-control"
                       id="base_id"
                       {...register("base_id")}
-                      onChange={handleBaseChange}
                     >
-                      <option value="" disabled selected>
+                      <option value="" disabled>
                         Chọn Khu Vực
                       </option>
                       {bases.map((base: IBase) => (
@@ -114,12 +117,9 @@ const CreateRoom: React.FC<Props> = ({ onAdd }) => {
                         </option>
                       ))}
                     </select>
-
                     <div id="emailHelp" className="form-text">
-                      {errors.base_id && (
-                        <div className="text-danger ">
-                          {errors.base_id.message}
-                        </div>
+                      {errors.bases_id && (
+                        <div className="text-danger">{errors.bases_id.message}</div>
                       )}
                     </div>
                   </div>
@@ -136,9 +136,7 @@ const CreateRoom: React.FC<Props> = ({ onAdd }) => {
                     />
                     <div id="emailHelp" className="form-text">
                       {errors.seat_count && (
-                        <div className="text-danger ">
-                          {errors.seat_count.message}
-                        </div>
+                        <div className="text-danger">{errors.seat_count.message}</div>
                       )}
                     </div>
                   </div>

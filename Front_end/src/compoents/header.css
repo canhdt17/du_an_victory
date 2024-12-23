@@ -1,0 +1,55 @@
+.headermenu {
+    position: sticky;
+    top: 0; /* Đảm bảo header luôn ở trên cùng */
+    z-index: 1000; /* Đảm bảo header không bị che khuất bởi các phần tử khác */
+    background-color: #1f2937; /* Màu nền của header (nếu cần điều chỉnh) */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tạo bóng cho header khi dính vào đầu trang */
+  }
+  
+  .menuhead {
+    background-color: #1f2937; /* Màu nền của menu */
+    padding: 0; /* Không có thêm padding ngoài */
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  
+  .logo {
+    height: 50px;
+  }
+  
+  nav {
+    display: flex;
+    gap: 20px;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  button {
+    background-color: #e11d48; /* Màu của nút Đăng xuất */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #9b1c28;
+  }
+  

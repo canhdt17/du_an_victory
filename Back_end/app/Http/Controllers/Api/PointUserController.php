@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class PointUserController extends Controller
 {
-    //
-    public function index()
-    {
-        $pointUsers = PointUser::with('user')->get();
+    // //
+    // public function index()
+    // {
+    //     $pointUsers = PointUser::with('user')->get();
 
-    return response()->json($pointUsers, 200);
-    }
+    // return response()->json($pointUsers, 200);
+    // }
 
     public function show($id)
     {
