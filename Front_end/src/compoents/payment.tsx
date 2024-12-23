@@ -10,6 +10,10 @@ const Payment = () => {
   const [seatTypes, setSeatTypes] = useState<ISeatType[]>([]);
   const [comboFoods, setComboFoods] = useState<any[]>([]); // Store combo foods
   const [selectedCombos, setSelectedCombos] = useState<any[]>([]); // Track selected combos
+  const [discountedPrice, setDiscountedPrice] = useState<number | null>(null); // Discounted price
+
+  const [voucherCode, setVoucherCode] = useState<string>(""); // Voucher input
+  const [voucherError, setVoucherError] = useState<string | null>(null); // Error message for voucher
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null); 
   const [step, setStep] = useState<number>(1); 
@@ -71,6 +75,8 @@ const Payment = () => {
     });
 
     setTotalPrice(total);
+    setDiscountedPrice(null); // Reset discounted price when recalculating total
+
   };
 
   // Handle combo selection
@@ -97,8 +103,32 @@ const Payment = () => {
     { id: "zalopay", name: "ZaloPay" },
   ];
 
+
+  // Validate and apply voucher
+  const applyVoucher = async () => {
+    try {
+      const response = await api.get(`/vouchers`);
+      const vouchers = response.data;
+
+      const voucher = vouchers.find(
+        (v: any) => v.code === voucherCode && v.is_active && new Date(v.expiry_date) > new Date()
+      );
+
+      if (voucher) {
+        const discountAmount = parseFloat(voucher.discount_amount);
+        setDiscountedPrice(Math.max(0, totalPrice - discountAmount));
+        setVoucherError(null);
+      } else {
+        setVoucherError("Mã giảm giá không hợp lệ hoặc đã hết hạn.");
+        setDiscountedPrice(null);
+      }
+    } catch (error) {
+      console.error("Lỗi khi áp dụng voucher:", error);
+      setVoucherError("Có lỗi xảy ra khi áp dụng mã giảm giá.");
+    }
+  };
   return (
-    <div className="payment-container flex gap-10 px-28 py-10">
+    <div className="payment-container flex gap-10 px-28 ">
       <div className="infomation flex-1">
         <div className="movie-info bg-[#1A1D23] p-8 mb-10 rounded-3xl">
           <div className="title text-3xl font-bold mb-10">Thông tin phim</div>
@@ -156,6 +186,23 @@ const Payment = () => {
             ))}
           </div>
         </div>
+         {/* Voucher Section */}
+         <div className="voucher-section mb-10">
+            <label>Mã giảm giá</label>
+            <div className="flex gap-4">
+              <input
+                type="text"
+                value={voucherCode}
+                onChange={(e) => setVoucherCode(e.target.value)}
+                className="input-voucher"
+              />
+              <button className="btn-secondary" onClick={applyVoucher}>
+                Áp dụng
+              </button>
+            </div>
+            {voucherError && <div className="text-red-500 mt-2">{voucherError}</div>}
+          </div>
+
 
         <div className="payment-info bg-[#1A1D23] p-8 rounded-3xl">
           <div className="title text-3xl font-bold mb-10">
@@ -254,3 +301,5 @@ const Payment = () => {
 };
 
 export default Payment;
+
+
