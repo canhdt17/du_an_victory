@@ -6,20 +6,21 @@ import axios from 'axios'
 import { Link, useParams} from 'react-router-dom'
 
 import ShowtimesId from './showtimesid'
+import { ITrendings } from '../../interface/trendings'
 
 
 
 
 const Showtimes = () => {
-  const [times, setTimes] = useState<IShowTime[]>([]);
+  const [trendings, setTrendings] = useState<ITrendings[]>([]);
 
   
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/showtimes`);
-        console.log(data)
-        setTimes(data.data);
+        const { data } = await axios.get(`http://127.0.0.1:8000/api/movies`);
+     
+        setTrendings(data.data);
       } catch (error) {
         console.log(error);
       }
@@ -39,8 +40,8 @@ const Showtimes = () => {
     <div>
    
      <div className="flex justify-center space-x-4 mb-6">
-   {Array.isArray(times) && times.map((times:IShowTime)=>(
-     <Link to={`/showtimes/${times.id}`}><button key={times.id} className="px-4 py-2 bg-gray-700 rounded-md text-sm font-medium">{times.showtime_date}</button></Link>
+   {Array.isArray(trendings) && trendings.map((trending:ITrendings)=>(
+     <Link to={`/showtimes/${trending.id}`}><button key={trending.id} className="px-4 py-2 bg-gray-700 rounded-md text-sm font-medium">{trending.show}</button></Link>
    
    ))}
      </div>

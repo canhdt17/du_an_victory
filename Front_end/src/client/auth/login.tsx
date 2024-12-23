@@ -1,8 +1,23 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom"; 
+import { toast } from "react-toastify";
 
 
+const fetchUserRole = async (token: string) => {
+  try {
+    const response = await axios.get("http://127.0.0.1:8000/api/user", {
+      headers: {
+        Authorization: `Bearer ${token}`, 
+      },
+    });
+
+    return response.data.role_id; 
+  } catch (error) {
+    console.error("Không thể lấy thông tin người dùng:", error);
+    throw error;
+  }
+};
 
 
 const LoginPage = () => {
@@ -19,39 +34,52 @@ const LoginPage = () => {
 
       if(response.data.access_token){
         localStorage.setItem("token", response.data.access_token);
-        console.log("Đăng nhập thành công:", response.data);
+        console.log( response.data);
+        toast.success("Đăng Nhập Thành Công.")
         navigate("/"); 
       }else{
-        console.log("Đăng nhập thất bại")
+        toast.error("Đăng Nhập Không Thành Công.")
       };
 
       return response.data;
     } catch (error) {
-      console.error("Lỗi khi đăng nhập:", error);
+      toast.error("Lỗi Đăng Nhập.")
+      console.error( error);
       throw error;
     }
   };
 
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault(); 
-
+    e.preventDefault();
+  
     try {
-    
-      const userData = await login(email, password);
-
-   
+      const response = await login(email, password);
       const token = localStorage.getItem("token");
+  
       if (token) {
-        //navigate("/"); 
+    
+        const roleId = await fetchUserRole(token);
+  
+      
+        switch (roleId) {
+          case 1:
+            navigate("/admin/dashboard");
+            break;
+          case 2:
+            navigate("/");
+            break;
+          default:
+            toast.error("Vai trò không hợp lệ.");
+        }
       } else {
-        console.error("Token không tồn tại.");
+        toast.error("Token không tồn tại.");
       }
     } catch (error) {
-      console.error("Đăng nhập thất bại.");
+      toast.error("Đăng nhập thất bại.");
     }
   };
-
+  
   return (
     <div className="register-container">
     <div className="register-box">

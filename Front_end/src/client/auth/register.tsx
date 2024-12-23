@@ -7,31 +7,30 @@ import "../css/client.css"
 import { useForm } from "react-hook-form";
 
 import axios from "axios";
-import { IUser } from "../../interface/User";
+
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-const registerScheama = Joi.object({
-  fulname:Joi.string().required().min(5),
-  username:Joi.string().required().min(1),
-  email:Joi.string().required(),
-  password:Joi.string().required().min(3),
-  gender:Joi.string().required().min(1),
-  phone:Joi.string().required().min(9)
-})
+import { toast } from "react-toastify";
+interface IUser {
+  username: string;
+  fullname: string;
+  email: string;
+  password: string;
+  gender: string;
+  phone: string;
+}
 
 const Register = () => {
-const {register,handleSubmit,formState:{errors}} = useForm<IUser>({
-  resolver:joiResolver(registerScheama)
-})
+const {register,handleSubmit,formState:{errors}} = useForm<IUser>()
 const navigate = useNavigate()
 const onSubmit = async (registerData:IUser)=>{
   try {
     const {data} = await axios.post(`http://127.0.0.1:8000/api/register`,registerData);
-    alert("Đăng Ký Thành Công");
+    toast.success("Đăng ký thành công!");
     navigate('/login')
   } catch (error) {
     console.log(error);
-    
+    toast.error("Đăng ký không thành công!");
   }
 }
 
@@ -44,68 +43,72 @@ const onSubmit = async (registerData:IUser)=>{
         <div className="form-group">
           <label htmlFor="username">Tên Đăng Nhập:</label>
           <input
-            type="text"
-           {...register('username')}
-           
-            placeholder="Nhập tên..."
-            
-          />
-        </div>
-        {errors.username && (
-              <div className="text-red-600 ">
-                {errors.username.message}
-              </div>
+              type="text"
+              {...register("username", { required: true })}
+              placeholder="Nhập tên đăng nhập..."
+            />
+            {errors.username && (
+              <p className="error-message">Tên đăng nhập không được để trống!</p>
             )}
-        <div className="form-group">
-          <label htmlFor="fullname">Họ:</label>
-          <input
-            type="text"
-           {...register('fullname')}
-           
-            placeholder="Nhập họ..."
-            required
-          />
         </div>
+     
         <div className="form-group">
-          <label htmlFor="email">Nhập Email:</label>
-          <input
-            type="text"
-           {...register('email')}
-           
-            placeholder="Nhập email..."
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Nhập Mật Khẩu:</label>
-          <input
-            type="password"
-           {...register('password')}
-           
-            placeholder="Nhập mật khẩu..."
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="gender">Giới Tính:</label>
-          <input
-            type="text"
-           {...register('gender')}
-           
-            placeholder="Nhập giới tính..."
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="phone">Nhập Số Điện Thoại:</label>
-          <input
-            type="text"
-           {...register('phone')}
-           
-            placeholder="Nhập số điện thoại..."
-            required
-          />
-        </div>
+            <label htmlFor="fullname">Họ và tên:</label>
+            <input
+              type="text"
+              {...register("fullname", { required: true })}
+              placeholder="Nhập họ và tên..."
+            />
+            {errors.fullname && (
+              <p className="error-message">Họ và tên không được để trống!</p>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              {...register("email", { required: true })}
+              placeholder="Nhập email..."
+            />
+            {errors.email && (
+              <p className="error-message">Email không được để trống!</p>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Mật Khẩu:</label>
+            <input
+              type="password"
+              {...register("password", { required: true })}
+              placeholder="Nhập mật khẩu..."
+            />
+            {errors.password && (
+              <p className="error-message">Mật khẩu không được để trống!</p>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="gender">Giới Tính:</label>
+            <input
+              type="text"
+              {...register("gender", { required: true })}
+              placeholder="Nhập giới tính..."
+            />
+            {errors.gender && (
+              <p className="error-message">Giới tính không được để trống!</p>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="phone">Số Điện Thoại:</label>
+            <input
+              type="text"
+              {...register("phone", { required: true })}
+              placeholder="Nhập số điện thoại..."
+            />
+            {errors.phone && (
+              <p className="error-message">
+                Số điện thoại không được để trống!
+              </p>
+            )}
+          </div>
         <button type="submit" className="btn btn-primary">
           Đăng Ký
         </button>

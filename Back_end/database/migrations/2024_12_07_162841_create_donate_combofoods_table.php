@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('combofood_id')->references('combofood_id')->on('combo_foods')->onDelete('cascade');
             $table->decimal('price_sale', 10, 2);
             $table->date('date_last_sale');
-            $table->enum('status', ['Hoạt động', 'Không hoạt động'])->default('Hoạt động');
+            $table->enum('status', ['on', 'off'])->default('on');
             $table->timestamps();
         });
     }

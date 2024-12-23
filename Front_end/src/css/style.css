@@ -2482,3 +2482,48 @@ button#btn-close{
 .dots li.active{
 	width: 30px;
 }
+.dropdown {
+	position: relative;
+	display: inline-block;
+  }
+
+  .dropdown-button {
+	display: flex;
+	align-items: center;
+
+	padding: 10px 16px;
+	border-radius: 8px;
+	cursor: pointer;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .dropdown-button svg {
+	margin-left: 8px;
+  }
+
+  .dropdown-menu {
+	display: none;
+	position: absolute;
+	right: 0;
+	top: 100%;
+	background-color: #2d3748;
+	width: 12rem;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .dropdown-menu a {
+	display: block;
+	padding: 8px 16px;
+	text-decoration: none;
+	color: white;
+	transition: background-color 0.2s;
+  }
+
+  .dropdown-menu a:hover {
+	background-color: #4a5568;
+  }
+
+  .dropdown:hover .dropdown-menu {
+	display: block;
+  }

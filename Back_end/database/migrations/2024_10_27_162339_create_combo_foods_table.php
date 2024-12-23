@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('combofood_id');
             $table->string('combofood_name');
             $table->decimal('combofood_price', 8, 2);
+            $table->text('image');
             $table->softDeletes();
             $table->timestamps();
         });
