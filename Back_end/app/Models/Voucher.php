@@ -9,9 +9,12 @@ class Voucher extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'name_voucher',
+        'image',
         'code',
         'discount_amount',
         'expiry_date',
-        'is_active',
+        'style_voucher_id',
+        'status',
     ];
 }

@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('style_vouchers', function (Blueprint $table) {
             $table->id(); // Primary key
             $table->string('name_stylevoucher')->unique(); // Tên style voucher, duy nhất
+            $table->softDeletes();
             $table->timestamps(); // Thêm created_at và updated_at
         });
     }

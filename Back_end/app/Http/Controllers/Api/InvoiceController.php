@@ -103,16 +103,36 @@ class InvoiceController extends Controller
                 }
             
             if (!empty($request->voucher_id)) {
-                $voucher = Voucher::find($request->voucher_id);
-                
+                $voucher = DB::table('vouchers')
+                    ->join('style_vouchers', 'style_vouchers.id', '=', 'vouchers.style_voucher_id')
+                    ->whereNull('vouchers.deleted_at')
+                    ->where('vouchers.id', '=', $request->voucher_id)
+                    ->select('vouchers.*', 'style_vouchers.name_stylevoucher')
+                    ->first(); // Lấy 1 bản ghi
+            
                 if ($voucher) {
-                    // Tính toán giảm giá
-                    $discount = ($totalPrice * $voucher->discount_amount) / 100;
-                    $totalPrice -= $discount; // Giảm giá từ tổng giá
-                } else {
-                    $totalPrice += 0;
+                    if ($voucher->name_stylevoucher === 'Percent') {
+                        // Kiểm tra tính hợp lệ của discount_amount
+                        if ($voucher->discount_amount > 0 && $voucher->discount_amount <= 100) {
+                            // Tính toán giảm giá theo phần trăm
+                            $discount = ($totalPrice * $voucher->discount_amount) / 100;
+            
+                            // Đảm bảo không làm tổng giá trị âm
+                            $totalPrice = max(0, $totalPrice - $discount);
+                        } else {
+                            return response()->json(['error' => 'Giá trị giảm giá phần trăm không hợp lệ'], 400);
+                        }
+                    } else {
+                        // Giảm giá cố định
+                        if ($voucher->discount_amount > 0) {
+                            $totalPrice = max(0, $totalPrice - $voucher->discount_amount);
+                        } else {
+                            return response()->json(['error' => 'Giá trị giảm giá không hợp lệ'], 400);
+                        }
+                    }
                 }
             }
+                
             $invoice->total_price = $totalPrice;
             $invoice->save();  // Lưu lại thay đổi vào cơ sở dữ liệu
             DB::commit();

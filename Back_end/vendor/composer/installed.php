@@ -3,11 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-<<<<<<< HEAD
-        'reference' => '4e12d1519b44cb14ca4730513f6b69922580fc44',
-=======
-        'reference' => '333e5875089670d7c5cdf19a2dd6d9b8a3819e1c',
->>>>>>> ac22533af13580d15e16748d1a33a54bf9f1661e
+        'reference' => '7257b28185bb9e46bbe9026351bedf871b53778a',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -422,11 +418,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-<<<<<<< HEAD
-            'reference' => '4e12d1519b44cb14ca4730513f6b69922580fc44',
-=======
-            'reference' => '333e5875089670d7c5cdf19a2dd6d9b8a3819e1c',
->>>>>>> ac22533af13580d15e16748d1a33a54bf9f1661e
+            'reference' => '7257b28185bb9e46bbe9026351bedf871b53778a',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1325,9 +1317,9 @@
             'dev_requirement' => true,
         ),
         'tijsverkoyen/css-to-inline-styles' => array(
-            'pretty_version' => 'v2.2.7',
-            'version' => '2.2.7.0',
-            'reference' => '83ee6f38df0a63106a9e4536e3060458b74ccedb',
+            'pretty_version' => 'v2.3.0',
+            'version' => '2.3.0.0',
+            'reference' => '0d72ac1c00084279c1816675284073c5a337c20d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../tijsverkoyen/css-to-inline-styles',
             'aliases' => array(),

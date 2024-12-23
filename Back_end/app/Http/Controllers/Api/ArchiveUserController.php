@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\ArchiveUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArchiveUserController extends Controller
 {
@@ -15,84 +16,83 @@ class ArchiveUserController extends Controller
         $request->validate([
             'user_id' => 'required|exists:users,id', // Kiểm tra user_id tồn tại trong bảng users
             'voucher_id' => 'required|exists:vouchers,id', // Kiểm tra voucher_id tồn tại trong bảng vouchers
-            'status' => 'required|boolean', // Giá trị status phải là boolean
         ]);
 
         $archiveUser = ArchiveUser::create([
             'user_id' => $request->user_id,
             'voucher_id' => $request->voucher_id,
-            'status' => $request->status,
         ]);
 
         return response()->json($archiveUser, 201);
     }
 
 
-    // danh sách tất cả 
-    public function index()
-    {
-        $archiveUsers = ArchiveUser::with(['user', 'voucher'])->get();
-        return response()->json($archiveUsers, 200);
-    }
+    // // danh sách tất cả 
+    // public function index()
+    // {
+    //     $archiveUsers = ArchiveUser::with(['user', 'voucher'])->get();
+    //     return response()->json($archiveUsers, 200);
+    // }
 
 
     // cập nhập 
-    public function update(Request $request, $id)
-    {
-        // Xác thực các trường thông tin
-        $request->validate([
-            'user_id' => 'required|exists:users,id', // Kiểm tra user_id tồn tại trong bảng users
-            'voucher_id' => 'required|exists:vouchers,id', // Kiểm tra voucher_id tồn tại trong bảng vouchers
-            'status' => 'required|boolean', // Giá trị status phải là boolean
-        ]);
+    // public function update(Request $request, $id)
+    // {
+    //     // Xác thực các trường thông tin
+    //     $request->validate([
+    //         'user_id' => 'required|exists:users,id', // Kiểm tra user_id tồn tại trong bảng users
+    //         'voucher_id' => 'required|exists:vouchers,id', // Kiểm tra voucher_id tồn tại trong bảng vouchers
+    //         'status' => 'required|boolean', // Giá trị status phải là boolean
+    //     ]);
     
-        // Tìm ArchiveUser theo ID
-        $archiveUser = ArchiveUser::find($id);
+    //     // Tìm ArchiveUser theo ID
+    //     $archiveUser = ArchiveUser::find($id);
     
-        // Kiểm tra nếu không tồn tại
-        if (!$archiveUser) {
-            return response()->json(['message' => 'ArchiveUser not found'], 404);
-        }
+    //     // Kiểm tra nếu không tồn tại
+    //     if (!$archiveUser) {
+    //         return response()->json(['message' => 'ArchiveUser not found'], 404);
+    //     }
     
-        // Cập nhật thông tin
-        $archiveUser->update([
-            'user_id' => $request->user_id,
-            'voucher_id' => $request->voucher_id,
-            'status' => $request->status,
-        ]);
+    //     // Cập nhật thông tin
+    //     $archiveUser->update([
+    //         'user_id' => $request->user_id,
+    //         'voucher_id' => $request->voucher_id,
+    //         'status' => $request->status,
+    //     ]);
     
-        // Trả về thông tin đã cập nhật
-        return response()->json($archiveUser, 200);
-    }
+    //     // Trả về thông tin đã cập nhật
+    //     return response()->json($archiveUser, 200);
+    // }
 
     // Hiển thị chi tiết một bản ghi
-    public function show($id)
+    public function showVoucherUser($id)
     {
-        // Tìm ArchiveUser theo ID
-        $archiveUser = ArchiveUser::with(['user', 'voucher'])->find($id);
+        // Hiển thị voucher của người dùng
+        $archive_user = DB::table('archive_user')
+            ->join('vouchers', 'vouchers.id', '=', 'archive_user.voucher_id')
+            ->select('archive_user.*', 'vouchers.*')
+            ->where('user_id', '=', $id)
+            ->where('archive_user.status', '=', 'On')
+            ->get();
 
-        // Kiểm tra nếu không tồn tại
-        if (!$archiveUser) {
-            return response()->json(['message' => 'ArchiveUser not found'], 404);
-        }
-
-        // Trả về dữ liệu của bản ghi
-        return response()->json($archiveUser, 200);
+        
+        return response()->json($archive_user);
     }
+    
 
 
     // xóa
-    public function destroy($id)
-    {
-        $archiveUser = ArchiveUser::find($id);
+    // public function destroy($id)
+    // {
+    //     $archiveUser = ArchiveUser::find($id);
 
-        if (!$archiveUser) {
-            return response()->json(['message' => 'ArchiveUser not found'], 404);
-        }
+    //     if (!$archiveUser) {
+    //         return response()->json(['message' => 'ArchiveUser not found'], 404);
+    //     }
 
-        $archiveUser->delete();
+    //     $archiveUser->delete();
 
-        return response()->json(['message' => 'ArchiveUser deleted successfully'], 200);
-    }
+    //     return response()->json(['message' => 'ArchiveUser deleted successfully'], 200);
+    // }
 
 }
