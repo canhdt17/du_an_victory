@@ -23,6 +23,7 @@ export interface IRoom {
   total_seat: number;
 }
 export interface ISeat {
+  seatPrice : ISeatType[];
   seatInfo: any;
   seatType: any;
   status: any;
@@ -48,7 +49,7 @@ export interface ISeatType {
   seat_price: number;
 }
 export interface IMovie {
-  type : ITypeMovie;
+  type: ITypeMovie;
   category: ICategory;
   id: string | number;
   name_movie: string;
@@ -86,3 +87,10 @@ export interface ITypeMovie {
   created_at: null;
   updated_at: null;
 }
+
+
+
+
+
+
+

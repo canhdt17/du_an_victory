@@ -1,8 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{html,js}"],
+export default {
+  content: ["./src/**/*.{html,js,ts,jsx,tsx}"], // Adjust paths to your files
   theme: {
     extend: {},
   },
-  plugins: [ require('tailwind-scrollbar'),],
-}
+  plugins: [],
+};

@@ -17,10 +17,10 @@ export const CategoryMovie = async () => {
 export const CategoryMovieById = async (id: number | string) => {
   try {
     const { data } = await api.get<{ category: ICategoryMovie }>(`categories/${id}`);
-    return data.category; 
+    return data.category;
   } catch (error) {
     console.error("Error fetching category:", error);
-    return null; 
+    // return null; 
   }
 };
 
@@ -32,6 +32,7 @@ export const AddCategoryMovie = async (categorymovieData: ICategoryMovie) => {
       "categories",
       categorymovieData
     );
+    console.log("API response:", data);
     return data;
   } catch (error) {
     console.log(error);
@@ -44,15 +45,19 @@ export const UpdateCategoryMovies = async (
   id: number | string
 ) => {
   try {
+    console.log("Data being sent to API:", categorymovieData);
     const { data } = await api.put<{ categories: ICategoryMovie[] }>(
       `categories/${id}`,
       categorymovieData
     );
     return data;
   } catch (error) {
-    console.log(error);
+    console.error("Error in UpdateCategoryMovies:", error);
+    throw error; // Throw lại lỗi để debug dễ hơn.
   }
 };
+
+
 
 // DELETE
 export const DeleteCategoryMovie = async (id: number | string) => {

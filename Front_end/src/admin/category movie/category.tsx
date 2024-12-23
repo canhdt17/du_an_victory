@@ -29,24 +29,31 @@ const Category: React.FC = () => {
       setLoading(false);
     }
   };
-
+  
   //update
   const updateCategoryMovies = async (
     id: number | string,
     updatedCategory: ICategoryMovie
   ): Promise<void> => {
     try {
-      const data = await UpdateCategoryMovies(id, updatedCategory);
-      if (data?.categories) {
-        setCategories(data.categories);
+      const updatedData = await UpdateCategoryMovies(id, updatedCategory);
+  
+      if (updatedData?.categories) {
+        // Cập nhật trực tiếp danh mục đã thay đổi
+        setCategories((prevCategories) =>
+          prevCategories.map((category) =>
+            category.id === id ? { ...category, ...updatedCategory } : category
+          )
+        );
       }
-      await fetchCategories();
+  
       alert("Cập nhật danh mục phim thành công!");
     } catch (error: any) {
       alert("Cập nhật danh mục phim thất bại!");
       console.error("Update Category Error:", error?.message || error);
     }
   };
+  
 
   // Hàm xóa
   const deleteCategoryMovie = async (id: number | string) => {

@@ -3,7 +3,7 @@ import Header from '../header'
 import Footer from '../footer'
 import { IShowTime } from '../../interface/shotime'
 import axios from 'axios'
-import { Link, useParams} from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import ShowtimesId from './showtimesid'
 import { ITrendings } from '../../interface/trendings'
@@ -14,7 +14,7 @@ import { ITrendings } from '../../interface/trendings'
 const Showtimes = () => {
   const [trendings, setTrendings] = useState<ITrendings[]>([]);
 
-  
+
   useEffect(() => {
     (async () => {
       try {
@@ -28,7 +28,7 @@ const Showtimes = () => {
   }, []);
 
 
-   
+
   return (
     <div>
         <Header></Header>
@@ -40,26 +40,26 @@ const Showtimes = () => {
     <div>
    
      <div className="flex justify-center space-x-4 mb-6">
-   {Array.isArray(trendings) && trendings.map((trending:ITrendings)=>(
-     <Link to={`/showtimes/${trending.id}`}><button key={trending.id} className="px-4 py-2 bg-gray-700 rounded-md text-sm font-medium">{trending.show}</button></Link>
+   {Array.isArray(times) && times.map((times:IShowTime)=>(
+     <Link to={`/showtimes/${times.id}`}><button key={times.id} className="px-4 py-2 bg-gray-700 rounded-md text-sm font-medium">{times.showtime_date}</button></Link>
    
    ))}
      </div>
    
 
-  
-  {/* Note */}
-  <p className="text-sm text-center text-gray-400 mb-6">
-    Lưu ý: Khán giả dưới 13 tuổi chỉ chọn suất chiếu kết thúc trước 22h và khán giả dưới 16 tuổi chỉ chọn suất chiếu kết thúc trước 23h.
-  </p>
-  {/* Movie List */}
-  <ShowtimesId></ShowtimesId>
+
+            {/* Note */}
+            <p className="text-sm text-center text-gray-400 mb-6">
+              Lưu ý: Khán giả dưới 13 tuổi chỉ chọn suất chiếu kết thúc trước 22h và khán giả dưới 16 tuổi chỉ chọn suất chiếu kết thúc trước 23h.
+            </p>
+            {/* Movie List */}
+            <ShowtimesId></ShowtimesId>
+          </div>
         </div>
-        </div>
-       
-      
-    </div>
-    <Footer></Footer>
+
+
+      </div>
+      <Footer></Footer>
     </div>
   )
 }
